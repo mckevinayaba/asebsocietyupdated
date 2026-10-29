@@ -40,6 +40,39 @@ export type Database = {
           },
         ]
       }
+      insight_pitches: {
+        Row: {
+          consent: boolean
+          contact_email: string
+          id: string
+          inquiry_type: string
+          payload: Json
+          source_page: string
+          status: string
+          submitted_at: string
+        }
+        Insert: {
+          consent?: boolean
+          contact_email: string
+          id?: string
+          inquiry_type?: string
+          payload: Json
+          source_page?: string
+          status?: string
+          submitted_at?: string
+        }
+        Update: {
+          consent?: boolean
+          contact_email?: string
+          id?: string
+          inquiry_type?: string
+          payload?: Json
+          source_page?: string
+          status?: string
+          submitted_at?: string
+        }
+        Relationships: []
+      }
       membership_applications: {
         Row: {
           code_accepted: boolean
