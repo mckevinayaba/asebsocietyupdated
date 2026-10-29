@@ -57,9 +57,9 @@ export const people: Person[] = [
   },
   {
     slug: "stacey-menga", name: "Stacey Menga", role: "Board Member · Strategy and Programmes", base: "CEO, Minkoti Business Concierge · Nairobi, Kenya", group: "board", photo: "images/people/stacey-menga.jpg",
-    summary: "Strategic management practitioner and entrepreneurship trainer. CEO of Minkoti Business Concierge, CEO of the AICCI Kenya Chapter and Founder of the Institute of Entrepreneurship and Innovations Training.",
+    summary: "Strategic management practitioner and entrepreneurship trainer. CEO of Minkoti Business Concierge and Founder of the Institute of Entrepreneurship and Innovations Training.",
     bio: [
-      "Based in Kenya, Stacey holds an MBA in Strategic Management from the University of Nairobi. She leads Minkoti Business Concierge as CEO, serves as CEO of the AICCI Kenya Chapter and founded the Institute of Entrepreneurship and Innovations Training, building the managerial and operational capability that growing enterprises depend on.",
+      "Based in Kenya, Stacey holds an MBA in Strategic Management from the University of Nairobi. She leads Minkoti Business Concierge as CEO and founded the Institute of Entrepreneurship and Innovations Training, building the managerial and operational capability that growing enterprises depend on.",
       "At ASEB Society, she anchors the strategy and programme architecture: the design of programmes that turn ecosystem building from a gathering of actors into a disciplined, measurable practice across the continent.",
     ],
   },
