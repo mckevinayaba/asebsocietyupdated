@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import AppShell from "@/pages/AppShell";
 import { ScrollToTop } from "@/components/Reveal";
 
-export const Route = createFileRoute("/app")({
+export const Route = createFileRoute("/_authenticated/app")({
   head: () => ({
     meta: [
       { title: 'Member app | ASEB Society' },

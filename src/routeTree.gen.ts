@@ -9,10 +9,11 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as SiteRouteImport } from './routes/_site'
-import { Route as AppRouteImport } from './routes/app'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as AuthenticatedAppRouteImport } from './routes/_authenticated/app'
 import { Route as SiteIndexRouteImport } from './routes/_site.index'
 import { Route as SiteEvidenceRouteImport } from './routes/_site.evidence'
 import { Route as SiteFrameworkRouteImport } from './routes/_site.framework'
@@ -29,13 +30,12 @@ import { Route as SiteRegistrySlugRouteImport } from './routes/_site.registry.$s
 import { Route as SiteRegistrySubmitRouteImport } from './routes/_site.registry_.submit'
 import { Route as SiteFieldRoleSlugRouteImport } from './routes/_site.field.role.$slug'
 
-const SiteRoute = SiteRouteImport.update({
-  id: '/_site',
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AppRoute = AppRouteImport.update({
-  id: '/app',
-  path: '/app',
+const SiteRoute = SiteRouteImport.update({
+  id: '/_site',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -47,6 +47,11 @@ const ResetPasswordRoute = ResetPasswordRouteImport.update({
   id: '/reset-password',
   path: '/reset-password',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAppRoute = AuthenticatedAppRouteImport.update({
+  id: '/app',
+  path: '/app',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const SiteIndexRoute = SiteIndexRouteImport.update({
   id: '/',
@@ -126,9 +131,9 @@ const SiteFieldRoleSlugRoute = SiteFieldRoleSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof SiteIndexRoute
-  '/app': typeof AppRoute
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/app': typeof AuthenticatedAppRoute
   '/evidence': typeof SiteEvidenceRoute
   '/framework': typeof SiteFrameworkRoute
   '/get-involved': typeof SiteGetInvolvedRoute
@@ -145,9 +150,10 @@ export interface FileRoutesByFullPath {
   '/field/role/$slug': typeof SiteFieldRoleSlugRoute
 }
 export interface FileRoutesByTo {
-  '/app': typeof AppRoute
+  '/': typeof SiteIndexRoute
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/app': typeof AuthenticatedAppRoute
   '/evidence': typeof SiteEvidenceRoute
   '/framework': typeof SiteFrameworkRoute
   '/get-involved': typeof SiteGetInvolvedRoute
@@ -156,7 +162,6 @@ export interface FileRoutesByTo {
   '/summit': typeof SiteSummitRoute
   '/what-we-build': typeof SiteWhatWeBuildRoute
   '/why-aseb': typeof SiteWhyAsebRoute
-  '/': typeof SiteIndexRoute
   '/field/$slug': typeof SiteFieldSlugRoute
   '/registry/$slug': typeof SiteRegistrySlugRoute
   '/registry/submit': typeof SiteRegistrySubmitRoute
@@ -166,10 +171,11 @@ export interface FileRoutesByTo {
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/_site': typeof SiteRouteWithChildren
-  '/app': typeof AppRoute
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/_authenticated/app': typeof AuthenticatedAppRoute
   '/_site/evidence': typeof SiteEvidenceRoute
   '/_site/framework': typeof SiteFrameworkRoute
   '/_site/get-involved': typeof SiteGetInvolvedRoute
@@ -190,9 +196,9 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/app'
     | '/auth'
     | '/reset-password'
+    | '/app'
     | '/evidence'
     | '/framework'
     | '/get-involved'
@@ -209,9 +215,10 @@ export interface FileRouteTypes {
     | '/field/role/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/app'
+    | '/'
     | '/auth'
     | '/reset-password'
+    | '/app'
     | '/evidence'
     | '/framework'
     | '/get-involved'
@@ -220,7 +227,6 @@ export interface FileRouteTypes {
     | '/summit'
     | '/what-we-build'
     | '/why-aseb'
-    | '/'
     | '/field/$slug'
     | '/registry/$slug'
     | '/registry/submit'
@@ -229,10 +235,11 @@ export interface FileRouteTypes {
     | '/field/role/$slug'
   id:
     | '__root__'
+    | '/_authenticated'
     | '/_site'
-    | '/app'
     | '/auth'
     | '/reset-password'
+    | '/_authenticated/app'
     | '/_site/evidence'
     | '/_site/framework'
     | '/_site/get-involved'
@@ -251,26 +258,26 @@ export interface FileRouteTypes {
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   SiteRoute: typeof SiteRouteWithChildren
-  AppRoute: typeof AppRoute
   AuthRoute: typeof AuthRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_site': {
       id: '/_site'
       path: ''
       fullPath: '/'
       preLoaderRoute: typeof SiteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/app': {
-      id: '/app'
-      path: '/app'
-      fullPath: '/app'
-      preLoaderRoute: typeof AppRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -286,6 +293,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/reset-password'
       preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/app': {
+      id: '/_authenticated/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AuthenticatedAppRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_site/': {
       id: '/_site/'
@@ -395,6 +409,17 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAppRoute: typeof AuthenticatedAppRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAppRoute: AuthenticatedAppRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 interface SiteRouteChildren {
   SiteEvidenceRoute: typeof SiteEvidenceRoute
   SiteFrameworkRoute: typeof SiteFrameworkRoute
@@ -434,8 +459,8 @@ const SiteRouteChildren: SiteRouteChildren = {
 const SiteRouteWithChildren = SiteRoute._addFileChildren(SiteRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   SiteRoute: SiteRouteWithChildren,
-  AppRoute: AppRoute,
   AuthRoute: AuthRoute,
   ResetPasswordRoute: ResetPasswordRoute,
 }
