@@ -32,7 +32,7 @@ export const people: Person[] = [
     bio: ["A Founder Institute and AWE alumna and intergovernmental liaison with YALDA. At ASEB she holds the community together across the continent: the relationships that make a continental institution feel personal."],
   },
   {
-    slug: "ian-lorenzen", name: "Ian Lorenzen", role: "Founding Advisory Board Member and Strategy Lead", base: "Partner and Executive Director, GrowthAfrica", group: "board", photo: "images/people/ian-lorenzen.jpg",
+    slug: "ian-lorenzen", name: "Ian Lorenzen", role: "Chairman of the Board", base: "Partner and Executive Director, GrowthAfrica", group: "board", photo: "images/people/ian-lorenzen.jpg",
     summary: "More than a decade supporting African entrepreneurs, growth-focused SMEs, ecosystem actors and funders. One of the earliest voices to engage with the question behind ASEB in 2022.",
     bio: [
       "His work sits at the intersection of entrepreneurship development, business acceleration, ecosystem convening, partnership building and programme strategy. He is known for asking the difficult questions that ecosystem conversations often avoid, and for protecting the meaning of ecosystem building from becoming another diluted development term.",
@@ -48,11 +48,11 @@ export const people: Person[] = [
     ],
   },
   {
-    slug: "patrice-habinshuti", name: "Dr Patrice Habinshuti", role: "East Africa Regional Representative · Advisory Board Member · 2023 ASEB Award Winner", base: "Rwanda and the United States", group: "board", photo: "images/people/patrice-habinshuti.jpg",
-    summary: "Programme strategist, entrepreneurship development practitioner and institutional capacity builder. Country Operations Director of Rwanda Business Development Center.",
+    slug: "patrice-habinshuti", name: "Dr Patrice Habinshuti", role: "Board Member · Global Partnerships (North America) · 2023 ASEB Award Winner", base: "United States and Rwanda", group: "board", photo: "images/people/patrice-habinshuti.jpg",
+    summary: "Programme strategist, entrepreneurship development practitioner and institutional capacity builder, now based in the United States. Country Operations Director of Rwanda Business Development Center.",
     bio: [
       "His work spans enterprise development, youth innovation, investment readiness, governance and cross-border ecosystem mobilisation, including country engagement and delegation leadership for OSCARS Olympiads across Africa.",
-      "He is a member of the UNDP Youth Startup Financing Facility for Africa ecosystem advisory group and strengthens ASEB's regional partnerships, representation and recognition across East Africa.",
+      "Now based in the United States, he leads ASEB Society's North American partnerships: opening doors to US foundations, development finance institutions, universities, investors and the African diaspora, and connecting those resources back into African ecosystems. He remains a member of the UNDP Youth Startup Financing Facility for Africa ecosystem advisory group, keeping his East African operational foundation active.",
     ],
   },
   {
