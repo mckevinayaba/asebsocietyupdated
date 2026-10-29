@@ -51,7 +51,7 @@ function HomeTab() {
       <div className="no-scrollbar -mx-5 flex gap-3 overflow-x-auto px-5 lg:mx-0 lg:px-0">
         {constituencies.map((c, i) => (
           <Link key={c.slug} to={`/field/${c.slug}`} className="relative block aspect-[9/14] w-[38%] shrink-0 overflow-hidden bg-ink sm:w-[30%] lg:w-[23%]">
-            <img src={asset(storyPhotos[i])} alt="" className="absolute inset-0 h-full w-full object-cover opacity-70" loading="lazy" />
+            <img src={asset(storyPhotos[i] ?? "")} alt="" className="absolute inset-0 h-full w-full object-cover opacity-70" loading="lazy" />
             <span className="absolute left-0 top-0 h-[3px] w-full bg-signal/90" aria-hidden="true" />
             <span className="absolute inset-x-0 bottom-0 bg-ink/80 p-3 text-ivory">
               <span className="block text-[0.6875rem] font-semibold uppercase tracking-[0.12em] text-sand">{rolesFor(c.slug).length} roles</span>

@@ -181,10 +181,10 @@ export default function Home() {
                 <img src={asset("images/events/aseb-awards-stage-2.jpg")} alt="Two builders embrace on stage at the ASEB Awards" loading="lazy" className="transition-transform duration-700 ease-quiet group-hover:scale-[1.02]" />
               </div>
               <div className="mt-6 flex items-baseline gap-5">
-                <span className="numeral text-sm text-stone">{pillars[3].n}</span>
+                <span className="numeral text-sm text-stone">{pillars[3]!.n}</span>
                 <div>
-                  <h3 className="text-[2rem] leading-tight">{pillars[3].name}</h3>
-                  <p className="mt-2 max-w-md text-[0.9375rem] text-stone">{pillars[3].line}</p>
+                  <h3 className="text-[2rem] leading-tight">{pillars[3]!.name}</h3>
+                  <p className="mt-2 max-w-md text-[0.9375rem] text-stone">{pillars[3]!.line}</p>
                 </div>
               </div>
             </Link>

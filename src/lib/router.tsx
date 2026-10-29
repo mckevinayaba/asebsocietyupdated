@@ -12,18 +12,18 @@ export { Outlet };
 
 function split(to: string) {
   const [beforeHash, hash] = to.split("#");
-  const [path, query] = beforeHash.split("?");
+  const [path, query] = (beforeHash ?? "").split("?");
   const search = query ? Object.fromEntries(new URLSearchParams(query)) : undefined;
   return { path: path || "/", search, hash };
 }
 
-type LinkProps = { to: string; className?: string; children?: ReactNode; "aria-label"?: string; onClick?: () => void };
+type LinkProps = { to: string; className?: string | undefined; children?: ReactNode; "aria-label"?: string | undefined; onClick?: (() => void) | undefined };
 
 export function Link({ to, className, children, ...rest }: LinkProps) {
   const { path, search, hash } = split(to);
   return (
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    <TLink to={path as any} search={search as any} hash={hash} className={className} {...rest}>
+    <TLink {...({ to: path, search, hash, className, ...rest } as any)}>
       {children}
     </TLink>
   );
