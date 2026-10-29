@@ -2,7 +2,6 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable";
-import "@lovable.dev/cloud-auth-js/styles.css";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/lib/router";
 import { useMember } from "@/hooks/use-member";
@@ -29,10 +28,10 @@ function AuthPage() {
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   useEffect(() => { if (ready && user) void navigate({ to: "/app", replace: true }); }, [ready, user, navigate]);
-  const social = async (provider: "google" | "lovable") => {
+  const social = async () => {
     setBusy(true); setError("");
     try {
-      const result = await lovable.auth.signInWithOAuth(provider, { redirect_uri: `${window.location.origin}/auth` });
+      const result = await lovable.auth.signInWithOAuth("google", { redirect_uri: `${window.location.origin}/auth` });
       if (result.error) setError("Sign-in could not be completed. Please try again.");
       else if (!result.redirected) await navigate({ to: "/app" });
     } catch { setError("Sign-in could not be completed. Please try again."); }
@@ -61,7 +60,7 @@ function AuthPage() {
       {error && <p className="text-sm text-ember" role="alert">{error}</p>}{notice && <p className="text-sm text-stone" role="status">{notice}</p>}
       <Button type="submit" disabled={busy} className="btn btn-primary h-auto w-full">{busy ? "Please wait…" : mode === "signup" ? "Create account" : mode === "forgot" ? "Send reset link" : "Sign in"} →</Button>
     </form>
-    {mode !== "forgot" && <div className="mt-6 space-y-3 border-t border-hairline pt-6"><Button variant="outline" className="btn btn-line h-auto w-full" disabled={busy} onClick={() => social("google")}>Continue with Google</Button><Button className="lovable-auth-button w-full" disabled={busy} onClick={() => social("lovable")}>Continue with Lovable</Button></div>}
+    {mode !== "forgot" && <div className="mt-6 space-y-3 border-t border-hairline pt-6"><Button variant="outline" className="btn btn-line h-auto w-full" disabled={busy} onClick={() => social()}>Continue with Google</Button></div>}
     <div className="mt-6 flex flex-wrap justify-between gap-3"><Button variant="link" onClick={() => { setMode(mode === "signup" ? "signin" : "signup"); setError(""); setNotice(""); }}>{mode === "signup" ? "Already have an account? Sign in" : "Create an account"}</Button><Button variant="link" onClick={() => { setMode(mode === "forgot" ? "signin" : "forgot"); setError(""); setNotice(""); }}>{mode === "forgot" ? "Back to sign in" : "Forgot password?"}</Button></div>
     <p className="mt-8 text-sm text-stone">An account does not automatically confer Society membership. <Link to="/join" className="underline underline-offset-4">Apply to join the Society</Link>.</p>
   </div></main>;

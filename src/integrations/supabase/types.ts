@@ -75,49 +75,67 @@ export type Database = {
       }
       membership_applications: {
         Row: {
+          city: string
           code_accepted: boolean
           country: string
           created_at: string
           email: string
+          focus_areas: string
           id: string
           intent: string
+          job_title: string
           membership_type: string
           name: string
+          operating_countries: string
           organisation: string
+          phone: string
           profile_url: string
           registry_slug: string | null
           role: string
           status: string
+          work_description: string
         }
         Insert: {
+          city?: string
           code_accepted: boolean
           country: string
           created_at?: string
           email: string
+          focus_areas?: string
           id?: string
           intent?: string
+          job_title?: string
           membership_type: string
           name: string
+          operating_countries?: string
           organisation?: string
+          phone?: string
           profile_url?: string
           registry_slug?: string | null
           role: string
           status?: string
+          work_description?: string
         }
         Update: {
+          city?: string
           code_accepted?: boolean
           country?: string
           created_at?: string
           email?: string
+          focus_areas?: string
           id?: string
           intent?: string
+          job_title?: string
           membership_type?: string
           name?: string
+          operating_countries?: string
           organisation?: string
+          phone?: string
           profile_url?: string
           registry_slug?: string | null
           role?: string
           status?: string
+          work_description?: string
         }
         Relationships: []
       }

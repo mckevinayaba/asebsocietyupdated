@@ -29,6 +29,13 @@
       "when": 1793293524650,
       "tag": "0003_store_editorial_pitches",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1793302524602,
+      "tag": "0004_join_full_details",
+      "breakpoints": true
     }
   ]
 }
