@@ -20,9 +20,16 @@ function Profile({ p, large = false }: { p: Person; large?: boolean }) {
         <p className="mt-1 text-[0.875rem] text-stone">{p.base}</p>
         <p className="mt-5 max-w-prose text-[1rem] leading-relaxed">{p.summary}</p>
         {open && <div className="mt-4 max-w-prose space-y-4 text-[1rem] leading-relaxed text-stone">{p.bio.map((b, i) => <p key={i}>{b}</p>)}</div>}
-        <button type="button" className="tlink mt-5" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
-          {open ? "Show less" : "Read full profile"} <span className="arr" aria-hidden="true">{open ? "↑" : "↓"}</span>
-        </button>
+        <div className="mt-5 flex flex-wrap items-center gap-5">
+          <button type="button" className="tlink" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
+            {open ? "Show less" : "Read full profile"} <span className="arr" aria-hidden="true">{open ? "↑" : "↓"}</span>
+          </button>
+          {p.linkedin && (
+            <a href={p.linkedin} target="_blank" rel="noreferrer" className="tlink">
+              LinkedIn <span className="arr" aria-hidden="true">↗</span>
+            </a>
+          )}
+        </div>
       </div>
     </article>
   );
