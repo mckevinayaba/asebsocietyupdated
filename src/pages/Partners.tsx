@@ -46,7 +46,7 @@ export default function Partners() {
           <ol className="mt-14 border-t border-ink">
             {tiers.map((t) => (
               <li key={t.n} className="reveal grid gap-4 border-b border-hairline py-10 lg:grid-cols-12 lg:gap-10">
-                <span className="numeral text-sm text-umber lg:col-span-1">{t.n}</span>
+                <span aria-hidden="true" className="hidden lg:col-span-1 lg:block"><span className="mt-4 block h-[2px] w-8 bg-signal" /></span>
                 <h3 className="font-display text-[1.875rem] leading-tight lg:col-span-4">{t.name}</h3>
                 <div className="space-y-3 text-[1rem] leading-relaxed lg:col-span-7">
                   <p>{t.who}</p>

@@ -168,7 +168,7 @@ export default function Join() {
               <ol className="mt-8 border-t border-ink">
                 {code.map((c, i) => (
                   <li key={i} className="grid grid-cols-[2.5rem_1fr] border-b border-hairline py-5 text-[1rem] leading-relaxed">
-                    <span className="numeral text-sm text-umber">{String(i + 1).padStart(2, "0")}</span>
+                    <span aria-hidden="true" className="mt-[0.7em] block h-px w-4 bg-signal" />
                     {c}
                   </li>
                 ))}

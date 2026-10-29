@@ -56,7 +56,7 @@ export default function Framework() {
               <tbody>
                 {conditions.map((c) => (
                   <tr key={c.n} className="border-b border-hairline align-top">
-                    <td className="numeral py-6 text-umber">{c.n}</td>
+                    <td className="w-8 py-6 align-top"><span aria-hidden="true" className="mt-3 block h-[2px] w-4 bg-signal" /></td>
                     <td className="py-6 pr-6">
                       <p className="font-display text-[1.375rem] leading-tight">{c.name}</p>
                       <p className="mt-2 max-w-sm text-[0.875rem] leading-relaxed text-stone">{c.summary}</p>
@@ -86,7 +86,7 @@ export default function Framework() {
           <ol className="grid border-t border-ink sm:grid-cols-2 lg:col-span-6 lg:col-start-7">
             {domains.map((d, i) => (
               <li key={d} className={`flex items-baseline gap-4 border-b border-hairline py-5 ${i % 2 === 1 ? "sm:border-l sm:pl-6" : "sm:pr-6"}`}>
-                <span className="numeral text-sm text-umber">{String(i + 1).padStart(2, "0")}</span>
+                <span aria-hidden="true" className="block h-1.5 w-1.5 shrink-0 -translate-y-[0.2em] rounded-full bg-signal" />
                 <span className="text-[1.0625rem] leading-snug">{d}</span>
               </li>
             ))}

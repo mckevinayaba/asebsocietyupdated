@@ -47,8 +47,8 @@ export function FieldIndex() {
           {constituencies.map((c) => (
             <div key={c.slug} className="grid gap-10 lg:grid-cols-12 lg:gap-10">
               <div className="lg:col-span-5">
-                <span className="numeral text-sm text-umber">{c.n}</span>
-                <h2 className="mt-3 text-display-sm">{c.name}</h2>
+                <span aria-hidden="true" className="block h-[3px] w-12 bg-signal" />
+                <h2 className="mt-6 text-display-sm">{c.name}</h2>
                 <p className="mt-4 font-display text-[1.25rem] leading-snug text-ink/80">{c.headline}</p>
                 <p className="mt-5 text-[0.9375rem] leading-relaxed text-stone">{c.intro}</p>
                 <div className="mt-7"><TLink to={`/field/${c.slug}`}>The {c.name.toLowerCase()} page</TLink></div>
