@@ -13,6 +13,12 @@ export const applicationSchema = z.object({
   country,
   organisation: z.string().trim().max(200),
   linkedin: z.union([z.literal(""), publicUrl]),
+  jobTitle: z.string().trim().min(2, "Add your title or the representative's title.").max(200),
+  phone: z.string().trim().min(7, "Add a phone or WhatsApp number.").max(40).regex(/^[+\d\s()-]+$/, "Use digits, spaces and + only."),
+  city: z.string().trim().min(2, "Add the city you operate from.").max(120),
+  operatingCountries: z.string().trim().min(2, "List where you operate.").max(1000),
+  workDescription: z.string().trim().min(80, "Describe your work in at least 80 characters.").max(4000),
+  focusAreas: z.string().trim().max(500),
   code: z.literal(true),
 });
 export const registrySubmissionSchema = z.object({
