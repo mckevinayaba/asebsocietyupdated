@@ -3,7 +3,7 @@ import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { ScrollToTop, useReveal } from "./Reveal";
 
-export function Layout() {
+export function Layout({ children }: { children?: import("react").ReactNode }) {
   useReveal();
   return (
     <div className="flex min-h-screen flex-col">
@@ -11,7 +11,7 @@ export function Layout() {
       <ScrollToTop />
       <Header />
       <main id="main" className="flex-1">
-        <Outlet />
+        {children ?? <Outlet />}
       </main>
       <Footer />
     </div>
