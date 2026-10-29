@@ -14,3 +14,6 @@
 - Keep registry filtering in a pure shared module so directory behaviour can be tested independently of page rendering.
 - Registry archive recognition and Society membership are distinct; never infer account membership from an awards listing.
 - Public intake uses insert-only Cloud tables with pending status; never grant public reads of contact details or direct approval rights.
+- Member data is loaded and changed through authenticated server functions and owner-only RLS; editable profiles contain no authorization roles or membership approval status.
+- Keep one root member-session subscriber; sign-out cancels queries, clears cached private data, clears the session and replaces navigation with the public auth page.
+- `/app` is protected by the client-only `_authenticated` layout; public editorial and auth pages remain outside it.
