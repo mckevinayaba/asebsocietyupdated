@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SiteRouteImport } from './routes/_site'
 import { Route as AppRouteImport } from './routes/app'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as SiteIndexRouteImport } from './routes/_site.index'
 import { Route as SiteEvidenceRouteImport } from './routes/_site.evidence'
 import { Route as SiteFrameworkRouteImport } from './routes/_site.framework'
@@ -34,6 +36,16 @@ const SiteRoute = SiteRouteImport.update({
 const AppRoute = AppRouteImport.update({
   id: '/app',
   path: '/app',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SiteIndexRoute = SiteIndexRouteImport.update({
@@ -115,6 +127,8 @@ const SiteFieldRoleSlugRoute = SiteFieldRoleSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof SiteIndexRoute
   '/app': typeof AppRoute
+  '/auth': typeof AuthRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/evidence': typeof SiteEvidenceRoute
   '/framework': typeof SiteFrameworkRoute
   '/get-involved': typeof SiteGetInvolvedRoute
@@ -132,6 +146,8 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/app': typeof AppRoute
+  '/auth': typeof AuthRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/evidence': typeof SiteEvidenceRoute
   '/framework': typeof SiteFrameworkRoute
   '/get-involved': typeof SiteGetInvolvedRoute
@@ -152,6 +168,8 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_site': typeof SiteRouteWithChildren
   '/app': typeof AppRoute
+  '/auth': typeof AuthRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/_site/evidence': typeof SiteEvidenceRoute
   '/_site/framework': typeof SiteFrameworkRoute
   '/_site/get-involved': typeof SiteGetInvolvedRoute
@@ -173,6 +191,8 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/app'
+    | '/auth'
+    | '/reset-password'
     | '/evidence'
     | '/framework'
     | '/get-involved'
@@ -190,6 +210,8 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/app'
+    | '/auth'
+    | '/reset-password'
     | '/evidence'
     | '/framework'
     | '/get-involved'
@@ -209,6 +231,8 @@ export interface FileRouteTypes {
     | '__root__'
     | '/_site'
     | '/app'
+    | '/auth'
+    | '/reset-password'
     | '/_site/evidence'
     | '/_site/framework'
     | '/_site/get-involved'
@@ -229,6 +253,8 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   SiteRoute: typeof SiteRouteWithChildren
   AppRoute: typeof AppRoute
+  AuthRoute: typeof AuthRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -245,6 +271,20 @@ declare module '@tanstack/react-router' {
       path: '/app'
       fullPath: '/app'
       preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_site/': {
@@ -396,6 +436,8 @@ const SiteRouteWithChildren = SiteRoute._addFileChildren(SiteRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   SiteRoute: SiteRouteWithChildren,
   AppRoute: AppRoute,
+  AuthRoute: AuthRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
