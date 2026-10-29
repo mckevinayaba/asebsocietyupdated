@@ -9,27 +9,373 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SiteRouteImport } from './routes/_site'
+import { Route as AppRouteImport } from './routes/app'
+import { Route as SiteIndexRouteImport } from './routes/_site.index'
+import { Route as SiteEvidenceRouteImport } from './routes/_site.evidence'
+import { Route as SiteFrameworkRouteImport } from './routes/_site.framework'
+import { Route as SiteGetInvolvedRouteImport } from './routes/_site.get-involved'
+import { Route as SiteJoinRouteImport } from './routes/_site.join'
+import { Route as SitePartnersRouteImport } from './routes/_site.partners'
+import { Route as SiteSummitRouteImport } from './routes/_site.summit'
+import { Route as SiteWhatWeBuildRouteImport } from './routes/_site.what-we-build'
+import { Route as SiteWhyAsebRouteImport } from './routes/_site.why-aseb'
+import { Route as SiteFieldIndexRouteImport } from './routes/_site.field.index'
+import { Route as SiteFieldSlugRouteImport } from './routes/_site.field.$slug'
+import { Route as SiteRegistryIndexRouteImport } from './routes/_site.registry.index'
+import { Route as SiteRegistrySlugRouteImport } from './routes/_site.registry.$slug'
+import { Route as SiteFieldRoleSlugRouteImport } from './routes/_site.field.role.$slug'
 
-export interface FileRoutesByFullPath {}
-export interface FileRoutesByTo {}
+const SiteRoute = SiteRouteImport.update({
+  id: '/_site',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppRoute = AppRouteImport.update({
+  id: '/app',
+  path: '/app',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SiteIndexRoute = SiteIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteEvidenceRoute = SiteEvidenceRouteImport.update({
+  id: '/evidence',
+  path: '/evidence',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteFrameworkRoute = SiteFrameworkRouteImport.update({
+  id: '/framework',
+  path: '/framework',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteGetInvolvedRoute = SiteGetInvolvedRouteImport.update({
+  id: '/get-involved',
+  path: '/get-involved',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteJoinRoute = SiteJoinRouteImport.update({
+  id: '/join',
+  path: '/join',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SitePartnersRoute = SitePartnersRouteImport.update({
+  id: '/partners',
+  path: '/partners',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteSummitRoute = SiteSummitRouteImport.update({
+  id: '/summit',
+  path: '/summit',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteWhatWeBuildRoute = SiteWhatWeBuildRouteImport.update({
+  id: '/what-we-build',
+  path: '/what-we-build',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteWhyAsebRoute = SiteWhyAsebRouteImport.update({
+  id: '/why-aseb',
+  path: '/why-aseb',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteFieldIndexRoute = SiteFieldIndexRouteImport.update({
+  id: '/field/',
+  path: '/field/',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteFieldSlugRoute = SiteFieldSlugRouteImport.update({
+  id: '/field/$slug',
+  path: '/field/$slug',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteRegistryIndexRoute = SiteRegistryIndexRouteImport.update({
+  id: '/registry/',
+  path: '/registry/',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteRegistrySlugRoute = SiteRegistrySlugRouteImport.update({
+  id: '/registry/$slug',
+  path: '/registry/$slug',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteFieldRoleSlugRoute = SiteFieldRoleSlugRouteImport.update({
+  id: '/field/role/$slug',
+  path: '/field/role/$slug',
+  getParentRoute: () => SiteRoute,
+} as any)
+
+export interface FileRoutesByFullPath {
+  '/': typeof SiteIndexRoute
+  '/app': typeof AppRoute
+  '/evidence': typeof SiteEvidenceRoute
+  '/framework': typeof SiteFrameworkRoute
+  '/get-involved': typeof SiteGetInvolvedRoute
+  '/join': typeof SiteJoinRoute
+  '/partners': typeof SitePartnersRoute
+  '/summit': typeof SiteSummitRoute
+  '/what-we-build': typeof SiteWhatWeBuildRoute
+  '/why-aseb': typeof SiteWhyAsebRoute
+  '/field/$slug': typeof SiteFieldSlugRoute
+  '/registry/$slug': typeof SiteRegistrySlugRoute
+  '/field/': typeof SiteFieldIndexRoute
+  '/registry/': typeof SiteRegistryIndexRoute
+  '/field/role/$slug': typeof SiteFieldRoleSlugRoute
+}
+export interface FileRoutesByTo {
+  '/app': typeof AppRoute
+  '/evidence': typeof SiteEvidenceRoute
+  '/framework': typeof SiteFrameworkRoute
+  '/get-involved': typeof SiteGetInvolvedRoute
+  '/join': typeof SiteJoinRoute
+  '/partners': typeof SitePartnersRoute
+  '/summit': typeof SiteSummitRoute
+  '/what-we-build': typeof SiteWhatWeBuildRoute
+  '/why-aseb': typeof SiteWhyAsebRoute
+  '/': typeof SiteIndexRoute
+  '/field/$slug': typeof SiteFieldSlugRoute
+  '/registry/$slug': typeof SiteRegistrySlugRoute
+  '/field': typeof SiteFieldIndexRoute
+  '/registry': typeof SiteRegistryIndexRoute
+  '/field/role/$slug': typeof SiteFieldRoleSlugRoute
+}
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
+  '/_site': typeof SiteRouteWithChildren
+  '/app': typeof AppRoute
+  '/_site/evidence': typeof SiteEvidenceRoute
+  '/_site/framework': typeof SiteFrameworkRoute
+  '/_site/get-involved': typeof SiteGetInvolvedRoute
+  '/_site/join': typeof SiteJoinRoute
+  '/_site/partners': typeof SitePartnersRoute
+  '/_site/summit': typeof SiteSummitRoute
+  '/_site/what-we-build': typeof SiteWhatWeBuildRoute
+  '/_site/why-aseb': typeof SiteWhyAsebRoute
+  '/_site/': typeof SiteIndexRoute
+  '/_site/field/$slug': typeof SiteFieldSlugRoute
+  '/_site/registry/$slug': typeof SiteRegistrySlugRoute
+  '/_site/field/': typeof SiteFieldIndexRoute
+  '/_site/registry/': typeof SiteRegistryIndexRoute
+  '/_site/field/role/$slug': typeof SiteFieldRoleSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: never
+  fullPaths:
+    | '/'
+    | '/app'
+    | '/evidence'
+    | '/framework'
+    | '/get-involved'
+    | '/join'
+    | '/partners'
+    | '/summit'
+    | '/what-we-build'
+    | '/why-aseb'
+    | '/field/$slug'
+    | '/registry/$slug'
+    | '/field/'
+    | '/registry/'
+    | '/field/role/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: never
-  id: '__root__'
+  to:
+    | '/app'
+    | '/evidence'
+    | '/framework'
+    | '/get-involved'
+    | '/join'
+    | '/partners'
+    | '/summit'
+    | '/what-we-build'
+    | '/why-aseb'
+    | '/'
+    | '/field/$slug'
+    | '/registry/$slug'
+    | '/field'
+    | '/registry'
+    | '/field/role/$slug'
+  id:
+    | '__root__'
+    | '/_site'
+    | '/app'
+    | '/_site/evidence'
+    | '/_site/framework'
+    | '/_site/get-involved'
+    | '/_site/join'
+    | '/_site/partners'
+    | '/_site/summit'
+    | '/_site/what-we-build'
+    | '/_site/why-aseb'
+    | '/_site/'
+    | '/_site/field/$slug'
+    | '/_site/registry/$slug'
+    | '/_site/field/'
+    | '/_site/registry/'
+    | '/_site/field/role/$slug'
   fileRoutesById: FileRoutesById
 }
-export interface RootRouteChildren {}
-
-declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {}
+export interface RootRouteChildren {
+  SiteRoute: typeof SiteRouteWithChildren
+  AppRoute: typeof AppRoute
 }
 
-const rootRouteChildren: RootRouteChildren = {}
+declare module '@tanstack/react-router' {
+  interface FileRoutesByPath {
+    '/_site': {
+      id: '/_site'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof SiteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/app': {
+      id: '/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_site/': {
+      id: '/_site/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof SiteIndexRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/evidence': {
+      id: '/_site/evidence'
+      path: '/evidence'
+      fullPath: '/evidence'
+      preLoaderRoute: typeof SiteEvidenceRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/framework': {
+      id: '/_site/framework'
+      path: '/framework'
+      fullPath: '/framework'
+      preLoaderRoute: typeof SiteFrameworkRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/get-involved': {
+      id: '/_site/get-involved'
+      path: '/get-involved'
+      fullPath: '/get-involved'
+      preLoaderRoute: typeof SiteGetInvolvedRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/join': {
+      id: '/_site/join'
+      path: '/join'
+      fullPath: '/join'
+      preLoaderRoute: typeof SiteJoinRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/partners': {
+      id: '/_site/partners'
+      path: '/partners'
+      fullPath: '/partners'
+      preLoaderRoute: typeof SitePartnersRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/summit': {
+      id: '/_site/summit'
+      path: '/summit'
+      fullPath: '/summit'
+      preLoaderRoute: typeof SiteSummitRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/what-we-build': {
+      id: '/_site/what-we-build'
+      path: '/what-we-build'
+      fullPath: '/what-we-build'
+      preLoaderRoute: typeof SiteWhatWeBuildRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/why-aseb': {
+      id: '/_site/why-aseb'
+      path: '/why-aseb'
+      fullPath: '/why-aseb'
+      preLoaderRoute: typeof SiteWhyAsebRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/field/': {
+      id: '/_site/field/'
+      path: '/field'
+      fullPath: '/field/'
+      preLoaderRoute: typeof SiteFieldIndexRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/field/$slug': {
+      id: '/_site/field/$slug'
+      path: '/field/$slug'
+      fullPath: '/field/$slug'
+      preLoaderRoute: typeof SiteFieldSlugRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/registry/': {
+      id: '/_site/registry/'
+      path: '/registry'
+      fullPath: '/registry/'
+      preLoaderRoute: typeof SiteRegistryIndexRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/registry/$slug': {
+      id: '/_site/registry/$slug'
+      path: '/registry/$slug'
+      fullPath: '/registry/$slug'
+      preLoaderRoute: typeof SiteRegistrySlugRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/field/role/$slug': {
+      id: '/_site/field/role/$slug'
+      path: '/field/role/$slug'
+      fullPath: '/field/role/$slug'
+      preLoaderRoute: typeof SiteFieldRoleSlugRouteImport
+      parentRoute: typeof SiteRoute
+    }
+  }
+}
+
+interface SiteRouteChildren {
+  SiteEvidenceRoute: typeof SiteEvidenceRoute
+  SiteFrameworkRoute: typeof SiteFrameworkRoute
+  SiteGetInvolvedRoute: typeof SiteGetInvolvedRoute
+  SiteJoinRoute: typeof SiteJoinRoute
+  SitePartnersRoute: typeof SitePartnersRoute
+  SiteSummitRoute: typeof SiteSummitRoute
+  SiteWhatWeBuildRoute: typeof SiteWhatWeBuildRoute
+  SiteWhyAsebRoute: typeof SiteWhyAsebRoute
+  SiteIndexRoute: typeof SiteIndexRoute
+  SiteFieldSlugRoute: typeof SiteFieldSlugRoute
+  SiteRegistrySlugRoute: typeof SiteRegistrySlugRoute
+  SiteFieldIndexRoute: typeof SiteFieldIndexRoute
+  SiteRegistryIndexRoute: typeof SiteRegistryIndexRoute
+  SiteFieldRoleSlugRoute: typeof SiteFieldRoleSlugRoute
+}
+
+const SiteRouteChildren: SiteRouteChildren = {
+  SiteEvidenceRoute: SiteEvidenceRoute,
+  SiteFrameworkRoute: SiteFrameworkRoute,
+  SiteGetInvolvedRoute: SiteGetInvolvedRoute,
+  SiteJoinRoute: SiteJoinRoute,
+  SitePartnersRoute: SitePartnersRoute,
+  SiteSummitRoute: SiteSummitRoute,
+  SiteWhatWeBuildRoute: SiteWhatWeBuildRoute,
+  SiteWhyAsebRoute: SiteWhyAsebRoute,
+  SiteIndexRoute: SiteIndexRoute,
+  SiteFieldSlugRoute: SiteFieldSlugRoute,
+  SiteRegistrySlugRoute: SiteRegistrySlugRoute,
+  SiteFieldIndexRoute: SiteFieldIndexRoute,
+  SiteRegistryIndexRoute: SiteRegistryIndexRoute,
+  SiteFieldRoleSlugRoute: SiteFieldRoleSlugRoute,
+}
+
+const SiteRouteWithChildren = SiteRoute._addFileChildren(SiteRouteChildren)
+
+const rootRouteChildren: RootRouteChildren = {
+  SiteRoute: SiteRouteWithChildren,
+  AppRoute: AppRoute,
+}
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
