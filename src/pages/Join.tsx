@@ -2,10 +2,12 @@ import { useMemo, useState } from "react";
 import { Link, useSearchParams } from "@/lib/router";
 import { constituencies, roles, roleBySlug, type ConstituencySlug } from "@/content/field";
 import { africanCountries } from "@/content/countries";
+import { supabase } from "@/integrations/supabase/client";
+import { applicationSchema } from "@/lib/intake";
+import { recordBySlug } from "@/content/registry";
+import { Button } from "@/components/ui/button";
 
-// The join flow. In this build, applications are kept in the browser (localStorage).
-// When Lovable Cloud is connected, replace saveApplication() with an insert into the
-// "applications" table. See CLAUDE.md, section "Backend".
+// Applications are private Cloud intake rows; submission does not confer membership.
 
 type Form = { role: string; type: "individual" | "organisation"; name: string; email: string; country: string; organisation: string; linkedin: string; code: boolean };
 
@@ -17,18 +19,15 @@ const code = [
   "I treat founders, peers and communities with care, and I protect what they share in confidence.",
 ];
 
-function saveApplication(f: Form) {
-  const list = JSON.parse(localStorage.getItem("aseb.applications") || "[]");
-  list.push({ ...f, submittedAt: new Date().toISOString() });
-  localStorage.setItem("aseb.applications", JSON.stringify(list));
-}
-
 const steps = ["Your role", "About you", "Code of Practice", "Confirmation"];
 
 export default function Join() {
   const [params] = useSearchParams();
   const preRole = roleBySlug(params.get("role") || "");
   const intent = params.get("intent");
+  const claimRecord = recordBySlug(params.get("record") || "");
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState("");
   const [step, setStep] = useState(0);
   const [tab, setTab] = useState<ConstituencySlug>(preRole?.constituency || "practitioners");
   const [f, setF] = useState<Form>({
@@ -42,15 +41,27 @@ export default function Join() {
   const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email);
   const canNext = step === 0 ? !!f.role : step === 1 ? f.name.trim().length > 1 && emailOk && !!f.country : step === 2 ? f.code : true;
 
-  const next = () => {
-    if (!canNext) return;
-    if (step === 2) saveApplication(f);
+  const next = async () => {
+    if (!canNext || saving) return;
+    setError("");
+    if (step === 2) {
+      const validated = applicationSchema.safeParse(f);
+      if (!validated.success) { setError(validated.error.issues[0]?.message || "Check your details."); return; }
+      setSaving(true);
+      try {
+        const applicationIntent = intent === "partner" || intent === "nominate" || intent === "steward" || intent === "claim" ? intent : "member";
+        const { error: saveError } = await supabase.from("membership_applications").insert({ name: validated.data.name, email: validated.data.email, country: f.country, role: f.role, membership_type: f.type, organisation: validated.data.organisation, profile_url: validated.data.linkedin, code_accepted: true, intent: applicationIntent, registry_slug: claimRecord?.slug || null });
+        if (saveError) { setError("Your application could not be saved. Please try again."); return; }
+      } catch { setError("Your application could not be saved. Please check your connection and try again."); return; }
+      finally { setSaving(false); }
+    }
     setStep((s) => Math.min(s + 1, 3));
     window.scrollTo({ top: 0 });
   };
 
   const intro =
-    intent === "partner" ? "Start a partner conversation. Tell us your role in the field first, so we can route you to the right team."
+    intent === "claim" && claimRecord ? `Request to claim ${claimRecord.name}. The Secretariat will review your relationship to this record before linking it to an account.`
+    : intent === "partner" ? "Start a partner conversation. Tell us your role in the field first, so we can route you to the right team."
     : intent === "nominate" ? "Register your interest in ASEB 2027 nominations. We will write to you when nominations open."
     : intent === "steward" ? "Express interest in becoming a Country Steward. Stewards begin as Members."
     : "Membership is the first step on the recognition pathway. It takes about three minutes.";
@@ -84,10 +95,10 @@ export default function Join() {
               <p className="mt-3 text-[0.9375rem] text-stone">Your answer sets your profile badge, your Circle suggestions and your Academy track. You can add two secondary roles later.</p>
               <div className="no-scrollbar -mx-5 mt-8 flex gap-2 overflow-x-auto px-5 sm:mx-0 sm:flex-wrap sm:px-0" role="tablist">
                 {constituencies.map((c) => (
-                  <button key={c.slug} role="tab" aria-selected={tab === c.slug} onClick={() => setTab(c.slug)}
+                  <Button variant="ghost" key={c.slug} role="tab" aria-selected={tab === c.slug} onClick={() => setTab(c.slug)}
                     className={`min-h-[40px] shrink-0 border px-4 text-[0.875rem] font-medium transition-colors ${tab === c.slug ? "border-ink bg-ink text-ivory" : "border-hairline hover:border-ink"}`}>
                     {c.name}
-                  </button>
+                  </Button>
                 ))}
               </div>
               <fieldset className="mt-6 border-t border-ink">
@@ -112,10 +123,10 @@ export default function Join() {
               <p className="mt-3 text-[0.9375rem] text-stone">Joining as {role ? `${/^[AEIOU]/.test(role.role) ? "an" : "a"} ${role.role}` : "a Member"}.</p>
               <div className="mt-8 inline-flex border border-ink" role="radiogroup" aria-label="Membership type">
                 {(["individual", "organisation"] as const).map((t) => (
-                  <button key={t} type="button" role="radio" aria-checked={f.type === t} onClick={() => set("type", t)}
+                  <Button variant="ghost" key={t} type="button" role="radio" aria-checked={f.type === t} onClick={() => set("type", t)}
                     className={`min-h-[44px] px-5 text-[0.875rem] font-semibold ${f.type === t ? "bg-ink text-ivory" : ""}`}>
                     {t === "individual" ? "As a practitioner" : "For an institution"}
-                  </button>
+                  </Button>
                 ))}
               </div>
               <div className="mt-8 grid gap-6 sm:grid-cols-2">
@@ -173,31 +184,34 @@ export default function Join() {
           {step === 3 && (
             <div>
               <p className="eyebrow">Application received</p>
-              <h2 className="mt-5 font-display text-[2.5rem] leading-tight">Your work was seen before you joined. Now it is yours.</h2>
+              <h2 className="mt-5 font-display text-[2.5rem] leading-tight">Thank you for taking your place in the field.</h2>
               <p className="mt-6 text-[1.0625rem] leading-relaxed text-stone">
-                Thank you, {f.name.split(" ")[0]}. The Secretariat will confirm your membership by email at {f.email}. If you already appear in the Field Registry, we will link your record to your account.
+                Thank you, {f.name.split(" ")[0]}. Your application has been saved for Secretariat review, with {f.email} as your contact address. Membership and profile claims remain subject to review.
               </p>
               <dl className="mt-10 grid border-t border-ink text-[0.9375rem] sm:grid-cols-3">
                 <div className="border-b border-hairline py-5"><dt className="text-stone">Role</dt><dd className="mt-1 font-medium">{role?.role}</dd></div>
                 <div className="border-b border-hairline py-5 sm:border-l sm:pl-5"><dt className="text-stone">Country</dt><dd className="mt-1 font-medium">{f.country}</dd></div>
-                <div className="border-b border-hairline py-5 sm:border-l sm:pl-5"><dt className="text-stone">Level</dt><dd className="mt-1 font-medium">Member</dd></div>
+                <div className="border-b border-hairline py-5 sm:border-l sm:pl-5"><dt className="text-stone">Application status</dt><dd className="mt-1 font-medium">Pending review</dd></div>
               </dl>
               <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                <Link to="/app" className="btn btn-primary">Open the member app <span className="arr" aria-hidden="true">→</span></Link>
+                <Link to="/app" className="btn btn-primary">Preview the member app <span className="arr" aria-hidden="true">→</span></Link>
                 <Link to="/registry" className="btn btn-line">Find your record <span className="arr" aria-hidden="true">→</span></Link>
               </div>
             </div>
           )}
 
           {step < 3 && (
+            <>
+            {error && <p role="alert" className="mt-8 text-sm text-ember">{error}</p>}
             <div className="mt-12 flex items-center justify-between gap-4 border-t border-hairline pt-8">
-              <button type="button" onClick={() => setStep((s) => Math.max(0, s - 1))} className={`min-h-[44px] text-[0.9375rem] font-semibold ${step === 0 ? "invisible" : ""}`}>
+              <Button variant="ghost" type="button" disabled={saving} onClick={() => setStep((s) => Math.max(0, s - 1))} className={`min-h-[44px] text-[0.9375rem] font-semibold ${step === 0 ? "invisible" : ""}`}>
                 ← Back
-              </button>
-              <button type="button" onClick={next} disabled={!canNext} className="btn btn-primary disabled:cursor-not-allowed disabled:opacity-40">
-                {step === 2 ? "Submit application" : "Continue"} <span className="arr" aria-hidden="true">→</span>
-              </button>
+              </Button>
+              <Button type="button" onClick={next} disabled={!canNext || saving} className="btn btn-primary h-auto disabled:cursor-not-allowed disabled:opacity-40">
+                {saving ? "Saving application…" : step === 2 ? "Submit application" : "Continue"} <span className="arr" aria-hidden="true">→</span>
+              </Button>
             </div>
+            </>
           )}
         </div>
       </div>
