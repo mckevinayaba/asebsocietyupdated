@@ -29,7 +29,7 @@ export default function Ambassadors() {
           <ol className="mt-12 grid border-t border-ink sm:grid-cols-2 lg:grid-cols-3">
             {ambassadorTypes.map((t, i) => (
               <li key={t.name} className="border-b border-hairline py-7 sm:pr-8">
-                <span className="numeral text-sm text-umber">{String(i + 1).padStart(2, "0")}</span>
+                <span aria-hidden="true" className="mt-3 block h-[2px] w-6 bg-signal" />
                 <h3 className="mt-3 font-display text-[1.375rem] leading-tight">{t.name}</h3>
                 <p className="mt-2 text-[0.9375rem] leading-relaxed text-stone">{t.who}</p>
               </li>

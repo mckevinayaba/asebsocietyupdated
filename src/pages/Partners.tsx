@@ -57,7 +57,7 @@ export default function Partners() {
           <ol className="mt-14 border-t border-ink">
             {tiers.map((t) => (
               <li key={t.n} className="reveal grid gap-4 border-b border-hairline py-10 lg:grid-cols-12 lg:gap-10">
-                <span className="numeral text-sm text-umber lg:col-span-1">{t.n}</span>
+                <span aria-hidden="true" className="mt-3 block h-[2px] w-6 bg-signal" />
                 <h3 className="font-display text-[1.875rem] leading-tight lg:col-span-4">{t.name}</h3>
                 <div className="space-y-3 text-[1rem] leading-relaxed lg:col-span-7">
                   <p>{t.who}</p>
@@ -100,7 +100,7 @@ export default function Partners() {
           </div>
           <ol className="border-t border-ivory/40 lg:col-span-6 lg:col-start-7">
             {partnerCommitments.map((c, i) => (
-              <li key={c} className="grid grid-cols-[2.5rem_1fr] border-b border-hairline-dark py-5 font-display text-[1.5rem]"><span className="numeral pt-2 font-sans text-sm text-signal">{String(i + 1).padStart(2, "0")}</span>{c}</li>
+              <li key={c} className="grid grid-cols-[2.5rem_1fr] border-b border-hairline-dark py-5 font-display text-[1.5rem]"><span aria-hidden="true" className="mt-3 block h-[2px] w-6 bg-signal" />{c}</li>
             ))}
           </ol>
         </div>

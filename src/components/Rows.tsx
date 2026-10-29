@@ -6,7 +6,7 @@ export function Rows({ items, start = 1 }: { items: { title: ReactNode; body: Re
     <ol className="border-t border-ink">
       {items.map((t, i) => (
         <li key={i} className="reveal grid gap-3 border-b border-hairline py-8 lg:grid-cols-12 lg:gap-10">
-          <span className="numeral text-sm text-umber lg:col-span-1">{String(i + start).padStart(2, "0")}</span>
+          <span aria-hidden="true" className="mt-3 block h-[2px] w-6 bg-signal" />
           <h3 className="font-display text-[1.5rem] leading-tight lg:col-span-4 lg:text-[1.75rem]">{t.title}</h3>
           <div className="text-[1rem] leading-relaxed text-stone lg:col-span-7">
             {t.body}

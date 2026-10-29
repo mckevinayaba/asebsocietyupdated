@@ -100,7 +100,7 @@ export function Header() {
         <div id="mobile-menu" className="fixed inset-x-0 bottom-0 top-[108px] z-30 overflow-y-auto bg-ivory xl:hidden">
           <nav aria-label="Mobile" className="wrap flex flex-col pb-16 pt-6">
             {nav.map((g, i) => {
-              const num = <span className="numeral w-6 text-sm text-stone">{String(i + 1).padStart(2, "0")}</span>;
+              const num = <span aria-hidden="true" className="mt-3 block h-[2px] w-6 bg-signal" />;
               if (!g.items.length)
                 return (
                   <Link key={g.label} to={g.to} className="flex items-baseline gap-5 border-b border-hairline py-5">

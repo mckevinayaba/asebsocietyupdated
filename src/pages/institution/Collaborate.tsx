@@ -25,7 +25,7 @@ export default function Collaborate() {
           <ol className="mt-12 grid border-t border-ink sm:grid-cols-2 lg:grid-cols-5">
             {programmeStandard.map((s, i) => (
               <li key={s.k} className="border-b border-hairline py-7 sm:pr-6">
-                <span className="numeral text-[2rem] leading-none text-ember">{i + 1}</span>
+                <span aria-hidden="true" className="mt-3 block h-[2px] w-6 bg-signal" />
                 <h3 className="mt-4 font-display text-[1.375rem]">{s.k}</h3>
                 <p className="mt-2 text-[0.9375rem] leading-relaxed text-stone">{s.v}</p>
               </li>

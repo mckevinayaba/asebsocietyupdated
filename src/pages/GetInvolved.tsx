@@ -24,7 +24,7 @@ export default function GetInvolved() {
             {paths.map((p, i) => (
               <li key={p.id} id={p.id} className="reveal grid scroll-mt-28 gap-5 border-b border-hairline py-10 lg:grid-cols-12 lg:gap-10 lg:py-12">
                 <div className="lg:col-span-2">
-                  <span className="numeral text-sm text-umber">{String(i + 1).padStart(2, "0")}</span>
+                  <span aria-hidden="true" className="mt-3 block h-[2px] w-6 bg-signal" />
                   <p className="mt-2 text-eyebrow font-semibold uppercase text-stone">{p.k}</p>
                 </div>
                 <div className="lg:col-span-6">

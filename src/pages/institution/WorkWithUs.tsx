@@ -34,7 +34,7 @@ export default function WorkWithUs() {
             </div>
             {serviceLines.map((s, i) => (
               <div key={s.name} className="grid gap-2 border-b border-hairline py-6 lg:grid-cols-12 lg:gap-10">
-                <span className="numeral text-sm text-umber lg:col-span-1">{String(i + 1).padStart(2, "0")}</span>
+                <span aria-hidden="true" className="mt-3 block h-[2px] w-6 bg-signal" />
                 <h3 className="font-display text-[1.375rem] leading-tight lg:col-span-4">{s.name}</h3>
                 <p className="text-[0.9375rem] leading-relaxed lg:col-span-4">{s.titles}</p>
                 <p className="text-[0.875rem] leading-relaxed text-stone lg:col-span-3">{s.evidence}</p>
@@ -50,7 +50,7 @@ export default function WorkWithUs() {
           <ol className="mt-14 grid gap-px bg-hairline-dark sm:grid-cols-2 lg:grid-cols-5">
             {steps.map((s, i) => (
               <li key={s.k} className="bg-ink py-7 sm:pr-6">
-                <span className="numeral text-[2rem] leading-none text-signal">{i + 1}</span>
+                <span aria-hidden="true" className="mt-3 block h-[2px] w-6 bg-signal" />
                 <h3 className="mt-4 font-display text-[1.375rem]">{s.k}</h3>
                 <p className="mt-2 text-[0.9375rem] leading-relaxed text-stone-light">{s.v}</p>
               </li>
@@ -67,7 +67,7 @@ export default function WorkWithUs() {
             <ul className="mt-8 border-t border-ink">
               {readiness.map((r, i) => (
                 <li key={r} className="grid grid-cols-[2.5rem_1fr] border-b border-hairline py-4 text-[1rem] leading-relaxed">
-                  <span className="numeral text-sm text-umber">{String(i + 1).padStart(2, "0")}</span>{r}
+                  <span aria-hidden="true" className="mt-3 block h-[2px] w-6 bg-signal" />{r}
                 </li>
               ))}
             </ul>

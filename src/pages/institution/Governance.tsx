@@ -18,7 +18,7 @@ export default function Governance() {
           <div className="mt-14 grid gap-px border-t border-ink bg-hairline lg:grid-cols-3">
             {governanceLayers.map((g) => (
               <div key={g.n} className="bg-ivory py-8 lg:px-8 lg:first:pl-0">
-                <span className="numeral text-sm text-umber">{g.n}</span>
+                <span aria-hidden="true" className="mt-3 block h-[2px] w-6 bg-signal" />
                 <p className="mt-4 text-eyebrow font-semibold uppercase text-stone">{g.kind}</p>
                 <h3 className="mt-2 font-display text-[1.625rem] leading-tight">{g.name}</h3>
                 <ul className="mt-5 space-y-3 text-[0.9375rem] leading-relaxed text-stone">
@@ -51,7 +51,7 @@ export default function Governance() {
           <ol className="mt-14 border-t border-ivory/40">
             {stewardshipGoals.map((g, i) => (
               <li key={g.name} className="grid gap-3 border-b border-hairline-dark py-7 lg:grid-cols-12 lg:gap-10">
-                <span className="numeral text-[2rem] leading-none text-signal lg:col-span-1">{i + 1}</span>
+                <span aria-hidden="true" className="mt-3 block h-[2px] w-6 bg-signal" />
                 <h3 className="font-display text-[1.5rem] leading-tight lg:col-span-4">{g.name}</h3>
                 <p className="text-[1rem] leading-relaxed text-stone-light lg:col-span-7">{g.line}</p>
               </li>

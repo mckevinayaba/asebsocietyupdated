@@ -45,7 +45,7 @@ export default function Climate() {
           <ul className="border-t border-ink lg:col-span-7 lg:col-start-6">
             {climateRoles.map((r, i) => (
               <li key={r} className="grid grid-cols-[2.5rem_1fr] border-b border-hairline py-4 text-[1.0625rem]">
-                <span className="numeral text-sm text-umber">{String(i + 1).padStart(2, "0")}</span>{r}
+                <span aria-hidden="true" className="mt-3 block h-[2px] w-6 bg-signal" />{r}
               </li>
             ))}
           </ul>
