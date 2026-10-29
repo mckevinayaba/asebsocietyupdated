@@ -1,7 +1,7 @@
 import { statements, timeline, whyNow } from "@/content/site";
 import { PageHero, SectionHead } from "@/components/PageHero";
 import { Photo } from "@/components/Photo";
-import { Btn } from "@/components/Arrow";
+import { Btn, TLink } from "@/components/Arrow";
 import { asset } from "@/lib/asset";
 import { Source, Ext } from "@/components/Rows";
 
@@ -41,6 +41,17 @@ export default function WhyAseb() {
               <p className="mt-6 font-display text-[1.625rem] leading-snug lg:text-[2rem]">{x.v}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      <section className="section border-b border-hairline">
+        <div className="wrap grid gap-12 lg:grid-cols-12 lg:gap-10">
+          <div className="lg:col-span-5"><p className="eyebrow">The ecosystem tax</p><h2 className="mt-5 text-display-sm">Founders pay for the gaps between institutions.</h2></div>
+          <div className="space-y-6 text-[1.0625rem] leading-relaxed text-stone lg:col-span-6 lg:col-start-7">
+            <p>When support is fragmented, founders spend time finding the right people, repeating their story and navigating disconnected programmes. That lost time and effort is an ecosystem tax.</p>
+            <p>Ecosystem building addresses the conditions behind that friction: better coordination, clearer pathways to capital and markets, stronger capabilities and shared evidence. ASEB Society brings the people doing that work into a professional home.</p>
+            <TLink to="/framework">Explore the seven conditions</TLink>
+          </div>
         </div>
       </section>
 

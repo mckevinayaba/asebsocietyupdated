@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "@/lib/router";
 import { Logo } from "./Logo";
+import { useMember } from "@/hooks/use-member";
 import { nav } from "@/content/site";
 
 export function Header() {
+  const { user } = useMember();
   const [open, setOpen] = useState(false);
   const [menu, setMenu] = useState<string | null>(null);
   const [mobileGroup, setMobileGroup] = useState<string | null>(null);
@@ -42,7 +44,7 @@ export function Header() {
           </div>
           <div className="hidden items-center gap-5 sm:flex">
             <Link to="/registry" className="transition-colors hover:text-ivory">Field Registry</Link>
-            <Link to="/app" className="transition-colors hover:text-ivory">Member sign in</Link>
+            <Link to={user ? "/app" : "/auth"} className="transition-colors hover:text-ivory">{user ? "My member app" : "Member sign in"}</Link>
           </div>
         </div>
       </div>
@@ -131,7 +133,7 @@ export function Header() {
             })}
             <div className="mt-10 flex flex-col gap-3">
               <Link to="/join" className="btn btn-primary w-full">Join the Society</Link>
-              <Link to="/app" className="btn btn-line w-full">Open the member app preview</Link>
+              <Link to={user ? "/app" : "/auth"} className="btn btn-line w-full">{user ? "Open my member app" : "Member sign in"}</Link>
             </div>
           </nav>
         </div>
