@@ -14,7 +14,96 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      membership_applications: {
+        Row: {
+          code_accepted: boolean
+          country: string
+          created_at: string
+          email: string
+          id: string
+          intent: string
+          membership_type: string
+          name: string
+          organisation: string
+          profile_url: string
+          registry_slug: string | null
+          role: string
+          status: string
+        }
+        Insert: {
+          code_accepted: boolean
+          country: string
+          created_at?: string
+          email: string
+          id?: string
+          intent?: string
+          membership_type: string
+          name: string
+          organisation?: string
+          profile_url?: string
+          registry_slug?: string | null
+          role: string
+          status?: string
+        }
+        Update: {
+          code_accepted?: boolean
+          country?: string
+          created_at?: string
+          email?: string
+          id?: string
+          intent?: string
+          membership_type?: string
+          name?: string
+          organisation?: string
+          profile_url?: string
+          registry_slug?: string | null
+          role?: string
+          status?: string
+        }
+        Relationships: []
+      }
+      registry_submissions: {
+        Row: {
+          bio: string
+          contact_email: string
+          contact_name: string
+          country: string
+          created_at: string
+          id: string
+          name: string
+          record_type: string
+          role: string
+          source_url: string
+          status: string
+        }
+        Insert: {
+          bio: string
+          contact_email: string
+          contact_name: string
+          country: string
+          created_at?: string
+          id?: string
+          name: string
+          record_type: string
+          role: string
+          source_url: string
+          status?: string
+        }
+        Update: {
+          bio?: string
+          contact_email?: string
+          contact_name?: string
+          country?: string
+          created_at?: string
+          id?: string
+          name?: string
+          record_type?: string
+          role?: string
+          source_url?: string
+          status?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
