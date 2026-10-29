@@ -14,6 +14,7 @@ import { Layout } from "../components/Layout";
 import NotFound from "../pages/NotFound";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { MemberProvider } from "@/hooks/use-member";
 
 function NotFoundComponent() {
   return (
@@ -104,7 +105,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <MemberProvider><Outlet /></MemberProvider>
     </QueryClientProvider>
   );
 }
