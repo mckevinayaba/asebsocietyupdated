@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { applicationSchema, registrySubmissionSchema } from "@/lib/intake";
 
-const application = { name: "Test Practitioner", email: "practitioner@example.com", role: "ecosystem-builder", type: "individual", country: "South Africa", organisation: "", linkedin: "", jobTitle: "Programme Director", phone: "+27 73 136 6639", city: "Johannesburg", operatingCountries: "South Africa, Kenya", workDescription: "We run an incubator supporting early-stage founders across Southern and East Africa with mentorship and capital readiness.", focusAreas: "", code: true };
+const application = { name: "Test Practitioner", email: "practitioner@example.com", role: "ecosystem-builder", type: "individual", country: "South Africa", organisation: "", linkedin: "@asebsociety", jobTitle: "Programme Director", phone: "+27 73 136 6639", city: "Johannesburg", operatingCountries: "South Africa, Kenya", workDescription: "We run an incubator supporting early-stage founders across Southern and East Africa with mentorship and capital readiness.", focusAreas: "climate-tech, policy", code: true };
 describe("Private intake validation", () => {
   it("accepts a completed membership application", () => {
     expect(applicationSchema.safeParse(application).success).toBe(true);
@@ -19,6 +19,9 @@ describe("Private intake validation", () => {
 describe("Join full details", () => {
   it("rejects a work description under 80 characters", () => {
     expect(applicationSchema.safeParse({ ...application, workDescription: "Short." }).success).toBe(false);
+    expect(applicationSchema.safeParse({ ...application, focusAreas: "" }).success).toBe(false);
+    expect(applicationSchema.safeParse({ ...application, linkedin: "" }).success).toBe(false);
+    expect(applicationSchema.safeParse({ ...application, linkedin: "https://asebsociety.org" }).success).toBe(true);
   });
   it("requires where the applicant operates", () => {
     expect(applicationSchema.safeParse({ ...application, operatingCountries: "" }).success).toBe(false);

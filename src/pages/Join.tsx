@@ -39,7 +39,7 @@ export default function Join() {
   const role = roleBySlug(f.role);
   const tabRoles = useMemo(() => roles.filter((r) => r.constituency === tab), [tab]);
   const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email);
-  const detailsOk = f.jobTitle.trim().length > 1 && f.phone.trim().length >= 7 && f.city.trim().length > 1 && f.operatingCountries.trim().length > 1 && f.workDescription.trim().length >= 80;
+  const detailsOk = f.jobTitle.trim().length > 1 && f.phone.trim().length >= 7 && f.city.trim().length > 1 && f.operatingCountries.trim().length > 1 && f.workDescription.trim().length >= 80 && f.focusAreas.trim().length >= 3 && f.linkedin.trim().length >= 3;
   const canNext = step === 0 ? !!f.role : step === 1 ? f.name.trim().length > 1 && emailOk && !!f.country && detailsOk : step === 2 ? f.code : true;
 
   const next = async () => {
@@ -156,8 +156,8 @@ export default function Join() {
                   </label>
                 )}
                 <label className={f.type === "individual" ? "" : "sm:col-span-2"}>
-                  <span className="field-label">LinkedIn or website <span className="font-normal text-stone">(optional)</span></span>
-                  <input className="field-input" value={f.linkedin} onChange={(e) => set("linkedin", e.target.value)} inputMode="url" placeholder="https://" />
+                  <span className="field-label">Website or social media handle</span>
+                  <input className="field-input" value={f.linkedin} onChange={(e) => set("linkedin", e.target.value)} inputMode="url" placeholder="https://… or @handle (LinkedIn, X, Instagram)" />
                 </label>
                 <label>
                   <span className="field-label">{f.type === "organisation" ? "Representative's title" : "Your title"}</span>
@@ -181,7 +181,7 @@ export default function Join() {
                   <span className="mt-2 block text-[0.8125rem] text-stone">{f.workDescription.trim().length < 80 ? `At least 80 characters (${f.workDescription.trim().length} so far).` : "Thank you, that gives the Secretariat a clear picture."}</span>
                 </label>
                 <label className="sm:col-span-2">
-                  <span className="field-label">Focus areas <span className="font-normal text-stone">(optional)</span></span>
+                  <span className="field-label">Focus areas</span>
                   <input className="field-input" value={f.focusAreas} onChange={(e) => set("focusAreas", e.target.value)} placeholder="e.g. early-stage ventures, climate-tech, women founders, policy" />
                 </label>
               </div>
