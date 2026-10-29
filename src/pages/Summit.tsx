@@ -29,7 +29,7 @@ export default function Summit() {
             <div className="photo aspect-[4/3] sm:aspect-[16/9] lg:aspect-[21/9]">
               <img src={asset("images/events/aseb-2026-recognised-builders.jpg")} alt="Recognised practitioners and institutions at ASEB 2026" style={{ objectPosition: "50% 40%" }} />
             </div>
-            <figcaption className="caption">ASEB Summit and Awards 2026, Johannesburg · Photo: credit to be confirmed</figcaption>
+            <figcaption className="caption">ASEB Summit and Awards 2026, Johannesburg · Photo: ASEB Society</figcaption>
           </figure>
           <dl className="mt-10 grid grid-cols-2 gap-px bg-hairline-dark lg:grid-cols-4">
             {proof.map((p) => (
@@ -94,7 +94,7 @@ export default function Summit() {
       {/* Gallery */}
       <section className="section">
         <div className="wrap">
-          <SectionHead eyebrow="From the Summit floor" title="The record, in pictures." lede="Photography from the ASEB Summit and Awards. Photographer credits to be confirmed before publication." />
+          <SectionHead eyebrow="From the Summit floor" title="The record, in pictures." lede="Photography from the ASEB Summit and Awards. Photos: ASEB Society." />
           <div className="mt-14 grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-4">
             {gallery.map((g) => (
               <figure key={g.src} className={g.span === "wide" ? "col-span-2" : "col-span-1"}>
@@ -107,7 +107,7 @@ export default function Summit() {
               <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-sand">ASEB 2026</p>
               <div>
                 <p className="font-display text-[1.375rem] leading-snug lg:text-[1.625rem]">The full gallery follows.</p>
-                <p className="mt-3 text-[0.8125rem] leading-relaxed text-stone-light">Added here as photographer credits are confirmed.</p>
+                <p className="mt-3 text-[0.8125rem] leading-relaxed text-stone-light">More photographs from the Summit floor to follow.</p>
               </div>
             </div>
           </div>
