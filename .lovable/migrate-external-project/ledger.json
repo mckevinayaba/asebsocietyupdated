@@ -1,0 +1,8 @@
+[
+ {"capability":"code, pages, content, design","source":"Vite + React Router SPA","outcome":"migrate","status":"done","next_action":"none"},
+ {"capability":"images and brand assets","source":"public/images","outcome":"migrate","status":"done","next_action":"none"},
+ {"capability":"registry and roles data","source":"src/content/*.json/ts (bundled)","outcome":"migrate","status":"done","next_action":"none"},
+ {"capability":"join applications","source":"localStorage in browser (source TODO: Cloud table)","outcome":"preserved as-is","status":"done","next_action":"optional: store applications in Lovable Cloud"},
+ {"capability":"database, auth, users","source":"none","outcome":"n/a","status":"absent","next_action":"none"},
+ {"capability":"member app (/app)","source":"preview-only UI","outcome":"migrate","status":"done","next_action":"none"}
+]
