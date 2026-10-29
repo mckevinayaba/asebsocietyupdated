@@ -38,9 +38,9 @@ export function Header() {
       <div className="on-dark bg-ink text-[0.8125rem] text-stone-light">
         <div className="wrap flex h-9 items-center justify-between">
           <div className="flex items-center gap-5">
-            <span className="font-semibold text-ivory">ASEB Society</span>
+            <a href="mailto:aseb@asebsociety.org" className="font-semibold text-ivory transition-colors hover:text-ivory/80">aseb@asebsociety.org</a>
             <span className="h-3 w-px bg-hairline-dark" aria-hidden="true" />
-            <Link to="/summit" className="transition-colors hover:text-ivory">Summit and Awards</Link>
+            <a href="https://wa.me/27731366639" target="_blank" rel="noreferrer" className="transition-colors hover:text-ivory">WhatsApp +27 73 136 6639</a>
           </div>
           <div className="hidden items-center gap-5 sm:flex">
             <Link to="/registry" className="transition-colors hover:text-ivory">Field Registry</Link>
