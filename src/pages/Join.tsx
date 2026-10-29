@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 
 // Applications are private Cloud intake rows; submission does not confer membership.
 
-type Form = { role: string; type: "individual" | "organisation"; name: string; email: string; country: string; organisation: string; linkedin: string; code: boolean };
+type Form = { role: string; type: "individual" | "organisation"; name: string; email: string; country: string; organisation: string; linkedin: string; jobTitle: string; phone: string; city: string; operatingCountries: string; workDescription: string; focusAreas: string; code: boolean };
 
 const code = [
   "I put the interests of founders and the ecosystem ahead of my own visibility.",
@@ -33,13 +33,14 @@ export default function Join() {
   const [f, setF] = useState<Form>({
     role: preRole?.slug || "",
     type: params.get("type") === "organisation" ? "organisation" : "individual",
-    name: "", email: "", country: "", organisation: "", linkedin: "", code: false,
+    name: "", email: "", country: "", organisation: "", linkedin: "", jobTitle: "", phone: "", city: "", operatingCountries: "", workDescription: "", focusAreas: "", code: false,
   });
   const set = <K extends keyof Form>(k: K, v: Form[K]) => setF((x) => ({ ...x, [k]: v }));
   const role = roleBySlug(f.role);
   const tabRoles = useMemo(() => roles.filter((r) => r.constituency === tab), [tab]);
   const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email);
-  const canNext = step === 0 ? !!f.role : step === 1 ? f.name.trim().length > 1 && emailOk && !!f.country : step === 2 ? f.code : true;
+  const detailsOk = f.jobTitle.trim().length > 1 && f.phone.trim().length >= 7 && f.city.trim().length > 1 && f.operatingCountries.trim().length > 1 && f.workDescription.trim().length >= 80;
+  const canNext = step === 0 ? !!f.role : step === 1 ? f.name.trim().length > 1 && emailOk && !!f.country && detailsOk : step === 2 ? f.code : true;
 
   const next = async () => {
     if (!canNext || saving) return;
@@ -50,7 +51,8 @@ export default function Join() {
       setSaving(true);
       try {
         const applicationIntent = intent === "partner" || intent === "nominate" || intent === "steward" || intent === "claim" ? intent : "member";
-        const { error: saveError } = await supabase.from("membership_applications").insert({ name: validated.data.name, email: validated.data.email, country: f.country, role: f.role, membership_type: f.type, organisation: validated.data.organisation, profile_url: validated.data.linkedin, code_accepted: true, intent: applicationIntent, registry_slug: claimRecord?.slug || null });
+        const d = validated.data;
+        const { error: saveError } = await supabase.from("membership_applications").insert({ name: d.name, email: d.email, country: f.country, role: f.role, membership_type: f.type, organisation: d.organisation, profile_url: d.linkedin, code_accepted: true, intent: applicationIntent, registry_slug: claimRecord?.slug || null, job_title: d.jobTitle, phone: d.phone, city: d.city, operating_countries: d.operatingCountries, work_description: d.workDescription, focus_areas: d.focusAreas });
         if (saveError) { setError("Your application could not be saved. Please try again."); return; }
       } catch { setError("Your application could not be saved. Please check your connection and try again."); return; }
       finally { setSaving(false); }
@@ -155,7 +157,32 @@ export default function Join() {
                 )}
                 <label className={f.type === "individual" ? "" : "sm:col-span-2"}>
                   <span className="field-label">LinkedIn or website <span className="font-normal text-stone">(optional)</span></span>
-                  <input className="field-input" value={f.linkedin} onChange={(e) => set("linkedin", e.target.value)} inputMode="url" />
+                  <input className="field-input" value={f.linkedin} onChange={(e) => set("linkedin", e.target.value)} inputMode="url" placeholder="https://" />
+                </label>
+                <label>
+                  <span className="field-label">{f.type === "organisation" ? "Representative's title" : "Your title"}</span>
+                  <input className="field-input" value={f.jobTitle} onChange={(e) => set("jobTitle", e.target.value)} autoComplete="organization-title" />
+                </label>
+                <label>
+                  <span className="field-label">Phone or WhatsApp</span>
+                  <input className="field-input" type="tel" value={f.phone} onChange={(e) => set("phone", e.target.value)} autoComplete="tel" placeholder="+27 …" />
+                </label>
+                <label>
+                  <span className="field-label">{f.type === "organisation" ? "Headquarters city" : "City you work from"}</span>
+                  <input className="field-input" value={f.city} onChange={(e) => set("city", e.target.value)} autoComplete="address-level2" />
+                </label>
+                <label>
+                  <span className="field-label">Countries where you operate</span>
+                  <input className="field-input" value={f.operatingCountries} onChange={(e) => set("operatingCountries", e.target.value)} placeholder="e.g. Kenya, Rwanda, Uganda" />
+                </label>
+                <label className="sm:col-span-2">
+                  <span className="field-label">{f.type === "organisation" ? "Who you are and what your institution does" : "Who you are and the work you do"}</span>
+                  <textarea rows={6} className="field-input min-h-[9rem]" value={f.workDescription} onChange={(e) => set("workDescription", e.target.value)} placeholder="Your mandate, the founders, startups or ecosystems you support, your programmes and the results so far." />
+                  <span className="mt-2 block text-[0.8125rem] text-stone">{f.workDescription.trim().length < 80 ? `At least 80 characters (${f.workDescription.trim().length} so far).` : "Thank you, that gives the Secretariat a clear picture."}</span>
+                </label>
+                <label className="sm:col-span-2">
+                  <span className="field-label">Focus areas <span className="font-normal text-stone">(optional)</span></span>
+                  <input className="field-input" value={f.focusAreas} onChange={(e) => set("focusAreas", e.target.value)} placeholder="e.g. early-stage ventures, climate-tech, women founders, policy" />
                 </label>
               </div>
             </div>
