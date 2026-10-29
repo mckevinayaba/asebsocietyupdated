@@ -18,7 +18,7 @@ export default function GetInvolved() {
       <section className="section">
         <div className="wrap">
           <ul className="border-t border-ink">
-            {paths.map((p) => (
+            {paths.map((p, i) => (
               <li key={p.id} id={p.id} className="reveal grid scroll-mt-28 gap-5 border-b border-hairline py-10 lg:grid-cols-12 lg:gap-10 lg:py-12">
                 <div className="lg:col-span-2">
                   <span aria-hidden="true" className="block h-[2px] w-8 bg-signal" />
