@@ -1,8 +1,9 @@
 import { statements, timeline, whyNow } from "@/content/site";
 import { PageHero, SectionHead } from "@/components/PageHero";
 import { Photo } from "@/components/Photo";
-import { Btn, TLink } from "@/components/Arrow";
+import { Btn } from "@/components/Arrow";
 import { asset } from "@/lib/asset";
+import { Source, Ext } from "@/components/Rows";
 
 export default function WhyAseb() {
   return (
@@ -40,17 +41,6 @@ export default function WhyAseb() {
               <p className="mt-6 font-display text-[1.625rem] leading-snug lg:text-[2rem]">{x.v}</p>
             </div>
           ))}
-        </div>
-      </section>
-
-      <section className="section border-b border-hairline">
-        <div className="wrap grid gap-12 lg:grid-cols-12 lg:gap-10">
-          <div className="lg:col-span-5"><p className="eyebrow">The ecosystem tax</p><h2 className="mt-5 text-display-sm">Founders pay for the gaps between institutions.</h2></div>
-          <div className="space-y-6 text-[1.0625rem] leading-relaxed text-stone lg:col-span-6 lg:col-start-7">
-            <p>When support is fragmented, founders spend time finding the right people, repeating their story and navigating disconnected programmes. That lost time and effort is an ecosystem tax.</p>
-            <p>Ecosystem building addresses the conditions behind that friction: better coordination, clearer pathways to capital and markets, stronger capabilities and shared evidence. ASEB Society brings the people doing that work into a professional home.</p>
-            <TLink to="/framework">Explore the seven conditions</TLink>
-          </div>
         </div>
       </section>
 
@@ -98,6 +88,28 @@ export default function WhyAseb() {
                 <a href={w.href} target="_blank" rel="noreferrer" className="mt-4 inline-block text-[0.8125rem] text-stone-light hover:text-ivory">{w.source}</a>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="informal" className="section scroll-mt-24">
+        <div className="wrap grid gap-12 lg:grid-cols-12 lg:gap-10">
+          <div className="lg:col-span-5">
+            <p className="eyebrow">The whole economy</p>
+            <p className="numeral mt-6 text-[4.5rem] leading-none text-ember lg:text-[6rem]">85.8%</p>
+            <p className="mt-3 max-w-sm text-[1rem] leading-relaxed text-stone">of employment in Africa is informal. More than eight in ten workers.</p>
+            <Source><Ext href="https://www.ilo.org/media/396341/download">ILO, Report on Employment in Africa</Ext></Source>
+          </div>
+          <div className="space-y-6 text-[1.0625rem] leading-relaxed lg:col-span-6 lg:col-start-7">
+            <h2 className="text-display-sm">An ecosystem is not only its startups.</h2>
+            <p>A field that serves only venture-backed founders serves a small share of Africa's enterprise. ASEB Society recognises the builders of the township, rural, informal and green economies as practitioners of the same profession.</p>
+            <p className="text-stone">South Africa's township economy alone is estimated at more than R900 billion, and 80% of the township businesses surveyed by Standard Bank are unregistered. That is why the ASEB 2026 Ecosystem Tour went to Soweto.</p>
+            <Source><Ext href="https://www.standardbank.co.za/static_file/South%20Africa/PDF/Township%20Informal%20Economy%20Insights%20Report%202025/Standard%20Bank%20Township%20Informal%20Economy%20Report%20October%202025%20Final.pdf">Standard Bank, Township Informal Economy Report, 2025</Ext></Source>
+            <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:flex-wrap">
+              <Btn to="/climate#informal" variant="line">Green and informal economies</Btn>
+              <Btn to="/about/story" variant="line">Our story</Btn>
+              <Btn to="/people" variant="line">Our people</Btn>
+            </div>
           </div>
         </div>
       </section>

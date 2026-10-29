@@ -7,12 +7,12 @@ export function Footer() {
     <footer className="on-dark bg-ink text-ivory">
       <div className="wrap pb-10 pt-20 lg:pt-28">
         <div className="grid gap-14 lg:grid-cols-12">
-          <div className="lg:col-span-5">
+          <div className="lg:col-span-4">
             <Logo tone="dark" />
             <p className="mt-8 max-w-sm font-display text-[1.625rem] leading-snug text-ivory">{statements.short}</p>
             <Link to="/join" className="btn btn-signal mt-8">Join the Society <span className="arr" aria-hidden="true">→</span></Link>
           </div>
-          <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 lg:col-span-7">
+          <div className="grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-4 lg:col-span-8">
             {footerNav.map((col) => (
               <div key={col.heading}>
                 <p className="text-eyebrow font-semibold uppercase text-sand">{col.heading}</p>

@@ -21,45 +21,76 @@ export const statements = {
   recognitionLine: "Recognition is not a trophy. It is infrastructure.",
 };
 
-export const nav = [
-  { label: "Why ASEB", to: "/why-aseb" },
-  { label: "What We Build", to: "/what-we-build" },
-  { label: "The Field", to: "/field" },
-  { label: "Evidence", to: "/evidence" },
-  { label: "Summit and Awards", to: "/summit" },
-  { label: "Get Involved", to: "/get-involved" },
+export type NavGroup = { label: string; to: string; items: { label: string; to: string; note: string }[] };
+
+// Grouped navigation. Desktop shows dropdowns; mobile shows numbered, expandable groups.
+export const nav: NavGroup[] = [
+  { label: "About", to: "/about/story", items: [
+    { label: "Our Story", to: "/about/story", note: "From a summit to an institution, 2022 to 2026" },
+    { label: "Why ASEB", to: "/why-aseb", note: "The case for a profession of ecosystem builders" },
+    { label: "People", to: "/people", note: "Founder, Executive Team and Board" },
+    { label: "Governance and Goals", to: "/governance", note: "How the Society is governed and what it is for" },
+  ] },
+  { label: "The Field", to: "/field", items: [
+    { label: "The Field", to: "/field", note: "Four constituencies and the roles within them" },
+    { label: "Green and Climate Economy", to: "/climate", note: "Climate is a condition, not a vertical" },
+    { label: "The 17 SDGs", to: "/sdgs", note: "How ecosystem building serves every goal" },
+    { label: "Field Registry", to: "/registry", note: "Public records of practice" },
+  ] },
+  { label: "What We Build", to: "/what-we-build", items: [
+    { label: "The Four Pillars", to: "/what-we-build", note: "Academy, Circles, Field Lab, Summit and Awards" },
+    { label: "The Framework", to: "/framework", note: "Seven conditions for a working ecosystem" },
+    { label: "Summit and Awards", to: "/summit", note: "The annual convening and recognition of the field" },
+  ] },
+  { label: "Insights", to: "/insights", items: [
+    { label: "Insights", to: "/insights", note: "Research, case studies, tools and stories" },
+    { label: "Evidence Library", to: "/evidence", note: "Open research the field can use" },
+  ] },
+  { label: "Partners", to: "/partners", items: [
+    { label: "Partners", to: "/partners", note: "Institutions advancing the field with us" },
+    { label: "Country Partners", to: "/country-partners", note: "Carry the field in your country" },
+    { label: "Ambassadors", to: "/ambassadors", note: "Represent the Society where you work" },
+    { label: "Programme Collaborations", to: "/collaborate", note: "Align your programme with the field" },
+    { label: "Funders and DFIs", to: "/funders", note: "Fund the builders. Multiply the founders." },
+  ] },
+  { label: "Work With Us", to: "/work-with-us", items: [] },
 ];
 
 export const footerNav = [
-  {
-    heading: "The Society",
-    links: [
-      { label: "Why ASEB", to: "/why-aseb" },
-      { label: "The Framework", to: "/framework" },
-      { label: "What We Build", to: "/what-we-build" },
-      { label: "Partners", to: "/partners" },
-    ],
-  },
-  {
-    heading: "The Field",
-    links: [
-      { label: "Practitioners", to: "/field/practitioners" },
-      { label: "Support Institutions", to: "/field/support-institutions" },
-      { label: "Capital and Market Builders", to: "/field/capital-market-builders" },
-      { label: "Systems Builders", to: "/field/systems-builders" },
-      { label: "Field Registry", to: "/registry" },
-    ],
-  },
-  {
-    heading: "Take part",
-    links: [
-      { label: "Join the Society", to: "/join" },
-      { label: "Get Involved", to: "/get-involved" },
-      { label: "Summit and Awards", to: "/summit" },
-      { label: "Evidence Library", to: "/evidence" },
-      { label: "Member app", to: "/app" },
-    ],
-  },
+  { heading: "The Society", links: [
+    { label: "Our Story", to: "/about/story" },
+    { label: "Why ASEB", to: "/why-aseb" },
+    { label: "People", to: "/people" },
+    { label: "Governance and Goals", to: "/governance" },
+    { label: "What We Build", to: "/what-we-build" },
+    { label: "The Framework", to: "/framework" },
+  ] },
+  { heading: "The Field", links: [
+    { label: "Practitioners", to: "/field/practitioners" },
+    { label: "Support Institutions", to: "/field/support-institutions" },
+    { label: "Capital and Market Builders", to: "/field/capital-market-builders" },
+    { label: "Systems Builders", to: "/field/systems-builders" },
+    { label: "Green and Climate Economy", to: "/climate" },
+    { label: "The 17 SDGs", to: "/sdgs" },
+    { label: "Field Registry", to: "/registry" },
+  ] },
+  { heading: "Partner", links: [
+    { label: "Partners", to: "/partners" },
+    { label: "Country Partners", to: "/country-partners" },
+    { label: "Ambassadors", to: "/ambassadors" },
+    { label: "Programme Collaborations", to: "/collaborate" },
+    { label: "Funders and DFIs", to: "/funders" },
+    { label: "Work With Us", to: "/work-with-us" },
+  ] },
+  { heading: "Take part", links: [
+    { label: "Join the Society", to: "/join" },
+    { label: "Get Involved", to: "/get-involved" },
+    { label: "Summit and Awards", to: "/summit" },
+    { label: "Insights", to: "/insights" },
+    { label: "Evidence Library", to: "/evidence" },
+    { label: "Contact", to: "/get-involved#contact" },
+    { label: "Member app preview", to: "/app" },
+  ] },
 ];
 
 // Proof figures. Each one carries its year and its source.
@@ -74,8 +105,8 @@ export const timeline = [
   { year: "2022", city: "Johannesburg", line: "Where it began. A room for the people who build the rooms founders walk into." },
   { year: "2023", city: "Nairobi", line: "Recognition created retention. Builders came back, and brought others." },
   { year: "2024", city: "Accra", line: "The field asked what happens between summits." },
-  { year: "2025", city: "Addis Ababa", line: "Scale met substance. ASEB Society was established to carry the work through the year." },
-  { year: "2026", city: "Johannesburg", line: "The homecoming. Fifth edition, and the institutional launch of the Society." },
+  { year: "2025", city: "Addis Ababa", line: "Scale met substance. ASEB Society launched on 16 November 2025 to carry the work through the year." },
+  { year: "2026", city: "Johannesburg", line: "The homecoming. Fifth edition, 20 to 22 October: Who Built the Builder?" },
 ];
 
 export const whyNow = [
