@@ -15,14 +15,25 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as AuthenticatedAppRouteImport } from './routes/_authenticated/app'
 import { Route as SiteIndexRouteImport } from './routes/_site.index'
+import { Route as SiteAmbassadorsRouteImport } from './routes/_site.ambassadors'
+import { Route as SiteClimateRouteImport } from './routes/_site.climate'
+import { Route as SiteCollaborateRouteImport } from './routes/_site.collaborate'
+import { Route as SiteCountryPartnersRouteImport } from './routes/_site.country-partners'
 import { Route as SiteEvidenceRouteImport } from './routes/_site.evidence'
 import { Route as SiteFrameworkRouteImport } from './routes/_site.framework'
+import { Route as SiteFundersRouteImport } from './routes/_site.funders'
 import { Route as SiteGetInvolvedRouteImport } from './routes/_site.get-involved'
+import { Route as SiteGovernanceRouteImport } from './routes/_site.governance'
+import { Route as SiteInsightsRouteImport } from './routes/_site.insights'
 import { Route as SiteJoinRouteImport } from './routes/_site.join'
 import { Route as SitePartnersRouteImport } from './routes/_site.partners'
+import { Route as SitePeopleRouteImport } from './routes/_site.people'
+import { Route as SiteSdgsRouteImport } from './routes/_site.sdgs'
 import { Route as SiteSummitRouteImport } from './routes/_site.summit'
 import { Route as SiteWhatWeBuildRouteImport } from './routes/_site.what-we-build'
 import { Route as SiteWhyAsebRouteImport } from './routes/_site.why-aseb'
+import { Route as SiteWorkWithUsRouteImport } from './routes/_site.work-with-us'
+import { Route as SiteAboutStoryRouteImport } from './routes/_site.about.story'
 import { Route as SiteFieldIndexRouteImport } from './routes/_site.field.index'
 import { Route as SiteFieldSlugRouteImport } from './routes/_site.field.$slug'
 import { Route as SiteRegistryIndexRouteImport } from './routes/_site.registry.index'
@@ -58,6 +69,26 @@ const SiteIndexRoute = SiteIndexRouteImport.update({
   path: '/',
   getParentRoute: () => SiteRoute,
 } as any)
+const SiteAmbassadorsRoute = SiteAmbassadorsRouteImport.update({
+  id: '/ambassadors',
+  path: '/ambassadors',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteClimateRoute = SiteClimateRouteImport.update({
+  id: '/climate',
+  path: '/climate',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteCollaborateRoute = SiteCollaborateRouteImport.update({
+  id: '/collaborate',
+  path: '/collaborate',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteCountryPartnersRoute = SiteCountryPartnersRouteImport.update({
+  id: '/country-partners',
+  path: '/country-partners',
+  getParentRoute: () => SiteRoute,
+} as any)
 const SiteEvidenceRoute = SiteEvidenceRouteImport.update({
   id: '/evidence',
   path: '/evidence',
@@ -68,9 +99,24 @@ const SiteFrameworkRoute = SiteFrameworkRouteImport.update({
   path: '/framework',
   getParentRoute: () => SiteRoute,
 } as any)
+const SiteFundersRoute = SiteFundersRouteImport.update({
+  id: '/funders',
+  path: '/funders',
+  getParentRoute: () => SiteRoute,
+} as any)
 const SiteGetInvolvedRoute = SiteGetInvolvedRouteImport.update({
   id: '/get-involved',
   path: '/get-involved',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteGovernanceRoute = SiteGovernanceRouteImport.update({
+  id: '/governance',
+  path: '/governance',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteInsightsRoute = SiteInsightsRouteImport.update({
+  id: '/insights',
+  path: '/insights',
   getParentRoute: () => SiteRoute,
 } as any)
 const SiteJoinRoute = SiteJoinRouteImport.update({
@@ -81,6 +127,16 @@ const SiteJoinRoute = SiteJoinRouteImport.update({
 const SitePartnersRoute = SitePartnersRouteImport.update({
   id: '/partners',
   path: '/partners',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SitePeopleRoute = SitePeopleRouteImport.update({
+  id: '/people',
+  path: '/people',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteSdgsRoute = SiteSdgsRouteImport.update({
+  id: '/sdgs',
+  path: '/sdgs',
   getParentRoute: () => SiteRoute,
 } as any)
 const SiteSummitRoute = SiteSummitRouteImport.update({
@@ -96,6 +152,16 @@ const SiteWhatWeBuildRoute = SiteWhatWeBuildRouteImport.update({
 const SiteWhyAsebRoute = SiteWhyAsebRouteImport.update({
   id: '/why-aseb',
   path: '/why-aseb',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteWorkWithUsRoute = SiteWorkWithUsRouteImport.update({
+  id: '/work-with-us',
+  path: '/work-with-us',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteAboutStoryRoute = SiteAboutStoryRouteImport.update({
+  id: '/about/story',
+  path: '/about/story',
   getParentRoute: () => SiteRoute,
 } as any)
 const SiteFieldIndexRoute = SiteFieldIndexRouteImport.update({
@@ -134,14 +200,25 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
   '/app': typeof AuthenticatedAppRoute
+  '/ambassadors': typeof SiteAmbassadorsRoute
+  '/climate': typeof SiteClimateRoute
+  '/collaborate': typeof SiteCollaborateRoute
+  '/country-partners': typeof SiteCountryPartnersRoute
   '/evidence': typeof SiteEvidenceRoute
   '/framework': typeof SiteFrameworkRoute
+  '/funders': typeof SiteFundersRoute
   '/get-involved': typeof SiteGetInvolvedRoute
+  '/governance': typeof SiteGovernanceRoute
+  '/insights': typeof SiteInsightsRoute
   '/join': typeof SiteJoinRoute
   '/partners': typeof SitePartnersRoute
+  '/people': typeof SitePeopleRoute
+  '/sdgs': typeof SiteSdgsRoute
   '/summit': typeof SiteSummitRoute
   '/what-we-build': typeof SiteWhatWeBuildRoute
   '/why-aseb': typeof SiteWhyAsebRoute
+  '/work-with-us': typeof SiteWorkWithUsRoute
+  '/about/story': typeof SiteAboutStoryRoute
   '/field/$slug': typeof SiteFieldSlugRoute
   '/registry/$slug': typeof SiteRegistrySlugRoute
   '/registry/submit': typeof SiteRegistrySubmitRoute
@@ -154,14 +231,25 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
   '/app': typeof AuthenticatedAppRoute
+  '/ambassadors': typeof SiteAmbassadorsRoute
+  '/climate': typeof SiteClimateRoute
+  '/collaborate': typeof SiteCollaborateRoute
+  '/country-partners': typeof SiteCountryPartnersRoute
   '/evidence': typeof SiteEvidenceRoute
   '/framework': typeof SiteFrameworkRoute
+  '/funders': typeof SiteFundersRoute
   '/get-involved': typeof SiteGetInvolvedRoute
+  '/governance': typeof SiteGovernanceRoute
+  '/insights': typeof SiteInsightsRoute
   '/join': typeof SiteJoinRoute
   '/partners': typeof SitePartnersRoute
+  '/people': typeof SitePeopleRoute
+  '/sdgs': typeof SiteSdgsRoute
   '/summit': typeof SiteSummitRoute
   '/what-we-build': typeof SiteWhatWeBuildRoute
   '/why-aseb': typeof SiteWhyAsebRoute
+  '/work-with-us': typeof SiteWorkWithUsRoute
+  '/about/story': typeof SiteAboutStoryRoute
   '/field/$slug': typeof SiteFieldSlugRoute
   '/registry/$slug': typeof SiteRegistrySlugRoute
   '/registry/submit': typeof SiteRegistrySubmitRoute
@@ -176,15 +264,26 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
   '/_authenticated/app': typeof AuthenticatedAppRoute
+  '/_site/ambassadors': typeof SiteAmbassadorsRoute
+  '/_site/climate': typeof SiteClimateRoute
+  '/_site/collaborate': typeof SiteCollaborateRoute
+  '/_site/country-partners': typeof SiteCountryPartnersRoute
   '/_site/evidence': typeof SiteEvidenceRoute
   '/_site/framework': typeof SiteFrameworkRoute
+  '/_site/funders': typeof SiteFundersRoute
   '/_site/get-involved': typeof SiteGetInvolvedRoute
+  '/_site/governance': typeof SiteGovernanceRoute
+  '/_site/insights': typeof SiteInsightsRoute
   '/_site/join': typeof SiteJoinRoute
   '/_site/partners': typeof SitePartnersRoute
+  '/_site/people': typeof SitePeopleRoute
+  '/_site/sdgs': typeof SiteSdgsRoute
   '/_site/summit': typeof SiteSummitRoute
   '/_site/what-we-build': typeof SiteWhatWeBuildRoute
   '/_site/why-aseb': typeof SiteWhyAsebRoute
+  '/_site/work-with-us': typeof SiteWorkWithUsRoute
   '/_site/': typeof SiteIndexRoute
+  '/_site/about/story': typeof SiteAboutStoryRoute
   '/_site/field/$slug': typeof SiteFieldSlugRoute
   '/_site/registry/$slug': typeof SiteRegistrySlugRoute
   '/_site/registry_/submit': typeof SiteRegistrySubmitRoute
@@ -199,14 +298,25 @@ export interface FileRouteTypes {
     | '/auth'
     | '/reset-password'
     | '/app'
+    | '/ambassadors'
+    | '/climate'
+    | '/collaborate'
+    | '/country-partners'
     | '/evidence'
     | '/framework'
+    | '/funders'
     | '/get-involved'
+    | '/governance'
+    | '/insights'
     | '/join'
     | '/partners'
+    | '/people'
+    | '/sdgs'
     | '/summit'
     | '/what-we-build'
     | '/why-aseb'
+    | '/work-with-us'
+    | '/about/story'
     | '/field/$slug'
     | '/registry/$slug'
     | '/registry/submit'
@@ -219,14 +329,25 @@ export interface FileRouteTypes {
     | '/auth'
     | '/reset-password'
     | '/app'
+    | '/ambassadors'
+    | '/climate'
+    | '/collaborate'
+    | '/country-partners'
     | '/evidence'
     | '/framework'
+    | '/funders'
     | '/get-involved'
+    | '/governance'
+    | '/insights'
     | '/join'
     | '/partners'
+    | '/people'
+    | '/sdgs'
     | '/summit'
     | '/what-we-build'
     | '/why-aseb'
+    | '/work-with-us'
+    | '/about/story'
     | '/field/$slug'
     | '/registry/$slug'
     | '/registry/submit'
@@ -240,15 +361,26 @@ export interface FileRouteTypes {
     | '/auth'
     | '/reset-password'
     | '/_authenticated/app'
+    | '/_site/ambassadors'
+    | '/_site/climate'
+    | '/_site/collaborate'
+    | '/_site/country-partners'
     | '/_site/evidence'
     | '/_site/framework'
+    | '/_site/funders'
     | '/_site/get-involved'
+    | '/_site/governance'
+    | '/_site/insights'
     | '/_site/join'
     | '/_site/partners'
+    | '/_site/people'
+    | '/_site/sdgs'
     | '/_site/summit'
     | '/_site/what-we-build'
     | '/_site/why-aseb'
+    | '/_site/work-with-us'
     | '/_site/'
+    | '/_site/about/story'
     | '/_site/field/$slug'
     | '/_site/registry/$slug'
     | '/_site/registry_/submit'
@@ -308,6 +440,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SiteIndexRouteImport
       parentRoute: typeof SiteRoute
     }
+    '/_site/ambassadors': {
+      id: '/_site/ambassadors'
+      path: '/ambassadors'
+      fullPath: '/ambassadors'
+      preLoaderRoute: typeof SiteAmbassadorsRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/climate': {
+      id: '/_site/climate'
+      path: '/climate'
+      fullPath: '/climate'
+      preLoaderRoute: typeof SiteClimateRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/collaborate': {
+      id: '/_site/collaborate'
+      path: '/collaborate'
+      fullPath: '/collaborate'
+      preLoaderRoute: typeof SiteCollaborateRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/country-partners': {
+      id: '/_site/country-partners'
+      path: '/country-partners'
+      fullPath: '/country-partners'
+      preLoaderRoute: typeof SiteCountryPartnersRouteImport
+      parentRoute: typeof SiteRoute
+    }
     '/_site/evidence': {
       id: '/_site/evidence'
       path: '/evidence'
@@ -322,11 +482,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SiteFrameworkRouteImport
       parentRoute: typeof SiteRoute
     }
+    '/_site/funders': {
+      id: '/_site/funders'
+      path: '/funders'
+      fullPath: '/funders'
+      preLoaderRoute: typeof SiteFundersRouteImport
+      parentRoute: typeof SiteRoute
+    }
     '/_site/get-involved': {
       id: '/_site/get-involved'
       path: '/get-involved'
       fullPath: '/get-involved'
       preLoaderRoute: typeof SiteGetInvolvedRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/governance': {
+      id: '/_site/governance'
+      path: '/governance'
+      fullPath: '/governance'
+      preLoaderRoute: typeof SiteGovernanceRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/insights': {
+      id: '/_site/insights'
+      path: '/insights'
+      fullPath: '/insights'
+      preLoaderRoute: typeof SiteInsightsRouteImport
       parentRoute: typeof SiteRoute
     }
     '/_site/join': {
@@ -341,6 +522,20 @@ declare module '@tanstack/react-router' {
       path: '/partners'
       fullPath: '/partners'
       preLoaderRoute: typeof SitePartnersRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/people': {
+      id: '/_site/people'
+      path: '/people'
+      fullPath: '/people'
+      preLoaderRoute: typeof SitePeopleRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/sdgs': {
+      id: '/_site/sdgs'
+      path: '/sdgs'
+      fullPath: '/sdgs'
+      preLoaderRoute: typeof SiteSdgsRouteImport
       parentRoute: typeof SiteRoute
     }
     '/_site/summit': {
@@ -362,6 +557,20 @@ declare module '@tanstack/react-router' {
       path: '/why-aseb'
       fullPath: '/why-aseb'
       preLoaderRoute: typeof SiteWhyAsebRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/work-with-us': {
+      id: '/_site/work-with-us'
+      path: '/work-with-us'
+      fullPath: '/work-with-us'
+      preLoaderRoute: typeof SiteWorkWithUsRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/about/story': {
+      id: '/_site/about/story'
+      path: '/about/story'
+      fullPath: '/about/story'
+      preLoaderRoute: typeof SiteAboutStoryRouteImport
       parentRoute: typeof SiteRoute
     }
     '/_site/field/': {
@@ -421,15 +630,26 @@ const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
 interface SiteRouteChildren {
+  SiteAmbassadorsRoute: typeof SiteAmbassadorsRoute
+  SiteClimateRoute: typeof SiteClimateRoute
+  SiteCollaborateRoute: typeof SiteCollaborateRoute
+  SiteCountryPartnersRoute: typeof SiteCountryPartnersRoute
   SiteEvidenceRoute: typeof SiteEvidenceRoute
   SiteFrameworkRoute: typeof SiteFrameworkRoute
+  SiteFundersRoute: typeof SiteFundersRoute
   SiteGetInvolvedRoute: typeof SiteGetInvolvedRoute
+  SiteGovernanceRoute: typeof SiteGovernanceRoute
+  SiteInsightsRoute: typeof SiteInsightsRoute
   SiteJoinRoute: typeof SiteJoinRoute
   SitePartnersRoute: typeof SitePartnersRoute
+  SitePeopleRoute: typeof SitePeopleRoute
+  SiteSdgsRoute: typeof SiteSdgsRoute
   SiteSummitRoute: typeof SiteSummitRoute
   SiteWhatWeBuildRoute: typeof SiteWhatWeBuildRoute
   SiteWhyAsebRoute: typeof SiteWhyAsebRoute
+  SiteWorkWithUsRoute: typeof SiteWorkWithUsRoute
   SiteIndexRoute: typeof SiteIndexRoute
+  SiteAboutStoryRoute: typeof SiteAboutStoryRoute
   SiteFieldSlugRoute: typeof SiteFieldSlugRoute
   SiteRegistrySlugRoute: typeof SiteRegistrySlugRoute
   SiteRegistrySubmitRoute: typeof SiteRegistrySubmitRoute
@@ -439,15 +659,26 @@ interface SiteRouteChildren {
 }
 
 const SiteRouteChildren: SiteRouteChildren = {
+  SiteAmbassadorsRoute: SiteAmbassadorsRoute,
+  SiteClimateRoute: SiteClimateRoute,
+  SiteCollaborateRoute: SiteCollaborateRoute,
+  SiteCountryPartnersRoute: SiteCountryPartnersRoute,
   SiteEvidenceRoute: SiteEvidenceRoute,
   SiteFrameworkRoute: SiteFrameworkRoute,
+  SiteFundersRoute: SiteFundersRoute,
   SiteGetInvolvedRoute: SiteGetInvolvedRoute,
+  SiteGovernanceRoute: SiteGovernanceRoute,
+  SiteInsightsRoute: SiteInsightsRoute,
   SiteJoinRoute: SiteJoinRoute,
   SitePartnersRoute: SitePartnersRoute,
+  SitePeopleRoute: SitePeopleRoute,
+  SiteSdgsRoute: SiteSdgsRoute,
   SiteSummitRoute: SiteSummitRoute,
   SiteWhatWeBuildRoute: SiteWhatWeBuildRoute,
   SiteWhyAsebRoute: SiteWhyAsebRoute,
+  SiteWorkWithUsRoute: SiteWorkWithUsRoute,
   SiteIndexRoute: SiteIndexRoute,
+  SiteAboutStoryRoute: SiteAboutStoryRoute,
   SiteFieldSlugRoute: SiteFieldSlugRoute,
   SiteRegistrySlugRoute: SiteRegistrySlugRoute,
   SiteRegistrySubmitRoute: SiteRegistrySubmitRoute,

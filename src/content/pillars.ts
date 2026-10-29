@@ -22,7 +22,7 @@ export const pillars: Pillar[] = [
     programmes: [
       { name: "Open Circles", detail: "Regional, language and condition Circles open to every Member.", status: "Launching" },
       { name: "Practice Circles", detail: "8 to 12 Verified practitioners, closed cohort, 12 months, facilitated.", status: "Planned" },
-      { name: "Country Circles", detail: "Hosted by Country Stewards and linked to each country page.", status: "Planned" },
+      { name: "Country Circles", detail: "Hosted by Country Partners and linked to each country page.", status: "Planned" },
       { name: "ASEB Voices", detail: "Monthly practitioner-led conversations, published with audio and a written summary.", status: "Launching" },
       { name: "Builder Wellbeing Circles", detail: "Confidential and facilitated. Nothing indexed, nothing shared.", status: "Planned" },
     ],
@@ -52,7 +52,7 @@ export const pillars: Pillar[] = [
     body:
       "Field Lab is where the field works on itself. Projects are documented from the first day, tagged to a condition and closed with an output that stays in the public record: a diagnostic, a standard, a brief or a playbook.",
     programmes: [
-      { name: "Ecosystem Stage Diagnostic", detail: "A score on each of the seven conditions for a city or country, led by its Steward.", status: "Planned" },
+      { name: "Ecosystem Stage Diagnostic", detail: "A score on each of the seven conditions for a city or country, led by its Country Partner.", status: "Planned" },
       { name: "ASEB Hub Standard", detail: "Self-assessment and peer review for hubs and support organisations.", status: "Planned" },
       { name: "Policy Bridge", detail: "Practitioner input into startup acts and policy reform, with a brief per cohort.", status: "Planned" },
       { name: "Fair Work Benchmark", detail: "An annual, anonymous survey of pay and conditions across the field.", status: "Planned" },

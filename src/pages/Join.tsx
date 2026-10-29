@@ -63,7 +63,7 @@ export default function Join() {
     intent === "claim" && claimRecord ? `Request to claim ${claimRecord.name}. The Secretariat will review your relationship to this record before linking it to an account.`
     : intent === "partner" ? "Start a partner conversation. Tell us your role in the field first, so we can route you to the right team."
     : intent === "nominate" ? "Register your interest in ASEB 2027 nominations. We will write to you when nominations open."
-    : intent === "steward" ? "Express interest in becoming a Country Steward. Stewards begin as Members."
+    : intent === "steward" ? "Country Partner expressions of interest now have their own page. You can also begin as a Member."
     : "Membership is the first step on the recognition pathway. It takes about three minutes.";
 
   return (
