@@ -14,8 +14,8 @@ export type Person = { slug: string; name: string; role: string; base: string; g
 
 export const people: Person[] = [
   {
-    slug: "mckevin-ayaba", name: "McKevin Ayaba", role: "Founder and Chief Ecosystem Officer", base: "Johannesburg, South Africa", group: "founder", photo: "images/people/mckevin-ayaba.jpg",
-    summary: "Startup ecosystem builder and institutional architect with more than 15 years across African entrepreneurial ecosystems, working on the systems around founders rather than single programmes.",
+    slug: "mckevin-ayaba", name: "McKevin Ayaba", role: "Founder and Chief Ecosystem Officer", base: "Johannesburg, South Africa", group: "founder", photo: "images/people/mckevin-ayaba-portrait.jpg", linkedin: "https://www.linkedin.com/in/mckevin-ayaba-89853220/",
+    summary: "Startup ecosystem builder and institutional architect with more than 15 years across African entrepreneurial ecosystems, including hands-on ecosystem work in 34 African countries, working on the systems around founders rather than single programmes.",
     bio: [
       "His work sits at the intersection of ecosystem strategy and field building, entrepreneurship support infrastructure, policy and institutional design, and cross-border ecosystem coordination.",
       "He founded the Africa Startup Ecosystem Builders Summit and Awards to give ecosystem builders a place to reflect, connect and be recognised for long-term contribution. ASEB Society is the evolution of that work: a permanent institution to professionalise ecosystem building, preserve institutional memory and protect the integrity of the field beyond events and personalities.",
