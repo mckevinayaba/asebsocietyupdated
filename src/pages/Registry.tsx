@@ -1,6 +1,8 @@
 import { useMemo, useState } from "react";
 import { Link, useParams } from "@/lib/router";
-import { registry, recordBySlug, regions, registryConditions, type RegistryRecord } from "@/content/registry";
+import { registry, recordBySlug, countries, regions, registryConditions, type RegistryRecord } from "@/content/registry";
+import { filterRegistry } from "@/lib/registry-search";
+import { Button } from "@/components/ui/button";
 import { PageHero } from "@/components/PageHero";
 import { Btn, TLink } from "@/components/Arrow";
 import NotFound from "./NotFound";
@@ -17,18 +19,16 @@ export function RegistryIndex() {
   const [type, setType] = useState<"all" | "individual" | "organisation">("all");
   const [region, setRegion] = useState("all");
   const [condition, setCondition] = useState("all");
+  const [country, setCountry] = useState("all");
+  const [year, setYear] = useState("all");
+  const [sort, setSort] = useState("name");
   const [shown, setShown] = useState(PAGE);
+  const years = [...new Set(registry.flatMap((r) => r.recognitions.map((x) => x.year)))].sort((a, b) => b - a);
+  const hasFilters = !!q || [type, region, condition, country, year].some((value) => value !== "all");
 
   const results = useMemo(() => {
-    const term = q.trim().toLowerCase();
-    return registry.filter((r) => {
-      if (type !== "all" && r.type !== type) return false;
-      if (region !== "all" && r.region !== region) return false;
-      if (condition !== "all" && r.condition !== condition) return false;
-      if (!term) return true;
-      return [r.name, r.country, r.bio, r.condition, ...r.recognitions.map((x) => x.award)].join(" ").toLowerCase().includes(term);
-    });
-  }, [q, type, region, condition]);
+    return filterRegistry(registry, { query: q, type, region, condition, country, year, sort });
+  }, [q, type, region, condition, country, year, sort]);
 
   const reset = (fn: () => void) => { fn(); setShown(PAGE); };
 
@@ -69,9 +69,15 @@ export function RegistryIndex() {
               </select>
             </label>
           </div>
-          <p className="mt-6 text-[0.875rem] text-stone" aria-live="polite">
-            <span className="numeral font-semibold text-ink">{results.length}</span> of {registry.length} verified records
-          </p>
+          <div className="mt-5 grid gap-4 sm:grid-cols-3">
+            <label><span className="field-label">Country</span><select className="field-input" value={country} onChange={(e) => reset(() => setCountry(e.target.value))}><option value="all">All countries</option>{countries.map((c) => <option key={c}>{c}</option>)}<option value="continental">Continental / not specified</option></select></label>
+            <label><span className="field-label">Recognition year</span><select className="field-input" value={year} onChange={(e) => reset(() => setYear(e.target.value))}><option value="all">All years</option>{years.map((y) => <option key={y}>{y}</option>)}</select></label>
+            <label><span className="field-label">Sort by</span><select className="field-input" value={sort} onChange={(e) => reset(() => setSort(e.target.value))}><option value="name">Name, A–Z</option><option value="recent">Latest recognition</option></select></label>
+          </div>
+          <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
+            <p className="text-[0.875rem] text-stone" aria-live="polite"><span className="numeral font-semibold text-ink">{results.length}</span> of {registry.length} archive records</p>
+            {hasFilters && <Button variant="ghost" onClick={() => reset(() => { setQ(""); setType("all"); setRegion("all"); setCondition("all"); setCountry("all"); setYear("all"); })}>Clear filters <span aria-hidden="true">×</span></Button>}
+          </div>
 
           <ul className="mt-6 grid gap-px bg-hairline sm:grid-cols-2 lg:grid-cols-3">
             {results.slice(0, shown).map((r) => {
@@ -101,9 +107,9 @@ export function RegistryIndex() {
           {results.length === 0 && <p className="border-b border-hairline py-16 text-center text-stone">No records match. Try a broader search.</p>}
           {shown < results.length && (
             <div className="mt-10 text-center">
-              <button type="button" className="btn btn-line" onClick={() => setShown((s) => s + PAGE)}>
+              <Button type="button" variant="outline" className="btn btn-line h-auto" onClick={() => setShown((s) => s + PAGE)}>
                 Show more records
-              </button>
+              </Button>
             </div>
           )}
           <p className="mt-12 max-w-3xl text-[0.8125rem] leading-relaxed text-stone">
@@ -133,9 +139,9 @@ export function RecordPage() {
             </div>
             <div className="flex flex-col gap-3 lg:col-span-4 lg:items-end lg:justify-end">
               <span className="inline-flex items-center gap-2 text-[0.875rem] font-semibold">
-                <span className="inline-block h-2 w-2 bg-signal" aria-hidden="true" /> Verified record
+                <span className="inline-block h-2 w-2 bg-signal" aria-hidden="true" /> Awards archive record
               </span>
-              <span className="text-[0.8125rem] text-stone">Level: Member</span>
+              <span className="text-[0.8125rem] text-stone">Society membership is not confirmed by this listing.</span>
             </div>
           </div>
         </div>
@@ -144,13 +150,16 @@ export function RecordPage() {
         <div className="wrap grid gap-14 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-7">
             <p className="text-xl leading-relaxed">{r.bio}</p>
+            {r.organisation && <p className="mt-5 text-stone">Organisation: <span className="font-medium text-ink">{r.organisation}</span></p>}
             <dl className="mt-10 grid border-t border-hairline text-[0.9375rem] sm:grid-cols-2">
               <div className="border-b border-hairline py-5 sm:pr-6"><dt className="text-stone">Primary condition</dt><dd className="mt-1 font-medium">{r.condition.replace(/&/g, "and") || "Not yet tagged"}</dd></div>
               <div className="border-b border-hairline py-5 sm:border-l sm:pl-6"><dt className="text-stone">Region</dt><dd className="mt-1 font-medium">{r.region || "Continental"}</dd></div>
             </dl>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <Btn to="/join">Claim this profile</Btn>
+              <Btn to={`/join?intent=claim&record=${encodeURIComponent(r.slug)}`}>Request to claim this profile</Btn>
               {r.source_url && <Btn to={r.source_url} variant="line">View the public source</Btn>}
+              {r.linkedin && <TLink to={r.linkedin}>LinkedIn</TLink>}
+              {r.website && <TLink to={r.website}>Website</TLink>}
             </div>
           </div>
           <div className="lg:col-span-4 lg:col-start-9">
