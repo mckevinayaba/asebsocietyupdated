@@ -35,8 +35,8 @@ export default function WhatWeBuild() {
         <div className="wrap grid lg:grid-cols-3">
           {chapters.map((c, i) => (
             <div key={c.k} className={`py-10 ${i > 0 ? "border-t border-hairline lg:border-l lg:border-t-0 lg:pl-10" : "lg:pr-10"}`}>
-              <p className="numeral text-sm text-umber">{String(i + 1).padStart(2, "0")}</p>
-              <p className="mt-3 font-display text-[1.625rem] leading-tight">{c.k}</p>
+              <span aria-hidden="true" className="block h-[2px] w-8 bg-signal" />
+              <p className="mt-5 font-display text-[1.625rem] leading-tight">{c.k}</p>
               <p className="mt-2 text-[0.9375rem] text-stone">{c.v}</p>
             </div>
           ))}
@@ -50,7 +50,7 @@ export default function WhatWeBuild() {
             <div className="wrap grid gap-12 lg:grid-cols-12 lg:gap-10">
               <div className="lg:col-span-5">
                 <div className="flex items-baseline gap-4">
-                  <span className="numeral text-[3.5rem] leading-none text-signal">{p.n}</span>
+                  <span aria-hidden="true" className="block h-[3px] w-12 bg-signal" />
                   <span className="text-eyebrow font-semibold uppercase text-umber">{p.role}</span>
                 </div>
                 <h2 className="mt-6 text-display-md">{p.name}</h2>
@@ -87,7 +87,7 @@ export default function WhatWeBuild() {
           <ol className="mt-16 border-t border-hairline-dark">
             {ladder.map((l, i) => (
               <li key={l.step} className="grid gap-3 border-b border-hairline-dark py-8 lg:grid-cols-12 lg:items-baseline lg:gap-10">
-                <span className="numeral text-sm text-sand lg:col-span-1">{l.step}</span>
+                <span aria-hidden="true" className="hidden lg:col-span-1 lg:block"><span className="block h-[2px] w-6 bg-sand" /></span>
                 <span className="font-display text-[1.75rem] leading-tight lg:col-span-4">{l.name}</span>
                 <p className="text-[1rem] leading-relaxed text-stone-light lg:col-span-6">{l.how}</p>
                 <span className="hidden h-[3px] bg-signal lg:col-span-1 lg:block" style={{ opacity: 0.3 + i * 0.175 }} aria-hidden="true" />

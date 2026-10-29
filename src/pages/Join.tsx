@@ -80,7 +80,7 @@ export default function Join() {
           <ol className="mt-10 hidden border-t border-hairline lg:block">
             {steps.map((s, i) => (
               <li key={s} className={`flex items-center gap-4 border-b border-hairline py-4 text-[0.9375rem] ${i === step ? "font-semibold text-ink" : i < step ? "text-ink" : "text-stone"}`}>
-                <span className={`numeral w-6 text-sm ${i <= step ? "text-ember" : ""}`}>{String(i + 1).padStart(2, "0")}</span>
+                <span aria-hidden="true" className={`block h-2 w-2 rounded-full border ${i <= step ? "border-ember bg-ember" : "border-stone"}`} />
                 {s}
                 {i < step && <span className="ml-auto text-[0.8125rem] font-medium text-stone">Done</span>}
               </li>
@@ -168,7 +168,7 @@ export default function Join() {
               <ol className="mt-8 border-t border-ink">
                 {code.map((c, i) => (
                   <li key={i} className="grid grid-cols-[2.5rem_1fr] border-b border-hairline py-5 text-[1rem] leading-relaxed">
-                    <span className="numeral text-sm text-umber">{String(i + 1).padStart(2, "0")}</span>
+                    <span aria-hidden="true" className="mt-[0.7em] block h-px w-4 bg-signal" />
                     {c}
                   </li>
                 ))}

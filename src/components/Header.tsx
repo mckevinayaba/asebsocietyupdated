@@ -74,10 +74,9 @@ export function Header() {
       {open && (
         <div id="mobile-menu" className="fixed inset-x-0 bottom-0 top-[108px] z-30 overflow-y-auto bg-ivory xl:hidden">
           <nav aria-label="Mobile" className="wrap flex flex-col pb-16 pt-6">
-            {nav.map((n, i) => (
+            {nav.map((n) => (
               <NavLink key={n.to} to={n.to} className="flex items-baseline gap-5 border-b border-hairline py-5">
-                <span className="numeral w-6 text-sm text-stone">{String(i + 1).padStart(2, "0")}</span>
-                <span className="font-display text-[1.875rem] leading-none">{n.label}</span>
+                                <span className="font-display text-[1.875rem] leading-none">{n.label}</span>
               </NavLink>
             ))}
             <div className="mt-10 flex flex-col gap-3">

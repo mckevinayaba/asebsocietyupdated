@@ -94,7 +94,7 @@ export default function Home() {
             <ol className="mt-5 border-t border-ink">
               {conditions.map((c) => (
                 <li key={c.n} className="reveal group grid grid-cols-[3rem_1fr] items-baseline gap-2 border-b border-hairline py-5">
-                  <span className="numeral text-[0.9375rem] text-umber">{c.n}</span>
+                  <span aria-hidden="true" className="mt-[0.7em] block h-px w-4 bg-signal" />
                   <div>
                     <p className="font-display text-[1.375rem] leading-tight">{c.name}</p>
                     <p className="mt-1.5 text-[0.9375rem] leading-relaxed text-stone">{c.summary}</p>
@@ -119,7 +119,7 @@ export default function Home() {
               const rs = rolesFor(c.slug);
               return (
                 <Link key={c.slug} to={`/field/${c.slug}`} className="reveal group grid gap-4 border-b border-hairline py-8 transition-colors hover:bg-ivory lg:grid-cols-12 lg:items-baseline lg:gap-10 lg:py-10">
-                  <span className="numeral text-sm text-stone lg:col-span-1">{c.n}</span>
+                  <span aria-hidden="true" className="hidden lg:col-span-1 lg:block"><span className="block h-[2px] w-8 bg-signal transition-all duration-500 group-hover:w-14" /></span>
                   <div className="lg:col-span-4">
                     <h3 className="text-[2rem] leading-none lg:text-[2.5rem]">{c.name}</h3>
                     <p className="mt-3 text-sm font-medium text-umber">{rs.length} roles</p>
@@ -194,9 +194,9 @@ export default function Home() {
               <div className="photo aspect-[4/3]">
                 <img src={asset("images/events/aseb-awards-stage-2.jpg")} alt="Two builders embrace on stage at the ASEB Awards" loading="lazy" className="transition-transform duration-700 ease-quiet group-hover:scale-[1.02]" />
               </div>
-              <div className="mt-6 flex items-baseline gap-5">
-                <span className="numeral text-sm text-stone">{pillars[3]!.n}</span>
-                <div>
+              <div className="mt-6">
+                <span className="text-eyebrow font-semibold uppercase text-umber">{pillars[3]!.role}</span>
+                <div className="mt-3">
                   <h3 className="text-[2rem] leading-tight">{pillars[3]!.name}</h3>
                   <p className="mt-2 max-w-md text-[0.9375rem] text-stone">{pillars[3]!.line}</p>
                 </div>
@@ -205,10 +205,7 @@ export default function Home() {
             <div className="flex flex-col lg:col-span-5">
               {pillars.slice(0, 3).map((p) => (
                 <Link key={p.slug} to={`/what-we-build#${p.slug}`} className="reveal group border-t border-ink/80 py-8 first:pt-8 lg:first:border-t-0 lg:first:pt-0">
-                  <div className="flex items-baseline justify-between gap-6">
-                    <span className="numeral text-sm text-stone">{p.n}</span>
-                    <span className="text-eyebrow font-semibold uppercase text-umber">{p.role}</span>
-                  </div>
+                  <span className="text-eyebrow font-semibold uppercase text-umber">{p.role}</span>
                   <h3 className="mt-4 text-[2rem] leading-tight transition-colors group-hover:text-ember">{p.name}</h3>
                   <p className="mt-3 text-[0.9375rem] leading-relaxed text-stone">{p.line}</p>
                 </Link>
@@ -232,8 +229,7 @@ export default function Home() {
               <li key={l.step} className="reveal relative border-t border-hairline py-7 lg:border-t-0 lg:pr-6 lg:pt-10">
                 <span className="absolute left-0 top-0 hidden h-[3px] bg-signal lg:block" style={{ width: `${(i + 1) * 20}%`, opacity: 0.35 + i * 0.16 }} aria-hidden="true" />
                 <span className="absolute left-0 right-0 top-0 hidden h-px bg-hairline lg:block" aria-hidden="true" />
-                <span className="numeral text-sm text-umber">{l.step}</span>
-                <p className="mt-3 font-display text-[1.5rem] leading-tight">{l.name}</p>
+                <p className="font-display text-[1.5rem] leading-tight">{l.name}</p>
                 <p className="mt-3 text-[0.875rem] leading-relaxed text-stone">{l.how}</p>
               </li>
             ))}
