@@ -66,10 +66,10 @@ export default function Ambassadors() {
           </div>
           <div className="min-w-0 lg:col-span-7 lg:col-start-6">
             <EoiForm
-              table="ambassador_eoi"
+              source="/ambassadors"
               submitLabel="Submit expression of interest"
               consent="I can commit three to five hours a month and I commit to the ASEB Code of Practice."
-              done={{ title: "Thank you. Your expression of interest is with the Secretariat.", body: "An Ambassador lead will contact you to agree your first 90 days." }}
+              done={{ title: "Thank you. Your expression of interest is with the Secretariat.", body: "Your application is pending review. The Ambassador team can contact you about your proposed contribution; submission does not confer an appointment." }}
               fields={[
                 { name: "type", label: "Ambassador type", type: "select", options: ambassadorTypes.map((t) => t.name), required: true },
                 { name: "name", label: "Full name", required: true },

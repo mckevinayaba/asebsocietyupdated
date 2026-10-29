@@ -73,7 +73,7 @@ export default function CountryPartners() {
           </div>
           <div className="min-w-0 lg:col-span-7 lg:col-start-6">
             <EoiForm
-              table="country_partner_eoi"
+              source="/country-partners"
               submitLabel="Submit expression of interest"
               consent="I have read the Country Partner obligations and commit to the ASEB Code of Practice."
               done={{ title: "Thank you. Your expression of interest is with the Secretariat.", body: "We will review it against the selection criteria, contact your referees and write to you within four weeks." }}

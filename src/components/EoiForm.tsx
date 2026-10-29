@@ -1,41 +1,36 @@
 import { useState } from "react";
 import { africanCountries } from "@/content/countries";
+import { supabase } from "@/integrations/supabase/client";
+import { Button } from "@/components/ui/button";
+import { fieldError, prepareEnquiry, type Field, type EnquirySource } from "@/lib/eoi";
+export type { Field } from "@/lib/eoi";
 
-// Expression-of-interest form used by Country Partners, Ambassadors, Collaborate, Funders and Work With Us.
-// In this build, submissions are kept in the browser (localStorage, key "aseb.<table>").
-// When Lovable Cloud is connected, replace save() with an insert into the table named in `table`.
-// See CLAUDE.md, section "Backend", for the table definitions.
+type Props = { source: EnquirySource; fields: Field[]; consent: string; submitLabel: string; done: { title: string; body: string } };
 
-export type Field = {
-  name: string;
-  label: string;
-  type?: "text" | "email" | "url" | "select" | "textarea" | "country" | "choice";
-  options?: string[];
-  required?: boolean;
-  full?: boolean;
-  hint?: string;
-};
-
-type Props = { table: string; fields: Field[]; consent: string; submitLabel: string; done: { title: string; body: string } };
-
-export function EoiForm({ table, fields, consent, submitLabel, done }: Props) {
+export function EoiForm({ source, fields, consent, submitLabel, done }: Props) {
   const [v, setV] = useState<Record<string, string>>({});
   const [agree, setAgree] = useState(false);
   const [sent, setSent] = useState(false);
   const [tried, setTried] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState("");
   const set = (k: string, val: string) => setV((x) => ({ ...x, [k]: val }));
-  const emailOk = (s = "") => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s);
-  const missing = fields.filter((f) => f.required && (!v[f.name]?.trim() || (f.type === "email" && !emailOk(v[f.name]))));
+  const missing = fields.filter((f) => fieldError(f, v[f.name]));
   const ok = missing.length === 0 && agree;
 
-  const save = () => {
+  const save = async () => {
     setTried(true);
-    if (!ok) return;
-    const key = `aseb.${table}`;
-    const list = JSON.parse(localStorage.getItem(key) || "[]");
-    list.push({ ...v, consent: true, submittedAt: new Date().toISOString() });
-    localStorage.setItem(key, JSON.stringify(list));
-    setSent(true);
+    if (!ok || saving) return;
+    setSaving(true);
+    setError("");
+    try {
+      const enquiry = prepareEnquiry(source, fields, v, agree);
+      const { error: insertError } = await supabase.from("partnership_enquiries").insert(enquiry);
+      if (insertError) throw new Error("Your enquiry could not be saved. Please try again; your answers are still here.");
+      setSent(true);
+    } catch (cause) {
+      setError(cause instanceof Error ? cause.message : "Your enquiry could not be saved. Please try again.");
+    } finally { setSaving(false); }
   };
 
   if (sent)
@@ -48,7 +43,8 @@ export function EoiForm({ table, fields, consent, submitLabel, done }: Props) {
     );
 
   return (
-    <form className="border-t border-ink pt-8" onSubmit={(e) => { e.preventDefault(); save(); }} noValidate>
+    <form className="border-t border-ink pt-8" aria-busy={saving} onSubmit={(e) => { e.preventDefault(); void save(); }} noValidate>
+      <fieldset disabled={saving}>
       <div className="grid gap-6 sm:grid-cols-2">
         {fields.map((f) => {
           const bad = tried && missing.includes(f);
@@ -68,17 +64,17 @@ export function EoiForm({ table, fields, consent, submitLabel, done }: Props) {
               ) : f.type === "choice" ? (
                 <span className="mt-1 flex flex-wrap gap-2">
                   {(f.options || []).map((o) => (
-                    <button key={o} type="button" onClick={() => set(f.name, o)} aria-pressed={v[f.name] === o}
+                     <Button variant="ghost" key={o} type="button" onClick={() => set(f.name, o)} aria-pressed={v[f.name] === o}
                       className={`min-h-[40px] border px-4 text-[0.875rem] font-medium transition-colors ${v[f.name] === o ? "border-ink bg-ink text-ivory" : bad ? "border-ember" : "border-hairline hover:border-ink"}`}>
                       {o}
-                    </button>
+                     </Button>
                   ))}
                 </span>
               ) : (
                 <input {...common} type={f.type === "email" ? "email" : f.type === "url" ? "url" : "text"} inputMode={f.type === "url" ? "url" : undefined} onChange={(e) => set(f.name, e.target.value)} />
               )}
               {f.hint && <span className="mt-2 block text-[0.8125rem] text-stone">{f.hint}</span>}
-              {bad && <span className="mt-2 block text-[0.8125rem] text-ember">{f.type === "email" ? "Enter a valid email address." : "This field is required."}</span>}
+               {bad && <span className="mt-2 block text-[0.8125rem] text-ember">{fieldError(f, v[f.name])}</span>}
             </label>
           );
         })}
@@ -90,9 +86,11 @@ export function EoiForm({ table, fields, consent, submitLabel, done }: Props) {
       </label>
       <div className="mt-10 flex flex-col gap-4 border-t border-hairline pt-8 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-[0.8125rem] text-stone">Your details are used only to assess this expression of interest, under POPIA.</p>
-        <button type="submit" className="btn btn-primary">{submitLabel} <span className="arr" aria-hidden="true">→</span></button>
+         <Button type="submit" className="btn btn-primary h-auto whitespace-normal">{saving ? "Sending…" : submitLabel} <span className="arr" aria-hidden="true">→</span></Button>
       </div>
       {tried && !ok && <p className="mt-4 text-[0.875rem] text-ember">Complete the required fields and the declaration to continue.</p>}
+      </fieldset>
+      {error && <p role="alert" className="mt-4 text-[0.875rem] text-ember">{error}</p>}
     </form>
   );
 }

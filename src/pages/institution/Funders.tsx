@@ -11,7 +11,7 @@ export default function Funders() {
       <PageHero
         eyebrow="For funders and DFIs"
         title="Fund the builders. Multiply the founders."
-        lede="One ecosystem builder serves dozens to hundreds of founders every year. Funding the builders, their methods and their evidence compounds across every programme they run. ASEB Society gives development finance institutions, foundations and corporates a coordination layer no single implementer can offer: one map of the field, one reporting language and one bench of verified practitioners across the continent."
+        lede="Invest in the people and institutions that help African startups and enterprises begin, survive and grow. Funding their methods, capabilities and evidence strengthens the support available across successive cohorts of founders. ASEB Society connects development finance institutions, foundations and corporates to the practice of ecosystem building: its people, its standards and its priorities."
       >
         <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <a href="#enquire" className="btn btn-primary">Start a funder conversation <span className="arr" aria-hidden="true">↓</span></a>
@@ -33,6 +33,10 @@ export default function Funders() {
 
       <section className="section">
         <div className="wrap">
+          <div className="mb-14 grid gap-6 border-l-2 border-signal pl-6 lg:grid-cols-2 lg:gap-12">
+            <h2 className="font-display text-[2rem] leading-tight">Back the infrastructure founders rely on.</h2>
+            <p className="text-[1.0625rem] leading-relaxed text-stone">A stronger startup hub can support successive cohorts, not just one venture. Better mentors, investment readiness, market connections and local coordination can benefit many entrepreneurs over time. Assess that leverage through the quality of support, the founders reached and the outcomes achieved—not a promised multiplier.</p>
+          </div>
           <SectionHead eyebrow="In your language" title="What a results framework needs, the field already has." />
           <dl className="mt-12 border-t border-ink">
             {funderNeeds.map((f) => (
@@ -61,7 +65,7 @@ export default function Funders() {
           </div>
           <div className="min-w-0 lg:col-span-7 lg:col-start-6">
             <EoiForm
-              table="partner_enquiries"
+              source="/funders"
               submitLabel="Send enquiry"
               consent="I agree that ASEB Society may contact me about this enquiry."
               done={{ title: "Thank you. A partnership lead will be in touch.", body: "We reply to every funder and partner enquiry within five working days." }}
