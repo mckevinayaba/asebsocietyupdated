@@ -55,7 +55,7 @@ export default function Collaborate() {
           </div>
           <div className="min-w-0 lg:col-span-7 lg:col-start-6">
             <EoiForm
-              table="collaboration_eoi"
+              source="/collaborate"
               submitLabel="Propose a collaboration"
               consent="Our programme is willing to work to the ASEB Programme Standard and the Code of Practice."
               done={{ title: "Thank you. Your proposal is with the Secretariat.", body: "We will review it and propose a collaboration model within three weeks." }}

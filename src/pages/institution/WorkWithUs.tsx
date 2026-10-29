@@ -97,7 +97,7 @@ export default function WorkWithUs() {
           </div>
           <div className="min-w-0 lg:col-span-7 lg:col-start-6">
             <EoiForm
-              table="partner_enquiries"
+              source="/work-with-us"
               submitLabel="Send request"
               consent="I agree that ASEB Society may contact me about this request."
               done={{ title: "Thank you. Your request is with the Secretariat.", body: "We will send the capability statement and reply on the opportunity within three working days." }}

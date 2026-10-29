@@ -17,7 +17,7 @@ export default function Climate() {
       <PageHero
         eyebrow="Green and climate economy"
         title="Climate is a condition, not a vertical."
-        lede="Every African ecosystem now operates under climate risk, and every ecosystem builder is, in part, a climate builder. The practitioners who build climate, clean-energy, agri-climate and circular-economy support systems belong at the centre of the field."
+        lede="Climate-tech startups and green enterprises need more than an idea and investment. They need incubators, technical expertise, routes to market and policy that enables them to grow. The practitioners building those conditions for clean-energy, agri-climate and circular-economy ventures are startup and entrepreneurship ecosystem builders. They belong at the centre of this field."
       />
 
       <section className="on-dark section bg-ink text-ivory">
