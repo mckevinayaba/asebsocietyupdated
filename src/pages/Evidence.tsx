@@ -3,6 +3,7 @@ import { evidence, aeeiCredit } from "@/content/evidence";
 import { conditions } from "@/content/framework";
 import { PageHero } from "@/components/PageHero";
 import { asset } from "@/lib/asset";
+import { Button } from "@/components/ui/button";
 
 const kinds = ["All", "Dataset", "Dashboard", "Paper", "Research programme", "Resource", "Summit session"] as const;
 
@@ -34,7 +35,14 @@ function ProfileFrame() {
 
 export default function Evidence() {
   const [kind, setKind] = useState<(typeof kinds)[number]>("All");
-  const list = kind === "All" ? evidence : evidence.filter((e) => e.kind === kind);
+  const [query, setQuery] = useState("");
+  const [condition, setCondition] = useState("All");
+  const conditionOptions = [...new Set(evidence.flatMap((item) => item.conditions).filter((value) => value !== "All seven"))];
+  const list = evidence.filter((item) => {
+    if (kind !== "All" && item.kind !== kind) return false;
+    if (condition !== "All" && !item.conditions.includes(condition) && !item.conditions.includes("All seven")) return false;
+    return [item.title, item.authors, item.summary, item.forPractice, ...item.conditions].join(" ").toLowerCase().includes(query.trim().toLowerCase());
+  });
   return (
     <>
       <PageHero
@@ -73,19 +81,23 @@ export default function Evidence() {
 
       <section className="section">
         <div className="wrap">
-          <div className="no-scrollbar -mx-5 flex gap-2 overflow-x-auto px-5 sm:mx-0 sm:flex-wrap sm:px-0" role="tablist" aria-label="Filter by type">
+          <div className="mb-6 grid gap-4 sm:grid-cols-2">
+            <label><span className="field-label">Search the library</span><input type="search" className="field-input" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Research, author or topic" /></label>
+            <label><span className="field-label">Condition</span><select className="field-input" value={condition} onChange={(event) => setCondition(event.target.value)}><option value="All">All conditions</option>{conditionOptions.map((value) => <option key={value}>{value}</option>)}</select></label>
+          </div>
+          <div className="no-scrollbar -mx-5 flex gap-2 overflow-x-auto px-5 sm:mx-0 sm:flex-wrap sm:px-0" role="group" aria-label="Filter by type">
             {kinds.map((k) => (
-              <button
+              <Button variant="ghost"
                 key={k}
-                role="tab"
-                aria-selected={kind === k}
+                aria-pressed={kind === k}
                 onClick={() => setKind(k)}
                 className={`min-h-[40px] shrink-0 border px-4 text-[0.875rem] font-medium transition-colors ${kind === k ? "border-ink bg-ink text-ivory" : "border-hairline text-ink hover:border-ink"}`}
               >
                 {k}
-              </button>
+              </Button>
             ))}
           </div>
+          <p className="mt-6 text-sm text-stone" aria-live="polite">{list.length} of {evidence.length} resources</p>
           <ul className="mt-10 border-t border-ink">
             {list.map((e) => (
               <li key={e.title} className="grid gap-5 border-b border-hairline py-10 lg:grid-cols-12 lg:gap-10">
@@ -99,6 +111,7 @@ export default function Evidence() {
                   </h3>
                   <p className="mt-2 text-[0.875rem] text-stone">{e.authors}</p>
                   <p className="mt-4 text-[1rem] leading-relaxed">{e.summary}</p>
+                  <p className="mt-4 text-[0.8125rem] text-umber">{e.conditions.join(" · ")}</p>
                 </div>
                 <div className="border-l-2 border-signal pl-5 lg:col-span-3">
                   <p className="text-eyebrow font-semibold uppercase text-stone">What this means for your practice</p>
@@ -107,6 +120,7 @@ export default function Evidence() {
               </li>
             ))}
           </ul>
+          {list.length === 0 && <div className="border-b border-hairline py-12"><p className="text-stone">No resources match this search.</p><Button variant="ghost" className="mt-4" onClick={() => { setQuery(""); setCondition("All"); setKind("All"); }}>Clear filters <span aria-hidden="true">×</span></Button></div>}
           <div className="mt-12 max-w-3xl space-y-3 text-[0.8125rem] leading-relaxed text-stone">
             <p>{aeeiCredit} <a className="underline underline-offset-4 hover:text-ember" href="https://data.mendeley.com/datasets/bkgpx2765s/1" target="_blank" rel="noreferrer">DOI 10.17632/bkgpx2765s.1</a>.</p>
             <p>Open licensing covers the data and the publications. Their inclusion here does not imply that the authors or their institutions endorse ASEB Society's interpretations.</p>

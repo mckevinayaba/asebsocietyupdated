@@ -11,3 +11,5 @@
 
 - Pages import Link/NavLink/useParams etc. from `@/lib/router`, a thin shim over TanStack Router kept from the React Router port; keep using it so page code stays simple.
 - Public site pages live under the pathless `_site` layout (header/footer); `/app` sits outside it.
+- Keep registry filtering in a pure shared module so directory behaviour can be tested independently of page rendering.
+- Registry archive recognition and Society membership are distinct; never infer account membership from an awards listing.
