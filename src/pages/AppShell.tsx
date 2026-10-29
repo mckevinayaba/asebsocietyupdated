@@ -146,7 +146,7 @@ function AcademyTab() {
         <ol className="mt-3">
           {modules.map((m, i) => (
             <li key={m} className="grid grid-cols-[2rem_1fr_auto] items-baseline gap-2 border-b border-hairline py-4 last:border-b-0">
-              <span className="numeral text-sm text-umber">{String(i + 1).padStart(2, "0")}</span>
+              <span aria-hidden="true" className="block h-px w-4 -translate-y-[0.3em] bg-signal" />
               <span className="text-[1rem]">{m}</span>
               <span className="text-[0.75rem] text-stone">Opens soon</span>
             </li>
