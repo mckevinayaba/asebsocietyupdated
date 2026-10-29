@@ -8,11 +8,9 @@ export function Logo({ tone = "light", compact = false }: { tone?: "light" | "da
     <Link to="/" className="group inline-flex items-center gap-3" aria-label="ASEB Society, home">
       <img src={asset(src)} alt="" width={44} height={40} className="h-10 w-auto" />
       {!compact && (
-        <span className="flex flex-col leading-none">
-          <span className={`font-display text-[1.3rem] tracking-[-0.01em] ${tone === "dark" ? "text-ivory" : "text-ink"}`}>ASEB Society</span>
-          <span className={`mt-1 hidden text-[0.625rem] font-semibold uppercase tracking-[0.16em] sm:block ${tone === "dark" ? "text-stone-light" : "text-stone"}`}>
-            Africa Startup Ecosystem Builders
-          </span>
+        <span className={`hidden flex-col font-display text-[1.05rem] leading-[1.15] tracking-[-0.01em] sm:flex ${tone === "dark" ? "text-ivory" : "text-ink"}`}>
+          <span>Africa Startup Ecosystem</span>
+          <span>Builders Society</span>
         </span>
       )}
     </Link>
