@@ -99,19 +99,19 @@ export function Header() {
       {open && (
         <div id="mobile-menu" className="fixed inset-x-0 bottom-0 top-[108px] z-30 overflow-y-auto bg-ivory xl:hidden">
           <nav aria-label="Mobile" className="wrap flex flex-col pb-16 pt-6">
-            {nav.map((g, i) => {
-              const num = <span aria-hidden="true" className="mt-3 block h-[2px] w-6 bg-signal" />;
+            {nav.map((g) => {
+              
               if (!g.items.length)
                 return (
                   <Link key={g.label} to={g.to} className="flex items-baseline gap-5 border-b border-hairline py-5">
-                    {num}<span className="font-display text-[1.875rem] leading-none">{g.label}</span>
+                    <span className="font-display text-[1.875rem] leading-none">{g.label}</span>
                   </Link>
                 );
               const ex = mobileGroup === g.label;
               return (
                 <div key={g.label} className="border-b border-hairline">
                   <button type="button" aria-expanded={ex} onClick={() => setMobileGroup(ex ? null : g.label)} className="flex w-full items-baseline gap-5 py-5 text-left">
-                    {num}<span className="flex-1 font-display text-[1.875rem] leading-none">{g.label}</span>
+                    <span className="flex-1 font-display text-[1.875rem] leading-none">{g.label}</span>
                     <span aria-hidden="true" className="text-[1.25rem] text-stone">{ex ? "−" : "+"}</span>
                   </button>
                   {ex && (
