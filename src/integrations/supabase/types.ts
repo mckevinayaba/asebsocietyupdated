@@ -14,6 +14,32 @@ export type Database = {
   }
   public: {
     Tables: {
+      circle_memberships: {
+        Row: {
+          circle_key: string
+          joined_at: string
+          user_id: string
+        }
+        Insert: {
+          circle_key: string
+          joined_at?: string
+          user_id: string
+        }
+        Update: {
+          circle_key?: string
+          joined_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "circle_memberships_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       membership_applications: {
         Row: {
           code_accepted: boolean
@@ -59,6 +85,36 @@ export type Database = {
           registry_slug?: string | null
           role?: string
           status?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          bio: string
+          country: string
+          created_at: string
+          id: string
+          name: string
+          organisation: string
+          primary_role: string
+        }
+        Insert: {
+          bio?: string
+          country?: string
+          created_at?: string
+          id: string
+          name?: string
+          organisation?: string
+          primary_role?: string
+        }
+        Update: {
+          bio?: string
+          country?: string
+          created_at?: string
+          id?: string
+          name?: string
+          organisation?: string
+          primary_role?: string
         }
         Relationships: []
       }

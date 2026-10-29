@@ -57,7 +57,7 @@ export const footerNav = [
       { label: "Get Involved", to: "/get-involved" },
       { label: "Summit and Awards", to: "/summit" },
       { label: "Evidence Library", to: "/evidence" },
-      { label: "Member app preview", to: "/app" },
+      { label: "Member app", to: "/app" },
     ],
   },
 ];

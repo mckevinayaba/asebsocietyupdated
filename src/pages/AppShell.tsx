@@ -1,7 +1,15 @@
 import { useState, type ReactNode } from "react";
 import { Link } from "@/lib/router";
+import { useNavigate } from "@tanstack/react-router";
+import { useSuspenseQuery, useQueryClient } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
+import { getMemberData, updateCircleMembership } from "@/lib/member.functions";
+import { useMember } from "@/hooks/use-member";
+import { MemberProfile } from "@/components/MemberProfile";
+import { Button } from "@/components/ui/button";
+import { supabase } from "@/integrations/supabase/client";
 import { asset } from "@/lib/asset";
-import { constituencies, rolesFor } from "@/content/field";
+import { constituencies, rolesFor, roleBySlug } from "@/content/field";
 import { conditions, domains, ladder } from "@/content/framework";
 import { pillars } from "@/content/pillars";
 import { summit2026, speakers } from "@/content/summit";
@@ -39,12 +47,12 @@ function Status({ s }: { s: string }) {
   return <span className={`text-[0.6875rem] font-semibold uppercase tracking-[0.12em] ${s === "Live" ? "text-ember" : s === "Launching" ? "text-ink" : "text-stone"}`}>{s}</span>;
 }
 
-function HomeTab() {
+function HomeTab({ name, role, country, edit }: { name: string; role: string; country: string; edit: () => void }) {
   const countryCount = new Set(registry.map((r) => r.country).filter(Boolean)).size;
   return (
     <div className="space-y-8">
       <div>
-        <Label>Good day</Label>
+        <Label>Good day{name ? `, ${name.split(" ")[0]}` : ""}</Label>
         <h1 className="mt-2 font-display text-[2rem] leading-tight">Your practice, through the year.</h1>
       </div>
       {/* Story row: one vertical card per part of the field */}
@@ -63,20 +71,18 @@ function HomeTab() {
       <Card>
         <div className="flex items-baseline justify-between">
           <Label>Your record</Label>
-          <span className="text-[0.75rem] font-semibold text-ember">Member</span>
+          <span className="text-[0.75rem] font-semibold text-ember">Account profile</span>
         </div>
-        <div className="mt-4 grid grid-cols-5 gap-1" aria-label="Recognition pathway progress">
-          {ladder.map((l, i) => <span key={l.step} className={`h-[3px] ${i === 0 ? "bg-signal" : "bg-linen"}`} />)}
-        </div>
-        <p className="mt-4 text-[0.9375rem] leading-relaxed">Next step: <span className="font-semibold">Verified</span>. Add one public source or a peer reference to your record.</p>
-        <button className="btn btn-primary mt-5 min-h-[44px] w-full sm:w-auto">Add evidence of practice <span className="arr" aria-hidden="true">→</span></button>
+        <p className="mt-4 text-[0.9375rem] leading-relaxed">{roleBySlug(role)?.role || "Primary role not selected"}{country ? ` · ${country}` : ""}</p>
+        <Button onClick={edit} className="btn btn-primary h-auto mt-5 min-h-[44px] w-full sm:w-auto">Edit profile <span className="arr" aria-hidden="true">→</span></Button>
+        <Link to="/registry/submit" className="tlink mt-5 block w-fit">Submit evidence of practice →</Link>
       </Card>
       <div>
         <Label>From the Society</Label>
         <ul className="mt-3 border-t border-ink">
           {[
             { k: "Evidence Library", t: "ASEB 2026 research sessions are being added", d: "Prof Erik Stam, Dr Phumlani Nkontwana and i4Policy on the Africa Entrepreneurial Ecosystem Index.", to: "/evidence" },
-            { k: "Field Registry", t: `${registry.length} verified records across ${countryCount} countries`, d: "Every finalist and Champion of the ASEB Awards, 2023 to 2026. Claim yours.", to: "/registry" },
+            { k: "Field Registry", t: `${registry.length} public-source records across ${countryCount} countries`, d: "Practitioners and institutions drawn from the ASEB archive. Find your record.", to: "/registry" },
             { k: "Academy", t: "ASEB Foundations is launching", d: "Free. Six modules. Leads to Associate Ecosystem Builder.", to: "/what-we-build#academy" },
           ].map((x) => (
             <li key={x.t}>
@@ -93,27 +99,30 @@ function HomeTab() {
   );
 }
 
-function CirclesTab() {
+function CirclesTab({ joined, toggle }: { joined: string[]; toggle: (key: string, join: boolean) => Promise<void> }) {
+  const [busy, setBusy] = useState("");
+  const [error, setError] = useState("");
   const groups = [
-    { k: "Regional Circles", items: regions.map((r) => `${r} Africa`) },
-    { k: "Language Circles", items: ["Cercle francophone", "Círculo lusófono", "Arabic-language Circle"] },
-    { k: "Condition Circles", items: conditions.map((c) => c.name) },
+    { k: "Regional Circles", items: regions.map((r) => ({ name: `${r} Africa`, key: `regional:${r}` })) },
+    { k: "Language Circles", items: [{ name: "Cercle francophone", key: "language:fr" }, { name: "Círculo lusófono", key: "language:pt" }, { name: "Arabic-language Circle", key: "language:ar" }] },
+    { k: "Condition Circles", items: conditions.map((c) => ({ name: c.name, key: `condition:${Number(c.n)}` })) },
   ];
   return (
     <div className="space-y-8">
       <div>
         <Label>ASEB Circles · Launching</Label>
         <h1 className="mt-2 font-display text-[2rem] leading-tight">Peer practice across borders.</h1>
-        <p className="mt-3 text-[0.9375rem] leading-relaxed text-stone">Open Circles are available to every Member. Practice Circles and Country Circles follow.</p>
+        <p className="mt-3 text-[0.9375rem] leading-relaxed text-stone">{joined.length} Circle selections saved. Conversations and facilitated sessions are not open yet.</p>
       </div>
+      {error && <p role="alert" className="text-sm text-ember">{error}</p>}
       {groups.map((g) => (
         <div key={g.k}>
           <Label>{g.k}</Label>
           <ul className="mt-3 border-t border-ink">
             {g.items.map((it) => (
-              <li key={it} className="flex min-h-[56px] items-center justify-between gap-4 border-b border-hairline py-3">
-                <span className="text-[1rem]">{it}</span>
-                <button className="min-h-[36px] border border-ink px-3 text-[0.8125rem] font-semibold hover:bg-ink hover:text-ivory">Join</button>
+              <li key={it.key} className="flex min-h-[56px] items-center justify-between gap-4 border-b border-hairline py-3">
+                <span className="text-[1rem]">{it.name}</span>
+                <Button variant="outline" className="min-h-[36px] shrink-0 border border-ink px-3 text-[0.8125rem] font-semibold" disabled={!!busy} aria-label={`${joined.includes(it.key) ? "Leave" : "Join"} ${it.name}`} onClick={async () => { setBusy(it.key); setError(""); try { await toggle(it.key, !joined.includes(it.key)); } catch { setError("Your Circle selection could not be saved. Please try again."); } finally { setBusy(""); } }}>{busy === it.key ? "Saving…" : joined.includes(it.key) ? "Leave" : "Join"}</Button>
               </li>
             ))}
           </ul>
@@ -160,7 +169,8 @@ function AcademyTab() {
 }
 
 function FieldLabTab() {
-  const lab = pillars.find((p) => p.slug === "field-lab")!;
+  const lab = pillars.find((p) => p.slug === "field-lab");
+  if (!lab) return null;
   return (
     <div className="space-y-8">
       <div>
@@ -220,8 +230,17 @@ function SummitTab() {
 }
 
 export default function AppShell() {
+  const { user } = useMember();
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  const fetchMember = useServerFn(getMemberData);
+  const changeCircle = useServerFn(updateCircleMembership);
+  const { data } = useSuspenseQuery({ queryKey: ["member-data", user?.id], queryFn: () => fetchMember() });
+  const [editing, setEditing] = useState(false);
+  const [signingOut, setSigningOut] = useState(false);
   const [tab, setTab] = useState<Tab>("home");
-  const body = { home: <HomeTab />, circles: <CirclesTab />, academy: <AcademyTab />, fieldlab: <FieldLabTab />, summit: <SummitTab /> }[tab];
+  const profile = data.profile;
+  const body = editing ? <MemberProfile profile={profile} close={() => setEditing(false)} /> : { home: <HomeTab name={profile?.name || ""} role={profile?.primary_role || ""} country={profile?.country || ""} edit={() => setEditing(true)} />, circles: <CirclesTab joined={data.circles} toggle={async (key, join) => { await changeCircle({ data: { key, join } }); await queryClient.invalidateQueries({ queryKey: ["member-data"] }); }} />, academy: <AcademyTab />, fieldlab: <FieldLabTab />, summit: <SummitTab /> }[tab];
 
   return (
     <div className="min-h-screen bg-ivory">
@@ -233,12 +252,12 @@ export default function AppShell() {
             <span className="font-display text-[1.125rem]">ASEB Society</span>
           </Link>
           <div className="flex items-center gap-5 text-[0.875rem] font-semibold">
-            <button className="min-h-[44px]">Search</button>
-            <span className="inline-flex h-9 w-9 items-center justify-center bg-ink font-display text-[0.9375rem] text-ivory" aria-label="Your profile">M</span>
+            <Button variant="ghost" className="min-h-[44px]" disabled={signingOut} onClick={async () => { setSigningOut(true); await queryClient.cancelQueries(); queryClient.clear(); await supabase.auth.signOut(); await navigate({ to: "/auth", replace: true }); }}>Sign out</Button>
+            <Button onClick={() => setEditing(true)} className="h-9 w-9 bg-ink font-display text-[0.9375rem] text-ivory" aria-label="Your profile">{profile?.name?.slice(0, 1) || "M"}</Button>
           </div>
         </div>
         <div className="border-t border-hairline bg-sand/40 px-5 py-2 text-center text-[0.75rem] text-ink/80">
-          Member app preview. Content is illustrative of structure only.
+          {profile?.country && profile?.primary_role ? "Your ASEB account · Society membership is reviewed separately." : "Complete your profile to add your country and primary role."}
         </div>
       </header>
 
@@ -248,10 +267,10 @@ export default function AppShell() {
           <ul className="border-t border-ink">
             {tabs.map((t) => (
               <li key={t.id}>
-                <button onClick={() => setTab(t.id)} className={`relative flex w-full items-center border-b border-hairline py-4 pl-4 text-left text-[1rem] ${tab === t.id ? "font-semibold" : "text-ink/70 hover:text-ink"}`}>
+                <Button variant="ghost" onClick={() => { setEditing(false); setTab(t.id); }} className={`relative flex h-auto justify-start w-full items-center border-b border-hairline py-4 pl-4 text-left text-[1rem] ${tab === t.id ? "font-semibold" : "text-ink/70 hover:text-ink"}`}>
                   {tab === t.id && <span className="absolute left-0 top-3 bottom-3 w-[3px] bg-signal" aria-hidden="true" />}
                   {t.label}
-                </button>
+                </Button>
               </li>
             ))}
           </ul>
@@ -266,9 +285,9 @@ export default function AppShell() {
             <Card>
               <Label>Recognition pathway</Label>
               <ol className="mt-3">
-                {ladder.map((l, i) => (
-                  <li key={l.step} className={`flex items-center gap-3 py-2 text-[0.875rem] ${i === 0 ? "font-semibold" : "text-stone"}`}>
-                    <span className={`inline-block h-2 w-2 ${i === 0 ? "bg-signal" : "border border-stone/50"}`} aria-hidden="true" />
+                {ladder.map((l) => (
+                  <li key={l.step} className="flex items-center gap-3 py-2 text-[0.875rem] text-stone">
+                    <span className="inline-block h-2 w-2 border border-stone/50" aria-hidden="true" />
                     {l.name}
                   </li>
                 ))}
@@ -276,7 +295,7 @@ export default function AppShell() {
             </Card>
             <Card>
               <Label>Find others in your role</Label>
-              <p className="mt-3 text-[0.875rem] leading-relaxed text-stone">Search {registry.length} verified practitioners and institutions.</p>
+              <p className="mt-3 text-[0.875rem] leading-relaxed text-stone">Search {registry.length} public-source practitioners and institutions.</p>
               <Link to="/registry" className="tlink mt-4">Open the Registry <span className="arr" aria-hidden="true">→</span></Link>
             </Card>
           </div>
@@ -288,11 +307,11 @@ export default function AppShell() {
         <ul className="grid grid-cols-5">
           {tabs.map((t) => (
             <li key={t.id}>
-              <button onClick={() => { setTab(t.id); window.scrollTo({ top: 0 }); }} aria-current={tab === t.id ? "page" : undefined}
+              <Button variant="ghost" onClick={() => { setEditing(false); setTab(t.id); window.scrollTo({ top: 0 }); }} aria-current={tab === t.id ? "page" : undefined}
                 className={`relative flex h-[60px] w-full items-center justify-center text-[0.8125rem] ${tab === t.id ? "font-semibold text-ink" : "text-stone"}`}>
                 {tab === t.id && <span className="absolute left-1/2 top-0 h-[3px] w-8 -translate-x-1/2 bg-signal" aria-hidden="true" />}
                 {t.label}
-              </button>
+              </Button>
             </li>
           ))}
         </ul>
