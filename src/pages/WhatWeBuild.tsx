@@ -1,0 +1,102 @@
+import { useEffect } from "react";
+import { useLocation } from "@/lib/router";
+import { pillars } from "@/content/pillars";
+import { ladder } from "@/content/framework";
+import { PageHero, SectionHead } from "@/components/PageHero";
+import { Btn } from "@/components/Arrow";
+import { Photo } from "@/components/Photo";
+
+const pillarPhoto: Record<string, { src: string; alt: string; caption: string } | undefined> = {
+  summit: { src: "images/events/aseb-2026-recognised-builders.jpg", alt: "Recognised practitioners at ASEB 2026", caption: "ASEB 2026, Johannesburg" },
+  circles: { src: "images/events/aseb-summit-panel.jpg", alt: "Practitioners in conversation at the ASEB Summit", caption: "Peer exchange at the ASEB Summit" },
+};
+
+const chapters = [
+  { k: "See the Field", v: "The Field Registry, the evidence and Insights." },
+  { k: "Build the Field", v: "The Academy and the Field Lab." },
+  { k: "Carry the Field Forward", v: "Circles, the commitments made and the next Summit." },
+];
+
+export default function WhatWeBuild() {
+  const { hash } = useLocation();
+  useEffect(() => {
+    if (hash) document.getElementById(hash.slice(1))?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [hash]);
+
+  return (
+    <>
+      <PageHero
+        eyebrow="What we build"
+        title="Four pillars. One year-round practice."
+        lede="The Summit gives the field its signal once a year. The Society carries the work through the other fifty-one weeks: in Circles, in the Academy and in the Field Lab."
+      />
+
+      <section className="border-b border-hairline bg-paper">
+        <div className="wrap grid lg:grid-cols-3">
+          {chapters.map((c, i) => (
+            <div key={c.k} className={`py-10 ${i > 0 ? "border-t border-hairline lg:border-l lg:border-t-0 lg:pl-10" : "lg:pr-10"}`}>
+              <p className="numeral text-sm text-umber">{String(i + 1).padStart(2, "0")}</p>
+              <p className="mt-3 font-display text-[1.625rem] leading-tight">{c.k}</p>
+              <p className="mt-2 text-[0.9375rem] text-stone">{c.v}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {pillars.map((p, idx) => {
+        const ph = pillarPhoto[p.slug];
+        return (
+          <section key={p.slug} id={p.slug} className={`section scroll-mt-28 ${idx % 2 === 1 ? "bg-linen/50" : ""}`}>
+            <div className="wrap grid gap-12 lg:grid-cols-12 lg:gap-10">
+              <div className="lg:col-span-5">
+                <div className="flex items-baseline gap-4">
+                  <span className="numeral text-[3.5rem] leading-none text-signal">{p.n}</span>
+                  <span className="text-eyebrow font-semibold uppercase text-umber">{p.role}</span>
+                </div>
+                <h2 className="mt-6 text-display-md">{p.name}</h2>
+                <p className="mt-5 font-display text-[1.375rem] leading-snug">{p.line}</p>
+                <p className="mt-6 text-[1.0625rem] leading-relaxed text-stone">{p.body}</p>
+                {ph && <Photo className="mt-10" src={ph.src} alt={ph.alt} caption={ph.caption} ratio="aspect-[3/2]" />}
+              </div>
+              <div className="lg:col-span-6 lg:col-start-7">
+                <p className="text-eyebrow font-semibold uppercase text-stone">Programmes</p>
+                <ul className="mt-5 border-t border-ink">
+                  {p.programmes.map((g) => (
+                    <li key={g.name} className="grid grid-cols-[1fr_auto] gap-6 border-b border-hairline py-6">
+                      <div>
+                        <p className="font-display text-[1.375rem] leading-tight">{g.name}</p>
+                        <p className="mt-2 text-[0.9375rem] leading-relaxed text-stone">{g.detail}</p>
+                      </div>
+                      <span className={`pt-1 text-[0.75rem] font-semibold uppercase tracking-[0.12em] ${g.status === "Live" ? "text-ember" : g.status === "Launching" ? "text-ink" : "text-stone"}`}>{g.status}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </section>
+        );
+      })}
+
+      <section id="pathway" className="on-dark section scroll-mt-28 bg-ink text-ivory">
+        <div className="wrap">
+          <SectionHead
+            eyebrow="The recognition pathway"
+            title="Five levels, each earned through evidence."
+            lede="Each level appears on the practitioner's public record in the Field Registry, with a verifiable certificate from Associate Ecosystem Builder upward."
+          />
+          <ol className="mt-16 border-t border-hairline-dark">
+            {ladder.map((l, i) => (
+              <li key={l.step} className="grid gap-3 border-b border-hairline-dark py-8 lg:grid-cols-12 lg:items-baseline lg:gap-10">
+                <span className="numeral text-sm text-sand lg:col-span-1">{l.step}</span>
+                <span className="font-display text-[1.75rem] leading-tight lg:col-span-4">{l.name}</span>
+                <p className="text-[1rem] leading-relaxed text-stone-light lg:col-span-6">{l.how}</p>
+                <span className="hidden h-[3px] bg-signal lg:col-span-1 lg:block" style={{ opacity: 0.3 + i * 0.175 }} aria-hidden="true" />
+              </li>
+            ))}
+          </ol>
+          <div className="mt-12"><Btn to="/join" variant="signal">Begin as a Member</Btn></div>
+        </div>
+      </section>
+    </>
+  );
+}
