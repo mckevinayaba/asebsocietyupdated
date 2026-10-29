@@ -1,5 +1,6 @@
 import { Link } from "@/lib/router";
-import { statements, proof, whyNow } from "@/content/site";
+import { statements, whyNow } from "@/content/site";
+import { LadderAssessment } from "@/components/LadderAssessment";
 import { conditions, ladder } from "@/content/framework";
 import { constituencies, rolesFor } from "@/content/field";
 import { pillars } from "@/content/pillars";
@@ -58,16 +59,20 @@ export default function Home() {
             />
           </div>
         </div>
-        {/* Proof figures */}
+        {/* The field, in figures */}
         <div className="wrap">
           <dl className="mt-12 grid grid-cols-2 gap-px border-t border-hairline bg-hairline lg:grid-cols-4">
-            {proof.map((p, i) => (
+            {[
+              { value: String(registry.length), label: "Practitioners and institutions on record", to: "/registry" },
+              { value: String(countryCount), label: "Countries in the Field Registry", to: "/registry" },
+              { value: "28", label: "Recognised roles in the field", to: "/field" },
+              { value: "7", label: "Conditions the practice strengthens", to: "/framework" },
+            ].map((p, i) => (
               <div key={p.label} className={`bg-ivory py-8 lg:py-10 ${i % 2 === 1 ? "pl-5" : "pr-4"} ${i > 0 ? "lg:pl-8" : ""}`}>
                 <dt className="sr-only">{p.label}</dt>
                 <dd className="numeral text-[2.75rem] leading-none lg:text-[3.5rem]">{p.value}</dd>
-                <dd className="mt-3 text-[0.9375rem] font-medium">{p.label}</dd>
-                <dd className="mt-1 text-[0.8125rem] text-stone">
-                  <a href={p.href} target="_blank" rel="noreferrer" className="hover:text-ember">{p.note}, asebs.com</a>
+                <dd className="mt-3 text-[0.9375rem] font-medium">
+                  <Link to={p.to} className="hover:text-ember">{p.label} <Arr /></Link>
                 </dd>
               </div>
             ))}
@@ -233,6 +238,13 @@ export default function Home() {
               </li>
             ))}
           </ol>
+          <div id="find-your-place" className="mt-16 grid gap-10 lg:grid-cols-12">
+            <div className="lg:col-span-4">
+              <h3 className="font-display text-[2rem] leading-tight">Where are you on the path?</h3>
+              <p className="mt-4 text-[0.9375rem] leading-relaxed text-stone">Four questions about your practice. See which designation you can work towards next.</p>
+            </div>
+            <div className="lg:col-span-7 lg:col-start-6"><LadderAssessment /></div>
+          </div>
         </div>
       </section>
 
