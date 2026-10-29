@@ -37,10 +37,11 @@ export function RegistryIndex() {
       <PageHero
         eyebrow="The Field Registry"
         title="Mapping who builds Africa's ecosystems."
-        lede="A public record of the practitioners and institutions who build the conditions for founders. It begins with every finalist and Champion of the ASEB Awards, verified against the awards archive, and grows each year."
+        lede="A public record of the practitioners and institutions who build the conditions for founders, drawn from the ASEB Awards archive and linked public sources."
       />
       <section className="section-tight">
         <div className="wrap">
+          <div className="mb-8 flex flex-wrap items-center justify-between gap-5 border-b border-hairline pb-6"><p className="text-sm text-stone">Awards recognition and Society membership are distinct.</p><TLink to="/registry/submit">Propose a registry record</TLink></div>
           <div className="grid gap-4 border-b border-ink pb-8 lg:grid-cols-12">
             <label className="lg:col-span-5">
               <span className="field-label">Search</span>
@@ -113,7 +114,7 @@ export function RegistryIndex() {
             </div>
           )}
           <p className="mt-12 max-w-3xl text-[0.8125rem] leading-relaxed text-stone">
-            Every record links to its public source. Practitioners and institutions can claim their profile to add their own record of practice. Records are verified by the Secretariat and, from 2027, by Country Stewards.
+            Every record links to its public source. Submit a proposed record or request to claim an existing profile for Secretariat review. Registry inclusion does not establish Society membership or professional accreditation.
           </p>
         </div>
       </section>
@@ -139,7 +140,7 @@ export function RecordPage() {
             </div>
             <div className="flex flex-col gap-3 lg:col-span-4 lg:items-end lg:justify-end">
               <span className="inline-flex items-center gap-2 text-[0.875rem] font-semibold">
-                <span className="inline-block h-2 w-2 bg-signal" aria-hidden="true" /> Awards archive record
+                <span className="inline-block h-2 w-2 bg-signal" aria-hidden="true" /> Public-source record
               </span>
               <span className="text-[0.8125rem] text-stone">Society membership is not confirmed by this listing.</span>
             </div>
@@ -165,6 +166,7 @@ export function RecordPage() {
           <div className="lg:col-span-4 lg:col-start-9">
             <p className="text-eyebrow font-semibold uppercase text-stone">Recognition</p>
             <ol className="mt-5 border-t border-ink">
+              {recs.length === 0 && <li className="border-b border-hairline py-5 text-sm text-stone">No award recognition recorded in this collection.</li>}
               {recs.map((x, i) => (
                 <li key={i} className="border-b border-hairline py-5">
                   <p className="numeral text-sm text-umber">{x.year}{x.edition ? ` · ${x.edition}` : ""}</p>
