@@ -24,6 +24,7 @@ import { Route as SiteFieldIndexRouteImport } from './routes/_site.field.index'
 import { Route as SiteFieldSlugRouteImport } from './routes/_site.field.$slug'
 import { Route as SiteRegistryIndexRouteImport } from './routes/_site.registry.index'
 import { Route as SiteRegistrySlugRouteImport } from './routes/_site.registry.$slug'
+import { Route as SiteRegistrySubmitRouteImport } from './routes/_site.registry_.submit'
 import { Route as SiteFieldRoleSlugRouteImport } from './routes/_site.field.role.$slug'
 
 const SiteRoute = SiteRouteImport.update({
@@ -100,6 +101,11 @@ const SiteRegistrySlugRoute = SiteRegistrySlugRouteImport.update({
   path: '/registry/$slug',
   getParentRoute: () => SiteRoute,
 } as any)
+const SiteRegistrySubmitRoute = SiteRegistrySubmitRouteImport.update({
+  id: '/registry_/submit',
+  path: '/registry/submit',
+  getParentRoute: () => SiteRoute,
+} as any)
 const SiteFieldRoleSlugRoute = SiteFieldRoleSlugRouteImport.update({
   id: '/field/role/$slug',
   path: '/field/role/$slug',
@@ -119,6 +125,7 @@ export interface FileRoutesByFullPath {
   '/why-aseb': typeof SiteWhyAsebRoute
   '/field/$slug': typeof SiteFieldSlugRoute
   '/registry/$slug': typeof SiteRegistrySlugRoute
+  '/registry/submit': typeof SiteRegistrySubmitRoute
   '/field/': typeof SiteFieldIndexRoute
   '/registry/': typeof SiteRegistryIndexRoute
   '/field/role/$slug': typeof SiteFieldRoleSlugRoute
@@ -136,6 +143,7 @@ export interface FileRoutesByTo {
   '/': typeof SiteIndexRoute
   '/field/$slug': typeof SiteFieldSlugRoute
   '/registry/$slug': typeof SiteRegistrySlugRoute
+  '/registry/submit': typeof SiteRegistrySubmitRoute
   '/field': typeof SiteFieldIndexRoute
   '/registry': typeof SiteRegistryIndexRoute
   '/field/role/$slug': typeof SiteFieldRoleSlugRoute
@@ -155,6 +163,7 @@ export interface FileRoutesById {
   '/_site/': typeof SiteIndexRoute
   '/_site/field/$slug': typeof SiteFieldSlugRoute
   '/_site/registry/$slug': typeof SiteRegistrySlugRoute
+  '/_site/registry_/submit': typeof SiteRegistrySubmitRoute
   '/_site/field/': typeof SiteFieldIndexRoute
   '/_site/registry/': typeof SiteRegistryIndexRoute
   '/_site/field/role/$slug': typeof SiteFieldRoleSlugRoute
@@ -174,6 +183,7 @@ export interface FileRouteTypes {
     | '/why-aseb'
     | '/field/$slug'
     | '/registry/$slug'
+    | '/registry/submit'
     | '/field/'
     | '/registry/'
     | '/field/role/$slug'
@@ -191,6 +201,7 @@ export interface FileRouteTypes {
     | '/'
     | '/field/$slug'
     | '/registry/$slug'
+    | '/registry/submit'
     | '/field'
     | '/registry'
     | '/field/role/$slug'
@@ -209,6 +220,7 @@ export interface FileRouteTypes {
     | '/_site/'
     | '/_site/field/$slug'
     | '/_site/registry/$slug'
+    | '/_site/registry_/submit'
     | '/_site/field/'
     | '/_site/registry/'
     | '/_site/field/role/$slug'
@@ -326,6 +338,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SiteRegistrySlugRouteImport
       parentRoute: typeof SiteRoute
     }
+    '/_site/registry_/submit': {
+      id: '/_site/registry_/submit'
+      path: '/registry/submit'
+      fullPath: '/registry/submit'
+      preLoaderRoute: typeof SiteRegistrySubmitRouteImport
+      parentRoute: typeof SiteRoute
+    }
     '/_site/field/role/$slug': {
       id: '/_site/field/role/$slug'
       path: '/field/role/$slug'
@@ -348,6 +367,7 @@ interface SiteRouteChildren {
   SiteIndexRoute: typeof SiteIndexRoute
   SiteFieldSlugRoute: typeof SiteFieldSlugRoute
   SiteRegistrySlugRoute: typeof SiteRegistrySlugRoute
+  SiteRegistrySubmitRoute: typeof SiteRegistrySubmitRoute
   SiteFieldIndexRoute: typeof SiteFieldIndexRoute
   SiteRegistryIndexRoute: typeof SiteRegistryIndexRoute
   SiteFieldRoleSlugRoute: typeof SiteFieldRoleSlugRoute
@@ -365,6 +385,7 @@ const SiteRouteChildren: SiteRouteChildren = {
   SiteIndexRoute: SiteIndexRoute,
   SiteFieldSlugRoute: SiteFieldSlugRoute,
   SiteRegistrySlugRoute: SiteRegistrySlugRoute,
+  SiteRegistrySubmitRoute: SiteRegistrySubmitRoute,
   SiteFieldIndexRoute: SiteFieldIndexRoute,
   SiteRegistryIndexRoute: SiteRegistryIndexRoute,
   SiteFieldRoleSlugRoute: SiteFieldRoleSlugRoute,
