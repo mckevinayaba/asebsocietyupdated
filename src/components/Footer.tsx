@@ -29,7 +29,7 @@ export function Footer() {
         </div>
         <div className="rule mt-20 flex flex-col gap-4 pt-8 text-[0.8125rem] text-stone-light md:flex-row md:items-center md:justify-between">
           <p>© {new Date().getFullYear()} ASEB Society. Johannesburg, South Africa. Serving all 54 countries.</p>
-          <p>Photography from the ASEB Summit and Awards. Credits to be confirmed.</p>
+          <p>Photography from the ASEB Summit and Awards. Photos: ASEB Society.</p>
         </div>
       </div>
     </footer>

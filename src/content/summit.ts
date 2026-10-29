@@ -1,5 +1,5 @@
 // ASEB Summit and Awards. Source for programme and speakers: https://www.asebs.com/programme
-// and https://www.asebs.com/speakers. Photo credits to be confirmed before launch.
+// and https://www.asebs.com/speakers. Photos credited to ASEB Society.
 
 export const summit2026 = {
   edition: "Fifth edition",
