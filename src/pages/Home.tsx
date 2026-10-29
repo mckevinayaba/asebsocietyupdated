@@ -9,6 +9,7 @@ import { Photo } from "@/components/Photo";
 import { Btn, TLink, Arr } from "@/components/Arrow";
 import { SectionHead } from "@/components/PageHero";
 import { asset } from "@/lib/asset";
+import panelPhoto from "@/assets/aseb-2026-panel-from-movement-to-institution.jpg.asset.json";
 
 // The full stop in the hero carries the logo orange. A small, deliberate brand detail.
 const Dot = () => <span className="text-signal">.</span>;
@@ -88,6 +89,14 @@ export default function Home() {
             <h2 className="mt-5 text-display-md">What is ecosystem building?</h2>
             <p className="mt-7 text-xl leading-relaxed text-ink lg:text-[1.375rem]">{statements.definition}</p>
             <div className="mt-8"><TLink to="/framework">Read the framework</TLink></div>
+            <Photo
+              src={panelPhoto.url}
+              alt="A panel of ecosystem builders in conversation on stage at the ASEB 2026 Summit in Johannesburg"
+              caption="The field in conversation, ASEB Summit and Awards 2026, Johannesburg"
+              ratio="aspect-[4/3]"
+              position="50% 60%"
+              className="mt-10 hidden lg:block"
+            />
           </div>
           <div className="lg:col-span-6 lg:col-start-7">
             <p className="text-eyebrow font-semibold uppercase text-stone">The seven conditions it strengthens</p>
