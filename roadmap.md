@@ -3,6 +3,8 @@
 - [x] 1. Refine registry discovery, record provenance, Evidence Library discovery and the ecosystem-tax narrative.
 - [x] 2. Enable Lovable Cloud and persist membership applications, profile-claim requests and registry submissions for review.
 - [x] 3. Enable member accounts, private editable profiles and saved Circle join/leave selections; verify sign-in, persistence, privacy and sign-out.
+- [ ] Strengthen climate venture-building and funder impact language without unsupported numerical promises.
+- [ ] Connect all five partnership interest forms to private Cloud storage and verify submission, validation and privacy.
 
 ## Limitations
 - Circle conversations, Academy lessons and automatic registry publication remain unavailable; current content marks their status.
