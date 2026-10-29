@@ -194,9 +194,9 @@ export default function Home() {
               <div className="photo aspect-[4/3]">
                 <img src={asset("images/events/aseb-awards-stage-2.jpg")} alt="Two builders embrace on stage at the ASEB Awards" loading="lazy" className="transition-transform duration-700 ease-quiet group-hover:scale-[1.02]" />
               </div>
-              <div className="mt-6 flex items-baseline gap-5">
+              <div className="mt-6">
                 <span className="text-eyebrow font-semibold uppercase text-umber">{pillars[3]!.role}</span>
-                <div>
+                <div className="mt-3">
                   <h3 className="text-[2rem] leading-tight">{pillars[3]!.name}</h3>
                   <p className="mt-2 max-w-md text-[0.9375rem] text-stone">{pillars[3]!.line}</p>
                 </div>
