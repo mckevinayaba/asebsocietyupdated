@@ -95,7 +95,7 @@ export default function Home() {
               caption="The field in conversation, ASEB Summit and Awards 2026, Johannesburg"
               ratio="aspect-[4/3]"
               position="50% 60%"
-              className="mt-10 hidden lg:block"
+              className="mt-10"
             />
           </div>
           <div className="lg:col-span-6 lg:col-start-7">
