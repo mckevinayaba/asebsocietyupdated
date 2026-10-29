@@ -29,4 +29,9 @@ describe("Partnership intake rules", () => {
   it("rejects a choice outside the configured options", () => {
     expect(fieldError({ name: "requestType", label: "Request", type: "choice", options: ["Direct commission"] }, "Approve me")).toBeDefined();
   });
+  it("limits editorial pitches to 200 words", () => {
+    const field: Field = { name: "summary", label: "What will a practitioner learn? (up to 200 words)" };
+    expect(fieldError(field, Array(200).fill("practice").join(" "))).toBeUndefined();
+    expect(fieldError(field, Array(201).fill("practice").join(" "))).toBeDefined();
+  });
 });

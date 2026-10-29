@@ -25,7 +25,7 @@ export function EoiForm({ source, fields, consent, submitLabel, done }: Props) {
     setError("");
     try {
       const enquiry = prepareEnquiry(source, fields, v, agree);
-      const { error: insertError } = await supabase.from("partnership_enquiries").insert(enquiry);
+      const { error: insertError } = await supabase.from(source === "/insights" ? "insight_pitches" : "partnership_enquiries").insert(enquiry);
       if (insertError) throw new Error("Your enquiry could not be saved. Please try again; your answers are still here.");
       setSent(true);
     } catch (cause) {

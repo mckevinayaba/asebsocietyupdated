@@ -56,7 +56,7 @@ export default function Insights() {
           </div>
           <div className="min-w-0 lg:col-span-7 lg:col-start-6">
             <EoiForm
-              table="insight_pitches"
+              source="/insights"
               submitLabel="Send pitch"
               consent="The work is mine or my organisation's to share, and it credits the people and institutions it draws on."
               done={{ title: "Thank you. Your pitch is with the editorial team.", body: "We reply to every pitch within three weeks." }}
