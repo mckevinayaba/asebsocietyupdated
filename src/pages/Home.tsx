@@ -39,15 +39,24 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <Photo
-            className="mt-12 lg:mt-16"
-            src="images/events/aseb-2026-recognised-builders.jpg"
-            alt="Recognised practitioners and institutions gathered at ASEB 2026 in Johannesburg"
-            caption="Recognised practitioners and institutions, ASEB Summit and Awards 2026, Johannesburg"
-            ratio="aspect-[4/3] sm:aspect-[16/9] lg:aspect-[21/9]"
-            position="50% 40%"
-            eager
-          />
+          <div className="mt-12 grid gap-6 md:grid-cols-2 md:gap-4 lg:mt-16 lg:gap-5">
+            <Photo
+              src="images/events/aseb-2026-recognised-builders.jpg"
+              alt="Recognised practitioners and institutions holding their awards at ASEB 2026 in Johannesburg"
+              caption="Recognised practitioners and institutions, ASEB Summit and Awards 2026, Johannesburg"
+              ratio="aspect-[4/3]"
+              position="50% 45%"
+              eager
+            />
+            <Photo
+              src="images/events/aseb-2026-summit-delegates.jpg"
+              alt="Summit delegates gathered together in the atrium at ASEB 2026 in Johannesburg"
+              caption="Builders, funders and partners gathered for the 5th anniversary summit"
+              ratio="aspect-[4/3]"
+              position="50% 55%"
+              eager
+            />
+          </div>
         </div>
         {/* Proof figures */}
         <div className="wrap">
