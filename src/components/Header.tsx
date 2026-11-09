@@ -47,7 +47,7 @@ export function Header() {
           </div>
           <div className="hidden items-center gap-5 sm:flex">
             <Link to="/registry" className="transition-colors hover:text-ivory">Field Registry</Link>
-            <Link to={user ? "/app" : "/auth"} className="transition-colors hover:text-ivory">{user ? "My member app" : "Member sign in"}</Link>
+            <Link to={user ? "/app" : "/auth"} className="transition-colors hover:text-ivory">{user ? `${typeof user.user_metadata["name"] === "string" ? user.user_metadata["name"].split(" ")[0] + " · " : ""}Member app` : "Member sign in"}</Link>
           </div>
         </div>
       </div>

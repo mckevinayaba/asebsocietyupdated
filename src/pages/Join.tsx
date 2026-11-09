@@ -5,6 +5,7 @@ import { africanCountries } from "@/content/countries";
 import { supabase } from "@/integrations/supabase/client";
 import { applicationSchema } from "@/lib/intake";
 import { recordBySlug } from "@/content/registry";
+import { useMember } from "@/hooks/use-member";
 import { Button } from "@/components/ui/button";
 
 // Applications are private Cloud intake rows; submission does not confer membership.
@@ -22,6 +23,7 @@ const code = [
 const steps = ["Your role", "About you", "Code of Practice", "Confirmation"];
 
 export default function Join() {
+  const { user } = useMember();
   const [params] = useSearchParams();
   const preRole = roleBySlug(params.get("role") || "");
   const intent = params.get("intent");
@@ -94,7 +96,7 @@ export default function Join() {
           {step === 0 && (
             <div>
               <h2 className="font-display text-[2rem] leading-tight">Which best describes your role in the field?</h2>
-              <p className="mt-3 text-[0.9375rem] text-stone">Your answer sets your profile badge, your Circle suggestions and your Academy track. You can add two secondary roles later.</p>
+              <p className="mt-3 text-[0.9375rem] text-stone">Your answer helps the Secretariat understand your contribution to entrepreneurship ecosystem building.</p>
               <div className="no-scrollbar -mx-5 mt-8 flex gap-2 overflow-x-auto px-5 sm:mx-0 sm:flex-wrap sm:px-0" role="tablist">
                 {constituencies.map((c) => (
                   <Button variant="ghost" key={c.slug} role="tab" aria-selected={tab === c.slug} onClick={() => setTab(c.slug)}
@@ -215,13 +217,14 @@ export default function Join() {
               <p className="mt-6 text-[1.0625rem] leading-relaxed text-stone">
                 Thank you, {f.name.split(" ")[0]}. Your application has been saved for Secretariat review, with {f.email} as your contact address. Membership and profile claims remain subject to review.
               </p>
+              <p className="mt-5 text-sm text-stone">Create or sign in to your account with this same email to track review status and manage Circle preferences. Confirm your email before accessing your account.</p>
               <dl className="mt-10 grid border-t border-ink text-[0.9375rem] sm:grid-cols-3">
                 <div className="border-b border-hairline py-5"><dt className="text-stone">Role</dt><dd className="mt-1 font-medium">{role?.role}</dd></div>
                 <div className="border-b border-hairline py-5 sm:border-l sm:pl-5"><dt className="text-stone">Country</dt><dd className="mt-1 font-medium">{f.country}</dd></div>
                 <div className="border-b border-hairline py-5 sm:border-l sm:pl-5"><dt className="text-stone">Application status</dt><dd className="mt-1 font-medium">Pending review</dd></div>
               </dl>
               <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                <Link to="/app" className="btn btn-primary">Preview the member app <span className="arr" aria-hidden="true">→</span></Link>
+                <Button asChild className="btn btn-primary h-auto whitespace-normal"><Link to={user ? "/app" : "/auth?mode=signup"} onClick={() => { if (!user) sessionStorage.setItem("aseb-application-account", JSON.stringify({ name: f.type === "individual" ? f.name : "", email: f.email })); }}>{user ? "View my application" : "Create your account"} <span className="arr" aria-hidden="true">→</span></Link></Button>
                 <Link to="/registry" className="btn btn-line">Find your record <span className="arr" aria-hidden="true">→</span></Link>
               </div>
             </div>

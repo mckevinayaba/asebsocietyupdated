@@ -22,3 +22,6 @@
 - Keep public programme readiness and persona pathways in shared browser-safe content; homepage, programme pages and progress must use the same readiness source to avoid conflicting availability claims.
 - Keep institutional mandates alongside service readiness in shared programme content; public presentation uses mandates while actions remain grounded in available services.
 - Use the shared reveal observer for public editorial scroll motion and respect reduced-motion preferences; never hide first-viewport content for entrance effects.
+- Programme interest forms share validated private intake; authenticated submissions derive ownership on the server and atomically synchronize Circle selections through the database trigger.
+- Membership application reads use verified-email owner RLS; account creation never grants membership approval or exposes other applicants.
+- Role pathways use shared browser-safe mappings and validated search parameters to connect registry, community and evidence views.

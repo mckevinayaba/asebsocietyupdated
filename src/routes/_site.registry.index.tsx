@@ -2,8 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { RegistryIndex } from "@/pages/Registry";
 
 export const Route = createFileRoute("/_site/registry/")({
-  validateSearch: (search: Record<string, unknown>): { region?: string } =>
-    typeof search["region"] === "string" ? { region: search["region"] } : {},
+  validateSearch: (search: Record<string, unknown>) => ({ region: typeof search["region"] === "string" ? search["region"] : undefined, q: typeof search["q"] === "string" ? search["q"] : undefined }),
   head: () => ({
     meta: [
       { title: 'The Field Registry | ASEB Society' },

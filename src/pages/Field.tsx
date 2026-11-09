@@ -1,3 +1,4 @@
+import { rolePathway } from "@/lib/role-pathways";
 import { Link, useParams } from "@/lib/router";
 import { constituencies, constituencyBySlug, roleBySlug, rolesFor, type ConstituencySlug } from "@/content/field";
 import { registry } from "@/content/registry";
@@ -118,13 +119,16 @@ export function RolePage() {
   const { slug = "" } = useParams();
   const r = roleBySlug(slug);
   if (!r) return <NotFound />;
-  const c = constituencyBySlug(r.constituency)!;
+  const c = constituencyBySlug(r.constituency);
+  if (!c) return <NotFound />;
+  const pathway = rolePathway(r);
   const pattern = awardPatterns[r.slug];
   const related = pattern ? registry.filter((x) => x.recognitions.some((rec) => pattern.test(rec.award))).slice(0, 8) : [];
 
   return (
     <>
       <PageHero eyebrow={`${c.name} · Role`} title={r.role} lede={r.contribution} />
+      <section className="section-tight border-b border-hairline bg-teal-soft"><div className="wrap grid gap-8 md:grid-cols-3">{[{ label: "Find practitioners and institutions", to: `/registry?q=${encodeURIComponent(pathway.registry)}` }, { label: "Choose your peer working group", to: `/communities?group=${encodeURIComponent(pathway.group)}#participate` }, { label: "Read evidence for your practice", to: `/evidence?condition=${encodeURIComponent(pathway.evidence)}` }].map(item => <div key={item.label} className="border-t border-teal/25 pt-5"><TLink to={item.to}>{item.label}</TLink></div>)}</div></section>
       <section className="section">
         <div className="wrap grid gap-14 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-6">
@@ -158,7 +162,7 @@ export function RolePage() {
             ) : (
               <p className="mt-5 border-t border-ink pt-5 text-[0.9375rem] text-stone">Records for this role are being added to the Field Registry.</p>
             )}
-            <div className="mt-6"><TLink to="/registry">The full Registry</TLink></div>
+            <div className="mt-6"><TLink to={`/registry?q=${encodeURIComponent(pathway.registry)}`}>Explore this role in the Registry</TLink></div>
           </div>
         </div>
       </section>

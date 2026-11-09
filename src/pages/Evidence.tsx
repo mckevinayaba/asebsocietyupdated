@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useSearchParams } from "@/lib/router";
+import { useEffect, useState } from "react";
 import { evidence, aeeiCredit } from "@/content/evidence";
 import { conditions } from "@/content/framework";
 import { PageHero } from "@/components/PageHero";
@@ -34,10 +35,13 @@ function ProfileFrame() {
 }
 
 export default function Evidence() {
+  const [params] = useSearchParams();
+  const requestedCondition = params.get("condition");
   const [kind, setKind] = useState<(typeof kinds)[number]>("All");
   const [query, setQuery] = useState("");
   const [condition, setCondition] = useState("All");
   const conditionOptions = [...new Set(evidence.flatMap((item) => item.conditions).filter((value) => value !== "All seven"))];
+  useEffect(() => { setCondition(requestedCondition && evidence.some(item => item.conditions.includes(requestedCondition)) ? requestedCondition : "All"); }, [requestedCondition]);
   const list = evidence.filter((item) => {
     if (kind !== "All" && item.kind !== kind) return false;
     if (condition !== "All" && !item.conditions.includes(condition) && !item.conditions.includes("All seven")) return false;

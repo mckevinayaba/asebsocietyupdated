@@ -17,6 +17,7 @@ const topRecognition = (r: RegistryRecord) => {
 export function RegistryIndex() {
   const [searchParams] = useSearchParams();
   const requestedRegion = searchParams.get("region");
+  const requestedQuery = searchParams.get("q") || "";
   const [q, setQ] = useState("");
   const [type, setType] = useState<"all" | "individual" | "organisation">("all");
   const [region, setRegion] = useState("all");
@@ -29,6 +30,7 @@ export function RegistryIndex() {
     setRegion(requestedRegion && regions.includes(requestedRegion) ? requestedRegion : "all");
     setShown(PAGE);
   }, [requestedRegion]);
+  useEffect(() => { setQ(requestedQuery); setShown(PAGE); }, [requestedQuery]);
   const years = [...new Set(registry.flatMap((r) => r.recognitions.map((x) => x.year)))].sort((a, b) => b - a);
   const hasFilters = !!q || [type, region, condition, country, year].some((value) => value !== "all");
 

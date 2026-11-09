@@ -1,3 +1,4 @@
+import { circleGroups } from "@/lib/programme-intake";
 import { useState, type ReactNode } from "react";
 import { Link } from "@/lib/router";
 import { useNavigate } from "@tanstack/react-router";
@@ -47,7 +48,7 @@ function Status({ s }: { s: string }) {
   return <span className={`text-[0.6875rem] font-semibold uppercase tracking-[0.12em] ${s === "Live" ? "text-ember" : s === "Launching" ? "text-ink" : "text-stone"}`}>{s}</span>;
 }
 
-function HomeTab({ name, role, country, edit }: { name: string; role: string; country: string; edit: () => void }) {
+function HomeTab({ name, role, country, edit, applications }: { name: string; role: string; country: string; edit: () => void; applications: { id: string; name: string; status: string; created_at: string }[] }) {
   const countryCount = new Set(registry.map((r) => r.country).filter(Boolean)).size;
   return (
     <div className="space-y-8">
@@ -55,6 +56,7 @@ function HomeTab({ name, role, country, edit }: { name: string; role: string; co
         <Label>Good day{name ? `, ${name.split(" ")[0]}` : ""}</Label>
         <h1 className="mt-2 font-display text-[2rem] leading-tight">Your practice, through the year.</h1>
       </div>
+      <section className="border-y border-hairline py-5"><Label>Your membership application</Label>{applications.length ? <ul className="mt-3 space-y-4">{applications.map(application => <li key={application.id}><p className="font-semibold">{application.name} · {application.status === "pending" ? "Pending Secretariat review" : application.status}</p><p className="mt-1 text-sm text-stone">Submitted {new Date(application.created_at).toLocaleDateString("en-GB", { timeZone: "UTC" })}</p></li>)}</ul> : <p className="mt-3 text-sm text-stone">No application is linked to your verified email. <Link to="/join" className="underline">Apply to join</Link> using your account email.</p>}</section>
       {/* Story row: one vertical card per part of the field */}
       <div className="no-scrollbar -mx-5 flex gap-3 overflow-x-auto px-5 lg:mx-0 lg:px-0">
         {constituencies.map((c, i) => (
@@ -83,7 +85,7 @@ function HomeTab({ name, role, country, edit }: { name: string; role: string; co
           {[
             { k: "Evidence Library", t: "ASEB 2026 research sessions are being added", d: "Prof Erik Stam, Dr Phumlani Nkontwana and i4Policy on the Africa Entrepreneurial Ecosystem Index.", to: "/evidence" },
             { k: "Field Registry", t: `${registry.length} public-source records across ${countryCount} countries`, d: "Practitioners and institutions drawn from the ASEB archive. Find your record.", to: "/registry" },
-            { k: "Academy", t: "ASEB Foundations is launching", d: "Free. Six modules. Leads to Associate Ecosystem Builder.", to: "/what-we-build#academy" },
+            { k: "Academy", t: "Your professional learning priorities", d: "Explore the framework and register interest in practitioner development opportunities.", to: "/learning" },
           ].map((x) => (
             <li key={x.t}>
               <Link to={x.to} className="block border-b border-hairline py-5">
@@ -102,17 +104,13 @@ function HomeTab({ name, role, country, edit }: { name: string; role: string; co
 function CirclesTab({ joined, toggle }: { joined: string[]; toggle: (key: string, join: boolean) => Promise<void> }) {
   const [busy, setBusy] = useState("");
   const [error, setError] = useState("");
-  const groups = [
-    { k: "Regional Circles", items: regions.map((r) => ({ name: `${r} Africa`, key: `regional:${r}` })) },
-    { k: "Language Circles", items: [{ name: "Cercle francophone", key: "language:fr" }, { name: "Círculo lusófono", key: "language:pt" }, { name: "Arabic-language Circle", key: "language:ar" }] },
-    { k: "Condition Circles", items: conditions.map((c) => ({ name: c.name, key: `condition:${Number(c.n)}` })) },
-  ];
+  const groups = circleGroups.map(group => ({ k: group.title, items: group.items }));
   return (
     <div className="space-y-8">
       <div>
-        <Label>ASEB Circles · Launching</Label>
+        <Label>ASEB Circles · Peer communities</Label>
         <h1 className="mt-2 font-display text-[2rem] leading-tight">Peer practice across borders.</h1>
-        <p className="mt-3 text-[0.9375rem] leading-relaxed text-stone">{joined.length} Circle selections saved. Conversations and facilitated sessions are not open yet.</p>
+        <p className="mt-3 text-[0.9375rem] leading-relaxed text-stone">{joined.length} Circle selections saved. Invitations to facilitated sessions follow confirmed programme schedules.</p>
       </div>
       {error && <p role="alert" className="text-sm text-ember">{error}</p>}
       {groups.map((g) => (
@@ -122,7 +120,7 @@ function CirclesTab({ joined, toggle }: { joined: string[]; toggle: (key: string
             {g.items.map((it) => (
               <li key={it.key} className="flex min-h-[56px] items-center justify-between gap-4 border-b border-hairline py-3">
                 <span className="text-[1rem]">{it.name}</span>
-                <Button variant="outline" className="min-h-[36px] shrink-0 border border-ink px-3 text-[0.8125rem] font-semibold" disabled={!!busy} aria-label={`${joined.includes(it.key) ? "Leave" : "Join"} ${it.name}`} onClick={async () => { setBusy(it.key); setError(""); try { await toggle(it.key, !joined.includes(it.key)); } catch { setError("Your Circle selection could not be saved. Please try again."); } finally { setBusy(""); } }}>{busy === it.key ? "Saving…" : joined.includes(it.key) ? "Leave" : "Join"}</Button>
+                <Button variant="outline" className="min-h-[36px] shrink-0 border border-ink px-3 text-[0.8125rem] font-semibold" disabled={!!busy} aria-label={`${joined.includes(it.key) ? "Remove preference for" : "Save preference for"} ${it.name}`} onClick={async () => { setBusy(it.key); setError(""); try { await toggle(it.key, !joined.includes(it.key)); } catch { setError("Your Circle selection could not be saved. Please try again."); } finally { setBusy(""); } }}>{busy === it.key ? "Saving…" : joined.includes(it.key) ? "Remove" : "Select"}</Button>
               </li>
             ))}
           </ul>
@@ -139,7 +137,7 @@ function AcademyTab() {
       <div>
         <Label>ASEB Academy</Label>
         <h1 className="mt-2 font-display text-[2rem] leading-tight">ASEB Foundations</h1>
-        <p className="mt-3 text-[0.9375rem] leading-relaxed text-stone">Free. Six modules, audio and text. Completing it, signing the Code and starting a record of continuing practice earns Associate Ecosystem Builder.</p>
+        <p className="mt-3 text-[0.9375rem] leading-relaxed text-stone">Explore the learning themes behind professional ecosystem-building practice. Register your priorities for upcoming opportunities; confirmed course and qualification details will be shared separately.</p>
       </div>
       <Card>
         <div className="flex items-baseline justify-between"><Label>Course outline</Label><span className="text-[0.6875rem] font-semibold uppercase tracking-[0.12em] text-stone">Draft</span></div>
@@ -148,13 +146,14 @@ function AcademyTab() {
             <li key={m} className="grid grid-cols-[2rem_1fr_auto] items-baseline gap-2 border-b border-hairline py-4 last:border-b-0">
               <span aria-hidden="true" className="block h-px w-4 -translate-y-[0.3em] bg-signal" />
               <span className="text-[1rem]">{m}</span>
-              <span className="text-[0.75rem] text-stone">Opens soon</span>
+              <span className="text-[0.75rem] text-stone">Learning theme</span>
             </li>
           ))}
         </ol>
       </Card>
+      <Button asChild className="btn btn-primary h-auto"><Link to="/learning#participate">Register learning interest →</Link></Button>
       <div>
-        <Label>Your eight domains</Label>
+        <Label>Practice domains</Label>
         <ul className="mt-3 space-y-3">
           {domains.map((d) => (
             <li key={d} className="grid grid-cols-[1fr_4rem] items-center gap-4 text-[0.875rem]">
@@ -182,15 +181,16 @@ function FieldLabTab() {
           <li key={p.name} className="border-b border-hairline py-5">
             <div className="flex items-baseline justify-between gap-4">
               <p className="font-display text-[1.25rem] leading-snug">{p.name}</p>
-              <Status s={p.status} />
+
             </div>
             <p className="mt-1.5 text-[0.875rem] leading-relaxed text-stone">{p.detail}</p>
           </li>
         ))}
       </ul>
       <Card>
-        <Label>Open calls</Label>
-        <p className="mt-3 text-[0.9375rem] leading-relaxed">No open calls yet. The first Field Lab projects are being scoped with Knowledge Partners for 2027.</p>
+        <Label>Research collaboration</Label>
+        <p className="mt-3 text-[0.9375rem] leading-relaxed">Bring an ecosystem bottleneck, policy question or applied research priority for Secretariat review.</p>
+        <Button asChild className="btn btn-primary h-auto mt-5 whitespace-normal"><Link to="/field-lab#participate">Submit a research enquiry →</Link></Button>
       </Card>
     </div>
   );
@@ -240,7 +240,7 @@ export default function AppShell() {
   const [signingOut, setSigningOut] = useState(false);
   const [tab, setTab] = useState<Tab>("home");
   const profile = data.profile;
-  const body = editing ? <MemberProfile profile={profile} close={() => setEditing(false)} /> : { home: <HomeTab name={profile?.name || ""} role={profile?.primary_role || ""} country={profile?.country || ""} edit={() => setEditing(true)} />, circles: <CirclesTab joined={data.circles} toggle={async (key, join) => { await changeCircle({ data: { key, join } }); await queryClient.invalidateQueries({ queryKey: ["member-data"] }); }} />, academy: <AcademyTab />, fieldlab: <FieldLabTab />, summit: <SummitTab /> }[tab];
+  const body = editing ? <MemberProfile profile={profile} close={() => setEditing(false)} /> : { home: <HomeTab applications={data.applications} name={profile?.name || ""} role={profile?.primary_role || ""} country={profile?.country || ""} edit={() => setEditing(true)} />, circles: <CirclesTab joined={data.circles} toggle={async (key, join) => { await changeCircle({ data: { key, join } }); await queryClient.invalidateQueries({ queryKey: ["member-data"] }); }} />, academy: <AcademyTab />, fieldlab: <FieldLabTab />, summit: <SummitTab /> }[tab];
 
   return (
     <div className="min-h-screen bg-ivory">
