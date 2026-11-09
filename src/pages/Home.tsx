@@ -18,10 +18,10 @@ export default function Home() {
     <section className="society-hero on-dark relative isolate flex items-center overflow-hidden bg-teal text-ivory">
       <img src={asset("images/events/aseb-2026-summit-delegates.jpg")} alt="ASEB ecosystem builders gathered together at the 2026 Summit in Johannesburg" className="absolute inset-0 -z-20 h-full w-full object-cover object-center" fetchPriority="high" />
       <div className="society-hero-scrim absolute inset-0 -z-10" />
-      <div className="wrap py-12 lg:py-14">
+      <div className="wrap py-7 lg:py-14">
         <p className="text-sm font-semibold text-ivory">Africa Startup Ecosystem Builders Society</p>
         <h1 className="society-headline mt-5 max-w-[15ch]">You help entrepreneurs grow.<br /><span className="text-sand">Who helps you grow?</span></h1>
-        <p className="mt-6 max-w-xl text-base leading-relaxed text-ivory lg:text-lg">Across Africa, you mentor founders, run innovation hubs, teach entrepreneurship, connect startups to funding and help businesses reach markets. But who supports the people doing this work?</p>
+        <p className="mt-5 max-w-xl text-base leading-relaxed text-ivory lg:text-lg"><span className="lg:hidden">You mentor founders, run hubs and strengthen entrepreneurship. You deserve support, shared knowledge and connections too.</span><span className="hidden lg:inline">Across Africa, you mentor founders, run innovation hubs, teach entrepreneurship, connect startups to funding and help businesses reach markets. But who supports the people doing this work?</span></p>
         <p className="mt-3 max-w-xl text-base leading-relaxed text-ivory/90">ASEB Society is building a professional home where you can connect, learn, grow and work together.</p>
         <div className="mt-7 flex flex-wrap gap-3"><Btn to="/#find-your-place" variant="signal">Find Your Place</Btn><Btn to="/what-we-build" variant="line">Explore What We Build</Btn></div>
         <p className="mt-7 text-xs text-ivory/80">ASEB Summit delegates, Johannesburg, October 2026 · Photo: ASEB Society</p>

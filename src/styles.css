@@ -181,7 +181,11 @@
   .society-section-title { font-size: 3.25rem; }
 }
 @media (max-width: 639px) {
-  .society-hero { min-height: 570px; }
-  .society-headline { font-size: 2.75rem; }
+  .society-hero { min-height: 520px; }
+  .society-headline { font-size: 2.25rem; }
   .society-hero-scrim { background: var(--color-hero-scrim); }
+}
+@media (min-width: 640px) and (max-width: 1023px) {
+  .society-hero { min-height: 510px; }
+  .society-headline { font-size: 2.75rem; }
 }
