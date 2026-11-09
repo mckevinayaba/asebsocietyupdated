@@ -32,15 +32,15 @@ export const pillars: Pillar[] = [
     n: "02",
     name: "ASEB Academy",
     role: "Professionalisation",
-    line: "Standards, learning and certification, designed by practitioners for practitioners.",
+    line: "Learning and professional development, designed around practitioner needs.",
     body:
-      "The Academy turns experience into a recognised standard. Its curriculum follows eight competency domains and leads from a free foundation course to the Professional Ecosystem Builder designation and the ASEB Fellowship.",
+      "The planned Academy aims to help practitioners strengthen their methods and share experience. Courses, assessments and credentials will require confirmed curriculum, delivery capacity and governance before they become available.",
     programmes: [
-      { name: "ASEB Foundations", detail: "Free. Six modules, audio and text, in four languages. Leads to Associate Ecosystem Builder.", status: "Launching" },
-      { name: "Practitioner Programme", detail: "Twelve-week cohort with a capstone reviewed by faculty. Leads to Professional Ecosystem Builder.", status: "Planned" },
-      { name: "ASEB Fellowship", detail: "Twelve months, 12 to 20 Fellows a year, each leading a Field Lab project.", status: "Planned" },
-      { name: "Mentor Corps", detail: "Matched mentoring. Hours count towards continuing practice.", status: "Planned" },
-      { name: "Builder Apprenticeship", detail: "Six-month paid placements with host institutions.", status: "Planned" },
+      { name: "ASEB Foundations", detail: "Proposed foundation learning on entrepreneurship ecosystem practice. Curriculum and delivery languages are not yet confirmed.", status: "Planned" },
+      { name: "Practitioner Programme", detail: "A proposed cohort-based learning programme with applied work. Duration, assessment and faculty remain to be confirmed.", status: "Planned" },
+      { name: "ASEB Fellowship", detail: "A proposed advanced practitioner-development pathway. Cohort capacity, assessment and delivery are not yet confirmed.", status: "Planned" },
+      { name: "Mentor Corps", detail: "A proposed mentoring pathway requiring confirmed mentors and delivery arrangements.", status: "Planned" },
+      { name: "Builder Apprenticeship", detail: "A proposed placement pathway requiring confirmed host institutions and funding.", status: "Planned" },
     ],
   },
   {
