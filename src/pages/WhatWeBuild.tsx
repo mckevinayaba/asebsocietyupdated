@@ -8,7 +8,7 @@ import { Photo } from "@/components/Photo";
 
 const pillarPhoto: Record<string, { src: string; alt: string; caption: string } | undefined> = {
   summit: { src: "images/events/aseb-2026-recognised-builders.jpg", alt: "Recognised practitioners at ASEB 2026", caption: "ASEB 2026, Johannesburg" },
-  circles: { src: "images/events/aseb-summit-panel.jpg", alt: "Practitioners in conversation at the ASEB Summit", caption: "Peer exchange at the ASEB Summit" },
+  circles: { src: "images/events/aseb-networking.jpg", alt: "Practitioners connecting between sessions at an ASEB gathering", caption: "Finding your people at an ASEB gathering" },
 };
 
 const chapters = [
