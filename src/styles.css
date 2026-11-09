@@ -28,6 +28,10 @@
   --color-ember: #a84e0e;
   --color-umber: #94582b;
   --color-sand: #debb9e;
+  --color-teal: oklch(0.39 0.065 182);
+  --color-teal-soft: oklch(0.94 0.018 175);
+  --color-hero-scrim: oklch(0.16 0.018 170 / 0.87);
+  --shadow-navigation: 0 18px 40px -24px oklch(0.18 0.008 50 / 0.35);
 
   --font-display: "Newsreader Variable", Georgia, serif;
   --font-sans: "Hanken Grotesk Variable", system-ui, sans-serif;
@@ -164,3 +168,24 @@
 
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { scrollbar-width: none; }
+
+/* Human-centred opening, with authentic ASEB photography. */
+.society-hero { min-height: 570px; }
+.society-hero-scrim { background: linear-gradient(90deg, var(--color-hero-scrim), color-mix(in oklab, var(--color-hero-scrim) 72%, transparent) 58%, transparent); }
+.society-headline { font-size: 3.25rem; line-height: 1.06; letter-spacing: 0; }
+.society-section-title { font-size: 2.5rem; line-height: 1.12; letter-spacing: 0; }
+.intent-menu { box-shadow: var(--shadow-navigation); }
+@media (min-width: 1024px) {
+  .society-hero { min-height: 610px; }
+  .society-headline { font-size: 4.5rem; }
+  .society-section-title { font-size: 3.25rem; }
+}
+@media (max-width: 639px) {
+  .society-hero { min-height: 520px; }
+  .society-headline { font-size: 2.25rem; }
+  .society-hero-scrim { background: var(--color-hero-scrim); }
+}
+@media (min-width: 640px) and (max-width: 1023px) {
+  .society-hero { min-height: 510px; }
+  .society-headline { font-size: 2.75rem; }
+}

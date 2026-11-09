@@ -18,16 +18,20 @@ import { Route as SiteIndexRouteImport } from './routes/_site.index'
 import { Route as SiteAmbassadorsRouteImport } from './routes/_site.ambassadors'
 import { Route as SiteClimateRouteImport } from './routes/_site.climate'
 import { Route as SiteCollaborateRouteImport } from './routes/_site.collaborate'
+import { Route as SiteCommunitiesRouteImport } from './routes/_site.communities'
 import { Route as SiteCountryPartnersRouteImport } from './routes/_site.country-partners'
 import { Route as SiteEvidenceRouteImport } from './routes/_site.evidence'
+import { Route as SiteFieldLabRouteImport } from './routes/_site.field-lab'
 import { Route as SiteFrameworkRouteImport } from './routes/_site.framework'
 import { Route as SiteFundersRouteImport } from './routes/_site.funders'
 import { Route as SiteGetInvolvedRouteImport } from './routes/_site.get-involved'
 import { Route as SiteGovernanceRouteImport } from './routes/_site.governance'
 import { Route as SiteInsightsRouteImport } from './routes/_site.insights'
 import { Route as SiteJoinRouteImport } from './routes/_site.join'
+import { Route as SiteLearningRouteImport } from './routes/_site.learning'
 import { Route as SitePartnersRouteImport } from './routes/_site.partners'
 import { Route as SitePeopleRouteImport } from './routes/_site.people'
+import { Route as SiteProgressRouteImport } from './routes/_site.progress'
 import { Route as SiteSdgsRouteImport } from './routes/_site.sdgs'
 import { Route as SiteSummitRouteImport } from './routes/_site.summit'
 import { Route as SiteWhatWeBuildRouteImport } from './routes/_site.what-we-build'
@@ -84,6 +88,11 @@ const SiteCollaborateRoute = SiteCollaborateRouteImport.update({
   path: '/collaborate',
   getParentRoute: () => SiteRoute,
 } as any)
+const SiteCommunitiesRoute = SiteCommunitiesRouteImport.update({
+  id: '/communities',
+  path: '/communities',
+  getParentRoute: () => SiteRoute,
+} as any)
 const SiteCountryPartnersRoute = SiteCountryPartnersRouteImport.update({
   id: '/country-partners',
   path: '/country-partners',
@@ -92,6 +101,11 @@ const SiteCountryPartnersRoute = SiteCountryPartnersRouteImport.update({
 const SiteEvidenceRoute = SiteEvidenceRouteImport.update({
   id: '/evidence',
   path: '/evidence',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteFieldLabRoute = SiteFieldLabRouteImport.update({
+  id: '/field-lab',
+  path: '/field-lab',
   getParentRoute: () => SiteRoute,
 } as any)
 const SiteFrameworkRoute = SiteFrameworkRouteImport.update({
@@ -124,6 +138,11 @@ const SiteJoinRoute = SiteJoinRouteImport.update({
   path: '/join',
   getParentRoute: () => SiteRoute,
 } as any)
+const SiteLearningRoute = SiteLearningRouteImport.update({
+  id: '/learning',
+  path: '/learning',
+  getParentRoute: () => SiteRoute,
+} as any)
 const SitePartnersRoute = SitePartnersRouteImport.update({
   id: '/partners',
   path: '/partners',
@@ -132,6 +151,11 @@ const SitePartnersRoute = SitePartnersRouteImport.update({
 const SitePeopleRoute = SitePeopleRouteImport.update({
   id: '/people',
   path: '/people',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteProgressRoute = SiteProgressRouteImport.update({
+  id: '/progress',
+  path: '/progress',
   getParentRoute: () => SiteRoute,
 } as any)
 const SiteSdgsRoute = SiteSdgsRouteImport.update({
@@ -203,16 +227,20 @@ export interface FileRoutesByFullPath {
   '/ambassadors': typeof SiteAmbassadorsRoute
   '/climate': typeof SiteClimateRoute
   '/collaborate': typeof SiteCollaborateRoute
+  '/communities': typeof SiteCommunitiesRoute
   '/country-partners': typeof SiteCountryPartnersRoute
   '/evidence': typeof SiteEvidenceRoute
+  '/field-lab': typeof SiteFieldLabRoute
   '/framework': typeof SiteFrameworkRoute
   '/funders': typeof SiteFundersRoute
   '/get-involved': typeof SiteGetInvolvedRoute
   '/governance': typeof SiteGovernanceRoute
   '/insights': typeof SiteInsightsRoute
   '/join': typeof SiteJoinRoute
+  '/learning': typeof SiteLearningRoute
   '/partners': typeof SitePartnersRoute
   '/people': typeof SitePeopleRoute
+  '/progress': typeof SiteProgressRoute
   '/sdgs': typeof SiteSdgsRoute
   '/summit': typeof SiteSummitRoute
   '/what-we-build': typeof SiteWhatWeBuildRoute
@@ -234,16 +262,20 @@ export interface FileRoutesByTo {
   '/ambassadors': typeof SiteAmbassadorsRoute
   '/climate': typeof SiteClimateRoute
   '/collaborate': typeof SiteCollaborateRoute
+  '/communities': typeof SiteCommunitiesRoute
   '/country-partners': typeof SiteCountryPartnersRoute
   '/evidence': typeof SiteEvidenceRoute
+  '/field-lab': typeof SiteFieldLabRoute
   '/framework': typeof SiteFrameworkRoute
   '/funders': typeof SiteFundersRoute
   '/get-involved': typeof SiteGetInvolvedRoute
   '/governance': typeof SiteGovernanceRoute
   '/insights': typeof SiteInsightsRoute
   '/join': typeof SiteJoinRoute
+  '/learning': typeof SiteLearningRoute
   '/partners': typeof SitePartnersRoute
   '/people': typeof SitePeopleRoute
+  '/progress': typeof SiteProgressRoute
   '/sdgs': typeof SiteSdgsRoute
   '/summit': typeof SiteSummitRoute
   '/what-we-build': typeof SiteWhatWeBuildRoute
@@ -267,16 +299,20 @@ export interface FileRoutesById {
   '/_site/ambassadors': typeof SiteAmbassadorsRoute
   '/_site/climate': typeof SiteClimateRoute
   '/_site/collaborate': typeof SiteCollaborateRoute
+  '/_site/communities': typeof SiteCommunitiesRoute
   '/_site/country-partners': typeof SiteCountryPartnersRoute
   '/_site/evidence': typeof SiteEvidenceRoute
+  '/_site/field-lab': typeof SiteFieldLabRoute
   '/_site/framework': typeof SiteFrameworkRoute
   '/_site/funders': typeof SiteFundersRoute
   '/_site/get-involved': typeof SiteGetInvolvedRoute
   '/_site/governance': typeof SiteGovernanceRoute
   '/_site/insights': typeof SiteInsightsRoute
   '/_site/join': typeof SiteJoinRoute
+  '/_site/learning': typeof SiteLearningRoute
   '/_site/partners': typeof SitePartnersRoute
   '/_site/people': typeof SitePeopleRoute
+  '/_site/progress': typeof SiteProgressRoute
   '/_site/sdgs': typeof SiteSdgsRoute
   '/_site/summit': typeof SiteSummitRoute
   '/_site/what-we-build': typeof SiteWhatWeBuildRoute
@@ -301,16 +337,20 @@ export interface FileRouteTypes {
     | '/ambassadors'
     | '/climate'
     | '/collaborate'
+    | '/communities'
     | '/country-partners'
     | '/evidence'
+    | '/field-lab'
     | '/framework'
     | '/funders'
     | '/get-involved'
     | '/governance'
     | '/insights'
     | '/join'
+    | '/learning'
     | '/partners'
     | '/people'
+    | '/progress'
     | '/sdgs'
     | '/summit'
     | '/what-we-build'
@@ -332,16 +372,20 @@ export interface FileRouteTypes {
     | '/ambassadors'
     | '/climate'
     | '/collaborate'
+    | '/communities'
     | '/country-partners'
     | '/evidence'
+    | '/field-lab'
     | '/framework'
     | '/funders'
     | '/get-involved'
     | '/governance'
     | '/insights'
     | '/join'
+    | '/learning'
     | '/partners'
     | '/people'
+    | '/progress'
     | '/sdgs'
     | '/summit'
     | '/what-we-build'
@@ -364,16 +408,20 @@ export interface FileRouteTypes {
     | '/_site/ambassadors'
     | '/_site/climate'
     | '/_site/collaborate'
+    | '/_site/communities'
     | '/_site/country-partners'
     | '/_site/evidence'
+    | '/_site/field-lab'
     | '/_site/framework'
     | '/_site/funders'
     | '/_site/get-involved'
     | '/_site/governance'
     | '/_site/insights'
     | '/_site/join'
+    | '/_site/learning'
     | '/_site/partners'
     | '/_site/people'
+    | '/_site/progress'
     | '/_site/sdgs'
     | '/_site/summit'
     | '/_site/what-we-build'
@@ -461,6 +509,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SiteCollaborateRouteImport
       parentRoute: typeof SiteRoute
     }
+    '/_site/communities': {
+      id: '/_site/communities'
+      path: '/communities'
+      fullPath: '/communities'
+      preLoaderRoute: typeof SiteCommunitiesRouteImport
+      parentRoute: typeof SiteRoute
+    }
     '/_site/country-partners': {
       id: '/_site/country-partners'
       path: '/country-partners'
@@ -473,6 +528,13 @@ declare module '@tanstack/react-router' {
       path: '/evidence'
       fullPath: '/evidence'
       preLoaderRoute: typeof SiteEvidenceRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/field-lab': {
+      id: '/_site/field-lab'
+      path: '/field-lab'
+      fullPath: '/field-lab'
+      preLoaderRoute: typeof SiteFieldLabRouteImport
       parentRoute: typeof SiteRoute
     }
     '/_site/framework': {
@@ -517,6 +579,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SiteJoinRouteImport
       parentRoute: typeof SiteRoute
     }
+    '/_site/learning': {
+      id: '/_site/learning'
+      path: '/learning'
+      fullPath: '/learning'
+      preLoaderRoute: typeof SiteLearningRouteImport
+      parentRoute: typeof SiteRoute
+    }
     '/_site/partners': {
       id: '/_site/partners'
       path: '/partners'
@@ -529,6 +598,13 @@ declare module '@tanstack/react-router' {
       path: '/people'
       fullPath: '/people'
       preLoaderRoute: typeof SitePeopleRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/progress': {
+      id: '/_site/progress'
+      path: '/progress'
+      fullPath: '/progress'
+      preLoaderRoute: typeof SiteProgressRouteImport
       parentRoute: typeof SiteRoute
     }
     '/_site/sdgs': {
@@ -633,16 +709,20 @@ interface SiteRouteChildren {
   SiteAmbassadorsRoute: typeof SiteAmbassadorsRoute
   SiteClimateRoute: typeof SiteClimateRoute
   SiteCollaborateRoute: typeof SiteCollaborateRoute
+  SiteCommunitiesRoute: typeof SiteCommunitiesRoute
   SiteCountryPartnersRoute: typeof SiteCountryPartnersRoute
   SiteEvidenceRoute: typeof SiteEvidenceRoute
+  SiteFieldLabRoute: typeof SiteFieldLabRoute
   SiteFrameworkRoute: typeof SiteFrameworkRoute
   SiteFundersRoute: typeof SiteFundersRoute
   SiteGetInvolvedRoute: typeof SiteGetInvolvedRoute
   SiteGovernanceRoute: typeof SiteGovernanceRoute
   SiteInsightsRoute: typeof SiteInsightsRoute
   SiteJoinRoute: typeof SiteJoinRoute
+  SiteLearningRoute: typeof SiteLearningRoute
   SitePartnersRoute: typeof SitePartnersRoute
   SitePeopleRoute: typeof SitePeopleRoute
+  SiteProgressRoute: typeof SiteProgressRoute
   SiteSdgsRoute: typeof SiteSdgsRoute
   SiteSummitRoute: typeof SiteSummitRoute
   SiteWhatWeBuildRoute: typeof SiteWhatWeBuildRoute
@@ -662,16 +742,20 @@ const SiteRouteChildren: SiteRouteChildren = {
   SiteAmbassadorsRoute: SiteAmbassadorsRoute,
   SiteClimateRoute: SiteClimateRoute,
   SiteCollaborateRoute: SiteCollaborateRoute,
+  SiteCommunitiesRoute: SiteCommunitiesRoute,
   SiteCountryPartnersRoute: SiteCountryPartnersRoute,
   SiteEvidenceRoute: SiteEvidenceRoute,
+  SiteFieldLabRoute: SiteFieldLabRoute,
   SiteFrameworkRoute: SiteFrameworkRoute,
   SiteFundersRoute: SiteFundersRoute,
   SiteGetInvolvedRoute: SiteGetInvolvedRoute,
   SiteGovernanceRoute: SiteGovernanceRoute,
   SiteInsightsRoute: SiteInsightsRoute,
   SiteJoinRoute: SiteJoinRoute,
+  SiteLearningRoute: SiteLearningRoute,
   SitePartnersRoute: SitePartnersRoute,
   SitePeopleRoute: SitePeopleRoute,
+  SiteProgressRoute: SiteProgressRoute,
   SiteSdgsRoute: SiteSdgsRoute,
   SiteSummitRoute: SiteSummitRoute,
   SiteWhatWeBuildRoute: SiteWhatWeBuildRoute,

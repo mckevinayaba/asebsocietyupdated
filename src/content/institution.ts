@@ -6,8 +6,8 @@ export const story = [
   { year: "2022", city: "Johannesburg", title: "The first room", line: "The first ASEB Summit and Awards opened a room for the people who build the rooms founders walk into: hub managers, programme leads, investors, policymakers and researchers." },
   { year: "2023", city: "Nairobi", title: "Recognition created return", line: "Builders who had been recognised came back and brought their peers. The Awards showed that the field could see itself." },
   { year: "2024", city: "Accra", title: "The question between summits", line: "The field asked what happens in the eleven months between convenings: where the learning goes, who keeps the record, who sets the standard." },
-  { year: "2025", city: "Addis Ababa", title: "The Society is formed", line: "ASEB Society was formally launched on 16 November 2025 as a permanent institution to professionalise ecosystem building and keep the field's memory." },
-  { year: "2026", city: "Johannesburg", title: "The homecoming", line: "The fifth edition, 20 to 22 October, asked 'Who Built the Builder?'. Nominations arrived from 52 countries. The Ecosystem Tour took the field to Soweto." },
+  { year: "2025", city: "Addis Ababa", title: "The year-round ambition", line: "The field continued developing the idea of a permanent professional home: somewhere to share practice and keep the field’s memory between summits." },
+  { year: "2026", city: "Johannesburg", title: "The homecoming", line: "The fifth edition, 20 to 22 October, asked 'Who Built the Builder?'. Nominations arrived from 52 countries. The Ecosystem Tour took the field to Soweto. ASEB Society was publicly launched on 21 October 2026 as a continuing professional home for ecosystem builders." },
 ];
 
 export type Person = { slug: string; name: string; role: string; base: string; group: "founder" | "executive" | "board"; photo: string; summary: string; bio: string[]; linkedin?: string };

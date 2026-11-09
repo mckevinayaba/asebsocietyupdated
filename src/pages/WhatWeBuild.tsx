@@ -5,6 +5,9 @@ import { ladder } from "@/content/framework";
 import { PageHero, SectionHead } from "@/components/PageHero";
 import { Btn } from "@/components/Arrow";
 import { Photo } from "@/components/Photo";
+import { programmeReadiness } from "@/content/platform";
+import { ProgrammeStatus } from "@/components/ProgrammeStatus";
+import { TLink } from "@/components/Arrow";
 
 const pillarPhoto: Record<string, { src: string; alt: string; caption: string } | undefined> = {
   summit: { src: "images/events/aseb-2026-recognised-builders.jpg", alt: "Recognised practitioners at ASEB 2026", caption: "ASEB 2026, Johannesburg" },
@@ -28,7 +31,7 @@ export default function WhatWeBuild() {
       <PageHero
         eyebrow="What we build"
         title="Four pillars. One year-round practice."
-        lede="The Summit gives the field its signal once a year. The Society carries the work through the other fifty-one weeks: in Circles, in the Academy and in the Field Lab."
+        lede="The Summit brings the field together. The Society is building year-round support through Circles, learning and collaborative projects. See what is available today and what is still in development."
       />
 
       <section className="border-b border-hairline bg-paper">
@@ -45,6 +48,7 @@ export default function WhatWeBuild() {
 
       {pillars.map((p, idx) => {
         const ph = pillarPhoto[p.slug];
+        const readiness = programmeReadiness[p.slug as keyof typeof programmeReadiness];
         return (
           <section key={p.slug} id={p.slug} className={`section scroll-mt-28 ${idx % 2 === 1 ? "bg-linen/50" : ""}`}>
             <div className="wrap grid gap-12 lg:grid-cols-12 lg:gap-10">
@@ -53,21 +57,23 @@ export default function WhatWeBuild() {
                   <span aria-hidden="true" className="block h-[3px] w-12 bg-signal" />
                   <span className="text-eyebrow font-semibold uppercase text-umber">{p.role}</span>
                 </div>
+                {readiness && <div className="mt-5"><ProgrammeStatus status={readiness.status} /></div>}
                 <h2 className="mt-6 text-display-md">{p.name}</h2>
                 <p className="mt-5 font-display text-[1.375rem] leading-snug">{p.line}</p>
                 <p className="mt-6 text-[1.0625rem] leading-relaxed text-stone">{p.body}</p>
+                {readiness && <><p className="mt-5 border-l-2 border-teal pl-4 text-base text-teal">{readiness.now}</p><div className="mt-6"><TLink to={readiness.to}>{readiness.action}</TLink></div></>}
                 {ph && <Photo className="mt-10" src={ph.src} alt={ph.alt} caption={ph.caption} ratio="aspect-[3/2]" />}
               </div>
               <div className="lg:col-span-6 lg:col-start-7">
                 <p className="text-eyebrow font-semibold uppercase text-stone">Programmes</p>
                 <ul className="mt-5 border-t border-ink">
                   {p.programmes.map((g) => (
-                    <li key={g.name} className="grid grid-cols-[1fr_auto] gap-6 border-b border-hairline py-6">
-                      <div>
+                    <li key={g.name} className="flex flex-wrap items-start justify-between gap-4 border-b border-hairline py-6">
+                      <div className="min-w-0 flex-1 basis-[220px]">
                         <p className="font-display text-[1.375rem] leading-tight">{g.name}</p>
                         <p className="mt-2 text-[0.9375rem] leading-relaxed text-stone">{g.detail}</p>
                       </div>
-                      <span className={`pt-1 text-[0.75rem] font-semibold uppercase tracking-[0.12em] ${g.status === "Live" ? "text-ember" : g.status === "Launching" ? "text-ink" : "text-stone"}`}>{g.status}</span>
+                      <ProgrammeStatus status={g.status === "Live" ? "Available" : g.status} />
                     </li>
                   ))}
                 </ul>
@@ -81,8 +87,8 @@ export default function WhatWeBuild() {
         <div className="wrap">
           <SectionHead
             eyebrow="The recognition pathway"
-            title="Five levels, each earned through evidence."
-            lede="Each level appears on the practitioner's public record in the Field Registry, with a verifiable certificate from Associate Ecosystem Builder upward."
+            title="A proposed pathway for professional growth."
+            lede="These designations describe the intended direction of professional development, not credentials available today. Assessment, standards and governance must be operational before any professional certification is issued."
           />
           <ol className="mt-16 border-t border-hairline-dark">
             {ladder.map((l, i) => (

@@ -19,3 +19,4 @@
 - Member data is loaded and changed through authenticated server functions and owner-only RLS; editable profiles contain no authorization roles or membership approval status.
 - Keep one root member-session subscriber; sign-out cancels queries, clears cached private data, clears the session and replaces navigation with the public auth page.
 - `/app` is protected by the client-only `_authenticated` layout; public editorial and auth pages remain outside it.
+- Keep public programme readiness and persona pathways in shared browser-safe content; homepage, programme pages and progress must use the same readiness source to avoid conflicting availability claims.

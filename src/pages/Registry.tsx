@@ -1,5 +1,5 @@
-import { useMemo, useState } from "react";
-import { Link, useParams } from "@/lib/router";
+import { useEffect, useMemo, useState } from "react";
+import { Link, useParams, useSearchParams } from "@/lib/router";
 import { registry, recordBySlug, countries, regions, registryConditions, type RegistryRecord } from "@/content/registry";
 import { filterRegistry } from "@/lib/registry-search";
 import { Button } from "@/components/ui/button";
@@ -15,6 +15,8 @@ const topRecognition = (r: RegistryRecord) => {
 };
 
 export function RegistryIndex() {
+  const [searchParams] = useSearchParams();
+  const requestedRegion = searchParams.get("region");
   const [q, setQ] = useState("");
   const [type, setType] = useState<"all" | "individual" | "organisation">("all");
   const [region, setRegion] = useState("all");
@@ -23,6 +25,10 @@ export function RegistryIndex() {
   const [year, setYear] = useState("all");
   const [sort, setSort] = useState("name");
   const [shown, setShown] = useState(PAGE);
+  useEffect(() => {
+    setRegion(requestedRegion && regions.includes(requestedRegion) ? requestedRegion : "all");
+    setShown(PAGE);
+  }, [requestedRegion]);
   const years = [...new Set(registry.flatMap((r) => r.recognitions.map((x) => x.year)))].sort((a, b) => b - a);
   const hasFilters = !!q || [type, region, condition, country, year].some((value) => value !== "all");
 
