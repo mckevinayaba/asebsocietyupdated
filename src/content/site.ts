@@ -37,17 +37,17 @@ export const nav: NavGroup[] = [
     { label: "Propose a Record", to: "/registry/submit", note: "Submit work and evidence for review" },
   ] },
   { label: "Communities", to: "/communities", items: [
-    { label: "ASEB Circles", to: "/communities", note: "Peer communities and their current readiness" },
+    { label: "ASEB Circles", to: "/communities", note: "Peer communities and working groups" },
     { label: "Country Partners", to: "/country-partners", note: "Express interest in local partnership" },
     { label: "Ambassadors", to: "/ambassadors", note: "Explore representing the field where you work" },
   ] },
   { label: "Learn and Grow", to: "/learning", items: [
-    { label: "Learning and Academy", to: "/learning", note: "Resources today; programmes in development" },
+    { label: "Learning and Academy", to: "/learning", note: "Professional learning and practice standards" },
     { label: "The Framework", to: "/framework", note: "Understand the conditions entrepreneurs need" },
     { label: "What We Build", to: "/what-we-build", note: "Four ways to support ecosystem builders" },
   ] },
   { label: "Work Together", to: "/collaborate", items: [
-    { label: "ASEB Field Lab", to: "/field-lab", note: "Shared challenges, proposed collaborations" },
+    { label: "ASEB Field Lab", to: "/field-lab", note: "Applied research and policy intelligence" },
     { label: "Programme Collaborations", to: "/collaborate", note: "Propose work with agreed outcomes" },
     { label: "Work With Us", to: "/work-with-us", note: "Discuss commissioning and delivery capacity" },
     { label: "Partners", to: "/partners", note: "Institutional partnership pathways" },
@@ -62,7 +62,7 @@ export const nav: NavGroup[] = [
   { label: "Summit and Awards", to: "/summit", items: [] },
   { label: "About and Accountability", to: "/about/story", items: [
     { label: "Our Story", to: "/about/story", note: "From annual recognition to a continuing institution" },
-    { label: "Our Progress", to: "/progress", note: "What is available, launching and planned" },
+    { label: "Our Progress", to: "/progress", note: "Our foundations and institutional journey" },
     { label: "People", to: "/people", note: "Founder, executive team and board" },
     { label: "Governance and Goals", to: "/governance", note: "Responsibility, standards and public benefit" },
   ] },
