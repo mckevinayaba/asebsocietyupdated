@@ -8,8 +8,10 @@
 
 - [x] ASEB Society 2.0 Phase 1: human-centred homepage, intent-led navigation, role guidance, transparent programme pages and Our Progress; preserve photos, accounts and intake; verify desktop/mobile without publishing.
 
+- [x] Upgrade institutional design, scroll motion and interactive pillar exploration; replace public readiness badges with mandates, preserve authentic photos and accurate next steps; verify desktop and mobile.
+
 ## Limitations
 - Enquiries and editorial pitches are stored for review in Lovable Cloud; automated email notifications and an in-platform review inbox are not included.
-- Circle conversations, Academy lessons and automatic registry publication remain unavailable; current content marks their status.
+- Circle conversations, Academy lessons and automatic registry publication remain unavailable; public programme mandates link to accurate next steps and participation announcements.
 - Google and email sign-in remain available; external provider round-trips and password-reset email delivery have not been exercised.
 - Signed-out hard refresh of `/app` recovers to `/auth` but emits a router hydration warning in the preview; signed-in profile/Circle workflows pass.

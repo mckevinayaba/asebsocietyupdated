@@ -17,15 +17,15 @@
   --color-ink: #14110f;
   --color-ink-2: #1f1b18;
   --color-ink-3: #2b2622;
-  --color-ivory: #f3f1eb;
-  --color-paper: #faf9f5;
-  --color-linen: #eae5db;
+  --color-ivory: oklch(0.99 0.002 170);
+  --color-paper: oklch(0.97 0.006 170);
+  --color-linen: oklch(0.94 0.007 170);
   --color-stone: #6a645c;
   --color-stone-light: #b8b1a6;
   --color-hairline: #d9d3c7;
   --color-hairline-dark: #3a342f;
   --color-signal: #e87216;
-  --color-ember: #a84e0e;
+  --color-ember: oklch(0.48 0.13 48);
   --color-umber: #94582b;
   --color-sand: #debb9e;
   --color-teal: oklch(0.39 0.065 182);
@@ -38,16 +38,16 @@
 
   --text-eyebrow: 0.75rem;
   --text-eyebrow--line-height: 1rem;
-  --text-eyebrow--letter-spacing: 0.14em;
+  --text-eyebrow--letter-spacing: 0;
   --text-display-sm: clamp(1.75rem, 1.2rem + 1.6vw, 2.5rem);
   --text-display-sm--line-height: 1.1;
-  --text-display-sm--letter-spacing: -0.01em;
+  --text-display-sm--letter-spacing: 0;
   --text-display-md: clamp(2.25rem, 1.4rem + 2.6vw, 3.5rem);
   --text-display-md--line-height: 1.05;
-  --text-display-md--letter-spacing: -0.015em;
+  --text-display-md--letter-spacing: 0;
   --text-display-lg: clamp(2.75rem, 1.5rem + 4.2vw, 5.25rem);
   --text-display-lg--line-height: 1;
-  --text-display-lg--letter-spacing: -0.02em;
+  --text-display-lg--letter-spacing: 0;
 
   --container-site: 1240px;
   --container-prose: 40rem;
@@ -105,7 +105,7 @@
   }
   p { text-wrap: pretty; }
   ::selection { @apply bg-sand text-ink; }
-  :focus-visible { outline: 2px solid #e87216; outline-offset: 3px; }
+  :focus-visible { outline: 2px solid var(--color-signal); outline-offset: 3px; }
   button { cursor: pointer; }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
@@ -126,13 +126,13 @@
   .on-dark .lede { @apply text-stone-light; }
 
   .btn {
-    @apply inline-flex min-h-[48px] items-center justify-center gap-3 whitespace-nowrap rounded px-5 text-[0.9375rem] font-semibold tracking-[0.01em] transition-colors duration-200 ease-quiet;
+    @apply inline-flex min-h-[48px] items-center justify-center gap-3 whitespace-nowrap rounded px-5 text-[0.9375rem] font-semibold tracking-normal transition-colors duration-200 ease-quiet;
   }
   .btn .arr { @apply inline-block transition-transform duration-200 ease-quiet; }
   .btn:hover .arr { transform: translateX(4px); }
   .btn-primary { @apply bg-ink text-ivory hover:bg-ink-3; }
-  .btn-accent { @apply bg-ember text-white hover:bg-[#8F420B]; }
-  .btn-signal { @apply bg-signal text-ink hover:bg-[#F08A3A]; }
+  .btn-accent { @apply bg-ember text-ivory hover:bg-ember/90; }
+  .btn-signal { @apply bg-signal text-ink hover:bg-signal/85; }
   .btn-line { @apply border border-ink/80 text-ink hover:bg-ink hover:text-ivory; }
   .on-dark .btn-line { @apply border-ivory/60 text-ivory hover:bg-ivory hover:text-ink; }
 
@@ -146,7 +146,7 @@
   .rule { @apply border-t border-hairline; }
   .on-dark .rule { @apply border-hairline-dark; }
 
-  .numeral { @apply font-display tabular-nums tracking-tight; font-variant-numeric: lining-nums tabular-nums; }
+  .numeral { @apply font-display tabular-nums tracking-normal; font-variant-numeric: lining-nums tabular-nums; }
 
   .caption { @apply mt-3 text-[0.8125rem] leading-snug text-stone; }
   .on-dark .caption { @apply text-stone-light; }
@@ -156,7 +156,7 @@
   }
   .field-label { @apply mb-2 block text-sm font-semibold text-ink; }
 
-  .tag { @apply inline-flex items-center border border-hairline px-2.5 py-1 text-[0.75rem] font-medium tracking-wide text-stone; }
+  .tag { @apply inline-flex items-center border border-hairline px-2.5 py-1 text-[0.75rem] font-medium tracking-normal text-stone; }
   .status-live { @apply text-ember; }
 }
 
@@ -188,4 +188,49 @@
 @media (min-width: 640px) and (max-width: 1023px) {
   .society-hero { min-height: 510px; }
   .society-headline { font-size: 2.75rem; }
+}
+
+/* Institutional editorial direction: open grids, quiet motion, authentic photographs. */
+@theme {
+  --color-mandate-surface: oklch(0.965 0.009 173);
+  --shadow-editorial: 0 12px 30px -20px oklch(0.25 0.025 175 / 0.3);
+}
+.society-hero { min-height: 600px; border-bottom: 4px solid var(--color-signal); }
+.society-hero img { object-position: 65% 45%; }
+.society-hero .eyebrow { color: var(--color-ivory); }
+.society-headline { font-size: 3rem; line-height: 1.04; }
+.society-headline em { font-weight: 400; }
+.hero-question { border-left: 2px solid var(--color-signal); padding-left: 1rem; }
+.mandate-band { background: var(--color-mandate-surface); }
+.mandate-tab { transition: background .25s var(--ease-quiet), color .25s var(--ease-quiet); position: relative; }
+.mandate-tab[aria-selected="true"]::after { content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--color-signal); }
+.mandate-enter { animation: mandate-enter .45s var(--ease-quiet) both; }
+@keyframes mandate-enter { from { opacity: .35; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.institution-statement { position: relative; }
+.institution-statement::before { content: ""; position: absolute; top: 0; bottom: 0; left: 68%; width: 1px; background: color-mix(in oklab, var(--color-ivory) 15%, transparent); }
+.photo img { transition: transform 1s var(--ease-quiet); }
+@media (hover: hover) { .photo:hover img { transform: scale(1.025); } }
+#main > .section > .wrap > .grid > a { transition: color .25s var(--ease-quiet), transform .25s var(--ease-quiet); }
+#main > .section > .wrap > .grid > a:hover { transform: translateY(-3px); }
+.intent-menu { animation: mandate-enter .18s var(--ease-quiet); }
+@media (min-width: 1024px) {
+  .society-headline { font-size: 4.25rem; }
+  .society-hero { min-height: 640px; }
+}
+@media (max-width: 639px) {
+  .society-headline { font-size: 2.5rem; }
+  .society-hero { min-height: 610px; }
+  .society-hero-scrim { background: color-mix(in oklab, var(--color-hero-scrim) 88%, transparent); }
+  .institution-statement::before { display: none; }
+  .btn { white-space: normal; text-align: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal.armed { opacity: 1; transform: none; }
+}
+@media (min-width: 640px) and (max-width: 1023px) {
+  .society-hero { min-height: 510px; }
+  .society-hero > .wrap { padding-top: 24px; padding-bottom: 24px; }
+  .society-headline { font-size: 2.75rem; }
+  .society-hero .hero-question { margin-top: 20px; }
+  .society-hero .mt-7 { margin-top: 20px; }
 }

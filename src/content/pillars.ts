@@ -18,13 +18,13 @@ export const pillars: Pillar[] = [
     role: "Continuity",
     line: "Peer practice across borders, through the whole year.",
     body:
-      "A year-round professional space where ecosystem builders exchange practice and reduce isolation. Circles are organised by region, language, country and condition, with closed Practice Circles for practitioners who want a facilitated peer group over twelve months.",
+      "Peer connection is professional infrastructure. The Circles agenda brings shared challenges, exchanged methods and cross-border relationships into a continuing community for the people behind entrepreneurship.",
     programmes: [
-      { name: "Open Circles", detail: "Regional, language and condition Circles open to every Member.", status: "Launching" },
-      { name: "Practice Circles", detail: "8 to 12 Verified practitioners, closed cohort, 12 months, facilitated.", status: "Planned" },
-      { name: "Country Circles", detail: "Hosted by Country Partners and linked to each country page.", status: "Planned" },
-      { name: "ASEB Voices", detail: "Monthly practitioner-led conversations, published with audio and a written summary.", status: "Launching" },
-      { name: "Builder Wellbeing Circles", detail: "Confidential and facilitated. Nothing indexed, nothing shared.", status: "Planned" },
+      { name: "Open Circles", detail: "A community direction connecting practitioners by region, language and ecosystem condition.", status: "Launching" },
+      { name: "Practice Circles", detail: "Facilitated peer exchange designed around shared professional challenges.", status: "Planned" },
+      { name: "Country Circles", detail: "A local community direction shaped with country partners and practitioner priorities.", status: "Planned" },
+      { name: "ASEB Voices", detail: "A practitioner-led conversation format for exchanging experience and field perspectives.", status: "Launching" },
+      { name: "Builder Wellbeing Circles", detail: "A community direction focused on the wellbeing of people supporting entrepreneurs.", status: "Planned" },
     ],
   },
   {
@@ -34,13 +34,13 @@ export const pillars: Pillar[] = [
     role: "Professionalisation",
     line: "Learning and professional development, designed around practitioner needs.",
     body:
-      "The planned Academy aims to help practitioners strengthen their methods and share experience. Courses, assessments and credentials will require confirmed curriculum, delivery capacity and governance before they become available.",
+      "Professional learning connects experience with stronger methods. The Academy agenda centres on practitioner development, shared frameworks and standards grounded in the realities of African entrepreneurship ecosystems.",
     programmes: [
-      { name: "ASEB Foundations", detail: "Proposed foundation learning on entrepreneurship ecosystem practice. Curriculum and delivery languages are not yet confirmed.", status: "Planned" },
-      { name: "Practitioner Programme", detail: "A proposed cohort-based learning programme with applied work. Duration, assessment and faculty remain to be confirmed.", status: "Planned" },
-      { name: "ASEB Fellowship", detail: "A proposed advanced practitioner-development pathway. Cohort capacity, assessment and delivery are not yet confirmed.", status: "Planned" },
-      { name: "Mentor Corps", detail: "A proposed mentoring pathway requiring confirmed mentors and delivery arrangements.", status: "Planned" },
-      { name: "Builder Apprenticeship", detail: "A proposed placement pathway requiring confirmed host institutions and funding.", status: "Planned" },
+      { name: "ASEB Foundations", detail: "Foundation learning direction: understanding ecosystem conditions and connecting them to everyday practice.", status: "Planned" },
+      { name: "Practitioner Programme", detail: "Applied practitioner development centred on programme design, methods and reflective practice.", status: "Planned" },
+      { name: "ASEB Fellowship", detail: "An advanced development direction for experienced practitioners contributing to the field.", status: "Planned" },
+      { name: "Mentor Corps", detail: "A mentoring direction connecting experienced practitioners with emerging ecosystem builders.", status: "Planned" },
+      { name: "Builder Apprenticeship", detail: "A practice-based learning direction developed around host institutions and real ecosystem work.", status: "Planned" },
     ],
   },
   {
@@ -52,11 +52,11 @@ export const pillars: Pillar[] = [
     body:
       "Field Lab is where the field works on itself. Projects are documented from the first day, tagged to a condition and closed with an output that stays in the public record: a diagnostic, a standard, a brief or a playbook.",
     programmes: [
-      { name: "Ecosystem Stage Diagnostic", detail: "A score on each of the seven conditions for a city or country, led by its Country Partner.", status: "Planned" },
-      { name: "ASEB Hub Standard", detail: "Self-assessment and peer review for hubs and support organisations.", status: "Planned" },
-      { name: "Policy Bridge", detail: "Practitioner input into startup acts and policy reform, with a brief per cohort.", status: "Planned" },
-      { name: "Fair Work Benchmark", detail: "An annual, anonymous survey of pay and conditions across the field.", status: "Planned" },
-      { name: "State of African Ecosystem Building", detail: "An annual report produced with the Society's Knowledge Partners.", status: "Planned" },
+      { name: "Ecosystem Stage Diagnostic", detail: "A research direction examining the seven ecosystem conditions in a city or country.", status: "Planned" },
+      { name: "ASEB Hub Standard", detail: "A standards-development direction for self-assessment and peer learning in support institutions.", status: "Planned" },
+      { name: "Policy Bridge", detail: "A policy collaboration direction bringing practitioner experience into startup legislation and reform.", status: "Planned" },
+      { name: "Fair Work Benchmark", detail: "A research direction on working conditions and sustainable livelihoods across the field.", status: "Planned" },
+      { name: "State of African Ecosystem Building", detail: "A research agenda documenting African ecosystem-building practice and conditions.", status: "Planned" },
     ],
   },
   {
@@ -71,8 +71,8 @@ export const pillars: Pillar[] = [
       { name: "The Awards", detail: "28 roles across four parts of the field, peer-reviewed against eight domains.", status: "Live" },
       { name: "The Summit", detail: "Three days of evidence, practice and field visits. Fifth edition held in Johannesburg, October 2026.", status: "Live" },
       { name: "Honour Roll", detail: "Every recognised practitioner and institution, from 2023 onward, in the Field Registry.", status: "Live" },
-      { name: "Regional rounds", detail: "North, West, Central, East and Southern rounds feeding the continental finals.", status: "Planned" },
-      { name: "Builders' Assembly", detail: "Members vote on the ASEB Agenda and on standards, in person or remotely.", status: "Planned" },
+      { name: "Regional rounds", detail: "A regional engagement direction connecting local practice with continental recognition.", status: "Planned" },
+      { name: "Builders' Assembly", detail: "A member-engagement direction for shaping shared priorities and practice standards.", status: "Planned" },
     ],
   },
 ];

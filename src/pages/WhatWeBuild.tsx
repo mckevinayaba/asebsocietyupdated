@@ -6,7 +6,6 @@ import { PageHero, SectionHead } from "@/components/PageHero";
 import { Btn } from "@/components/Arrow";
 import { Photo } from "@/components/Photo";
 import { programmeReadiness } from "@/content/platform";
-import { ProgrammeStatus } from "@/components/ProgrammeStatus";
 import { TLink } from "@/components/Arrow";
 
 const pillarPhoto: Record<string, { src: string; alt: string; caption: string } | undefined> = {
@@ -31,7 +30,7 @@ export default function WhatWeBuild() {
       <PageHero
         eyebrow="What we build"
         title="Four pillars. One year-round practice."
-        lede="The Summit brings the field together. The Society is building year-round support through Circles, learning and collaborative projects. See what is available today and what is still in development."
+        lede="The Summit brings the field together. The Society is building year-round support through Circles, learning and collaborative projects. Explore the institutional mandates and choose a pathway into the work."
       />
 
       <section className="border-b border-hairline bg-paper">
@@ -57,7 +56,7 @@ export default function WhatWeBuild() {
                   <span aria-hidden="true" className="block h-[3px] w-12 bg-signal" />
                   <span className="text-eyebrow font-semibold uppercase text-umber">{p.role}</span>
                 </div>
-                {readiness && <div className="mt-5"><ProgrammeStatus status={readiness.status} /></div>}
+                {readiness && <p className="mt-5 text-sm font-semibold text-teal">{readiness.mandate}</p>}
                 <h2 className="mt-6 text-display-md">{p.name}</h2>
                 <p className="mt-5 font-display text-[1.375rem] leading-snug">{p.line}</p>
                 <p className="mt-6 text-[1.0625rem] leading-relaxed text-stone">{p.body}</p>
@@ -65,7 +64,7 @@ export default function WhatWeBuild() {
                 {ph && <Photo className="mt-10" src={ph.src} alt={ph.alt} caption={ph.caption} ratio="aspect-[3/2]" />}
               </div>
               <div className="lg:col-span-6 lg:col-start-7">
-                <p className="text-eyebrow font-semibold uppercase text-stone">Programmes</p>
+                <p className="text-eyebrow font-semibold uppercase text-stone">Programme directions</p>
                 <ul className="mt-5 border-t border-ink">
                   {p.programmes.map((g) => (
                     <li key={g.name} className="flex flex-wrap items-start justify-between gap-4 border-b border-hairline py-6">
@@ -73,7 +72,7 @@ export default function WhatWeBuild() {
                         <p className="font-display text-[1.375rem] leading-tight">{g.name}</p>
                         <p className="mt-2 text-[0.9375rem] leading-relaxed text-stone">{g.detail}</p>
                       </div>
-                      <ProgrammeStatus status={g.status === "Live" ? "Available" : g.status} />
+                      
                     </li>
                   ))}
                 </ul>
@@ -87,8 +86,8 @@ export default function WhatWeBuild() {
         <div className="wrap">
           <SectionHead
             eyebrow="The recognition pathway"
-            title="A proposed pathway for professional growth."
-            lede="These designations describe the intended direction of professional development, not credentials available today. Assessment, standards and governance must be operational before any professional certification is issued."
+            title="A direction for professional growth."
+            lede="Professional development connects experience with evidence, shared standards and accountable practice."
           />
           <ol className="mt-16 border-t border-hairline-dark">
             {ladder.map((l, i) => (
