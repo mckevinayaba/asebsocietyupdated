@@ -23,37 +23,49 @@ export const statements = {
 
 export type NavGroup = { label: string; to: string; items: { label: string; to: string; note: string }[] };
 
-// Grouped navigation. Desktop shows dropdowns; mobile shows numbered, expandable groups.
+// Intent-led navigation preserves all existing public destinations.
 export const nav: NavGroup[] = [
-  { label: "About", to: "/about/story", items: [
-    { label: "Our Story", to: "/about/story", note: "From a summit to an institution, 2022 to 2026" },
-    { label: "Why ASEB", to: "/why-aseb", note: "The case for a profession of ecosystem builders" },
-    { label: "People", to: "/people", note: "Founder, Executive Team and Board" },
-    { label: "Governance and Goals", to: "/governance", note: "How the Society is governed and what it is for" },
+  { label: "Start Here", to: "/", items: [
+    { label: "Find Your Place", to: "/#find-your-place", note: "A pathway for the work you do" },
+    { label: "Why ASEB Society", to: "/why-aseb", note: "A professional home, beyond the annual Summit" },
+    { label: "Join the Society", to: "/join", note: "Apply as a practitioner or organisation" },
+    { label: "Get Involved", to: "/get-involved", note: "Find a practical way to contribute" },
   ] },
-  { label: "The Field", to: "/field", items: [
-    { label: "The Field", to: "/field", note: "Four constituencies and the roles within them" },
-    { label: "Green and Climate Economy", to: "/climate", note: "Climate is a condition, not a vertical" },
-    { label: "The 17 SDGs", to: "/sdgs", note: "How ecosystem building serves every goal" },
-    { label: "Field Registry", to: "/registry", note: "Public records of practice" },
+  { label: "Find People and Organisations", to: "/registry", items: [
+    { label: "Field Registry", to: "/registry", note: "Search public Awards archive records" },
+    { label: "Discover Your Role", to: "/field", note: "See how your work strengthens entrepreneurship" },
+    { label: "Propose a Record", to: "/registry/submit", note: "Submit work and evidence for review" },
   ] },
-  { label: "What We Build", to: "/what-we-build", items: [
-    { label: "The Four Pillars", to: "/what-we-build", note: "Academy, Circles, Field Lab, Summit and Awards" },
-    { label: "The Framework", to: "/framework", note: "Seven conditions for a working ecosystem" },
-    { label: "Summit and Awards", to: "/summit", note: "The annual convening and recognition of the field" },
+  { label: "Communities", to: "/communities", items: [
+    { label: "ASEB Circles", to: "/communities", note: "Peer communities and their current readiness" },
+    { label: "Country Partners", to: "/country-partners", note: "Express interest in local partnership" },
+    { label: "Ambassadors", to: "/ambassadors", note: "Explore representing the field where you work" },
   ] },
-  { label: "Insights", to: "/insights", items: [
-    { label: "Insights", to: "/insights", note: "Research, case studies, tools and stories" },
-    { label: "Evidence Library", to: "/evidence", note: "Open research the field can use" },
+  { label: "Learn and Grow", to: "/learning", items: [
+    { label: "Learning and Academy", to: "/learning", note: "Resources today; programmes in development" },
+    { label: "The Framework", to: "/framework", note: "Understand the conditions entrepreneurs need" },
+    { label: "What We Build", to: "/what-we-build", note: "Four ways to support ecosystem builders" },
   ] },
-  { label: "Partners", to: "/partners", items: [
-    { label: "Partners", to: "/partners", note: "Institutions advancing the field with us" },
-    { label: "Country Partners", to: "/country-partners", note: "Carry the field in your country" },
-    { label: "Ambassadors", to: "/ambassadors", note: "Represent the Society where you work" },
-    { label: "Programme Collaborations", to: "/collaborate", note: "Align your programme with the field" },
-    { label: "Funders and DFIs", to: "/funders", note: "Fund the builders. Multiply the founders." },
+  { label: "Work Together", to: "/collaborate", items: [
+    { label: "ASEB Field Lab", to: "/field-lab", note: "Shared challenges, proposed collaborations" },
+    { label: "Programme Collaborations", to: "/collaborate", note: "Propose work with agreed outcomes" },
+    { label: "Work With Us", to: "/work-with-us", note: "Discuss commissioning and delivery capacity" },
+    { label: "Partners", to: "/partners", note: "Institutional partnership pathways" },
+    { label: "Funders and DFIs", to: "/funders", note: "Support practitioner and ecosystem development" },
   ] },
-  { label: "Work With Us", to: "/work-with-us", items: [] },
+  { label: "Knowledge and Evidence", to: "/evidence", items: [
+    { label: "Evidence Library", to: "/evidence", note: "Research to strengthen your practice" },
+    { label: "Insights", to: "/insights", note: "Field perspectives and editorial contributions" },
+    { label: "Green and Climate Economy", to: "/climate", note: "Build the ecosystems climate ventures need" },
+    { label: "The 17 SDGs", to: "/sdgs", note: "Entrepreneurship ecosystem building and public benefit" },
+  ] },
+  { label: "Summit and Awards", to: "/summit", items: [] },
+  { label: "About and Accountability", to: "/about/story", items: [
+    { label: "Our Story", to: "/about/story", note: "From annual recognition to a continuing institution" },
+    { label: "Our Progress", to: "/progress", note: "What is available, launching and planned" },
+    { label: "People", to: "/people", note: "Founder, executive team and board" },
+    { label: "Governance and Goals", to: "/governance", note: "Responsibility, standards and public benefit" },
+  ] },
 ];
 
 export const footerNav = [
@@ -63,6 +75,7 @@ export const footerNav = [
     { label: "People", to: "/people" },
     { label: "Governance and Goals", to: "/governance" },
     { label: "What We Build", to: "/what-we-build" },
+    { label: "Our Progress", to: "/progress" },
     { label: "The Framework", to: "/framework" },
   ] },
   { heading: "The Field", links: [
@@ -105,8 +118,8 @@ export const timeline = [
   { year: "2022", city: "Johannesburg", line: "Where it began. A room for the people who build the rooms founders walk into." },
   { year: "2023", city: "Nairobi", line: "Recognition created retention. Builders came back, and brought others." },
   { year: "2024", city: "Accra", line: "The field asked what happens between summits." },
-  { year: "2025", city: "Addis Ababa", line: "Scale met substance. ASEB Society launched on 16 November 2025 to carry the work through the year." },
-  { year: "2026", city: "Johannesburg", line: "The homecoming. Fifth edition, 20 to 22 October: Who Built the Builder?" },
+  { year: "2025", city: "Addis Ababa", line: "Scale met substance. The field continued shaping its ambition for a year-round professional home." },
+  { year: "2026", city: "Johannesburg", line: "The homecoming. Fifth edition, 20 to 22 October: Who Built the Builder? ASEB Society was publicly launched on 21 October 2026." },
 ];
 
 export const whyNow = [
