@@ -3,7 +3,7 @@ import { RegistryIndex } from "@/pages/Registry";
 
 export const Route = createFileRoute("/_site/registry/")({
   validateSearch: (search: Record<string, unknown>): { region?: string } =>
-    typeof search.region === "string" ? { region: search.region } : {},
+    typeof search["region"] === "string" ? { region: search["region"] } : {},
   head: () => ({
     meta: [
       { title: 'The Field Registry | ASEB Society' },
