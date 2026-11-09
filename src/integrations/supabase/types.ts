@@ -202,6 +202,50 @@ export type Database = {
         }
         Relationships: []
       }
+      programme_interests: {
+        Row: {
+          consent: boolean
+          contact_email: string
+          id: string
+          inquiry_type: string
+          payload: Json
+          source_page: string
+          status: string
+          submitted_at: string
+          user_id: string | null
+        }
+        Insert: {
+          consent?: boolean
+          contact_email: string
+          id?: string
+          inquiry_type: string
+          payload: Json
+          source_page: string
+          status?: string
+          submitted_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          consent?: boolean
+          contact_email?: string
+          id?: string
+          inquiry_type?: string
+          payload?: Json
+          source_page?: string
+          status?: string
+          submitted_at?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "programme_interests_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       registry_submissions: {
         Row: {
           bio: string
@@ -249,7 +293,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_verified_application_owner: {
+        Args: { application_email: string }
+        Returns: boolean
+      }
     }
     Enums: {
       [_ in never]: never
