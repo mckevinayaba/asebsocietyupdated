@@ -42,8 +42,11 @@ export function EoiForm({ source, fields, consent, submitLabel, done }: Props) {
       if (programme && (user || verified?.data.user)) {
         await submitMemberInterest({ data: { source, values: v, consent: agree } });
         await queryClient.invalidateQueries({ queryKey: ["member-data"] });
+      } else if (programme) {
+        const { error: insertError } = await supabase.from("programme_interests").insert({ ...enquiry, user_id: null });
+        if (insertError) throw new Error("Your enquiry could not be saved. Please try again; your answers are still here.");
       } else {
-        const { error: insertError } = await supabase.from(programme ? "programme_interests" : source === "/insights" ? "insight_pitches" : "partnership_enquiries").insert(programme ? { ...enquiry, user_id: null } : enquiry);
+        const { error: insertError } = await supabase.from(source === "/insights" ? "insight_pitches" : "partnership_enquiries").insert(enquiry);
         if (insertError) throw new Error("Your enquiry could not be saved. Please try again; your answers are still here.");
       }
       setSent(true);
@@ -67,15 +70,16 @@ export function EoiForm({ source, fields, consent, submitLabel, done }: Props) {
       <div className="grid gap-6 sm:grid-cols-2">
         {fields.map((f) => {
           const bad = tried && missing.includes(f);
-          const common = { className: `field-input ${bad ? "border-ember" : ""}`, value: v[f.name] || "", "aria-invalid": bad || undefined };
+          const common = { name: f.name, className: `field-input ${bad ? "border-ember" : ""}`, value: v[f.name] || "", "aria-invalid": bad || undefined };
+          const Wrapper = f.type === "multiple" ? "div" : "label";
           return (
-            <label key={f.name} className={f.full || f.type === "textarea" || f.type === "choice" || f.type === "multiple" ? "sm:col-span-2" : ""}>
+            <Wrapper key={f.name} className={f.full || f.type === "textarea" || f.type === "choice" || f.type === "multiple" ? "sm:col-span-2" : ""}>
               <span className="field-label">
                 {f.label} {!f.required && <span className="font-normal text-stone">(optional)</span>}
               </span>
               {f.type === "multiple" ? (
                 <span className="mt-3 grid gap-3 sm:grid-cols-2">
-                  {f.options?.map(option => <span key={option} className="flex items-start gap-3 border-b border-hairline pb-3"><input type="checkbox" className="mt-1 accent-teal" aria-label={f.optionLabels?.[option] || option} checked={(v[f.name] || "").split("|").includes(option)} onChange={event => { const selected = (v[f.name] || "").split("|").filter(Boolean); set(f.name, (event.target.checked ? [...selected, option] : selected.filter(item => item !== option)).join("|")); }} /><span className="text-sm">{f.optionLabels?.[option] || option}</span></span>)}
+                  {f.options?.map(option => <label key={option} className="flex cursor-pointer items-start gap-3 border-b border-hairline pb-3"><input type="checkbox" className="mt-1 accent-teal" aria-label={f.optionLabels?.[option] || option} checked={(v[f.name] || "").split("|").includes(option)} onChange={event => { const selected = (v[f.name] || "").split("|").filter(Boolean); set(f.name, (event.target.checked ? [...selected, option] : selected.filter(item => item !== option)).join("|")); }} /><span className="text-sm">{f.optionLabels?.[option] || option}</span></label>)}
                 </span>
               ) : f.type === "textarea" ? (
                 <textarea {...common} rows={4} onChange={(e) => set(f.name, e.target.value)} />
@@ -98,7 +102,7 @@ export function EoiForm({ source, fields, consent, submitLabel, done }: Props) {
               )}
               {f.hint && <span className="mt-2 block text-[0.8125rem] text-stone">{f.hint}</span>}
                {bad && <span className="mt-2 block text-[0.8125rem] text-ember">{fieldError(f, v[f.name])}</span>}
-            </label>
+            </Wrapper>
           );
         })}
       </div>

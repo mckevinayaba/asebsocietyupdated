@@ -6,7 +6,7 @@ import { Link } from "@/lib/router";
 import { useMember } from "@/hooks/use-member";
 
 export const Route = createFileRoute("/auth")({
-  validateSearch: (search: Record<string, unknown>) => ({ mode: search["mode"] === "signup" ? "signup" : "signin" }),
+  validateSearch: (search: Record<string, unknown>): { mode?: "signup" } => search["mode"] === "signup" ? { mode: "signup" } : {},
   head: () => ({ meta: [
     { title: "Member sign in | ASEB Society" },
     { name: "description", content: "Sign in or create your ASEB account to keep a personal profile and connect with Circles." },
