@@ -1,3 +1,7 @@
+import { useServerFn } from "@tanstack/react-start";
+import { useQueryClient } from "@tanstack/react-query";
+import { submitProgrammeInterest } from "@/lib/member.functions";
+import { useMember } from "@/hooks/use-member";
 import { useState } from "react";
 import { africanCountries } from "@/content/countries";
 import { supabase } from "@/integrations/supabase/client";
@@ -8,6 +12,9 @@ export type { Field } from "@/lib/eoi";
 type Props = { source: EnquirySource; fields: Field[]; consent: string; submitLabel: string; done: { title: string; body: string } };
 
 export function EoiForm({ source, fields, consent, submitLabel, done }: Props) {
+  const { user } = useMember();
+  const submitMemberInterest = useServerFn(submitProgrammeInterest);
+  const queryClient = useQueryClient();
   const [v, setV] = useState<Record<string, string>>({});
   const [agree, setAgree] = useState(false);
   const [sent, setSent] = useState(false);
@@ -25,8 +32,15 @@ export function EoiForm({ source, fields, consent, submitLabel, done }: Props) {
     setError("");
     try {
       const enquiry = prepareEnquiry(source, fields, v, agree);
-      const { error: insertError } = await supabase.from(source === "/insights" ? "insight_pitches" : "partnership_enquiries").insert(enquiry);
-      if (insertError) throw new Error("Your enquiry could not be saved. Please try again; your answers are still here.");
+      const programme = ["/communities", "/learning", "/field-lab"].includes(source);
+      const verified = programme ? await supabase.auth.getUser() : null;
+      if (programme && (user || verified?.data.user)) {
+        await submitMemberInterest({ data: { source, values: v, consent: agree } });
+        await queryClient.invalidateQueries({ queryKey: ["member-data"] });
+      } else {
+        const { error: insertError } = await supabase.from(programme ? "programme_interests" : source === "/insights" ? "insight_pitches" : "partnership_enquiries").insert(programme ? { ...enquiry, user_id: null } : enquiry);
+        if (insertError) throw new Error("Your enquiry could not be saved. Please try again; your answers are still here.");
+      }
       setSent(true);
     } catch (cause) {
       setError(cause instanceof Error ? cause.message : "Your enquiry could not be saved. Please try again.");
@@ -50,11 +64,15 @@ export function EoiForm({ source, fields, consent, submitLabel, done }: Props) {
           const bad = tried && missing.includes(f);
           const common = { className: `field-input ${bad ? "border-ember" : ""}`, value: v[f.name] || "", "aria-invalid": bad || undefined };
           return (
-            <label key={f.name} className={f.full || f.type === "textarea" || f.type === "choice" ? "sm:col-span-2" : ""}>
+            <label key={f.name} className={f.full || f.type === "textarea" || f.type === "choice" || f.type === "multiple" ? "sm:col-span-2" : ""}>
               <span className="field-label">
                 {f.label} {!f.required && <span className="font-normal text-stone">(optional)</span>}
               </span>
-              {f.type === "textarea" ? (
+              {f.type === "multiple" ? (
+                <span className="mt-3 grid gap-3 sm:grid-cols-2">
+                  {f.options?.map(option => <span key={option} className="flex items-start gap-3 border-b border-hairline pb-3"><input type="checkbox" className="mt-1 accent-teal" aria-label={f.optionLabels?.[option] || option} checked={(v[f.name] || "").split("|").includes(option)} onChange={event => { const selected = (v[f.name] || "").split("|").filter(Boolean); set(f.name, (event.target.checked ? [...selected, option] : selected.filter(item => item !== option)).join("|")); }} /><span className="text-sm">{f.optionLabels?.[option] || option}</span></span>)}
+                </span>
+              ) : f.type === "textarea" ? (
                 <textarea {...common} rows={4} onChange={(e) => set(f.name, e.target.value)} />
               ) : f.type === "select" || f.type === "country" ? (
                 <select {...common} onChange={(e) => set(f.name, e.target.value)}>

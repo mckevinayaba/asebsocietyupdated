@@ -1,5 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import { circleKeys, programmeFields, type ProgrammeSource } from "@/lib/programme-intake";
+import { prepareEnquiry } from "@/lib/eoi";
 import { z } from "zod";
 import { africanCountries } from "@/content/countries";
 import { roleBySlug } from "@/content/field";
@@ -13,12 +15,13 @@ export const memberProfileSchema = z.object({
 });
 
 export const getMemberData = createServerFn({ method: "GET" }).middleware([requireSupabaseAuth]).handler(async ({ context }) => {
-  const [{ data: profile, error: profileError }, { data: circles, error: circlesError }] = await Promise.all([
+  const [{ data: profile, error: profileError }, { data: circles, error: circlesError }, { data: applications, error: applicationError }] = await Promise.all([
     context.supabase.from("profiles").select("name,country,organisation,primary_role,bio").eq("id", context.userId).maybeSingle(),
     context.supabase.from("circle_memberships").select("circle_key").eq("user_id", context.userId),
+    context.supabase.from("membership_applications").select("id,name,status,created_at,role,country").order("created_at", { ascending: false }),
   ]);
-  if (profileError || circlesError) throw new Error("Your member information could not be loaded.");
-  return { profile, circles: circles?.map((circle) => circle.circle_key) || [] };
+  if (profileError || circlesError || applicationError) throw new Error("Your member information could not be loaded.");
+  return { profile, applications: applications || [], circles: circles?.map((circle) => circle.circle_key) || [] };
 });
 
 export const saveMemberProfile = createServerFn({ method: "POST" }).middleware([requireSupabaseAuth]).inputValidator((input) => memberProfileSchema.parse(input)).handler(async ({ data, context }) => {
@@ -27,11 +30,18 @@ export const saveMemberProfile = createServerFn({ method: "POST" }).middleware([
   return { success: true };
 });
 
-const circleKeys = ["regional:North", "regional:West", "regional:Central", "regional:East", "regional:Southern", "language:fr", "language:pt", "language:ar", "condition:1", "condition:2", "condition:3", "condition:4", "condition:5", "condition:6", "condition:7"];
 export const updateCircleMembership = createServerFn({ method: "POST" }).middleware([requireSupabaseAuth]).inputValidator((input) => z.object({ key: z.string().refine((value) => circleKeys.includes(value)), join: z.boolean() }).parse(input)).handler(async ({ data, context }) => {
   const result = data.join
-    ? await context.supabase.from("circle_memberships").upsert({ user_id: context.userId, circle_key: data.key })
+    ? await context.supabase.from("circle_memberships").upsert({ user_id: context.userId, circle_key: data.key }, { ignoreDuplicates: true })
     : await context.supabase.from("circle_memberships").delete().eq("user_id", context.userId).eq("circle_key", data.key);
   if (result.error) throw new Error("Your Circle selection could not be saved.");
+  return { success: true };
+});
+export const submitProgrammeInterest = createServerFn({ method: "POST" }).middleware([requireSupabaseAuth]).inputValidator((input) => {
+  const data = z.object({ source: z.enum(["/communities", "/learning", "/field-lab"]), values: z.record(z.string(), z.string()), consent: z.boolean() }).parse(input);
+  return prepareEnquiry(data.source as ProgrammeSource, programmeFields[data.source], data.values, data.consent);
+}).handler(async ({ data, context }) => {
+  const { error } = await context.supabase.from("programme_interests").insert({ ...data, user_id: context.userId });
+  if (error) throw new Error("Your interest could not be saved. Please try again.");
   return { success: true };
 });
