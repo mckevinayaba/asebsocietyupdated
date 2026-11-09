@@ -20,3 +20,5 @@
 - Keep one root member-session subscriber; sign-out cancels queries, clears cached private data, clears the session and replaces navigation with the public auth page.
 - `/app` is protected by the client-only `_authenticated` layout; public editorial and auth pages remain outside it.
 - Keep public programme readiness and persona pathways in shared browser-safe content; homepage, programme pages and progress must use the same readiness source to avoid conflicting availability claims.
+- Keep institutional mandates alongside service readiness in shared programme content; public presentation uses mandates while actions remain grounded in available services.
+- Use the shared reveal observer for public editorial scroll motion and respect reduced-motion preferences; never hide first-viewport content for entrance effects.
