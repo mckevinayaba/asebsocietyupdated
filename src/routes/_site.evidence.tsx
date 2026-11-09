@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import Evidence from "@/pages/Evidence";
 
 export const Route = createFileRoute("/_site/evidence")({
+  validateSearch: (search: Record<string, unknown>) => ({ condition: typeof search["condition"] === "string" ? search["condition"] : undefined }),
   head: () => ({
     meta: [
       { title: 'Evidence | ASEB Society' },

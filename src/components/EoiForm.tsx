@@ -1,8 +1,10 @@
+import { useSearchParams } from "@/lib/router";
+import { circleKeys } from "@/lib/programme-intake";
 import { useServerFn } from "@tanstack/react-start";
 import { useQueryClient } from "@tanstack/react-query";
 import { submitProgrammeInterest } from "@/lib/member.functions";
 import { useMember } from "@/hooks/use-member";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { africanCountries } from "@/content/countries";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -13,9 +15,12 @@ type Props = { source: EnquirySource; fields: Field[]; consent: string; submitLa
 
 export function EoiForm({ source, fields, consent, submitLabel, done }: Props) {
   const { user } = useMember();
+  const [params] = useSearchParams();
+  const requestedGroup = params.get("group");
   const submitMemberInterest = useServerFn(submitProgrammeInterest);
   const queryClient = useQueryClient();
   const [v, setV] = useState<Record<string, string>>({});
+  useEffect(() => { if (source === "/communities" && requestedGroup?.startsWith("group:") && circleKeys.includes(requestedGroup)) setV(value => ({ ...value, groups: requestedGroup })); }, [source, requestedGroup]);
   const [agree, setAgree] = useState(false);
   const [sent, setSent] = useState(false);
   const [tried, setTried] = useState(false);
