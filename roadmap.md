@@ -7,6 +7,7 @@
 - [x] Connect all five partnership interest forms and the shared Insights pitch form to private Cloud storage; verify submission, validation and privacy.
 
 ## Limitations
+- [ ] ASEB Society 2.0 Phase 1: human-centred homepage, intent-led navigation, role guidance, transparent programme pages and Our Progress; preserve photos, accounts and intake; verify desktop/mobile without publishing.
 - Enquiries and editorial pitches are stored for review in Lovable Cloud; automated email notifications and an in-platform review inbox are not included.
 - Circle conversations, Academy lessons and automatic registry publication remain unavailable; current content marks their status.
 - Google/Lovable provider settings enabled; external provider round-trips and password-reset email delivery have not been exercised.
