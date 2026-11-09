@@ -11,11 +11,11 @@
 - [x] Upgrade institutional design, scroll motion and interactive pillar exploration; replace public readiness badges with mandates, preserve authentic photos and accurate next steps; verify desktop and mobile.
 
 ## Limitations
-- [ ] Replace external sign-in buttons with ASEB email access and connect application confirmation to account creation.
-- [ ] Save public Circle preferences and synchronize signed-in selections with the member app.
-- [ ] Add dedicated Academy interest and Field Lab research intake; connect role pages to discovery and evidence.
-- [ ] Verify public and signed-in journeys, private storage, and small-screen layouts.
+- [x] Replace external sign-in buttons with ASEB email access and connect application confirmation to account creation.
+- [x] Save public Circle preferences and synchronize signed-in selections with the member app.
+- [x] Add dedicated Academy interest and Field Lab research intake; connect role pages to discovery and evidence.
+- [x] Verify public and signed-in journeys, private storage, and small-screen layouts.
 - Enquiries and editorial pitches are stored for review in Lovable Cloud; automated email notifications and an in-platform review inbox are not included.
 - Circle conversations, Academy lessons and automatic registry publication remain unavailable; public programme mandates link to accurate next steps and participation announcements.
-- Google and email sign-in remain available; external provider round-trips and password-reset email delivery have not been exercised.
+- Member access uses email/password only; confirmation and password-reset email delivery have not been exercised. Existing verified account access and sign-out were checked.
 - Signed-out hard refresh of `/app` recovers to `/auth` but emits a router hydration warning in the preview; signed-in profile/Circle workflows pass.
