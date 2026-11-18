@@ -5,7 +5,6 @@ export type ConstituencySlug = "practitioners" | "support-institutions" | "capit
 
 export type Constituency = {
   slug: ConstituencySlug;
-  n: string;
   name: string;
   headline: string;
   intro: string;
@@ -23,7 +22,6 @@ export type Role = {
 export const constituencies: Constituency[] = [
   {
     slug: "practitioners",
-    n: "01",
     name: "Practitioners",
     headline: "The practitioners who build the field.",
     intro:
@@ -31,7 +29,6 @@ export const constituencies: Constituency[] = [
   },
   {
     slug: "support-institutions",
-    n: "02",
     name: "Support Institutions",
     headline: "The institutions where founders find their footing.",
     intro:
@@ -39,7 +36,6 @@ export const constituencies: Constituency[] = [
   },
   {
     slug: "capital-market-builders",
-    n: "03",
     name: "Capital and Market Builders",
     headline: "The builders who move capital, markets and partnerships.",
     intro:
@@ -47,7 +43,6 @@ export const constituencies: Constituency[] = [
   },
   {
     slug: "systems-builders",
-    n: "04",
     name: "Systems Builders",
     headline: "The builders who shape the system itself.",
     intro:

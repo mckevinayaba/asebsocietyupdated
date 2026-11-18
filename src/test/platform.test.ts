@@ -8,7 +8,13 @@ describe("public programme readiness", () => {
   });
   it("keeps Academy learning planned, not available credentials", () => {
     expect(programmeReadiness.academy.status).toBe("Planned");
-    expect(pillars.find((pillar) => pillar.slug === "academy")?.programmes.every((programme) => programme.status === "Planned")).toBe(true);
+  });
+  it("presents the four pillars as mandates, led by the Summit, without readiness labels or numbering", () => {
+    expect(pillars.map((pillar) => pillar.slug)).toEqual(["summit", "circles", "academy", "field-lab"]);
+    for (const pillar of pillars) {
+      expect(pillar).not.toHaveProperty("n");
+      for (const programme of pillar.programmes) expect(programme).not.toHaveProperty("status");
+    }
   });
   it("does not advertise developing Circles as active communities", () => {
     expect(programmeReadiness.circles.status).toBe("Launching");

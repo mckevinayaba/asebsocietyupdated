@@ -5,14 +5,14 @@ import { TLink } from "@/components/Arrow";
 import { Photo } from "@/components/Photo";
 
 const programmes: { key: ProgrammeKey; name: string; photo: string; alt: string; focus: string[] }[] = [
+  { key: "summit", name: "ASEB Summit & Awards", photo: "aseb-awards-stage-2.jpg", alt: "Ecosystem builders celebrating recognition on the ASEB stage", focus: ["Continental dialogue", "Practitioner recognition", "The Awards archive"] },
   { key: "circles", name: "ASEB Circles", photo: "aseb-networking.jpg", alt: "Ecosystem builders connecting at an ASEB gathering", focus: ["Peer exchange", "Cross-border relationships", "Shared professional challenges"] },
   { key: "academy", name: "ASEB Academy", photo: "aseb-summit-panel.jpg", alt: "Practitioners sharing knowledge at the ASEB Summit", focus: ["Practitioner development", "Operational frameworks", "Learning grounded in evidence"] },
   { key: "field-lab", name: "ASEB Field Lab", photo: "aseb-community-gathering.jpg", alt: "Practitioners and institutions gathered at ASEB", focus: ["Ecosystem conditions", "Research-to-practice", "Startup and climate policy"] },
-  { key: "summit", name: "ASEB Summit & Awards", photo: "aseb-awards-stage-2.jpg", alt: "Ecosystem builders celebrating recognition on the ASEB stage", focus: ["Continental dialogue", "Practitioner recognition", "The Awards archive"] },
 ];
 
 export function MandateExplorer() {
-  const [active, setActive] = useState<ProgrammeKey>("circles");
+  const [active, setActive] = useState<ProgrammeKey>("summit");
   const programme = programmes.find((item) => item.key === active);
   if (!programme) return null;
   const info = programmeReadiness[active];

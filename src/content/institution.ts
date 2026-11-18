@@ -66,9 +66,9 @@ export const people: Person[] = [
 ];
 
 export const governanceLayers = [
-  { n: "01", name: "Board of ASEB Society", kind: "Institutional oversight", points: ["Fiduciary and strategic oversight of all ASEB Society work.", "Approves strategy, annual budgets, major partnerships and multi-year funding decisions.", "Operates under the Charter and a conflict-of-interest framework, on a predictable annual rhythm."] },
-  { n: "02", name: "Summit and Awards Advisory Board", kind: "Product integrity", points: ["Counsel on themes, categories, criteria, integrity safeguards and reputational risk.", "Advisory, not operational. It does not judge nominees or select winners.", "Appointed by, and accountable to, the Board of ASEB Society."] },
-  { n: "03", name: "Field Councils and Working Groups", kind: "Practitioner voice", points: ["Bring practitioner voice from every region and role into standards, learning and systems work.", "Inform the institution. They carry no legal or fiduciary authority."] },
+  { name: "Board of ASEB Society", kind: "Institutional oversight", points: ["Fiduciary and strategic oversight of all ASEB Society work.", "Approves strategy, annual budgets, major partnerships and multi-year funding decisions.", "Operates under the Charter and a conflict-of-interest framework, on a predictable annual rhythm."] },
+  { name: "Summit and Awards Advisory Board", kind: "Product integrity", points: ["Counsel on themes, categories, criteria, integrity safeguards and reputational risk.", "Advisory, not operational. It does not judge nominees or select winners.", "Appointed by, and accountable to, the Board of ASEB Society."] },
+  { name: "Field Councils and Working Groups", kind: "Practitioner voice", points: ["Bring practitioner voice from every region and role into standards, learning and systems work.", "Inform the institution. They carry no legal or fiduciary authority."] },
 ];
 
 export const governancePrinciples = [
@@ -119,10 +119,10 @@ export const countryPartnerCriteria = [
 ];
 
 export const countryLadder = [
-  { n: "01", name: "Ambassador", line: "An individual obligation of three to five hours a month." },
-  { n: "02", name: "Country Partner (Interim)", line: "Twelve months, with a defined first-year plan." },
-  { n: "03", name: "Country Partner", line: "Carries the Society's work in one country." },
-  { n: "04", name: "Regional Representative", line: "Coordinates Country Partners across a region: SADC, ECOWAS, EAC, Central, North or Lusophone Africa." },
+  { name: "Ambassador", line: "An individual obligation of three to five hours a month." },
+  { name: "Country Partner (Interim)", line: "Twelve months, with a defined first-year plan." },
+  { name: "Country Partner", line: "Carries the Society's work in one country." },
+  { name: "Regional Representative", line: "Coordinates Country Partners across a region: SADC, ECOWAS, EAC, Central, North or Lusophone Africa." },
 ];
 
 export const ambassadorDuties = [
