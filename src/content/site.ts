@@ -110,7 +110,7 @@ export const footerNav = [
 export const proof = [
   { value: "1,786", label: "Nominations received", note: "ASEB 2026", href: "https://www.asebs.com" },
   { value: "52", label: "Countries represented", note: "ASEB 2026", href: "https://www.asebs.com" },
-  { value: "145", label: "Finalists", note: "ASEB 2026", href: "https://www.asebs.com" },
+  { value: "180+", label: "Recognised leaders in the Field Registry", note: "Awards archive", href: "/registry" },
   { value: "5", label: "Editions since 2022", note: "2022 to 2026", href: "https://www.asebs.com/story" },
 ];
 

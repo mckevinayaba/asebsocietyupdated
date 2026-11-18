@@ -44,10 +44,6 @@ function Label({ children }: { children: ReactNode }) {
   return <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-stone">{children}</p>;
 }
 
-function Status({ s }: { s: string }) {
-  return <span className={`text-[0.6875rem] font-semibold uppercase tracking-[0.12em] ${s === "Live" ? "text-ember" : s === "Launching" ? "text-ink" : "text-stone"}`}>{s}</span>;
-}
-
 function HomeTab({ name, role, country, edit, applications }: { name: string; role: string; country: string; edit: () => void; applications: { id: string; name: string; status: string; created_at: string }[] }) {
   const countryCount = new Set(registry.map((r) => r.country).filter(Boolean)).size;
   return (

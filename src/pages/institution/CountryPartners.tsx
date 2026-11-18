@@ -53,7 +53,7 @@ export default function CountryPartners() {
             <p className="eyebrow">The ladder</p>
             <ol className="mt-6 border-t border-ink">
               {countryLadder.map((l) => (
-                <li key={l.n} className="grid grid-cols-[2.5rem_1fr] border-b border-hairline py-5">
+                <li key={l.name} className="grid grid-cols-[2.5rem_1fr] border-b border-hairline py-5">
                   <span aria-hidden="true" className="mt-3 block h-[2px] w-6 bg-signal" />
                   <span><span className="block font-display text-[1.25rem]">{l.name}</span><span className="mt-1 block text-[0.9375rem] text-stone">{l.line}</span></span>
                 </li>

@@ -17,7 +17,7 @@ export default function Governance() {
           <SectionHead eyebrow="Structure" title="Three layers, each with a defined mandate." lede="Legal authority, product integrity and field voice are deliberately separated." />
           <div className="mt-14 grid gap-px border-t border-ink bg-hairline lg:grid-cols-3">
             {governanceLayers.map((g) => (
-              <div key={g.n} className="bg-ivory py-8 lg:px-8 lg:first:pl-0">
+              <div key={g.name} className="bg-ivory py-8 lg:px-8 lg:first:pl-0">
                 <span aria-hidden="true" className="mt-3 block h-[2px] w-6 bg-signal" />
                 <p className="mt-4 text-eyebrow font-semibold uppercase text-stone">{g.kind}</p>
                 <h3 className="mt-2 font-display text-[1.625rem] leading-tight">{g.name}</h3>

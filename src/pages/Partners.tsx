@@ -6,25 +6,21 @@ import { partnerTypes, partnerCommitments } from "@/content/institution";
 
 const tiers = [
   {
-    n: "01",
     name: "Continental Partners",
     who: "Hub networks, academies, development finance institutions and governments.",
     what: "A seat on the partner council, co-design of the ASEB Agenda, and shared data under the Common Reporting Framework.",
   },
   {
-    n: "02",
     name: "Knowledge Partners",
     who: "Research centres and policy institutions producing evidence on African ecosystems.",
     what: "Named co-authorship of the State of the Field, a seat on the ASEB Research Council, a Field Lab project and a research session at every Summit.",
   },
   {
-    n: "03",
     name: "Programme Partners",
     who: "Funders, foundations and corporates who back a specific pillar or programme.",
     what: "Sponsorship of an Academy cohort, a Field Lab project or an Awards category, with outcome reporting against the seven conditions.",
   },
   {
-    n: "04",
     name: "Summit and Awards Partners",
     who: "Institutions supporting the annual convening and recognition of the field.",
     what: "Category sponsorship, Summit sessions and visibility in front of practitioners from more than 50 countries.",
@@ -56,7 +52,7 @@ export default function Partners() {
           <SectionHead eyebrow="How partnership works" title="Four ways to partner." />
           <ol className="mt-14 border-t border-ink">
             {tiers.map((t) => (
-              <li key={t.n} className="reveal grid gap-4 border-b border-hairline py-10 lg:grid-cols-12 lg:gap-10">
+              <li key={t.name} className="reveal grid gap-4 border-b border-hairline py-10 lg:grid-cols-12 lg:gap-10">
                 <span aria-hidden="true" className="mt-3 block h-[2px] w-6 bg-signal" />
                 <h3 className="font-display text-[1.875rem] leading-tight lg:col-span-4">{t.name}</h3>
                 <div className="space-y-3 text-[1rem] leading-relaxed lg:col-span-7">
