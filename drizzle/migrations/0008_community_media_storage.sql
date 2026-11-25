@@ -2,9 +2,10 @@
 -- Uploads are private. Others can read a photograph only once an item that uses it is live.
 -- Size and type limits are enforced by the storage service, not only by the browser.
 
-INSERT INTO storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
-VALUES ('community-media', 'community-media', false, 5242880, ARRAY['image/jpeg', 'image/png', 'image/webp'])
-ON CONFLICT (id) DO NOTHING;
+-- The bucket row below is created with the storage tool (private, 5 MB, jpeg/png/webp), not SQL.
+-- INSERT INTO storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+-- VALUES ('community-media', 'community-media', false, 5242880, ARRAY['image/jpeg', 'image/png', 'image/webp'])
+-- ON CONFLICT (id) DO NOTHING;
 
 -- Verified people upload only into their own folder: "<user id>/<file>".
 CREATE POLICY "Upload own community media" ON storage.objects FOR INSERT TO authenticated

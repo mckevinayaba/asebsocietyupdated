@@ -64,6 +64,13 @@
       "when": 1795651260000,
       "tag": "0008_community_media_storage",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1795651260001,
+      "tag": "0009_apply_pending_0006_to_0008",
+      "breakpoints": true
     }
   ]
 }
