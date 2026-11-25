@@ -12,9 +12,9 @@ describe("Registry discovery", () => {
     expect(results.length).toBeLessThan(registry.length);
   });
   it("includes professional roles in search", () => {
-    const results = filterRegistry(registry, { ...defaults, query: "Founder & Chief Ecosystem Officer" });
+    const results = filterRegistry(registry, { ...defaults, query: "Founder & Chief Executive Officer" });
     expect(results.length).toBeGreaterThan(0);
-    expect(results.some((record) => record.role === "Founder & Chief Ecosystem Officer")).toBe(true);
+    expect(results.some((record) => record.role === "Founder & Chief Executive Officer")).toBe(true);
   });
   it("returns no records for incompatible filters", () => {
     expect(filterRegistry(registry, { ...defaults, country: "Nigeria", region: "North" })).toEqual([]);

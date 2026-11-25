@@ -14,7 +14,7 @@ export type Person = { slug: string; name: string; role: string; base: string; g
 
 export const people: Person[] = [
   {
-    slug: "mckevin-ayaba", name: "McKevin Ayaba", role: "Founder and Chief Ecosystem Officer", base: "Johannesburg, South Africa", group: "founder", photo: "images/people/mckevin-ayaba-portrait.jpg", linkedin: "https://www.linkedin.com/in/mckevin-ayaba-89853220/",
+    slug: "mckevin-ayaba", name: "McKevin Ayaba", role: "Founder & Chief Executive Officer", base: "Johannesburg, South Africa", group: "founder", photo: "images/people/mckevin-ayaba-portrait.jpg", linkedin: "https://www.linkedin.com/in/mckevin-ayaba-89853220/",
     summary: "Startup ecosystem builder and institutional architect with more than 15 years across African entrepreneurial ecosystems, including hands-on ecosystem work in 34 African countries, working on the systems around founders rather than single programmes.",
     bio: [
       "His work sits at the intersection of ecosystem strategy and field building, entrepreneurship support infrastructure, policy and institutional design, and cross-border ecosystem coordination.",
