@@ -91,6 +91,7 @@ export type Database = {
           phone: string
           profile_url: string
           registry_slug: string | null
+          review_stage: string
           role: string
           status: string
           work_description: string
@@ -112,6 +113,7 @@ export type Database = {
           phone?: string
           profile_url?: string
           registry_slug?: string | null
+          review_stage?: string
           role: string
           status?: string
           work_description?: string
@@ -133,6 +135,7 @@ export type Database = {
           phone?: string
           profile_url?: string
           registry_slug?: string | null
+          review_stage?: string
           role?: string
           status?: string
           work_description?: string
@@ -288,18 +291,42 @@ export type Database = {
         }
         Relationships: []
       }
+      secretariat_audit_log: {
+        Row: { action: string; actor_id: string; created_at: string; detail: Json; id: number; subject_id: string | null; subject_type: string | null }
+        Insert: { action: string; actor_id?: string; created_at?: string; detail?: Json; id?: never; subject_id?: string | null; subject_type?: string | null }
+        Update: { action?: string; actor_id?: string; created_at?: string; detail?: Json; id?: never; subject_id?: string | null; subject_type?: string | null }
+        Relationships: []
+      }
+      secretariat_notes: {
+        Row: { author_id: string; body: string; created_at: string; id: string; subject_id: string; subject_type: string }
+        Insert: { author_id?: string; body: string; created_at?: string; id?: string; subject_id: string; subject_type: string }
+        Update: { author_id?: string; body?: string; created_at?: string; id?: string; subject_id?: string; subject_type?: string }
+        Relationships: []
+      }
+      secretariat_roles: {
+        Row: { granted_at: string; granted_note: string; role: Database["public"]["Enums"]["secretariat_role"]; user_id: string }
+        Insert: { granted_at?: string; granted_note?: string; role: Database["public"]["Enums"]["secretariat_role"]; user_id: string }
+        Update: { granted_at?: string; granted_note?: string; role?: Database["public"]["Enums"]["secretariat_role"]; user_id?: string }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
+      is_secretariat: { Args: never; Returns: boolean }
+      is_secretariat_admin: { Args: never; Returns: boolean }
       is_verified_application_owner: {
         Args: { application_email: string }
         Returns: boolean
       }
+      secretariat_list_accounts: {
+        Args: never
+        Returns: { country: string; created_at: string; email: string; email_confirmed: boolean; id: string; last_sign_in_at: string | null; name: string; organisation: string; primary_role: string }[]
+      }
     }
     Enums: {
-      [_ in never]: never
+      secretariat_role: "secretariat_admin" | "secretariat_reviewer"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -426,6 +453,6 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: { secretariat_role: ["secretariat_admin", "secretariat_reviewer"] },
   },
 } as const

@@ -43,6 +43,13 @@
       "when": 1794264951674,
       "tag": "0005_connected_programme_interest_and_application_access",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1795564800000,
+      "tag": "0006_secretariat_access_and_security_hardening",
+      "breakpoints": true
     }
   ]
 }
