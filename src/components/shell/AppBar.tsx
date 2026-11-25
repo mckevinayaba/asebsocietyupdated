@@ -3,7 +3,8 @@ import { Link, useLocation } from "@/lib/router";
 import { asset } from "@/lib/asset";
 import { desktopNav, investPath } from "@/content/navigation";
 import { useMember } from "@/hooks/use-member";
-import { MenuIcon, SearchIcon } from "./Icons";
+import { CreateIcon, MenuIcon, SearchIcon } from "./Icons";
+import { NotificationsButton } from "./Notifications";
 import { SearchSheet } from "./SearchSheet";
 import { MenuSheet } from "./MenuSheet";
 
@@ -94,8 +95,15 @@ export function AppBar({ immersive = false }: { immersive?: boolean }) {
             <button type="button" onClick={() => setSearchOpen(true)} className="grid h-11 w-11 place-items-center rounded-full transition-colors hover:bg-current/10" aria-label="Search ASEB Society" title="Search (press /)">
               <SearchIcon />
             </button>
-            <Link to={user ? "/app" : "/auth"} className={`hidden h-11 items-center px-2 text-[0.875rem] font-medium lg:inline-flex ${clear ? "text-ivory/90 hover:text-ivory" : "text-ink/75 hover:text-ink"}`}>
-              {user ? `${firstName ? firstName + " · " : ""}Member app` : "Member sign in"}
+            {user && (
+              <Link to="/contribute" className={`hidden h-11 items-center gap-1.5 rounded-full px-3 text-[0.875rem] font-semibold transition-colors hover:bg-current/10 md:inline-flex`} aria-label="Create a contribution">
+                <CreateIcon width={20} height={20} /><span className="hidden xl:inline">Create</span>
+              </Link>
+            )}
+            {user && <Link to="/contribute" className="grid h-11 w-11 place-items-center rounded-full hover:bg-current/10 md:hidden" aria-label="Create a contribution"><CreateIcon /></Link>}
+            {user && <NotificationsButton clear={clear} />}
+            <Link to={user ? "/you" : "/auth"} className={`hidden h-11 items-center px-2 text-[0.875rem] font-medium lg:inline-flex ${clear ? "text-ivory/90 hover:text-ivory" : "text-ink/75 hover:text-ink"}`}>
+              {user ? (firstName || "You") : "Sign in"}
             </Link>
             <Link to={investPath} className="btn btn-signal hidden min-h-[44px] px-4 text-[0.875rem] lg:inline-flex">Invest in Our Mission</Link>
             <button type="button" onClick={() => setMenuOpen(true)} className="grid h-11 w-11 place-items-center rounded-full transition-colors hover:bg-current/10 lg:hidden" aria-label="Open the institutional menu" aria-expanded={menuOpen}>

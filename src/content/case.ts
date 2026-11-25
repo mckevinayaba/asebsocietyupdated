@@ -4,8 +4,8 @@
 
 export const positioning = {
   headline: "Stronger ecosystems. Stronger African economies.",
-  statement: "We strengthen the people, institutions and systems that make entrepreneurship possible across Africa.",
-  philosophy: "It takes an ecosystem.",
+  statement: "We advance ecosystem building as a professional practice and a recognised profession, strengthening the people, institutions and systems that make entrepreneurship possible across Africa.",
+  philosophy: "It Takes a Village.",
   promise: "Strengthening those who strengthen entrepreneurship.",
   question: "Africa invests in entrepreneurs. Who invests in the people who make entrepreneurship possible?",
 };
@@ -97,6 +97,9 @@ export const investmentAreas: InvestmentArea[] = [
   { slug: "country-network", name: "Country network activation", purpose: "Recruiting, onboarding and supporting Country Partners and Ambassadors.", outcome: "Locally rooted representation, beginning where demand and capacity exist." },
   { slug: "ecosystem-intelligence", name: "Ecosystem intelligence and applied research", purpose: "Field Lab research, policy intelligence and the translation of evidence into practice.", outcome: "Decisions informed by evidence rather than assumption." },
   { slug: "inclusive-participation", name: "Inclusive participation", purpose: "Reaching township, rural, informal economy and Francophone, Lusophone and Arabic speaking practitioners.", outcome: "A field that reflects the whole continent, not only its capital cities." },
+  { slug: "playbook", name: "The African Ecosystem Building Playbook", purpose: "Editing, research and publication of a living professional publication written with practitioners.", outcome: "Shared, African-authored knowledge on how ecosystems are built." },
+  { slug: "voices-and-memory", name: "ASEB Voices and institutional memory", purpose: "Editorial capacity to document the people, institutions and lessons behind African ecosystems.", outcome: "A field that keeps its memory instead of starting from zero." },
+  { slug: "knowledge-access", name: "Knowledge accessibility", purpose: "Translation, low-bandwidth access and multilingual participation.", outcome: "Knowledge that reaches practitioners in every language and connection." },
   { slug: "digital-infrastructure", name: "Digital institutional infrastructure", purpose: "This platform: registry, member services, knowledge and Secretariat tools.", outcome: "A shared professional home that a small team can run." },
   { slug: "strategic-collaboration", name: "Strategic collaboration", purpose: "Joint programmes with foundations, agencies, universities and networks.", outcome: "Shared outcomes, agreed in advance and reported openly." },
 ];

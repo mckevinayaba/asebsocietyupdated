@@ -7,6 +7,7 @@ export const Route = createFileRoute("/_site/contribute")({
     kind: typeof search["kind"] === "string" ? search["kind"] : undefined,
     chapter: typeof search["chapter"] === "string" ? search["chapter"] : undefined,
     category: typeof search["category"] === "string" ? search["category"] : undefined,
+    edit: typeof search["edit"] === "string" ? search["edit"] : undefined,
   }),
   head: () => seo({ title: "Contribute", description: "Share with the village.", path: "/contribute", noindex: true }),
   component: Contribute,

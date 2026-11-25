@@ -67,17 +67,17 @@ export default function Stories() {
       if (info) return;
       if (event.key === "ArrowDown" || event.key === "PageDown") { event.preventDefault(); go(1); }
       if (event.key === "ArrowUp" || event.key === "PageUp") { event.preventDefault(); go(-1); }
-      if (event.key === "Escape") void navigate({ href: "/discover" });
+      if (event.key === "Escape") void navigate({ href: "/voices" });
     };
     window.addEventListener("keydown", key);
     return () => window.removeEventListener("keydown", key);
   });
 
   return (
-    <main className="fixed inset-0 bg-night text-ivory" aria-roledescription="story viewer" aria-label="Field stories">
+    <main className="fixed inset-0 bg-night text-ivory" aria-roledescription="story viewer" aria-label="ASEB Voices: stories from the archive">
       <div className="pointer-events-none absolute inset-x-0 top-0 z-20 flex items-center justify-between px-4 pt-[calc(12px+var(--safe-top))]">
-        <p className="pointer-events-auto text-[0.8125rem] font-semibold text-ivory/80" aria-live="polite">Field stories · {index + 1} of {stories.length}</p>
-        <Link to="/discover" className="pointer-events-auto grid h-11 w-11 place-items-center rounded-full bg-night/45 backdrop-blur-sm" aria-label="Close stories"><CloseIcon /></Link>
+        <p className="pointer-events-auto text-[0.8125rem] font-semibold text-ivory/80" aria-live="polite">ASEB Voices · {index + 1} of {stories.length}</p>
+        <Link to="/voices" className="pointer-events-auto grid h-11 w-11 place-items-center rounded-full bg-night/45 backdrop-blur-sm" aria-label="Close stories"><CloseIcon /></Link>
       </div>
       <div className="pointer-events-none absolute inset-x-0 top-[calc(4px+var(--safe-top))] z-20 flex gap-1 px-4" aria-hidden="true">
         {stories.map((s, i) => <span key={s.id} className={`h-[2px] flex-1 rounded-full ${i <= index ? "bg-ivory" : "bg-ivory/25"}`} />)}

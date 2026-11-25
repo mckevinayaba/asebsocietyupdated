@@ -20,6 +20,7 @@ export const desktopNav: NavGroup[] = [
     { label: "ASEB Academy", to: "/learning", note: "Professional learning and practice standards" },
     { label: "ASEB Field Lab", to: "/field-lab", note: "Applied research and policy intelligence" },
     { label: "How the mandates connect", to: "/what-we-build", note: "Four mandates, one practice" },
+    { label: "The Framework", to: "/framework", note: "Seven conditions entrepreneurs need" },
   ] },
   { label: "Explore", to: "/registry", items: [
     { label: "Practitioners", to: "/registry?type=individual", note: "People recognised in the Field Registry" },
@@ -29,12 +30,14 @@ export const desktopNav: NavGroup[] = [
     { label: "Ambassadors", to: "/ambassadors", note: "Individual advocacy mandates" },
     { label: "Roles in the field", to: "/field", note: "Find the work you do" },
   ] },
-  { label: "Knowledge", to: "/discover", items: [
-    { label: "Discover", to: "/discover", note: "Knowledge, learning, opportunities and events" },
+  { label: "The Village", to: "/the-field", items: [
+    { label: "The Field", to: "/the-field", note: "Africa's ecosystem building community" },
+    { label: "ASEB Voices", to: "/voices", note: "Every ecosystem has a story" },
+    { label: "Ask the Village", to: "/ask", note: "No one has all the answers" },
+    { label: "The Playbook", to: "/playbook", note: "A book Africa writes together" },
+    { label: "State of the Field", to: "/state-of-the-field", note: "Evidence and ecosystem intelligence" },
+    { label: "Discover", to: "/discover", note: "Learning, opportunities and events" },
     { label: "Evidence Library", to: "/evidence", note: "Research summarised for practice" },
-    { label: "Insights", to: "/insights", note: "Field perspectives and editorial pitches" },
-    { label: "The Framework", to: "/framework", note: "Seven conditions entrepreneurs need" },
-    { label: "Green and Climate Economy", to: "/climate", note: "Building climate venture support" },
   ] },
   { label: "Get Involved", to: "/get-involved", items: [
     { label: "Become a member", to: "/join", note: "Apply as a practitioner or organisation" },
@@ -50,10 +53,10 @@ export type PrimaryTab = { key: TabKey; label: string; to: string; memberTo?: st
 
 // Bottom navigation. Prefix order matters: the first tab whose prefix matches wins.
 export const primaryTabs: PrimaryTab[] = [
-  { key: "home", label: "Home", to: "/", memberTo: "/app", prefixes: ["/why-aseb", "/about", "/people", "/governance", "/progress", "/invest", "/funders", "/what-we-build", "/summit", "/learning", "/field-lab", "/partners", "/collaborate", "/work-with-us", "/get-involved", "/join", "/sdgs"] },
+  { key: "home", label: "Home", to: "/", memberTo: "/the-field", prefixes: ["/the-field", "/contribute", "/members", "/onboarding", "/community-guidelines", "/why-aseb", "/about", "/people", "/governance", "/progress", "/invest", "/funders", "/what-we-build", "/summit", "/learning", "/field-lab", "/partners", "/collaborate", "/work-with-us", "/get-involved", "/join", "/sdgs"] },
   { key: "explore", label: "Explore", to: "/registry", prefixes: ["/registry", "/countries", "/country-partners", "/ambassadors", "/field"] },
   { key: "circles", label: "Circles", to: "/communities", prefixes: ["/communities"] },
-  { key: "discover", label: "Discover", to: "/discover", prefixes: ["/discover", "/stories", "/evidence", "/insights", "/framework", "/climate"] },
+  { key: "discover", label: "Discover", to: "/discover", prefixes: ["/discover", "/playbook", "/voices", "/ask", "/state-of-the-field", "/stories", "/evidence", "/insights", "/framework", "/climate"] },
   { key: "you", label: "You", to: "/you", prefixes: ["/you", "/app", "/auth", "/secretariat", "/reset-password"] },
 ];
 
@@ -74,8 +77,11 @@ export const contextTabSets: ContextTabSet[] = [
   { id: "explore", label: "Explore", prefixes: ["/registry", "/countries", "/country-partners", "/ambassadors", "/field"], tabs: [
     { label: "Field Registry", to: "/registry" }, { label: "People", to: "/registry?type=individual" }, { label: "Institutions", to: "/registry?type=organisation" }, { label: "Countries", to: "/countries" }, { label: "Country Partners", to: "/country-partners" }, { label: "Ambassadors", to: "/ambassadors" }, { label: "Roles", to: "/field" },
   ] },
-  { id: "discover", label: "Discover", prefixes: ["/discover", "/evidence", "/insights", "/framework", "/climate"], tabs: [
-    { label: "All", to: "/discover" }, { label: "Knowledge", to: "/discover?type=knowledge" }, { label: "Learning", to: "/discover?type=learning" }, { label: "Opportunities", to: "/discover?type=opportunity" }, { label: "Events", to: "/discover?type=event" }, { label: "Evidence Library", to: "/evidence" }, { label: "Insights", to: "/insights" },
+  { id: "discover", label: "Discover", prefixes: ["/discover", "/playbook", "/voices", "/ask", "/state-of-the-field", "/evidence", "/insights", "/framework", "/climate"], tabs: [
+    { label: "Discover", to: "/discover" }, { label: "The Playbook", to: "/playbook" }, { label: "ASEB Voices", to: "/voices" }, { label: "Ask the Village", to: "/ask" }, { label: "State of the Field", to: "/state-of-the-field" }, { label: "Academy", to: "/learning" }, { label: "Opportunities", to: "/the-field?tab=opportunities" }, { label: "Events", to: "/discover?type=event" },
+  ] },
+  { id: "you", label: "You", prefixes: ["/you"], tabs: [
+    { label: "Overview", to: "/you" }, { label: "Profile", to: "/you?tab=profile" }, { label: "My contributions", to: "/you?tab=contributions" }, { label: "Saved", to: "/you?tab=saved" }, { label: "Following", to: "/you?tab=following" }, { label: "Membership", to: "/you?tab=membership" }, { label: "Settings", to: "/you?tab=settings" },
   ] },
   { id: "involved", label: "Get Involved", prefixes: ["/join", "/get-involved", "/partners", "/collaborate", "/work-with-us", "/invest", "/funders"], tabs: [
     { label: "Invest", to: investPath }, { label: "Membership", to: "/join" }, { label: "Partnerships", to: "/partners" }, { label: "Collaborate", to: "/collaborate" }, { label: "Commission", to: "/work-with-us" }, { label: "All routes", to: "/get-involved" },

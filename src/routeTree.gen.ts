@@ -15,6 +15,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as StoriesRouteImport } from './routes/stories'
 import { Route as AuthenticatedAppRouteImport } from './routes/_authenticated/app'
+import { Route as AuthenticatedEditorialRouteImport } from './routes/_authenticated/editorial'
 import { Route as AuthenticatedSecretariatRouteImport } from './routes/_authenticated/secretariat'
 import { Route as SiteIndexRouteImport } from './routes/_site.index'
 import { Route as SiteAmbassadorsRouteImport } from './routes/_site.ambassadors'
@@ -58,6 +59,7 @@ import { Route as SiteFieldSlugRouteImport } from './routes/_site.field.$slug'
 import { Route as SiteMembersIdRouteImport } from './routes/_site.members.$id'
 import { Route as SitePlaybookIndexRouteImport } from './routes/_site.playbook.index'
 import { Route as SitePlaybookSlugRouteImport } from './routes/_site.playbook.$slug'
+import { Route as SitePreviewVillageRouteImport } from './routes/_site.preview.village'
 import { Route as SiteRegistryIndexRouteImport } from './routes/_site.registry.index'
 import { Route as SiteRegistrySlugRouteImport } from './routes/_site.registry.$slug'
 import { Route as SiteRegistrySubmitRouteImport } from './routes/_site.registry_.submit'
@@ -95,6 +97,11 @@ const StoriesRoute = StoriesRouteImport.update({
 const AuthenticatedAppRoute = AuthenticatedAppRouteImport.update({
   id: '/app',
   path: '/app',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedEditorialRoute = AuthenticatedEditorialRouteImport.update({
+  id: '/editorial',
+  path: '/editorial',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedSecretariatRoute =
@@ -313,6 +320,11 @@ const SitePlaybookSlugRoute = SitePlaybookSlugRouteImport.update({
   path: '/playbook/$slug',
   getParentRoute: () => SiteRoute,
 } as any)
+const SitePreviewVillageRoute = SitePreviewVillageRouteImport.update({
+  id: '/preview/village',
+  path: '/preview/village',
+  getParentRoute: () => SiteRoute,
+} as any)
 const SiteRegistryIndexRoute = SiteRegistryIndexRouteImport.update({
   id: '/registry/',
   path: '/registry/',
@@ -371,6 +383,7 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/stories': typeof StoriesRoute
   '/app': typeof AuthenticatedAppRoute
+  '/editorial': typeof AuthenticatedEditorialRoute
   '/secretariat': typeof AuthenticatedSecretariatRoute
   '/ambassadors': typeof SiteAmbassadorsRoute
   '/climate': typeof SiteClimateRoute
@@ -409,6 +422,7 @@ export interface FileRoutesByFullPath {
   '/field/$slug': typeof SiteFieldSlugRoute
   '/members/$id': typeof SiteMembersIdRoute
   '/playbook/$slug': typeof SitePlaybookSlugRoute
+  '/preview/village': typeof SitePreviewVillageRoute
   '/registry/$slug': typeof SiteRegistrySlugRoute
   '/registry/submit': typeof SiteRegistrySubmitRoute
   '/state-of-the-field/$slug': typeof SiteStateOfTheFieldSlugRoute
@@ -430,6 +444,7 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/stories': typeof StoriesRoute
   '/app': typeof AuthenticatedAppRoute
+  '/editorial': typeof AuthenticatedEditorialRoute
   '/secretariat': typeof AuthenticatedSecretariatRoute
   '/ambassadors': typeof SiteAmbassadorsRoute
   '/climate': typeof SiteClimateRoute
@@ -468,6 +483,7 @@ export interface FileRoutesByTo {
   '/field/$slug': typeof SiteFieldSlugRoute
   '/members/$id': typeof SiteMembersIdRoute
   '/playbook/$slug': typeof SitePlaybookSlugRoute
+  '/preview/village': typeof SitePreviewVillageRoute
   '/registry/$slug': typeof SiteRegistrySlugRoute
   '/registry/submit': typeof SiteRegistrySubmitRoute
   '/state-of-the-field/$slug': typeof SiteStateOfTheFieldSlugRoute
@@ -491,6 +507,7 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/stories': typeof StoriesRoute
   '/_authenticated/app': typeof AuthenticatedAppRoute
+  '/_authenticated/editorial': typeof AuthenticatedEditorialRoute
   '/_authenticated/secretariat': typeof AuthenticatedSecretariatRoute
   '/_site/ambassadors': typeof SiteAmbassadorsRoute
   '/_site/climate': typeof SiteClimateRoute
@@ -530,6 +547,7 @@ export interface FileRoutesById {
   '/_site/field/$slug': typeof SiteFieldSlugRoute
   '/_site/members/$id': typeof SiteMembersIdRoute
   '/_site/playbook/$slug': typeof SitePlaybookSlugRoute
+  '/_site/preview/village': typeof SitePreviewVillageRoute
   '/_site/registry/$slug': typeof SiteRegistrySlugRoute
   '/_site/registry_/submit': typeof SiteRegistrySubmitRoute
   '/_site/state-of-the-field/$slug': typeof SiteStateOfTheFieldSlugRoute
@@ -553,6 +571,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/stories'
     | '/app'
+    | '/editorial'
     | '/secretariat'
     | '/ambassadors'
     | '/climate'
@@ -591,6 +610,7 @@ export interface FileRouteTypes {
     | '/field/$slug'
     | '/members/$id'
     | '/playbook/$slug'
+    | '/preview/village'
     | '/registry/$slug'
     | '/registry/submit'
     | '/state-of-the-field/$slug'
@@ -612,6 +632,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/stories'
     | '/app'
+    | '/editorial'
     | '/secretariat'
     | '/ambassadors'
     | '/climate'
@@ -650,6 +671,7 @@ export interface FileRouteTypes {
     | '/field/$slug'
     | '/members/$id'
     | '/playbook/$slug'
+    | '/preview/village'
     | '/registry/$slug'
     | '/registry/submit'
     | '/state-of-the-field/$slug'
@@ -672,6 +694,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/stories'
     | '/_authenticated/app'
+    | '/_authenticated/editorial'
     | '/_authenticated/secretariat'
     | '/_site/ambassadors'
     | '/_site/climate'
@@ -711,6 +734,7 @@ export interface FileRouteTypes {
     | '/_site/field/$slug'
     | '/_site/members/$id'
     | '/_site/playbook/$slug'
+    | '/_site/preview/village'
     | '/_site/registry/$slug'
     | '/_site/registry_/submit'
     | '/_site/state-of-the-field/$slug'
@@ -778,6 +802,13 @@ declare module '@tanstack/react-router' {
       path: '/app'
       fullPath: '/app'
       preLoaderRoute: typeof AuthenticatedAppRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/editorial': {
+      id: '/_authenticated/editorial'
+      path: '/editorial'
+      fullPath: '/editorial'
+      preLoaderRoute: typeof AuthenticatedEditorialRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/secretariat': {
@@ -1081,6 +1112,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitePlaybookSlugRouteImport
       parentRoute: typeof SiteRoute
     }
+    '/_site/preview/village': {
+      id: '/_site/preview/village'
+      path: '/preview/village'
+      fullPath: '/preview/village'
+      preLoaderRoute: typeof SitePreviewVillageRouteImport
+      parentRoute: typeof SiteRoute
+    }
     '/_site/registry/': {
       id: '/_site/registry/'
       path: '/registry'
@@ -1156,11 +1194,13 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAppRoute: typeof AuthenticatedAppRoute
+  AuthenticatedEditorialRoute: typeof AuthenticatedEditorialRoute
   AuthenticatedSecretariatRoute: typeof AuthenticatedSecretariatRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAppRoute: AuthenticatedAppRoute,
+  AuthenticatedEditorialRoute: AuthenticatedEditorialRoute,
   AuthenticatedSecretariatRoute: AuthenticatedSecretariatRoute,
 }
 
@@ -1205,6 +1245,7 @@ interface SiteRouteChildren {
   SiteFieldSlugRoute: typeof SiteFieldSlugRoute
   SiteMembersIdRoute: typeof SiteMembersIdRoute
   SitePlaybookSlugRoute: typeof SitePlaybookSlugRoute
+  SitePreviewVillageRoute: typeof SitePreviewVillageRoute
   SiteRegistrySlugRoute: typeof SiteRegistrySlugRoute
   SiteRegistrySubmitRoute: typeof SiteRegistrySubmitRoute
   SiteStateOfTheFieldSlugRoute: typeof SiteStateOfTheFieldSlugRoute
@@ -1259,6 +1300,7 @@ const SiteRouteChildren: SiteRouteChildren = {
   SiteFieldSlugRoute: SiteFieldSlugRoute,
   SiteMembersIdRoute: SiteMembersIdRoute,
   SitePlaybookSlugRoute: SitePlaybookSlugRoute,
+  SitePreviewVillageRoute: SitePreviewVillageRoute,
   SiteRegistrySlugRoute: SiteRegistrySlugRoute,
   SiteRegistrySubmitRoute: SiteRegistrySubmitRoute,
   SiteStateOfTheFieldSlugRoute: SiteStateOfTheFieldSlugRoute,

@@ -3,7 +3,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { useQueryClient } from "@tanstack/react-query";
 import { Link } from "@/lib/router";
 import { supabase } from "@/integrations/supabase/client";
-import { contributionSchema, evidenceLabel, kindLabel, type ContentKind, type EvidenceClass, type MediaItem } from "@/lib/community";
+import { contributionSchema, evidenceLabel, kindLabel, type ContentKind, type ContentRow, type EvidenceClass, type MediaItem } from "@/lib/community";
 import { saveContribution } from "@/lib/community.functions";
 import { founderTopics, playbookChapters, voicesCategories } from "@/content/products";
 import { africanCountries } from "@/content/countries";
@@ -11,7 +11,7 @@ import { useMember } from "@/hooks/use-member";
 import { useCommunity } from "@/hooks/use-community";
 import { Media, NotYetLive, Prose, SignInPrompt } from "./Primitives";
 
-type Props = { kind: ContentKind; parentId?: string; chapterSlug?: string; category?: string; compact?: boolean; onDone?: (result: { slug: string; status: string }) => void };
+type Props = { kind: ContentKind; parentId?: string; chapterSlug?: string; category?: string; compact?: boolean; initial?: ContentRow; onDone?: (result: { slug: string; status: string }) => void };
 
 const guidance: Partial<Record<ContentKind, { title: string; body: string }>> = {
   post: { title: "", body: "What is happening in your ecosystem?" },
@@ -32,7 +32,7 @@ const DRAFT_KEY = (kind: string, scope: string) => `aseb-draft-${kind}-${scope}`
 
 // One editor for every contribution type. Drafts are kept on the device while writing so an
 // interrupted session is not lost, and can be saved to the account as drafts at any time.
-export function ContributionEditor({ kind, parentId, chapterSlug, category, compact = false, onDone }: Props) {
+export function ContributionEditor({ kind, parentId, chapterSlug, category, compact = false, initial, onDone }: Props) {
   const { user, ready } = useMember();
   const community = useCommunity();
   const save = useServerFn(saveContribution);
@@ -58,6 +58,15 @@ export function ContributionEditor({ kind, parentId, chapterSlug, category, comp
   const [result, setResult] = useState<{ slug: string; status: string } | null>(null);
   const [savedId, setSavedId] = useState<string | undefined>();
   const restored = useRef(false);
+  // Continue editing an existing draft or a submission returned for revision.
+  useEffect(() => {
+    if (!initial) return;
+    restored.current = true;
+    setSavedId(initial.id); setTitle(initial.title); setBody(initial.body); setSummary(initial.summary);
+    setVoicesCategory(initial.voices_category ?? ""); setChapter(initial.details["chapterSlug"] ?? ""); setCountry(initial.country);
+    setTopics(initial.topics.join(", ")); setEvidence(initial.evidence_class); setDetails(initial.details); setMedia(initial.media);
+    setVisibility(initial.visibility); setAttribution(initial.attribution); setConsentPublish(initial.consent_publish); setConsentEdit(initial.consent_edit);
+  }, [initial]);
   const editorial = !["post", "question", "answer"].includes(kind);
 
   // Restore an unfinished draft from this device, then keep saving it as the person types.

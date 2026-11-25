@@ -44,7 +44,7 @@ export function VoicesPage() {
         </div>
       </header>
 
-      <nav aria-label="Voices categories" className="sticky top-[calc(var(--app-bar-h)+var(--safe-top))] z-20 border-b border-hairline bg-paper/95 backdrop-blur-sm">
+      <nav aria-label="Voices categories" className="sticky top-[calc(var(--app-bar-h)+var(--context-tabs-h)+var(--safe-top))] z-20 border-b border-hairline bg-paper/95 backdrop-blur-sm">
         <div className="no-scrollbar wrap flex h-12 gap-6 overflow-x-auto">
           <Link to="/voices" aria-current={!category ? "page" : undefined} className={`flex shrink-0 items-center whitespace-nowrap text-[0.875rem] ${!category ? "font-semibold" : "text-ink/60 hover:text-ink"}`}>All voices</Link>
           {categories.map((c) => <Link key={c.key} to={`/voices?category=${c.key}`} aria-current={category?.key === c.key ? "page" : undefined} className={`flex shrink-0 items-center whitespace-nowrap text-[0.875rem] ${category?.key === c.key ? "font-semibold" : "text-ink/60 hover:text-ink"}`}>{c.name}</Link>)}

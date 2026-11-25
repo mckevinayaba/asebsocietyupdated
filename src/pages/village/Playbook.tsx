@@ -28,7 +28,7 @@ export function PlaybookPage() {
           </div>
           <div className="flex flex-col justify-end lg:col-span-5">
             <p className="text-[1.0625rem] leading-relaxed text-ivory/85">{products.playbook.line} Practitioners, founders, researchers and institutions contribute what they know. Editors weave it into chapters, with every contributor credited and every source kept.</p>
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row"><Btn to="/contribute?kind=playbook_contribution" variant="signal">Contribute to a chapter</Btn><Btn to="#chapters" variant="line">Read the chapters</Btn></div>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row"><Btn to="/contribute?kind=playbook_contribution" variant="signal">Contribute to a chapter</Btn><a href="#chapters" className="btn btn-line">Read the chapters <span className="arr" aria-hidden="true">↓</span></a></div>
           </div>
         </div>
       </header>

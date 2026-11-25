@@ -1,4 +1,6 @@
 import { asset } from "@/lib/asset";
+import { Link } from "@/lib/router";
+import { waysToContribute } from "@/content/products";
 import { Btn, TLink } from "@/components/Arrow";
 import { EoiForm } from "@/components/EoiForm";
 import { TheoryOfChange } from "@/components/TheoryOfChange";
@@ -92,6 +94,22 @@ export default function Invest() {
         </div>
       </section>
 
+      <section className="section border-t border-hairline" aria-labelledby="ways-title">
+        <div className="wrap grid gap-12 lg:grid-cols-12 lg:gap-10">
+          <div className="lg:col-span-5">
+            <p className="eyebrow">It Takes a Village</p>
+            <h2 id="ways-title" className="mt-5 text-title">Contributing to the village is not only money.</h2>
+            <p className="lede mt-5">Institutions and individuals strengthen the Society with knowledge, time, networks and resources. Every route below reaches a person at the Secretariat.</p>
+          </div>
+          <ul className="grid self-start sm:grid-cols-2 lg:col-span-6 lg:col-start-7">
+            {waysToContribute.map((way) => {
+              const to = way === "Funding" || way === "Institutional resources" ? "#enquire" : way === "Research" ? "/field-lab" : way === "Country representation" ? "/country-partners" : way === "Professional knowledge" ? "/playbook" : way === "Partnerships" ? "/partners" : "/collaborate";
+              return <li key={way} className="border-t border-hairline">{to.startsWith("#") ? <a href={to} className="group flex min-h-[56px] items-center justify-between gap-3 pr-4 font-semibold hover:text-ember">{way}<span aria-hidden="true">→</span></a> : <Link to={to} className="group flex min-h-[56px] items-center justify-between gap-3 pr-4 font-semibold hover:text-ember">{way}<span aria-hidden="true">→</span></Link>}</li>;
+            })}
+          </ul>
+        </div>
+      </section>
+
       <section id="enquire" className="section scroll-mt-28 border-t border-hairline bg-paper" aria-labelledby="enquire-title">
         <div className="wrap grid gap-12 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-4">
@@ -115,7 +133,7 @@ export default function Invest() {
                 { name: "organisation", label: "Institution", required: true },
                 { name: "contact", label: "Your name and title", required: true },
                 { name: "email", label: "Email", type: "email", required: true },
-                { name: "interest", label: "Area of interest", type: "select", options: [...investmentAreas.map((a) => a.name), "Request institutional documents"], required: true },
+                { name: "interest", label: "Area of interest", type: "select", options: [...investmentAreas.map((a) => a.name), ...waysToContribute.filter((w) => w !== "Funding").map((w) => `Contribute: ${w}`), "Request institutional documents"], required: true },
                 { name: "geography", label: "Countries or regions of focus" },
                 { name: "message", label: "Where do your priorities align with the Society's mandate?", type: "textarea", required: true },
               ]}
