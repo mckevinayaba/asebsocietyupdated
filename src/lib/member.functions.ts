@@ -18,10 +18,14 @@ export const getMemberData = createServerFn({ method: "GET" }).middleware([requi
   const [{ data: profile, error: profileError }, { data: circles, error: circlesError }, { data: applications, error: applicationError }] = await Promise.all([
     context.supabase.from("profiles").select("name,country,organisation,primary_role,bio").eq("id", context.userId).maybeSingle(),
     context.supabase.from("circle_memberships").select("circle_key").eq("user_id", context.userId),
-    context.supabase.from("membership_applications").select("id,name,status,created_at,role,country").order("created_at", { ascending: false }),
+    context.supabase.from("membership_applications").select("id,name,email,status,created_at,role,country").order("created_at", { ascending: false }),
   ]);
   if (profileError || circlesError || applicationError) throw new Error("Your member information could not be loaded.");
-  return { profile, applications: applications || [], circles: circles?.map((circle) => circle.circle_key) || [] };
+  // Row level security already limits members to their own applications. Secretariat roles can read
+  // every application, so the member view is scoped to the caller's own email as well.
+  const ownEmail = typeof context.claims.email === "string" ? context.claims.email.trim().toLowerCase() : "";
+  const own = (applications || []).filter((application) => ownEmail !== "" && application.email.trim().toLowerCase() === ownEmail).map(({ email: _email, ...application }) => application);
+  return { profile, applications: own, circles: circles?.map((circle) => circle.circle_key) || [] };
 });
 
 export const saveMemberProfile = createServerFn({ method: "POST" }).middleware([requireSupabaseAuth]).inputValidator((input) => memberProfileSchema.parse(input)).handler(async ({ data, context }) => {
