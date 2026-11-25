@@ -19,3 +19,18 @@ export function seo({ title, description, path, noindex = false, image = "/image
     links: noindex ? [] : [{ rel: "canonical", href: url }],
   };
 }
+
+// Metadata for a single community item. Unpublished or private items get a generic, noindex
+// preview, so nothing unpublished can appear in a link preview or a search engine.
+export function itemSeo(meta: { title: string; description: string; author: string; publishedAt: string | null } | null, options: { product: string; path: string; image: string; article?: boolean }) {
+  if (!meta) return seo({ title: options.product, description: `${options.product} on ASEB Society.`, path: options.path, image: options.image, noindex: true });
+  const base = seo({ title: `${meta.title} | ${options.product}`, description: meta.description, path: options.path, image: options.image });
+  return {
+    ...base,
+    meta: [
+      ...base.meta.map((m) => ("property" in m && m.property === "og:type" && options.article ? { property: "og:type", content: "article" } : m)),
+      ...(meta.author ? [{ name: "author", content: meta.author }] : []),
+      ...(meta.publishedAt && options.article ? [{ property: "article:published_time", content: meta.publishedAt }] : []),
+    ],
+  };
+}

@@ -3,9 +3,7 @@
 // in order, against an in-memory PostgreSQL (PGlite) with a minimal stand-in for the Supabase auth
 // schema and API roles, including Supabase's default privileges on new public objects.
 // The tests then act as anon, members and Secretariat roles to prove what each may and may not do.
-import { readdirSync, readFileSync } from "node:fs";
-import path from "node:path";
-import { PGlite } from "@electric-sql/pglite";
+import { createDatabase, type Db } from "./db-harness";
 import { beforeAll, describe, expect, it } from "vitest";
 
 const ADMIN = "11111111-1111-1111-1111-111111111111";
@@ -13,7 +11,7 @@ const REVIEWER = "22222222-2222-2222-2222-222222222222";
 const MEMBER = "33333333-3333-3333-3333-333333333333";
 const UNVERIFIED_ADMIN = "44444444-4444-4444-4444-444444444444";
 
-let db: PGlite;
+let db: Db;
 let memberApplicationId = "";
 
 async function as(role: "anon" | "authenticated", uid: string, sql: string) {
@@ -29,22 +27,7 @@ async function as(role: "anon" | "authenticated", uid: string, sql: string) {
 }
 
 beforeAll(async () => {
-  db = new PGlite();
-  await db.exec(`
-    CREATE ROLE anon NOLOGIN; CREATE ROLE authenticated NOLOGIN; CREATE ROLE service_role NOLOGIN BYPASSRLS;
-    CREATE SCHEMA auth;
-    GRANT USAGE ON SCHEMA auth TO anon, authenticated, service_role;
-    GRANT USAGE ON SCHEMA public TO anon, authenticated, service_role;
-    CREATE TABLE auth.users (id uuid PRIMARY KEY, email text, email_confirmed_at timestamptz, created_at timestamptz DEFAULT now(), last_sign_in_at timestamptz, raw_user_meta_data jsonb DEFAULT '{}');
-    CREATE FUNCTION auth.uid() RETURNS uuid LANGUAGE sql STABLE AS $$ SELECT nullif(current_setting('request.uid', true), '')::uuid $$;
-    GRANT EXECUTE ON FUNCTION auth.uid() TO anon, authenticated;
-    ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO anon, authenticated, service_role;
-    ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON FUNCTIONS TO anon, authenticated, service_role;
-  `);
-  const dir = path.resolve(__dirname, "../../drizzle/migrations");
-  for (const file of readdirSync(dir).filter((name) => name.endsWith(".sql")).sort()) {
-    await db.exec(readFileSync(path.join(dir, file), "utf8"));
-  }
+  db = await createDatabase();
   await db.exec(`
     INSERT INTO auth.users (id, email, email_confirmed_at, raw_user_meta_data) VALUES
       ('${ADMIN}', 'admin@example.org', now(), '{"name":"Admin Person"}'),

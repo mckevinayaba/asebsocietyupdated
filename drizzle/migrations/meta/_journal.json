@@ -50,6 +50,20 @@
       "when": 1795564800000,
       "tag": "0006_secretariat_access_and_security_hardening",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1795651200000,
+      "tag": "0007_living_village_shared_content",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1795651260000,
+      "tag": "0008_community_media_storage",
+      "breakpoints": true
     }
   ]
 }

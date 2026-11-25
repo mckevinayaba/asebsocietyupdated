@@ -15,16 +15,20 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as StoriesRouteImport } from './routes/stories'
 import { Route as AuthenticatedAppRouteImport } from './routes/_authenticated/app'
+import { Route as AuthenticatedEditorialRouteImport } from './routes/_authenticated/editorial'
 import { Route as AuthenticatedSecretariatRouteImport } from './routes/_authenticated/secretariat'
 import { Route as SiteIndexRouteImport } from './routes/_site.index'
 import { Route as SiteAmbassadorsRouteImport } from './routes/_site.ambassadors'
 import { Route as SiteClimateRouteImport } from './routes/_site.climate'
 import { Route as SiteCollaborateRouteImport } from './routes/_site.collaborate'
 import { Route as SiteCommunitiesRouteImport } from './routes/_site.communities'
+import { Route as SiteCommunityGuidelinesRouteImport } from './routes/_site.community-guidelines'
+import { Route as SiteContributeRouteImport } from './routes/_site.contribute'
 import { Route as SiteCountryPartnersRouteImport } from './routes/_site.country-partners'
 import { Route as SiteDiscoverRouteImport } from './routes/_site.discover'
 import { Route as SiteEvidenceRouteImport } from './routes/_site.evidence'
 import { Route as SiteFieldLabRouteImport } from './routes/_site.field-lab'
+import { Route as SiteFounderVoicesRouteImport } from './routes/_site.founder-voices'
 import { Route as SiteFrameworkRouteImport } from './routes/_site.framework'
 import { Route as SiteFundersRouteImport } from './routes/_site.funders'
 import { Route as SiteGetInvolvedRouteImport } from './routes/_site.get-involved'
@@ -33,10 +37,12 @@ import { Route as SiteInsightsRouteImport } from './routes/_site.insights'
 import { Route as SiteInvestRouteImport } from './routes/_site.invest'
 import { Route as SiteJoinRouteImport } from './routes/_site.join'
 import { Route as SiteLearningRouteImport } from './routes/_site.learning'
+import { Route as SiteOnboardingRouteImport } from './routes/_site.onboarding'
 import { Route as SitePartnersRouteImport } from './routes/_site.partners'
 import { Route as SitePeopleRouteImport } from './routes/_site.people'
 import { Route as SiteProgressRouteImport } from './routes/_site.progress'
 import { Route as SiteSdgsRouteImport } from './routes/_site.sdgs'
+import { Route as SiteStoriesFromTheFieldRouteImport } from './routes/_site.stories-from-the-field'
 import { Route as SiteSummitRouteImport } from './routes/_site.summit'
 import { Route as SiteWhatWeBuildRouteImport } from './routes/_site.what-we-build'
 import { Route as SiteWhyAsebRouteImport } from './routes/_site.why-aseb'
@@ -44,13 +50,25 @@ import { Route as SiteWorkWithUsRouteImport } from './routes/_site.work-with-us'
 import { Route as SiteYouRouteImport } from './routes/_site.you'
 import { Route as PreviewSecretariatRouteImport } from './routes/preview.secretariat'
 import { Route as SiteAboutStoryRouteImport } from './routes/_site.about.story'
+import { Route as SiteAskIndexRouteImport } from './routes/_site.ask.index'
+import { Route as SiteAskSlugRouteImport } from './routes/_site.ask.$slug'
 import { Route as SiteCountriesIndexRouteImport } from './routes/_site.countries.index'
 import { Route as SiteCountriesSlugRouteImport } from './routes/_site.countries.$slug'
 import { Route as SiteFieldIndexRouteImport } from './routes/_site.field.index'
 import { Route as SiteFieldSlugRouteImport } from './routes/_site.field.$slug'
+import { Route as SiteMembersIdRouteImport } from './routes/_site.members.$id'
+import { Route as SitePlaybookIndexRouteImport } from './routes/_site.playbook.index'
+import { Route as SitePlaybookSlugRouteImport } from './routes/_site.playbook.$slug'
+import { Route as SitePreviewVillageRouteImport } from './routes/_site.preview.village'
 import { Route as SiteRegistryIndexRouteImport } from './routes/_site.registry.index'
 import { Route as SiteRegistrySlugRouteImport } from './routes/_site.registry.$slug'
 import { Route as SiteRegistrySubmitRouteImport } from './routes/_site.registry_.submit'
+import { Route as SiteStateOfTheFieldIndexRouteImport } from './routes/_site.state-of-the-field.index'
+import { Route as SiteStateOfTheFieldSlugRouteImport } from './routes/_site.state-of-the-field.$slug'
+import { Route as SiteTheFieldIndexRouteImport } from './routes/_site.the-field.index'
+import { Route as SiteTheFieldSlugRouteImport } from './routes/_site.the-field.$slug'
+import { Route as SiteVoicesIndexRouteImport } from './routes/_site.voices.index'
+import { Route as SiteVoicesSlugRouteImport } from './routes/_site.voices.$slug'
 import { Route as SiteFieldRoleSlugRouteImport } from './routes/_site.field.role.$slug'
 
 const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
@@ -79,6 +97,11 @@ const StoriesRoute = StoriesRouteImport.update({
 const AuthenticatedAppRoute = AuthenticatedAppRouteImport.update({
   id: '/app',
   path: '/app',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedEditorialRoute = AuthenticatedEditorialRouteImport.update({
+  id: '/editorial',
+  path: '/editorial',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedSecretariatRoute =
@@ -112,6 +135,16 @@ const SiteCommunitiesRoute = SiteCommunitiesRouteImport.update({
   path: '/communities',
   getParentRoute: () => SiteRoute,
 } as any)
+const SiteCommunityGuidelinesRoute = SiteCommunityGuidelinesRouteImport.update({
+  id: '/community-guidelines',
+  path: '/community-guidelines',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteContributeRoute = SiteContributeRouteImport.update({
+  id: '/contribute',
+  path: '/contribute',
+  getParentRoute: () => SiteRoute,
+} as any)
 const SiteCountryPartnersRoute = SiteCountryPartnersRouteImport.update({
   id: '/country-partners',
   path: '/country-partners',
@@ -130,6 +163,11 @@ const SiteEvidenceRoute = SiteEvidenceRouteImport.update({
 const SiteFieldLabRoute = SiteFieldLabRouteImport.update({
   id: '/field-lab',
   path: '/field-lab',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteFounderVoicesRoute = SiteFounderVoicesRouteImport.update({
+  id: '/founder-voices',
+  path: '/founder-voices',
   getParentRoute: () => SiteRoute,
 } as any)
 const SiteFrameworkRoute = SiteFrameworkRouteImport.update({
@@ -172,6 +210,11 @@ const SiteLearningRoute = SiteLearningRouteImport.update({
   path: '/learning',
   getParentRoute: () => SiteRoute,
 } as any)
+const SiteOnboardingRoute = SiteOnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
+  getParentRoute: () => SiteRoute,
+} as any)
 const SitePartnersRoute = SitePartnersRouteImport.update({
   id: '/partners',
   path: '/partners',
@@ -190,6 +233,11 @@ const SiteProgressRoute = SiteProgressRouteImport.update({
 const SiteSdgsRoute = SiteSdgsRouteImport.update({
   id: '/sdgs',
   path: '/sdgs',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteStoriesFromTheFieldRoute = SiteStoriesFromTheFieldRouteImport.update({
+  id: '/stories-from-the-field',
+  path: '/stories-from-the-field',
   getParentRoute: () => SiteRoute,
 } as any)
 const SiteSummitRoute = SiteSummitRouteImport.update({
@@ -227,6 +275,16 @@ const SiteAboutStoryRoute = SiteAboutStoryRouteImport.update({
   path: '/about/story',
   getParentRoute: () => SiteRoute,
 } as any)
+const SiteAskIndexRoute = SiteAskIndexRouteImport.update({
+  id: '/ask/',
+  path: '/ask/',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteAskSlugRoute = SiteAskSlugRouteImport.update({
+  id: '/ask/$slug',
+  path: '/ask/$slug',
+  getParentRoute: () => SiteRoute,
+} as any)
 const SiteCountriesIndexRoute = SiteCountriesIndexRouteImport.update({
   id: '/countries/',
   path: '/countries/',
@@ -247,6 +305,26 @@ const SiteFieldSlugRoute = SiteFieldSlugRouteImport.update({
   path: '/field/$slug',
   getParentRoute: () => SiteRoute,
 } as any)
+const SiteMembersIdRoute = SiteMembersIdRouteImport.update({
+  id: '/members/$id',
+  path: '/members/$id',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SitePlaybookIndexRoute = SitePlaybookIndexRouteImport.update({
+  id: '/playbook/',
+  path: '/playbook/',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SitePlaybookSlugRoute = SitePlaybookSlugRouteImport.update({
+  id: '/playbook/$slug',
+  path: '/playbook/$slug',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SitePreviewVillageRoute = SitePreviewVillageRouteImport.update({
+  id: '/preview/village',
+  path: '/preview/village',
+  getParentRoute: () => SiteRoute,
+} as any)
 const SiteRegistryIndexRoute = SiteRegistryIndexRouteImport.update({
   id: '/registry/',
   path: '/registry/',
@@ -262,6 +340,37 @@ const SiteRegistrySubmitRoute = SiteRegistrySubmitRouteImport.update({
   path: '/registry/submit',
   getParentRoute: () => SiteRoute,
 } as any)
+const SiteStateOfTheFieldIndexRoute =
+  SiteStateOfTheFieldIndexRouteImport.update({
+    id: '/state-of-the-field/',
+    path: '/state-of-the-field/',
+    getParentRoute: () => SiteRoute,
+  } as any)
+const SiteStateOfTheFieldSlugRoute = SiteStateOfTheFieldSlugRouteImport.update({
+  id: '/state-of-the-field/$slug',
+  path: '/state-of-the-field/$slug',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteTheFieldIndexRoute = SiteTheFieldIndexRouteImport.update({
+  id: '/the-field/',
+  path: '/the-field/',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteTheFieldSlugRoute = SiteTheFieldSlugRouteImport.update({
+  id: '/the-field/$slug',
+  path: '/the-field/$slug',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteVoicesIndexRoute = SiteVoicesIndexRouteImport.update({
+  id: '/voices/',
+  path: '/voices/',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteVoicesSlugRoute = SiteVoicesSlugRouteImport.update({
+  id: '/voices/$slug',
+  path: '/voices/$slug',
+  getParentRoute: () => SiteRoute,
+} as any)
 const SiteFieldRoleSlugRoute = SiteFieldRoleSlugRouteImport.update({
   id: '/field/role/$slug',
   path: '/field/role/$slug',
@@ -274,15 +383,19 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/stories': typeof StoriesRoute
   '/app': typeof AuthenticatedAppRoute
+  '/editorial': typeof AuthenticatedEditorialRoute
   '/secretariat': typeof AuthenticatedSecretariatRoute
   '/ambassadors': typeof SiteAmbassadorsRoute
   '/climate': typeof SiteClimateRoute
   '/collaborate': typeof SiteCollaborateRoute
   '/communities': typeof SiteCommunitiesRoute
+  '/community-guidelines': typeof SiteCommunityGuidelinesRoute
+  '/contribute': typeof SiteContributeRoute
   '/country-partners': typeof SiteCountryPartnersRoute
   '/discover': typeof SiteDiscoverRoute
   '/evidence': typeof SiteEvidenceRoute
   '/field-lab': typeof SiteFieldLabRoute
+  '/founder-voices': typeof SiteFounderVoicesRoute
   '/framework': typeof SiteFrameworkRoute
   '/funders': typeof SiteFundersRoute
   '/get-involved': typeof SiteGetInvolvedRoute
@@ -291,10 +404,12 @@ export interface FileRoutesByFullPath {
   '/invest': typeof SiteInvestRoute
   '/join': typeof SiteJoinRoute
   '/learning': typeof SiteLearningRoute
+  '/onboarding': typeof SiteOnboardingRoute
   '/partners': typeof SitePartnersRoute
   '/people': typeof SitePeopleRoute
   '/progress': typeof SiteProgressRoute
   '/sdgs': typeof SiteSdgsRoute
+  '/stories-from-the-field': typeof SiteStoriesFromTheFieldRoute
   '/summit': typeof SiteSummitRoute
   '/what-we-build': typeof SiteWhatWeBuildRoute
   '/why-aseb': typeof SiteWhyAsebRoute
@@ -302,13 +417,25 @@ export interface FileRoutesByFullPath {
   '/you': typeof SiteYouRoute
   '/preview/secretariat': typeof PreviewSecretariatRoute
   '/about/story': typeof SiteAboutStoryRoute
+  '/ask/$slug': typeof SiteAskSlugRoute
   '/countries/$slug': typeof SiteCountriesSlugRoute
   '/field/$slug': typeof SiteFieldSlugRoute
+  '/members/$id': typeof SiteMembersIdRoute
+  '/playbook/$slug': typeof SitePlaybookSlugRoute
+  '/preview/village': typeof SitePreviewVillageRoute
   '/registry/$slug': typeof SiteRegistrySlugRoute
   '/registry/submit': typeof SiteRegistrySubmitRoute
+  '/state-of-the-field/$slug': typeof SiteStateOfTheFieldSlugRoute
+  '/the-field/$slug': typeof SiteTheFieldSlugRoute
+  '/voices/$slug': typeof SiteVoicesSlugRoute
+  '/ask/': typeof SiteAskIndexRoute
   '/countries/': typeof SiteCountriesIndexRoute
   '/field/': typeof SiteFieldIndexRoute
+  '/playbook/': typeof SitePlaybookIndexRoute
   '/registry/': typeof SiteRegistryIndexRoute
+  '/state-of-the-field/': typeof SiteStateOfTheFieldIndexRoute
+  '/the-field/': typeof SiteTheFieldIndexRoute
+  '/voices/': typeof SiteVoicesIndexRoute
   '/field/role/$slug': typeof SiteFieldRoleSlugRoute
 }
 export interface FileRoutesByTo {
@@ -317,15 +444,19 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/stories': typeof StoriesRoute
   '/app': typeof AuthenticatedAppRoute
+  '/editorial': typeof AuthenticatedEditorialRoute
   '/secretariat': typeof AuthenticatedSecretariatRoute
   '/ambassadors': typeof SiteAmbassadorsRoute
   '/climate': typeof SiteClimateRoute
   '/collaborate': typeof SiteCollaborateRoute
   '/communities': typeof SiteCommunitiesRoute
+  '/community-guidelines': typeof SiteCommunityGuidelinesRoute
+  '/contribute': typeof SiteContributeRoute
   '/country-partners': typeof SiteCountryPartnersRoute
   '/discover': typeof SiteDiscoverRoute
   '/evidence': typeof SiteEvidenceRoute
   '/field-lab': typeof SiteFieldLabRoute
+  '/founder-voices': typeof SiteFounderVoicesRoute
   '/framework': typeof SiteFrameworkRoute
   '/funders': typeof SiteFundersRoute
   '/get-involved': typeof SiteGetInvolvedRoute
@@ -334,10 +465,12 @@ export interface FileRoutesByTo {
   '/invest': typeof SiteInvestRoute
   '/join': typeof SiteJoinRoute
   '/learning': typeof SiteLearningRoute
+  '/onboarding': typeof SiteOnboardingRoute
   '/partners': typeof SitePartnersRoute
   '/people': typeof SitePeopleRoute
   '/progress': typeof SiteProgressRoute
   '/sdgs': typeof SiteSdgsRoute
+  '/stories-from-the-field': typeof SiteStoriesFromTheFieldRoute
   '/summit': typeof SiteSummitRoute
   '/what-we-build': typeof SiteWhatWeBuildRoute
   '/why-aseb': typeof SiteWhyAsebRoute
@@ -345,13 +478,25 @@ export interface FileRoutesByTo {
   '/you': typeof SiteYouRoute
   '/preview/secretariat': typeof PreviewSecretariatRoute
   '/about/story': typeof SiteAboutStoryRoute
+  '/ask/$slug': typeof SiteAskSlugRoute
   '/countries/$slug': typeof SiteCountriesSlugRoute
   '/field/$slug': typeof SiteFieldSlugRoute
+  '/members/$id': typeof SiteMembersIdRoute
+  '/playbook/$slug': typeof SitePlaybookSlugRoute
+  '/preview/village': typeof SitePreviewVillageRoute
   '/registry/$slug': typeof SiteRegistrySlugRoute
   '/registry/submit': typeof SiteRegistrySubmitRoute
+  '/state-of-the-field/$slug': typeof SiteStateOfTheFieldSlugRoute
+  '/the-field/$slug': typeof SiteTheFieldSlugRoute
+  '/voices/$slug': typeof SiteVoicesSlugRoute
+  '/ask': typeof SiteAskIndexRoute
   '/countries': typeof SiteCountriesIndexRoute
   '/field': typeof SiteFieldIndexRoute
+  '/playbook': typeof SitePlaybookIndexRoute
   '/registry': typeof SiteRegistryIndexRoute
+  '/state-of-the-field': typeof SiteStateOfTheFieldIndexRoute
+  '/the-field': typeof SiteTheFieldIndexRoute
+  '/voices': typeof SiteVoicesIndexRoute
   '/field/role/$slug': typeof SiteFieldRoleSlugRoute
 }
 export interface FileRoutesById {
@@ -362,15 +507,19 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/stories': typeof StoriesRoute
   '/_authenticated/app': typeof AuthenticatedAppRoute
+  '/_authenticated/editorial': typeof AuthenticatedEditorialRoute
   '/_authenticated/secretariat': typeof AuthenticatedSecretariatRoute
   '/_site/ambassadors': typeof SiteAmbassadorsRoute
   '/_site/climate': typeof SiteClimateRoute
   '/_site/collaborate': typeof SiteCollaborateRoute
   '/_site/communities': typeof SiteCommunitiesRoute
+  '/_site/community-guidelines': typeof SiteCommunityGuidelinesRoute
+  '/_site/contribute': typeof SiteContributeRoute
   '/_site/country-partners': typeof SiteCountryPartnersRoute
   '/_site/discover': typeof SiteDiscoverRoute
   '/_site/evidence': typeof SiteEvidenceRoute
   '/_site/field-lab': typeof SiteFieldLabRoute
+  '/_site/founder-voices': typeof SiteFounderVoicesRoute
   '/_site/framework': typeof SiteFrameworkRoute
   '/_site/funders': typeof SiteFundersRoute
   '/_site/get-involved': typeof SiteGetInvolvedRoute
@@ -379,10 +528,12 @@ export interface FileRoutesById {
   '/_site/invest': typeof SiteInvestRoute
   '/_site/join': typeof SiteJoinRoute
   '/_site/learning': typeof SiteLearningRoute
+  '/_site/onboarding': typeof SiteOnboardingRoute
   '/_site/partners': typeof SitePartnersRoute
   '/_site/people': typeof SitePeopleRoute
   '/_site/progress': typeof SiteProgressRoute
   '/_site/sdgs': typeof SiteSdgsRoute
+  '/_site/stories-from-the-field': typeof SiteStoriesFromTheFieldRoute
   '/_site/summit': typeof SiteSummitRoute
   '/_site/what-we-build': typeof SiteWhatWeBuildRoute
   '/_site/why-aseb': typeof SiteWhyAsebRoute
@@ -391,13 +542,25 @@ export interface FileRoutesById {
   '/preview/secretariat': typeof PreviewSecretariatRoute
   '/_site/': typeof SiteIndexRoute
   '/_site/about/story': typeof SiteAboutStoryRoute
+  '/_site/ask/$slug': typeof SiteAskSlugRoute
   '/_site/countries/$slug': typeof SiteCountriesSlugRoute
   '/_site/field/$slug': typeof SiteFieldSlugRoute
+  '/_site/members/$id': typeof SiteMembersIdRoute
+  '/_site/playbook/$slug': typeof SitePlaybookSlugRoute
+  '/_site/preview/village': typeof SitePreviewVillageRoute
   '/_site/registry/$slug': typeof SiteRegistrySlugRoute
   '/_site/registry_/submit': typeof SiteRegistrySubmitRoute
+  '/_site/state-of-the-field/$slug': typeof SiteStateOfTheFieldSlugRoute
+  '/_site/the-field/$slug': typeof SiteTheFieldSlugRoute
+  '/_site/voices/$slug': typeof SiteVoicesSlugRoute
+  '/_site/ask/': typeof SiteAskIndexRoute
   '/_site/countries/': typeof SiteCountriesIndexRoute
   '/_site/field/': typeof SiteFieldIndexRoute
+  '/_site/playbook/': typeof SitePlaybookIndexRoute
   '/_site/registry/': typeof SiteRegistryIndexRoute
+  '/_site/state-of-the-field/': typeof SiteStateOfTheFieldIndexRoute
+  '/_site/the-field/': typeof SiteTheFieldIndexRoute
+  '/_site/voices/': typeof SiteVoicesIndexRoute
   '/_site/field/role/$slug': typeof SiteFieldRoleSlugRoute
 }
 export interface FileRouteTypes {
@@ -408,15 +571,19 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/stories'
     | '/app'
+    | '/editorial'
     | '/secretariat'
     | '/ambassadors'
     | '/climate'
     | '/collaborate'
     | '/communities'
+    | '/community-guidelines'
+    | '/contribute'
     | '/country-partners'
     | '/discover'
     | '/evidence'
     | '/field-lab'
+    | '/founder-voices'
     | '/framework'
     | '/funders'
     | '/get-involved'
@@ -425,10 +592,12 @@ export interface FileRouteTypes {
     | '/invest'
     | '/join'
     | '/learning'
+    | '/onboarding'
     | '/partners'
     | '/people'
     | '/progress'
     | '/sdgs'
+    | '/stories-from-the-field'
     | '/summit'
     | '/what-we-build'
     | '/why-aseb'
@@ -436,13 +605,25 @@ export interface FileRouteTypes {
     | '/you'
     | '/preview/secretariat'
     | '/about/story'
+    | '/ask/$slug'
     | '/countries/$slug'
     | '/field/$slug'
+    | '/members/$id'
+    | '/playbook/$slug'
+    | '/preview/village'
     | '/registry/$slug'
     | '/registry/submit'
+    | '/state-of-the-field/$slug'
+    | '/the-field/$slug'
+    | '/voices/$slug'
+    | '/ask/'
     | '/countries/'
     | '/field/'
+    | '/playbook/'
     | '/registry/'
+    | '/state-of-the-field/'
+    | '/the-field/'
+    | '/voices/'
     | '/field/role/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -451,15 +632,19 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/stories'
     | '/app'
+    | '/editorial'
     | '/secretariat'
     | '/ambassadors'
     | '/climate'
     | '/collaborate'
     | '/communities'
+    | '/community-guidelines'
+    | '/contribute'
     | '/country-partners'
     | '/discover'
     | '/evidence'
     | '/field-lab'
+    | '/founder-voices'
     | '/framework'
     | '/funders'
     | '/get-involved'
@@ -468,10 +653,12 @@ export interface FileRouteTypes {
     | '/invest'
     | '/join'
     | '/learning'
+    | '/onboarding'
     | '/partners'
     | '/people'
     | '/progress'
     | '/sdgs'
+    | '/stories-from-the-field'
     | '/summit'
     | '/what-we-build'
     | '/why-aseb'
@@ -479,13 +666,25 @@ export interface FileRouteTypes {
     | '/you'
     | '/preview/secretariat'
     | '/about/story'
+    | '/ask/$slug'
     | '/countries/$slug'
     | '/field/$slug'
+    | '/members/$id'
+    | '/playbook/$slug'
+    | '/preview/village'
     | '/registry/$slug'
     | '/registry/submit'
+    | '/state-of-the-field/$slug'
+    | '/the-field/$slug'
+    | '/voices/$slug'
+    | '/ask'
     | '/countries'
     | '/field'
+    | '/playbook'
     | '/registry'
+    | '/state-of-the-field'
+    | '/the-field'
+    | '/voices'
     | '/field/role/$slug'
   id:
     | '__root__'
@@ -495,15 +694,19 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/stories'
     | '/_authenticated/app'
+    | '/_authenticated/editorial'
     | '/_authenticated/secretariat'
     | '/_site/ambassadors'
     | '/_site/climate'
     | '/_site/collaborate'
     | '/_site/communities'
+    | '/_site/community-guidelines'
+    | '/_site/contribute'
     | '/_site/country-partners'
     | '/_site/discover'
     | '/_site/evidence'
     | '/_site/field-lab'
+    | '/_site/founder-voices'
     | '/_site/framework'
     | '/_site/funders'
     | '/_site/get-involved'
@@ -512,10 +715,12 @@ export interface FileRouteTypes {
     | '/_site/invest'
     | '/_site/join'
     | '/_site/learning'
+    | '/_site/onboarding'
     | '/_site/partners'
     | '/_site/people'
     | '/_site/progress'
     | '/_site/sdgs'
+    | '/_site/stories-from-the-field'
     | '/_site/summit'
     | '/_site/what-we-build'
     | '/_site/why-aseb'
@@ -524,13 +729,25 @@ export interface FileRouteTypes {
     | '/preview/secretariat'
     | '/_site/'
     | '/_site/about/story'
+    | '/_site/ask/$slug'
     | '/_site/countries/$slug'
     | '/_site/field/$slug'
+    | '/_site/members/$id'
+    | '/_site/playbook/$slug'
+    | '/_site/preview/village'
     | '/_site/registry/$slug'
     | '/_site/registry_/submit'
+    | '/_site/state-of-the-field/$slug'
+    | '/_site/the-field/$slug'
+    | '/_site/voices/$slug'
+    | '/_site/ask/'
     | '/_site/countries/'
     | '/_site/field/'
+    | '/_site/playbook/'
     | '/_site/registry/'
+    | '/_site/state-of-the-field/'
+    | '/_site/the-field/'
+    | '/_site/voices/'
     | '/_site/field/role/$slug'
   fileRoutesById: FileRoutesById
 }
@@ -587,6 +804,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAppRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/editorial': {
+      id: '/_authenticated/editorial'
+      path: '/editorial'
+      fullPath: '/editorial'
+      preLoaderRoute: typeof AuthenticatedEditorialRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/secretariat': {
       id: '/_authenticated/secretariat'
       path: '/secretariat'
@@ -629,6 +853,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SiteCommunitiesRouteImport
       parentRoute: typeof SiteRoute
     }
+    '/_site/community-guidelines': {
+      id: '/_site/community-guidelines'
+      path: '/community-guidelines'
+      fullPath: '/community-guidelines'
+      preLoaderRoute: typeof SiteCommunityGuidelinesRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/contribute': {
+      id: '/_site/contribute'
+      path: '/contribute'
+      fullPath: '/contribute'
+      preLoaderRoute: typeof SiteContributeRouteImport
+      parentRoute: typeof SiteRoute
+    }
     '/_site/country-partners': {
       id: '/_site/country-partners'
       path: '/country-partners'
@@ -655,6 +893,13 @@ declare module '@tanstack/react-router' {
       path: '/field-lab'
       fullPath: '/field-lab'
       preLoaderRoute: typeof SiteFieldLabRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/founder-voices': {
+      id: '/_site/founder-voices'
+      path: '/founder-voices'
+      fullPath: '/founder-voices'
+      preLoaderRoute: typeof SiteFounderVoicesRouteImport
       parentRoute: typeof SiteRoute
     }
     '/_site/framework': {
@@ -713,6 +958,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SiteLearningRouteImport
       parentRoute: typeof SiteRoute
     }
+    '/_site/onboarding': {
+      id: '/_site/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof SiteOnboardingRouteImport
+      parentRoute: typeof SiteRoute
+    }
     '/_site/partners': {
       id: '/_site/partners'
       path: '/partners'
@@ -739,6 +991,13 @@ declare module '@tanstack/react-router' {
       path: '/sdgs'
       fullPath: '/sdgs'
       preLoaderRoute: typeof SiteSdgsRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/stories-from-the-field': {
+      id: '/_site/stories-from-the-field'
+      path: '/stories-from-the-field'
+      fullPath: '/stories-from-the-field'
+      preLoaderRoute: typeof SiteStoriesFromTheFieldRouteImport
       parentRoute: typeof SiteRoute
     }
     '/_site/summit': {
@@ -790,6 +1049,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SiteAboutStoryRouteImport
       parentRoute: typeof SiteRoute
     }
+    '/_site/ask/': {
+      id: '/_site/ask/'
+      path: '/ask'
+      fullPath: '/ask/'
+      preLoaderRoute: typeof SiteAskIndexRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/ask/$slug': {
+      id: '/_site/ask/$slug'
+      path: '/ask/$slug'
+      fullPath: '/ask/$slug'
+      preLoaderRoute: typeof SiteAskSlugRouteImport
+      parentRoute: typeof SiteRoute
+    }
     '/_site/countries/': {
       id: '/_site/countries/'
       path: '/countries'
@@ -818,6 +1091,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SiteFieldSlugRouteImport
       parentRoute: typeof SiteRoute
     }
+    '/_site/members/$id': {
+      id: '/_site/members/$id'
+      path: '/members/$id'
+      fullPath: '/members/$id'
+      preLoaderRoute: typeof SiteMembersIdRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/playbook/': {
+      id: '/_site/playbook/'
+      path: '/playbook'
+      fullPath: '/playbook/'
+      preLoaderRoute: typeof SitePlaybookIndexRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/playbook/$slug': {
+      id: '/_site/playbook/$slug'
+      path: '/playbook/$slug'
+      fullPath: '/playbook/$slug'
+      preLoaderRoute: typeof SitePlaybookSlugRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/preview/village': {
+      id: '/_site/preview/village'
+      path: '/preview/village'
+      fullPath: '/preview/village'
+      preLoaderRoute: typeof SitePreviewVillageRouteImport
+      parentRoute: typeof SiteRoute
+    }
     '/_site/registry/': {
       id: '/_site/registry/'
       path: '/registry'
@@ -839,6 +1140,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SiteRegistrySubmitRouteImport
       parentRoute: typeof SiteRoute
     }
+    '/_site/state-of-the-field/': {
+      id: '/_site/state-of-the-field/'
+      path: '/state-of-the-field'
+      fullPath: '/state-of-the-field/'
+      preLoaderRoute: typeof SiteStateOfTheFieldIndexRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/state-of-the-field/$slug': {
+      id: '/_site/state-of-the-field/$slug'
+      path: '/state-of-the-field/$slug'
+      fullPath: '/state-of-the-field/$slug'
+      preLoaderRoute: typeof SiteStateOfTheFieldSlugRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/the-field/': {
+      id: '/_site/the-field/'
+      path: '/the-field'
+      fullPath: '/the-field/'
+      preLoaderRoute: typeof SiteTheFieldIndexRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/the-field/$slug': {
+      id: '/_site/the-field/$slug'
+      path: '/the-field/$slug'
+      fullPath: '/the-field/$slug'
+      preLoaderRoute: typeof SiteTheFieldSlugRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/voices/': {
+      id: '/_site/voices/'
+      path: '/voices'
+      fullPath: '/voices/'
+      preLoaderRoute: typeof SiteVoicesIndexRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/voices/$slug': {
+      id: '/_site/voices/$slug'
+      path: '/voices/$slug'
+      fullPath: '/voices/$slug'
+      preLoaderRoute: typeof SiteVoicesSlugRouteImport
+      parentRoute: typeof SiteRoute
+    }
     '/_site/field/role/$slug': {
       id: '/_site/field/role/$slug'
       path: '/field/role/$slug'
@@ -851,11 +1194,13 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAppRoute: typeof AuthenticatedAppRoute
+  AuthenticatedEditorialRoute: typeof AuthenticatedEditorialRoute
   AuthenticatedSecretariatRoute: typeof AuthenticatedSecretariatRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAppRoute: AuthenticatedAppRoute,
+  AuthenticatedEditorialRoute: AuthenticatedEditorialRoute,
   AuthenticatedSecretariatRoute: AuthenticatedSecretariatRoute,
 }
 
@@ -867,10 +1212,13 @@ interface SiteRouteChildren {
   SiteClimateRoute: typeof SiteClimateRoute
   SiteCollaborateRoute: typeof SiteCollaborateRoute
   SiteCommunitiesRoute: typeof SiteCommunitiesRoute
+  SiteCommunityGuidelinesRoute: typeof SiteCommunityGuidelinesRoute
+  SiteContributeRoute: typeof SiteContributeRoute
   SiteCountryPartnersRoute: typeof SiteCountryPartnersRoute
   SiteDiscoverRoute: typeof SiteDiscoverRoute
   SiteEvidenceRoute: typeof SiteEvidenceRoute
   SiteFieldLabRoute: typeof SiteFieldLabRoute
+  SiteFounderVoicesRoute: typeof SiteFounderVoicesRoute
   SiteFrameworkRoute: typeof SiteFrameworkRoute
   SiteFundersRoute: typeof SiteFundersRoute
   SiteGetInvolvedRoute: typeof SiteGetInvolvedRoute
@@ -879,10 +1227,12 @@ interface SiteRouteChildren {
   SiteInvestRoute: typeof SiteInvestRoute
   SiteJoinRoute: typeof SiteJoinRoute
   SiteLearningRoute: typeof SiteLearningRoute
+  SiteOnboardingRoute: typeof SiteOnboardingRoute
   SitePartnersRoute: typeof SitePartnersRoute
   SitePeopleRoute: typeof SitePeopleRoute
   SiteProgressRoute: typeof SiteProgressRoute
   SiteSdgsRoute: typeof SiteSdgsRoute
+  SiteStoriesFromTheFieldRoute: typeof SiteStoriesFromTheFieldRoute
   SiteSummitRoute: typeof SiteSummitRoute
   SiteWhatWeBuildRoute: typeof SiteWhatWeBuildRoute
   SiteWhyAsebRoute: typeof SiteWhyAsebRoute
@@ -890,13 +1240,25 @@ interface SiteRouteChildren {
   SiteYouRoute: typeof SiteYouRoute
   SiteIndexRoute: typeof SiteIndexRoute
   SiteAboutStoryRoute: typeof SiteAboutStoryRoute
+  SiteAskSlugRoute: typeof SiteAskSlugRoute
   SiteCountriesSlugRoute: typeof SiteCountriesSlugRoute
   SiteFieldSlugRoute: typeof SiteFieldSlugRoute
+  SiteMembersIdRoute: typeof SiteMembersIdRoute
+  SitePlaybookSlugRoute: typeof SitePlaybookSlugRoute
+  SitePreviewVillageRoute: typeof SitePreviewVillageRoute
   SiteRegistrySlugRoute: typeof SiteRegistrySlugRoute
   SiteRegistrySubmitRoute: typeof SiteRegistrySubmitRoute
+  SiteStateOfTheFieldSlugRoute: typeof SiteStateOfTheFieldSlugRoute
+  SiteTheFieldSlugRoute: typeof SiteTheFieldSlugRoute
+  SiteVoicesSlugRoute: typeof SiteVoicesSlugRoute
+  SiteAskIndexRoute: typeof SiteAskIndexRoute
   SiteCountriesIndexRoute: typeof SiteCountriesIndexRoute
   SiteFieldIndexRoute: typeof SiteFieldIndexRoute
+  SitePlaybookIndexRoute: typeof SitePlaybookIndexRoute
   SiteRegistryIndexRoute: typeof SiteRegistryIndexRoute
+  SiteStateOfTheFieldIndexRoute: typeof SiteStateOfTheFieldIndexRoute
+  SiteTheFieldIndexRoute: typeof SiteTheFieldIndexRoute
+  SiteVoicesIndexRoute: typeof SiteVoicesIndexRoute
   SiteFieldRoleSlugRoute: typeof SiteFieldRoleSlugRoute
 }
 
@@ -905,10 +1267,13 @@ const SiteRouteChildren: SiteRouteChildren = {
   SiteClimateRoute: SiteClimateRoute,
   SiteCollaborateRoute: SiteCollaborateRoute,
   SiteCommunitiesRoute: SiteCommunitiesRoute,
+  SiteCommunityGuidelinesRoute: SiteCommunityGuidelinesRoute,
+  SiteContributeRoute: SiteContributeRoute,
   SiteCountryPartnersRoute: SiteCountryPartnersRoute,
   SiteDiscoverRoute: SiteDiscoverRoute,
   SiteEvidenceRoute: SiteEvidenceRoute,
   SiteFieldLabRoute: SiteFieldLabRoute,
+  SiteFounderVoicesRoute: SiteFounderVoicesRoute,
   SiteFrameworkRoute: SiteFrameworkRoute,
   SiteFundersRoute: SiteFundersRoute,
   SiteGetInvolvedRoute: SiteGetInvolvedRoute,
@@ -917,10 +1282,12 @@ const SiteRouteChildren: SiteRouteChildren = {
   SiteInvestRoute: SiteInvestRoute,
   SiteJoinRoute: SiteJoinRoute,
   SiteLearningRoute: SiteLearningRoute,
+  SiteOnboardingRoute: SiteOnboardingRoute,
   SitePartnersRoute: SitePartnersRoute,
   SitePeopleRoute: SitePeopleRoute,
   SiteProgressRoute: SiteProgressRoute,
   SiteSdgsRoute: SiteSdgsRoute,
+  SiteStoriesFromTheFieldRoute: SiteStoriesFromTheFieldRoute,
   SiteSummitRoute: SiteSummitRoute,
   SiteWhatWeBuildRoute: SiteWhatWeBuildRoute,
   SiteWhyAsebRoute: SiteWhyAsebRoute,
@@ -928,13 +1295,25 @@ const SiteRouteChildren: SiteRouteChildren = {
   SiteYouRoute: SiteYouRoute,
   SiteIndexRoute: SiteIndexRoute,
   SiteAboutStoryRoute: SiteAboutStoryRoute,
+  SiteAskSlugRoute: SiteAskSlugRoute,
   SiteCountriesSlugRoute: SiteCountriesSlugRoute,
   SiteFieldSlugRoute: SiteFieldSlugRoute,
+  SiteMembersIdRoute: SiteMembersIdRoute,
+  SitePlaybookSlugRoute: SitePlaybookSlugRoute,
+  SitePreviewVillageRoute: SitePreviewVillageRoute,
   SiteRegistrySlugRoute: SiteRegistrySlugRoute,
   SiteRegistrySubmitRoute: SiteRegistrySubmitRoute,
+  SiteStateOfTheFieldSlugRoute: SiteStateOfTheFieldSlugRoute,
+  SiteTheFieldSlugRoute: SiteTheFieldSlugRoute,
+  SiteVoicesSlugRoute: SiteVoicesSlugRoute,
+  SiteAskIndexRoute: SiteAskIndexRoute,
   SiteCountriesIndexRoute: SiteCountriesIndexRoute,
   SiteFieldIndexRoute: SiteFieldIndexRoute,
+  SitePlaybookIndexRoute: SitePlaybookIndexRoute,
   SiteRegistryIndexRoute: SiteRegistryIndexRoute,
+  SiteStateOfTheFieldIndexRoute: SiteStateOfTheFieldIndexRoute,
+  SiteTheFieldIndexRoute: SiteTheFieldIndexRoute,
+  SiteVoicesIndexRoute: SiteVoicesIndexRoute,
   SiteFieldRoleSlugRoute: SiteFieldRoleSlugRoute,
 }
 

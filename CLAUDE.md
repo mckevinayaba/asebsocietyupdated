@@ -21,12 +21,17 @@ Database changes are hand written SQL in `drizzle/migrations/`, registered in `d
 - The institutional argument lives in `src/content/case.ts`. Statistics are published only when `verified` is true.
 - Continental data lives in `src/content/continent.ts`. Representation appears only when confirmed in `src/content/institution.ts`.
 - Progress statuses live in `src/content/progress.ts`. Update them with every release.
+- The five knowledge products (The Field, the Playbook, ASEB Voices, Ask the Village, State of the Field) share one content model. Read `docs/LIVING_VILLAGE.md` before touching them. Community data is reached through `src/lib/community-data.ts` (reads) and `src/lib/community.functions.ts` (writes, with the user's own token).
+- `/editorial` is the editorial and moderation workspace. Roles: secretariat_admin, secretariat_reviewer, editor, moderator.
 - The Secretariat workspace is `/secretariat`. Security is enforced by row level security and the parameterless `is_secretariat()` function, not by the route guard.
 - `src/dev/` and `/preview/*` are development only and are removed from production builds.
 
 ## Non negotiables
 
-- Four pillars, never more without approval: ASEB Summit & Awards, ASEB Circles, ASEB Academy, ASEB Field Lab.
+- Four pillars, never more without approval: ASEB Summit & Awards, ASEB Circles, ASEB Academy, ASEB Field Lab. The five knowledge products are not pillars.
+- Tagline: It Takes a Village. The Founder is Founder & Chief Executive Officer.
+- ASEB Voices is the only storytelling brand. Founders' Voices is a category. Never create a separate Founder Voices or Stories from the Field product.
+- Never read or expose `content_items.author_id` outside the database. Use `content_authors()`.
 - No sequential number badges, no emoji, no third party branding or social login, no generic icon grids. The only icons are the original line icons in `src/components/shell/Icons.tsx`, always with a label or accessible name.
 - Never present planned work as delivered. Never invent people, testimonials, counts, funding, staff or impact.
 - Nominations, recognitions, Field Registry records, registered accounts, approved members, Country Partners and Ambassadors are different things. Never conflate them.

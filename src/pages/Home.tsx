@@ -9,11 +9,13 @@ import { ContinentalField } from "@/components/ContinentalField";
 import { investPath } from "@/content/navigation";
 import { accountability, investmentAreas, membershipValue, positioning, problemThemes, publishedEvidence, supportSystem } from "@/content/case";
 import { people } from "@/content/institution";
+import { interdependence } from "@/content/products";
+import { VillageHighlights } from "@/components/village/VillageHighlights";
 
 const heroTabs = [
   { label: "Our Purpose", href: "#purpose" },
-  { label: "Our Work", href: "#work" },
-  { label: "Network", href: "#network" },
+  { label: "The Field", href: "/the-field" },
+  { label: "Following", href: "/the-field?tab=following" },
 ];
 
 function SectionLabel({ children, dark = false }: { children: string; dark?: boolean }) {
@@ -32,7 +34,7 @@ export default function Home() {
         </div>
         <div className="cinema-grade" />
         <nav aria-label="On this page" className="relative z-10 mt-[calc(var(--app-bar-h)+var(--safe-top))] flex justify-center gap-6 pt-2 text-[0.875rem] font-semibold text-ivory/75 lg:hidden">
-          {heroTabs.map((tab, i) => <a key={tab.href} href={tab.href} className={`py-2 transition-colors hover:text-ivory ${i === 0 ? "text-ivory underline decoration-signal decoration-2 underline-offset-[10px]" : ""}`}>{tab.label}</a>)}
+          {heroTabs.map((tab, i) => tab.href.startsWith("#") ? <a key={tab.href} href={tab.href} className={`py-2 transition-colors hover:text-ivory ${i === 0 ? "text-ivory underline decoration-signal decoration-2 underline-offset-[10px]" : ""}`}>{tab.label}</a> : <Link key={tab.href} to={tab.href} className="py-2 transition-colors hover:text-ivory">{tab.label}</Link>)}
         </nav>
         <div className="wrap relative mt-auto pb-6 pt-10 lg:my-auto lg:pb-24 lg:pt-[calc(var(--app-bar-h)+64px)]">
           <div className="max-w-[44rem]">
@@ -74,6 +76,26 @@ export default function Home() {
               </li>
             ))}
             <li className="py-6 text-[0.9375rem] leading-relaxed text-stone">Capital, policy and talent all matter. Each depends on the people and institutions who connect them. That layer is the least funded and the least visible.</li>
+          </ol>
+        </div>
+      </section>
+
+      {/* The economics of interdependence */}
+      <section className="on-dark relative overflow-hidden bg-night text-ivory" aria-labelledby="village-title">
+        <div className="wrap section grid gap-12 lg:grid-cols-12 lg:gap-10">
+          <div className="lg:col-span-4">
+            <p className="eyebrow text-sand">The economics of interdependence</p>
+            <h2 id="village-title" className="mt-5 font-display text-title italic">It Takes a Village.</h2>
+            <p className="mt-6 text-[0.9375rem] leading-relaxed text-ivory/70">One way to see why ecosystem builders matter. Economic development has many drivers, and enterprise is one of them.</p>
+          </div>
+          <ol className="lg:col-span-7 lg:col-start-6">
+            {interdependence.map((line, i) => (
+              <li key={line} className="reveal flex items-baseline gap-5 border-t border-night-line py-5 first:border-t-0 first:pt-0">
+                <span aria-hidden="true" className="mt-[0.7em] flex w-20 shrink-0"><span className="h-[2px] bg-signal" style={{ width: `${20 + i * 20}%` }} /></span>
+                <span className="font-display text-[1.5rem] leading-snug lg:text-[2rem]">{line}</span>
+              </li>
+            ))}
+            <li className="reveal border-t border-signal pt-6"><p className="text-[1.125rem] font-semibold text-sand">This is why ASEB Society exists.</p></li>
           </ol>
         </div>
       </section>
@@ -179,6 +201,9 @@ export default function Home() {
           </nav>
         </div>
       </section>
+
+      {/* From the village: live editorial previews from the five knowledge products */}
+      <VillageHighlights />
 
       {/* 8. Institutional investment */}
       <section id="invest" className="on-dark relative isolate overflow-hidden bg-night text-ivory" aria-labelledby="invest-title">

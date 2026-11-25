@@ -32,3 +32,11 @@ export const SaveIcon = (p: IconProps) => <Frame {...p}><path d="M7 4h10v16l-5-3
 export const ShareIcon = (p: IconProps) => <Frame {...p}><path d="M12 4v11" /><path d="m7.5 8.5 4.5-4.5 4.5 4.5" /><path d="M5 13v6h14v-6" /></Frame>;
 export const InfoIcon = (p: IconProps) => <Frame {...p}><circle cx="12" cy="12" r="8" /><path d="M12 11v5" /><path d="M12 8h.01" /></Frame>;
 export const RelatedIcon = (p: IconProps) => <Frame {...p}><path d="M9 6H5v13h13v-4" /><path d="M13 5h6v6" /><path d="M19 5l-8 8" /></Frame>;
+export const CreateIcon = (p: IconProps) => <Frame {...p}><path d="M12 5v14M5 12h14" /></Frame>;
+// Notifications: a village bell.
+export const BellIcon = (p: IconProps) => <Frame {...p}><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15L6 16Z" fill={p.filled ? "currentColor" : "none"} fillOpacity={0.18} /><path d="M10 20.5a2.2 2.2 0 0 0 4 0" /></Frame>;
+// Appreciate: two hands meeting, drawn as an open arc.
+export const AppreciateIcon = (p: IconProps) => <Frame {...p}><path d="M12 19.5s-7-4.3-7-9.3A3.7 3.7 0 0 1 12 8a3.7 3.7 0 0 1 7 2.2c0 5-7 9.3-7 9.3Z" fill={p.filled ? "currentColor" : "none"} /></Frame>;
+export const DiscussIcon = (p: IconProps) => <Frame {...p}><path d="M5 6h14v9H10l-4 3.5V15H5V6Z" /></Frame>;
+export const FlagIcon = (p: IconProps) => <Frame {...p}><path d="M6 21V4" /><path d="M6 4h11l-2 4 2 4H6" /></Frame>;
+export const UsefulIcon = (p: IconProps) => <Frame {...p}><path d="m5 12.5 4.5 4.5L19 7.5" /></Frame>;

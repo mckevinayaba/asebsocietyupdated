@@ -34,7 +34,7 @@ export const summit2026 = {
 export type Speaker = { slug: string; name: string; role: string; session: string };
 
 export const speakers: Speaker[] = [
-  { slug: "mckevin-ayaba", name: "McKevin Ayaba", role: "Founder and Chief Ecosystem Officer, ASEB Society", session: "Understanding Startup Ecosystem Building: From Movement to Institution" },
+  { slug: "mckevin-ayaba", name: "McKevin Ayaba", role: "Founder & Chief Executive Officer, ASEB Society", session: "Understanding Startup Ecosystem Building: From Movement to Institution" },
   { slug: "colin-leshou", name: "Colin Leshou", role: "Head of Ecosystem Enablement, Allan & Gill Gray Philanthropies", session: "From Programmes to Ecosystems: Building Institutions Entrepreneurs Can Depend On" },
   { slug: "erik-stam", name: "Professor Erik Stam", role: "Professor of Strategy, Organisation and Entrepreneurship, Utrecht University", session: "From Ecosystem Language to Ecosystem Evidence" },
   { slug: "phumlani-nkontwana", name: "Dr Phumlani Nkontwana", role: "Founding Academic Director, Allan Gray Centre for Africa Entrepreneurship, Stellenbosch University", session: "Provincial ecosystem research in South Africa" },

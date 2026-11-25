@@ -2,11 +2,11 @@
 
 ## Identity
 
-ASEB Society is Africa's institutional home for startup ecosystem builders. It advances ecosystem building as a professional practice and as infrastructure for African entrepreneurship. It strengthens the people, institutions and systems that make entrepreneurship possible across Africa.
+ASEB Society advances ecosystem building as a professional practice and a recognised profession, strengthening the people, institutions and systems that make entrepreneurship possible across Africa. The Founder is Founder & Chief Executive Officer.
 
 It is not primarily a conference, an awards organisation, an accelerator, a networking site, a training provider or a conventional NGO. It is permanent professional and institutional infrastructure.
 
-- Philosophy: It takes an ecosystem.
+- Tagline: It Takes a Village.
 - Promise: Strengthening those who strengthen entrepreneurship.
 - Primary positioning: Stronger ecosystems. Stronger African economies.
 
@@ -31,7 +31,7 @@ Each step is an intended outcome. Measured impact is reported separately, and on
 | ASEB Academy | Professional development and practice standards |
 | ASEB Field Lab | Applied research, policy intelligence and systems work |
 
-The Field (Discover) is a discovery layer connecting the mandates. It is not a fifth pillar.
+Five digital knowledge products support the mandates and are not pillars: The Field, the African Ecosystem Building Playbook, ASEB Voices, Ask the Village and State of the Field. See `docs/LIVING_VILLAGE.md`. Discover is a browsing page across them.
 
 ## Verified figures and their provenance
 

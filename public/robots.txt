@@ -9,5 +9,9 @@ Disallow: /you
 Disallow: /reset-password
 Disallow: /_serverFn/
 Disallow: /preview/
+Disallow: /editorial
+Disallow: /contribute
+Disallow: /members/
+Disallow: /onboarding
 
 Sitemap: https://www.asebsociety.org/sitemap.xml

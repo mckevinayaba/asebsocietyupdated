@@ -69,7 +69,7 @@ export default function Discover() {
       {!type && (
         <section className="section-tight border-b border-hairline" aria-labelledby="stories-title">
           <div className="wrap">
-            <div className="flex items-baseline justify-between gap-4"><h2 id="stories-title" className="font-display text-[1.75rem]">Field stories</h2><Link to="/stories" className="tlink">Open full screen <span className="arr" aria-hidden="true">→</span></Link></div>
+            <div className="flex items-baseline justify-between gap-4"><h2 id="stories-title" className="font-display text-[1.75rem]">ASEB Voices: from the archive</h2><Link to="/stories" className="tlink">Open full screen <span className="arr" aria-hidden="true">→</span></Link></div>
             <ul className="no-scrollbar -mx-5 mt-6 flex snap-x gap-3 overflow-x-auto px-5 pb-2 sm:-mx-8 sm:px-8 lg:mx-0 lg:px-0">
               {stories.map((s) => (
                 <li key={s.id} className="w-[44vw] max-w-[220px] shrink-0 snap-start sm:w-[200px]">

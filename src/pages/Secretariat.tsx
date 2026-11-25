@@ -31,7 +31,7 @@ function Frame({ children }: { children: React.ReactNode }) {
       <header className="sticky top-0 z-30 border-b border-hairline bg-ivory/95 backdrop-blur-sm">
         <div className="mx-auto flex h-14 max-w-[1400px] items-center justify-between gap-4 px-5 lg:h-16 lg:px-8">
           <Link to="/" className="flex items-center gap-2.5"><img src={asset("images/brand/aseb-society-mark-on-light.png")} alt="" className="h-8 w-auto" /><span className="font-display text-[1.0625rem]">ASEB Society</span><span className="ml-2 hidden border-l border-hairline pl-3 text-[0.8125rem] font-semibold uppercase tracking-[0.12em] text-ember sm:inline">Secretariat</span></Link>
-          <Link to="/app" className="text-[0.875rem] font-semibold text-stone hover:text-ink">Member app</Link>
+          <nav className="flex gap-5 text-[0.875rem] font-semibold"><Link to="/editorial" className="text-stone hover:text-ink">Editorial</Link><Link to="/app" className="text-stone hover:text-ink">Member app</Link></nav>
         </div>
       </header>
       {children}

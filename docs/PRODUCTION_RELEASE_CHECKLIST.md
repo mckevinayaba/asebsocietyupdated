@@ -17,6 +17,13 @@ After merging:
 - [ ] Review the Lovable preview on a phone and a desktop.
 - [ ] Submit an enquiry form on the preview and confirm the on-screen acknowledgement.
 
+Living Village:
+
+- [ ] `.output` contains no "demonstration content" text from `src/dev/`.
+- [ ] Before migrations: every product page shows "Opening soon", not errors.
+- [ ] After migrations: submit a post, a story and a question as a verified member, and confirm none appear publicly until an editor or moderator publishes them.
+- [ ] An item published without a name shows no profile link, and its page source contains no author identifier.
+
 Database changes:
 
 - [ ] Verified backup taken before applying any migration.

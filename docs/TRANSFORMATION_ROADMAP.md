@@ -9,9 +9,13 @@
 | E. Continental and member infrastructure | Partly done: directory and profiles. Next: representatives table, registry migration, profile visibility controls, saved items table |
 | F. Launch readiness | Partly done: PWA, sitemap, robots, accessibility scan, overflow checks. Next: performance measurement on real devices, French |
 
+## Living Village (this release)
+
+Built and tested: the shared content model (0007), private media storage (0008), the five products, the composer, onboarding, profiles, My contributions, notifications, the editorial workspace, sharing metadata and preview images. Live once the migrations are applied.
+
 ## Next, in priority order
 
-1. Apply migration 0006 after backup. Provision the Founder as Secretariat administrator. Verify real names appear.
+1. Apply migrations 0006, 0007 and 0008 after backup. Provision the Founder as Secretariat administrator and at least one editor. Verify real names appear in /secretariat.
 2. Decide the membership approval authority. Then add approve and decline as an audited database function.
 3. Add `saved_items` with owner-only access, and sync device saves on sign in.
 4. Add a `representatives` table with appointment periods and publication status, and an admin view for Country Partner and Ambassador decisions.
