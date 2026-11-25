@@ -199,3 +199,30 @@ describe("community media storage", () => {
     expect((await anon(`SELECT name FROM storage.objects WHERE name = '${AUTHOR}/photo.jpg'`)).rows).toHaveLength(1);
   });
 });
+
+describe("anonymous attribution cannot be unmasked", () => {
+  it("never exposes author_id to readers, so unnamed work cannot be linked to its author", async () => {
+    expect((await anon("SELECT author_id FROM public.content_items LIMIT 1")).error).toMatch(/permission denied/);
+    expect((await as(READER, "SELECT author_id FROM public.content_items LIMIT 1")).error).toMatch(/permission denied/);
+    expect((await as(READER, `SELECT id FROM public.content_items WHERE author_id = '${AUTHOR}'`)).error).toMatch(/permission denied/);
+  });
+  it("still lets authors list, edit and withdraw their own work", async () => {
+    const mine = await as(AUTHOR, "SELECT slug FROM public.my_content()");
+    expect(mine.rows.map((r) => r["slug"])).toContain("my-draft-story");
+    expect((await as(READER, "SELECT slug FROM public.my_content()")).rows.map((r) => r["slug"])).not.toContain("my-draft-story");
+    expect((await as(AUTHOR, "UPDATE public.content_items SET body = 'Edited draft' WHERE slug = 'my-draft-story' RETURNING slug")).rows).toEqual([{ slug: "my-draft-story" }]);
+    expect((await as(READER, "UPDATE public.content_items SET body = 'Hijack' WHERE slug = 'my-draft-story' RETURNING slug")).rows).toEqual([]);
+  });
+  it("lists only named public work on a profile", async () => {
+    const ids = (await anon(`SELECT p AS id FROM public.profile_content('${AUTHOR}') p`)).rows.map((r) => r["id"]);
+    const slugs = (await db.query<{ slug: string }>(`SELECT slug FROM public.content_items WHERE id = ANY ('{${ids.join(",")}}'::uuid[])`)).rows.map((r) => r.slug);
+    expect(slugs).toContain("the-hub-that-stayed");
+    expect(slugs).not.toContain("anonymous-truth");
+  });
+  it("shows the real submitter only to moderators and editors", async () => {
+    const id = (await anon("SELECT id FROM public.content_items WHERE slug = 'anonymous-truth'")).rows[0]?.["id"];
+    expect((await as(EDITOR, `SELECT name FROM public.content_submitters(ARRAY['${String(id)}']::uuid[])`)).rows).toEqual([{ name: "Amina Author" }]);
+    expect((await as(READER, `SELECT name FROM public.content_submitters(ARRAY['${String(id)}']::uuid[])`)).rows).toEqual([]);
+    expect((await anon(`SELECT name FROM public.content_submitters(ARRAY['${String(id)}']::uuid[])`)).error).toMatch(/permission denied/);
+  });
+});

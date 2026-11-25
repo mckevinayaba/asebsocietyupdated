@@ -219,7 +219,10 @@ $$;
 
 ALTER TABLE public.content_items ENABLE ROW LEVEL SECURITY;
 REVOKE ALL ON public.content_items FROM anon, authenticated;
-GRANT SELECT ON public.content_items TO anon, authenticated;
+-- Every column except author_id is readable (subject to the policies below). Withholding
+-- author_id means an item published without a name can never be linked to its author through
+-- the API. Names come only from content_authors(), which honours each attribution choice.
+GRANT SELECT (id, kind, slug, title, summary, body, voices_category, chapter_id, parent_id, repost_of, country, topics, evidence_class, details, media, visibility, attribution, consent_publish, consent_edit, status, scheduled_for, published_at, featured, hidden_by_moderator, created_at, updated_at) ON public.content_items TO anon, authenticated;
 GRANT INSERT, UPDATE, DELETE ON public.content_items TO authenticated;
 GRANT ALL ON public.content_items TO service_role;
 CREATE POLICY "Live public content" ON public.content_items FOR SELECT TO anon, authenticated USING (visibility = 'public' AND public.content_is_live(content_items));
@@ -297,6 +300,44 @@ END;
 $$;
 CREATE TRIGGER enforce_content_lifecycle BEFORE INSERT OR UPDATE ON public.content_items FOR EACH ROW EXECUTE FUNCTION public.enforce_content_lifecycle();
 
+-- Yes or no answers for other tables' policies, which cannot read author_id themselves.
+CREATE FUNCTION public.is_live_content(item uuid) RETURNS boolean LANGUAGE sql STABLE SECURITY DEFINER SET search_path = '' AS $$
+  SELECT EXISTS (SELECT 1 FROM public.content_items c WHERE c.id = item AND public.content_is_live(c));
+$$;
+CREATE FUNCTION public.is_content_author(item uuid) RETURNS boolean LANGUAGE sql STABLE SECURITY DEFINER SET search_path = '' AS $$
+  SELECT EXISTS (SELECT 1 FROM public.content_items c WHERE c.id = item AND c.author_id = auth.uid());
+$$;
+REVOKE ALL ON FUNCTION public.is_live_content(uuid), public.is_content_author(uuid) FROM PUBLIC;
+GRANT EXECUTE ON FUNCTION public.is_live_content(uuid), public.is_content_author(uuid) TO anon, authenticated;
+
+-- Authors list their own work through this function, because author_id is not readable.
+CREATE FUNCTION public.my_content() RETURNS SETOF public.content_items LANGUAGE sql STABLE SECURITY DEFINER SET search_path = '' AS $$
+  SELECT * FROM public.content_items WHERE author_id = auth.uid() ORDER BY updated_at DESC LIMIT 200;
+$$;
+REVOKE ALL ON FUNCTION public.my_content() FROM PUBLIC, anon;
+GRANT EXECUTE ON FUNCTION public.my_content() TO authenticated;
+
+-- Moderators and editors always know who submitted an item, whatever its public attribution.
+CREATE FUNCTION public.content_submitters(ids uuid[]) RETURNS TABLE (content_id uuid, author_id uuid, name text, email text)
+LANGUAGE sql STABLE SECURITY DEFINER SET search_path = '' AS $$
+  SELECT c.id, c.author_id, p.name, u.email::text
+  FROM public.content_items c JOIN public.profiles p ON p.id = c.author_id JOIN auth.users u ON u.id = c.author_id
+  WHERE c.id = ANY (ids) AND c.status <> 'draft' AND public.can_moderate();
+$$;
+REVOKE ALL ON FUNCTION public.content_submitters(uuid[]) FROM PUBLIC, anon;
+GRANT EXECUTE ON FUNCTION public.content_submitters(uuid[]) TO authenticated;
+
+-- Published work by one named person, for public profiles. Anonymous and initials-only items
+-- are excluded, so a profile never reveals work published without a name.
+CREATE FUNCTION public.profile_content(profile uuid, max_rows int DEFAULT 40) RETURNS SETOF uuid
+LANGUAGE sql STABLE SECURITY DEFINER SET search_path = '' AS $$
+  SELECT c.id FROM public.content_items c JOIN public.profiles p ON p.id = c.author_id
+  WHERE c.author_id = profile AND c.attribution = 'name' AND p.visibility = 'public' AND c.visibility = 'public' AND public.content_is_live(c)
+  ORDER BY c.published_at DESC LIMIT least(greatest(max_rows, 1), 100);
+$$;
+REVOKE ALL ON FUNCTION public.profile_content(uuid, int) FROM PUBLIC;
+GRANT EXECUTE ON FUNCTION public.profile_content(uuid, int) TO anon, authenticated;
+
 -- Revision history: every change to the text of a non-draft item is preserved.
 CREATE TABLE public.content_revisions (
   id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -312,7 +353,7 @@ REVOKE ALL ON public.content_revisions FROM anon, authenticated;
 GRANT SELECT ON public.content_revisions TO authenticated;
 GRANT ALL ON public.content_revisions TO service_role;
 CREATE POLICY "Authors and staff read revisions" ON public.content_revisions FOR SELECT TO authenticated
-  USING (public.can_moderate() OR EXISTS (SELECT 1 FROM public.content_items c WHERE c.id = content_id AND c.author_id = auth.uid()));
+  USING (public.can_moderate() OR public.is_content_author(content_id));
 CREATE FUNCTION public.record_content_revision() RETURNS trigger LANGUAGE plpgsql SECURITY DEFINER SET search_path = '' AS $$
 BEGIN
   IF TG_OP = 'INSERT' OR NEW.body IS DISTINCT FROM OLD.body OR NEW.title IS DISTINCT FROM OLD.title OR NEW.status IS DISTINCT FROM OLD.status THEN
@@ -404,8 +445,8 @@ GRANT SELECT, INSERT ON public.content_reports TO authenticated;
 GRANT UPDATE (status, resolution_note) ON public.content_reports TO authenticated;
 GRANT ALL ON public.reactions, public.bookmarks, public.follows, public.content_reports, public.blocks TO service_role;
 -- Reactions on live content are visible to everyone signed in, so totals are real.
-CREATE POLICY "Read reactions on visible content" ON public.reactions FOR SELECT TO authenticated USING (EXISTS (SELECT 1 FROM public.content_items c WHERE c.id = content_id));
-CREATE POLICY "React as yourself" ON public.reactions FOR INSERT TO authenticated WITH CHECK (user_id = auth.uid() AND public.is_verified_user() AND EXISTS (SELECT 1 FROM public.content_items c WHERE c.id = content_id AND public.content_is_live(c)));
+CREATE POLICY "Read own reactions" ON public.reactions FOR SELECT TO authenticated USING (user_id = auth.uid());
+CREATE POLICY "React as yourself" ON public.reactions FOR INSERT TO authenticated WITH CHECK (user_id = auth.uid() AND public.is_verified_user() AND public.is_live_content(content_id));
 CREATE POLICY "Remove your reaction" ON public.reactions FOR DELETE TO authenticated USING (user_id = auth.uid());
 CREATE POLICY "Own bookmarks" ON public.bookmarks FOR SELECT TO authenticated USING (user_id = auth.uid());
 CREATE POLICY "Save visible content" ON public.bookmarks FOR INSERT TO authenticated WITH CHECK (user_id = auth.uid() AND EXISTS (SELECT 1 FROM public.content_items c WHERE c.id = content_id));

@@ -107,7 +107,7 @@ export const contributionSchema = z.object({
 export type Contribution = z.infer<typeof contributionSchema>;
 
 export type ContentRow = {
-  id: string; kind: ContentKind; slug: string; title: string; summary: string; body: string; author_id: string;
+  id: string; kind: ContentKind; slug: string; title: string; summary: string; body: string;
   voices_category: string | null; chapter_id: string | null; parent_id: string | null; country: string; topics: string[];
   evidence_class: EvidenceClass; details: Record<string, string>; media: MediaItem[]; visibility: "public" | "community";
   attribution: "name" | "initials" | "anonymous"; status: ContentStatus; scheduled_for: string | null; published_at: string | null;
@@ -117,7 +117,7 @@ export type ContentRow = {
 export type Author = { content_id: string; display_name: string; profile_id: string | null; headline: string; country: string };
 export type Engagement = { content_id: string; appreciations: number; useful: number; responses: number };
 
-export const publicColumns = "id,kind,slug,title,summary,body,author_id,voices_category,chapter_id,parent_id,country,topics,evidence_class,details,media,visibility,attribution,status,scheduled_for,published_at,featured,hidden_by_moderator,created_at,updated_at,consent_publish,consent_edit";
+export const publicColumns = "id,kind,slug,title,summary,body,voices_category,chapter_id,parent_id,country,topics,evidence_class,details,media,visibility,attribution,status,scheduled_for,published_at,featured,hidden_by_moderator,created_at,updated_at,consent_publish,consent_edit";
 
 export function excerpt(text: string, max = 220): string {
   const plain = text.replace(/[#*_>`[\]]/g, "").replace(/\s+/g, " ").trim();
@@ -136,11 +136,11 @@ export const feedTabs: { key: FeedTab; label: string }[] = [
 
 // "For You" uses only what a person chose: followed countries, topics and people, then the rest
 // by date. It is a filter, not an algorithm, and the interface says so.
-export function forYouOrder<T extends { country: string; topics: string[]; author_id: string; published_at: string | null }>(items: T[], follows: { target_type: string; target_key: string }[]): T[] {
+export function forYouOrder<T extends { country: string; topics: string[]; published_at: string | null; author?: { profile_id: string | null } | undefined }>(items: T[], follows: { target_type: string; target_key: string }[]): T[] {
   const countries = new Set(follows.filter((f) => f.target_type === "country").map((f) => f.target_key));
   const topics = new Set(follows.filter((f) => f.target_type === "topic").map((f) => f.target_key));
   const people = new Set(follows.filter((f) => f.target_type === "profile").map((f) => f.target_key));
-  const matches = (item: T) => people.has(item.author_id) || countries.has(item.country) || item.topics.some((t) => topics.has(t));
+  const matches = (item: T) => (!!item.author?.profile_id && people.has(item.author.profile_id)) || countries.has(item.country) || item.topics.some((t) => topics.has(t));
   const byDate = (a: T, b: T) => Date.parse(b.published_at ?? "") - Date.parse(a.published_at ?? "");
   return [...items.filter(matches).sort(byDate), ...items.filter((i) => !matches(i)).sort(byDate)];
 }
