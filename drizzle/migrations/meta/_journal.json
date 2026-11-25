@@ -71,6 +71,13 @@
       "when": 1795651260001,
       "tag": "0009_apply_pending_0006_to_0008",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1795651260002,
+      "tag": "0010_limit_platform_settings_reads",
+      "breakpoints": true
     }
   ]
 }
