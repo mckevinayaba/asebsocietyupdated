@@ -21,88 +21,39 @@ export const statements = {
   recognitionLine: "Recognition is not a trophy. It is infrastructure.",
 };
 
-export type NavGroup = { label: string; to: string; items: { label: string; to: string; note: string }[] };
-
-// Intent-led navigation preserves all existing public destinations.
-export const nav: NavGroup[] = [
-  { label: "Start Here", to: "/", items: [
-    { label: "Find Your Place", to: "/#find-your-place", note: "A pathway for the work you do" },
-    { label: "Why ASEB Society", to: "/why-aseb", note: "A professional home, beyond the annual Summit" },
-    { label: "Join the Society", to: "/join", note: "Apply as a practitioner or organisation" },
-    { label: "Get Involved", to: "/get-involved", note: "Find a practical way to contribute" },
-  ] },
-  { label: "Find People and Organisations", to: "/registry", items: [
-    { label: "Field Registry", to: "/registry", note: "Search public Awards archive records" },
-    { label: "Discover Your Role", to: "/field", note: "See how your work strengthens entrepreneurship" },
-    { label: "Propose a Record", to: "/registry/submit", note: "Submit work and evidence for review" },
-  ] },
-  { label: "Communities", to: "/communities", items: [
-    { label: "ASEB Circles", to: "/communities", note: "Peer communities and working groups" },
-    { label: "Country Partners", to: "/country-partners", note: "Express interest in local partnership" },
-    { label: "Ambassadors", to: "/ambassadors", note: "Explore representing the field where you work" },
-  ] },
-  { label: "Learn and Grow", to: "/learning", items: [
-    { label: "Learning and Academy", to: "/learning", note: "Professional learning and practice standards" },
-    { label: "The Framework", to: "/framework", note: "Understand the conditions entrepreneurs need" },
-    { label: "What We Build", to: "/what-we-build", note: "Four ways to support ecosystem builders" },
-  ] },
-  { label: "Work Together", to: "/collaborate", items: [
-    { label: "ASEB Field Lab", to: "/field-lab", note: "Applied research and policy intelligence" },
-    { label: "Programme Collaborations", to: "/collaborate", note: "Propose work with agreed outcomes" },
-    { label: "Work With Us", to: "/work-with-us", note: "Discuss commissioning and delivery capacity" },
-    { label: "Partners", to: "/partners", note: "Institutional partnership pathways" },
-    { label: "Funders and DFIs", to: "/funders", note: "Support practitioner and ecosystem development" },
-  ] },
-  { label: "Knowledge and Evidence", to: "/evidence", items: [
-    { label: "Evidence Library", to: "/evidence", note: "Research to strengthen your practice" },
-    { label: "Insights", to: "/insights", note: "Field perspectives and editorial contributions" },
-    { label: "Green and Climate Economy", to: "/climate", note: "Build the ecosystems climate ventures need" },
-    { label: "The 17 SDGs", to: "/sdgs", note: "Entrepreneurship ecosystem building and public benefit" },
-  ] },
-  { label: "Summit and Awards", to: "/summit", items: [] },
-  { label: "About and Accountability", to: "/about/story", items: [
-    { label: "Our Story", to: "/about/story", note: "From annual recognition to a continuing institution" },
-    { label: "Our Progress", to: "/progress", note: "Our foundations and institutional journey" },
-    { label: "People", to: "/people", note: "Founder, executive team and board" },
-    { label: "Governance and Goals", to: "/governance", note: "Responsibility, standards and public benefit" },
-  ] },
-];
-
 export const footerNav = [
-  { heading: "The Society", links: [
+  { heading: "About", links: [
+    { label: "Why We Exist", to: "/why-aseb" },
     { label: "Our Story", to: "/about/story" },
-    { label: "Why ASEB", to: "/why-aseb" },
-    { label: "People", to: "/people" },
-    { label: "Governance and Goals", to: "/governance" },
-    { label: "What We Build", to: "/what-we-build" },
-    { label: "Our Progress", to: "/progress" },
+    { label: "Leadership", to: "/people" },
+    { label: "Governance", to: "/governance" },
+    { label: "Progress", to: "/progress" },
     { label: "The Framework", to: "/framework" },
   ] },
-  { heading: "The Field", links: [
-    { label: "Practitioners", to: "/field/practitioners" },
-    { label: "Support Institutions", to: "/field/support-institutions" },
-    { label: "Capital and Market Builders", to: "/field/capital-market-builders" },
-    { label: "Systems Builders", to: "/field/systems-builders" },
-    { label: "Green and Climate Economy", to: "/climate" },
+  { heading: "Our Work", links: [
+    { label: "Summit & Awards", to: "/summit" },
+    { label: "ASEB Circles", to: "/communities" },
+    { label: "ASEB Academy", to: "/learning" },
+    { label: "ASEB Field Lab", to: "/field-lab" },
+    { label: "Discover", to: "/discover" },
+    { label: "Evidence Library", to: "/evidence" },
     { label: "The 17 SDGs", to: "/sdgs" },
-    { label: "Field Registry", to: "/registry" },
   ] },
-  { heading: "Partner", links: [
-    { label: "Partners", to: "/partners" },
+  { heading: "Explore", links: [
+    { label: "Field Registry", to: "/registry" },
+    { label: "Countries", to: "/countries" },
     { label: "Country Partners", to: "/country-partners" },
     { label: "Ambassadors", to: "/ambassadors" },
-    { label: "Programme Collaborations", to: "/collaborate" },
-    { label: "Funders and DFIs", to: "/funders" },
-    { label: "Work With Us", to: "/work-with-us" },
+    { label: "Roles in the field", to: "/field" },
+    { label: "Green and Climate Economy", to: "/climate" },
   ] },
   { heading: "Take part", links: [
-    { label: "Join the Society", to: "/join" },
-    { label: "Get Involved", to: "/get-involved" },
-    { label: "Summit and Awards", to: "/summit" },
-    { label: "Insights", to: "/insights" },
-    { label: "Evidence Library", to: "/evidence" },
+    { label: "Invest in Our Mission", to: "/invest" },
+    { label: "Become a member", to: "/join" },
+    { label: "Partnerships", to: "/partners" },
+    { label: "Funders and DFIs", to: "/funders" },
+    { label: "Work With Us", to: "/work-with-us" },
     { label: "Contact", to: "/get-involved#contact" },
-    { label: "Member app preview", to: "/app" },
   ] },
 ];
 

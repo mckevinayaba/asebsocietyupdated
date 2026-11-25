@@ -25,3 +25,10 @@
 - Programme interest forms share validated private intake; authenticated submissions derive ownership on the server and atomically synchronize Circle selections through the database trigger.
 - Membership application reads use verified-email owner RLS; account creation never grants membership approval or exposes other applicants.
 - Role pathways use shared browser-safe mappings and validated search parameters to connect registry, community and evidence views.
+- Public pages render inside the application shell (`src/components/Layout.tsx`): fixed application bar, contextual tabs, footer and a five-tab mobile bottom navigation. All navigation comes from `src/content/navigation.ts`. Never add a second navigation source.
+- The institutional case lives in `src/content/case.ts`. Publish a statistic only when its `verified` flag is true, and never invent funding amounts, testimonials, counts or impact.
+- Country representation is published only when confirmed in `src/content/institution.ts`. Every other country reads as open.
+- Secretariat access is enforced in the database by parameterless `is_secretariat()` checks and row level security. Roles are provisioned only by the database owner. Never add approval rights without an approved authorisation model.
+- Migrations are hand-written SQL in `drizzle/migrations/` and must pass `src/test/database-security.test.ts`. They are applied to Lovable Cloud by the owner after a verified backup.
+- `src/dev/` and `/preview/*` are development-only and must never ship demonstration data in production.
+- See `CLAUDE.md` and `docs/` for the full institutional, design and data governance rules.

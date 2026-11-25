@@ -1,54 +1,84 @@
-import { PageHero, SectionHead } from "@/components/PageHero";
+import { Link } from "@/lib/router";
+import { asset } from "@/lib/asset";
 import { Photo } from "@/components/Photo";
-import { Btn } from "@/components/Arrow";
+import { Btn, TLink } from "@/components/Arrow";
 import { Source, Ext } from "@/components/Rows";
 import { story } from "@/content/institution";
+import { proof } from "@/content/site";
+import { cumulativeFigures, nextSummit, positioning } from "@/content/case";
 
+const editionPhoto: Record<string, { src: string; alt: string; caption: string; position?: string }> = {
+  "2023": { src: "images/events/aseb-2023-nairobi.jpg", alt: "Builders celebrate together at ASEB 2023 in Nairobi", caption: "Nairobi, 2023", position: "40% center" },
+  "2024": { src: "images/events/aseb-2024-accra-group.jpg", alt: "Recognised builders at the ASEB Summit 2024 in Accra", caption: "Accra, 2024" },
+  "2025": { src: "images/events/aseb-2025-addis-panel.jpg", alt: "A panel discussion at ASEB 2025 in Addis Ababa", caption: "Addis Ababa, 2025", position: "70% center" },
+  "2026": { src: "images/events/aseb-2026-summit-delegates.jpg", alt: "ASEB Summit delegates in Johannesburg, 2026", caption: "Johannesburg, 2026" },
+};
+
+// Our Story: the historical archive. The movement-to-institution narrative, edition record and
+// historical figures live here, not on the home page.
 export default function Story() {
   return (
     <>
-      <PageHero
-        eyebrow="Our story"
-        title="We did not start with a theory. We started with a room."
-        lede="In 2022 we opened a room for the people who build the rooms founders walk into. Four host countries and five editions later, that room has become an institution: the professional home for the practice of ecosystem building in Africa."
-      />
+      <section className="cinema cinema-dense on-dark" aria-labelledby="story-title">
+        <div className="cinema-media"><img src={asset("images/events/aseb-2026-summit-delegates.jpg")} alt="" className="object-[45%_center]" fetchPriority="high" /></div>
+        <div className="cinema-grade" />
+        <div className="wrap relative pb-14 pt-32 lg:pb-24 lg:pt-44">
+          <p className="text-[0.75rem] font-semibold uppercase tracking-[0.16em] text-sand">Our Story · From movement to institution</p>
+          <h1 id="story-title" className="mt-5 max-w-[18ch] font-display text-hero">We did not start with a theory. We started with a room.</h1>
+          <p className="mt-6 max-w-[36rem] text-[1.0625rem] leading-relaxed text-ivory/85">In 2022 the Africa Startup Ecosystem Builders Summit and Awards opened a room for the people who build the rooms founders walk into. Five editions in four host countries later, that room has become a permanent institution.</p>
+          <p className="mt-10 text-[0.75rem] text-ivory/60">ASEB Summit delegates, Johannesburg, October 2026 · Photo: ASEB Society</p>
+        </div>
+      </section>
 
-      <section className="section">
+      <section className="section" aria-labelledby="editions-title">
         <div className="wrap">
-          <ol className="border-t border-ink">
-            {story.map((s) => (
-              <li key={s.year} className="reveal grid gap-3 border-b border-hairline py-10 lg:grid-cols-12 lg:gap-10">
-                <span className="numeral text-[2.75rem] leading-none lg:col-span-2 lg:text-[3.25rem]">{s.year}</span>
-                <div className="lg:col-span-3">
-                  <p className="eyebrow">{s.city}</p>
-                  <h2 className="mt-3 font-display text-[1.625rem] leading-tight">{s.title}</h2>
-                </div>
-                <p className="text-[1.0625rem] leading-relaxed text-stone lg:col-span-7">{s.line}</p>
-              </li>
-            ))}
+          <div className="grid gap-6 lg:grid-cols-12"><div className="lg:col-span-6"><p className="eyebrow">Five editions</p><h2 id="editions-title" className="mt-5 text-title">The record, edition by edition.</h2></div><p className="lede lg:col-span-5 lg:col-start-8 lg:pt-12">Each convening answered a question the last one raised. Together they made the case for an institution.</p></div>
+          <ol className="mt-14 border-t border-ink">
+            {story.map((s) => {
+              const photo = editionPhoto[s.year];
+              return (
+                <li key={s.year} className="reveal grid gap-6 border-b border-hairline py-10 lg:grid-cols-12 lg:gap-10">
+                  <div className="lg:col-span-2"><span className="numeral block text-[2.75rem] leading-none lg:text-[3.5rem]">{s.year}</span><span className="mt-2 block text-[0.875rem] font-semibold text-umber">{s.city}</span></div>
+                  <div className="lg:col-span-5"><h3 className="font-display text-[1.75rem] leading-tight">{s.title}</h3><p className="mt-4 text-[1.0625rem] leading-relaxed text-stone">{s.line}</p></div>
+                  <div className="lg:col-span-4 lg:col-start-9">{photo ? <Photo src={photo.src} alt={photo.alt} caption={photo.caption} ratio="aspect-[4/3]" {...(photo.position ? { position: photo.position } : {})} /> : <div className="grid aspect-[4/3] place-items-center border border-hairline bg-paper p-6 text-center text-[0.875rem] text-stone">No authorised photograph from the first edition is in the archive yet.</div>}</div>
+                </li>
+              );
+            })}
+            <li className="grid gap-6 py-10 lg:grid-cols-12 lg:gap-10">
+              <div className="lg:col-span-2"><span className="numeral block text-[2.75rem] leading-none text-ember lg:text-[3.5rem]">{nextSummit.year}</span><span className="mt-2 block text-[0.875rem] font-semibold text-umber">{nextSummit.place}</span></div>
+              <div className="lg:col-span-7"><h3 className="font-display text-[1.75rem] leading-tight">The next convening</h3><p className="mt-4 text-[1.0625rem] leading-relaxed text-stone">{nextSummit.line}</p><div className="mt-5"><TLink to={nextSummit.href}>ASEB Summit and Awards on asebs.com</TLink></div></div>
+            </li>
           </ol>
-          <Source>Source: <Ext href="https://www.asebsociety.org/about/story">ASEB Society, Our Story</Ext>.</Source>
+          <Source>Sources: <Ext href="https://www.asebsociety.org/about/story">ASEB Society, Our Story</Ext> and <Ext href="https://www.asebs.com/story">The ASEB Story, asebs.com</Ext>.</Source>
         </div>
       </section>
 
-      <section className="pb-[72px] lg:pb-32">
-        <div className="wrap grid gap-6 sm:grid-cols-3">
-          <Photo src="images/events/aseb-2023-nairobi.jpg" alt="Builders celebrate together at ASEB 2023 in Nairobi" caption="Nairobi, 2023" ratio="aspect-[4/5]" position="40% center" />
-          <Photo src="images/events/aseb-2024-accra-group.jpg" alt="Recognised builders at the ASEB Summit 2024 in Accra" caption="Accra, 2024" ratio="aspect-[4/5]" className="sm:mt-16" />
-          <Photo src="images/events/aseb-2025-addis-panel.jpg" alt="A panel discussion at ASEB 2025 in Addis Ababa" caption="Addis Ababa, 2025" ratio="aspect-[4/5]" position="70% center" className="sm:mt-32" />
+      <section className="section border-y border-hairline bg-paper" aria-labelledby="figures-title">
+        <div className="wrap grid gap-12 lg:grid-cols-12 lg:gap-10">
+          <div className="lg:col-span-4"><p className="eyebrow">The historical record</p><h2 id="figures-title" className="mt-5 text-display-sm">What five editions gathered.</h2><p className="mt-5 text-[0.9375rem] leading-relaxed text-stone">Nominations, recognitions, Field Registry records, registered accounts, approved members, Country Partners and Ambassadors are different things, and the Society counts each separately.</p></div>
+          <div className="lg:col-span-7 lg:col-start-6">
+            <h3 className="text-[0.8125rem] font-semibold uppercase tracking-[0.1em] text-stone">Across five editions</h3>
+            <dl className="mt-4 grid grid-cols-3 border-y border-hairline">{cumulativeFigures.items.map((f, i) => <div key={f.label} className={`flex flex-col py-6 ${i ? "border-l border-hairline pl-4 sm:pl-6" : ""}`}><dt className="order-2 mt-2 text-[0.8125rem] leading-snug text-stone">{f.label}</dt><dd className="numeral text-[1.875rem] leading-none sm:text-[2.5rem]">{f.value}</dd></div>)}</dl>
+            <p className="mt-3 text-[0.8125rem] text-stone">{cumulativeFigures.provenance}</p>
+            <h3 className="mt-10 text-[0.8125rem] font-semibold uppercase tracking-[0.1em] text-stone">The 2026 edition</h3>
+            <dl className="mt-4 grid grid-cols-2 border-y border-hairline sm:grid-cols-4">{proof.map((p, i) => <div key={p.label} className={`flex flex-col py-6 ${i % 2 ? "border-l border-hairline pl-4" : ""} ${i >= 2 ? "border-t border-hairline sm:border-t-0" : ""} ${i === 2 ? "sm:border-l sm:pl-4" : ""}`}><dt className="order-2 mt-2 text-[0.8125rem] leading-snug text-stone">{p.label}<span className="block text-[0.75rem]">{p.note}</span></dt><dd className="numeral text-[1.75rem] leading-none sm:text-[2rem]">{p.value}</dd></div>)}</dl>
+          </div>
         </div>
       </section>
 
-      <section className="on-dark section bg-ink text-ivory">
-        <div className="wrap">
-          <SectionHead
-            eyebrow="What the story taught us"
-            title="Visibility is not infrastructure."
-            lede="A convening can recognise the field once a year. Only an institution can keep its memory, set its standards and protect its builders in the eleven months between. That is why the Summit became a Society."
-          />
-          <div className="mt-12 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <Btn to="/people" variant="signal">Our people</Btn>
-            <Btn to="/governance" variant="line">How we are governed</Btn>
+      <section className="section" aria-labelledby="transition-title">
+        <div className="wrap grid gap-12 lg:grid-cols-12 lg:gap-10">
+          <div className="lg:col-span-5">
+            <Photo src="images/events/aseb-2026-recognised-builders.jpg" alt="Recognised practitioners and institutions holding awards at ASEB 2026" caption="Recognised ecosystem builders, ASEB 2026, Johannesburg" ratio="aspect-[4/3]" />
+          </div>
+          <div className="lg:col-span-6 lg:col-start-7">
+            <p className="eyebrow">The institutional transition</p>
+            <h2 id="transition-title" className="mt-5 text-display-sm">Visibility is not infrastructure.</h2>
+            <p className="mt-6 text-[1.0625rem] leading-relaxed text-stone">A convening can recognise the field once a year. Only an institution can keep its memory, set its standards and support its builders in the eleven months between. ASEB Society was publicly launched on 21 October 2026, on Day Two of the Johannesburg Summit, to be that institution.</p>
+            <p className="mt-5 text-[1.0625rem] leading-relaxed text-stone">The Summit and Awards continue as one of the Society's four mandates, with its own home at asebs.com. The Society carries the work forward all year.</p>
+            <p className="mt-8 font-display text-[1.5rem] leading-snug">{positioning.promise}</p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap"><Btn to="/why-aseb">Why We Exist</Btn><Btn to="/people" variant="line">Leadership</Btn><Btn to="https://www.asebs.com" variant="line">asebs.com</Btn></div>
+            <p className="mt-6 text-[0.875rem] text-stone">Recognised practitioners appear in the <Link to="/registry" className="underline underline-offset-4">Field Registry</Link>. Recognition there does not make someone a Society member.</p>
           </div>
         </div>
       </section>

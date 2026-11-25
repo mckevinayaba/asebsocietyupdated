@@ -1,14 +1,13 @@
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
+# Public institutional content is open to search engines.
+# Member, Secretariat and account screens are private and never indexed.
 User-agent: *
 Allow: /
+Disallow: /app
+Disallow: /secretariat
+Disallow: /auth
+Disallow: /you
+Disallow: /reset-password
+Disallow: /_serverFn/
+Disallow: /preview/
+
+Sitemap: https://www.asebsociety.org/sitemap.xml

@@ -68,7 +68,7 @@ export default function Funders() {
               source="/funders"
               submitLabel="Send enquiry"
               consent="I agree that ASEB Society may contact me about this enquiry."
-              done={{ title: "Thank you. A partnership lead will be in touch.", body: "We reply to every funder and partner enquiry within five working days." }}
+              done={{ title: "Thank you. A partnership lead will be in touch.", body: "The Secretariat reviews every funder and partner enquiry and replies by email." }}
               fields={[
                 { name: "partnerType", label: "Type of institution", type: "select", options: partnerTypes.map((p) => p.name), required: true },
                 { name: "organisation", label: "Institution", required: true },

@@ -58,7 +58,7 @@ export default function Collaborate() {
               source="/collaborate"
               submitLabel="Propose a collaboration"
               consent="Our programme is willing to work to the ASEB Programme Standard and the Code of Practice."
-              done={{ title: "Thank you. Your proposal is with the Secretariat.", body: "We will review it and propose a collaboration model within three weeks." }}
+              done={{ title: "Thank you. Your proposal is with the Secretariat.", body: "The Secretariat reviews each proposal and replies by email to discuss a collaboration model." }}
               fields={[
                 { name: "programme", label: "Programme name", required: true },
                 { name: "leadOrg", label: "Lead organisation", required: true },

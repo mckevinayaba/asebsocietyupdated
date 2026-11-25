@@ -1,79 +1,233 @@
+import { useState } from "react";
 import { Link } from "@/lib/router";
-import { registry, countries, regions } from "@/content/registry";
-import { challenges } from "@/content/platform";
-import { FindYourPlace } from "@/components/FindYourPlace";
-import { MandateExplorer } from "@/components/MandateExplorer";
-import { Photo } from "@/components/Photo";
-import { Btn, TLink, Arr } from "@/components/Arrow";
 import { asset } from "@/lib/asset";
-import panelPhoto from "@/assets/aseb-2026-panel-from-movement-to-institution.jpg.asset.json";
+import { Btn, TLink } from "@/components/Arrow";
+import { Photo } from "@/components/Photo";
+import { TheoryOfChange } from "@/components/TheoryOfChange";
+import { MandatePanels } from "@/components/MandatePanels";
+import { ContinentalField } from "@/components/ContinentalField";
+import { investPath } from "@/content/navigation";
+import { accountability, investmentAreas, membershipValue, positioning, problemThemes, publishedEvidence, supportSystem } from "@/content/case";
+import { people } from "@/content/institution";
 
-function Heading({ label, title, children }: { label: string; title: string; children?: React.ReactNode }) {
-  return <div className="reveal max-w-3xl"><p className="eyebrow">{label}</p><h2 className="society-section-title mt-5">{title}</h2>{children && <p className="lede mt-6">{children}</p>}</div>;
+const heroTabs = [
+  { label: "Our Purpose", href: "#purpose" },
+  { label: "Our Work", href: "#work" },
+  { label: "Network", href: "#network" },
+];
+
+function SectionLabel({ children, dark = false }: { children: string; dark?: boolean }) {
+  return <p className={`eyebrow ${dark ? "text-sand" : ""}`}>{children}</p>;
 }
 
 export default function Home() {
-  return <>
-    <section className="society-hero on-dark relative isolate flex items-center overflow-hidden bg-teal text-ivory">
-      <img src={asset("images/events/aseb-2026-summit-delegates.jpg")} alt="ASEB ecosystem builders gathered together at the 2026 Summit in Johannesburg" className="absolute inset-0 -z-20 h-full w-full object-cover object-center" fetchPriority="high" />
-      <div className="society-hero-scrim absolute inset-0 -z-10" />
-      <div className="wrap relative py-10 lg:py-14">
-        <p className="eyebrow">A professional home for Africa’s ecosystem builders</p>
-        <h1 className="society-headline mt-6 max-w-[18ch]">Africa Startup Ecosystem<br /><em className="text-ivory">Builders Society.</em></h1><p className="hero-question mt-6 max-w-xl font-display text-2xl leading-snug lg:text-3xl">You help entrepreneurs grow.<br /><span className="text-sand">Who helps you grow?</span></p>
-        <p className="mt-5 max-w-lg text-base leading-relaxed text-ivory/90">For the people and institutions behind Africa’s entrepreneurs. A shared home for professional practice, knowledge, connection and collective action.</p>
-        <div className="mt-7 flex flex-wrap gap-3"><Btn to="/#find-your-place" variant="signal">Find Your Place</Btn><Btn to="/what-we-build" variant="line">Explore What We Build</Btn></div>
-        <p className="mt-7 text-xs text-ivory/80">ASEB Summit delegates, Johannesburg, October 2026 · Photo: ASEB Society</p>
-      </div>
-    </section>
-    <div className="border-b border-hairline bg-teal-soft"><div className="wrap flex flex-col gap-3 py-5 text-sm sm:flex-row sm:items-center sm:justify-between"><p className="max-w-2xl text-teal"><strong>A Society for the whole year.</strong> The Summit convenes and recognises the field. The Society is building its continuing professional home.</p><TLink to="/progress" className="shrink-0">See our progress</TLink></div></div>
+  const [problem, setProblem] = useState(0);
+  const chair = people.find((person) => person.slug === "ian-lorenzen");
+  return (
+    <>
+      {/* 1. Immersive institutional introduction */}
+      <section className="cinema cinema-mobile on-dark flex flex-col" aria-labelledby="home-title">
+        <div className="cinema-media">
+          <img src={asset("images/events/aseb-community-gathering.jpg")} alt="" className="object-[68%_center] lg:object-[60%_center]" fetchPriority="high" decoding="async" />
+        </div>
+        <div className="cinema-grade" />
+        <nav aria-label="On this page" className="relative z-10 mt-[calc(var(--app-bar-h)+var(--safe-top))] flex justify-center gap-6 pt-2 text-[0.875rem] font-semibold text-ivory/75 lg:hidden">
+          {heroTabs.map((tab, i) => <a key={tab.href} href={tab.href} className={`py-2 transition-colors hover:text-ivory ${i === 0 ? "text-ivory underline decoration-signal decoration-2 underline-offset-[10px]" : ""}`}>{tab.label}</a>)}
+        </nav>
+        <div className="wrap relative mt-auto pb-6 pt-10 lg:my-auto lg:pb-24 lg:pt-[calc(var(--app-bar-h)+64px)]">
+          <div className="max-w-[44rem]">
+            <p className="hidden text-[0.75rem] font-semibold uppercase tracking-[0.16em] text-sand sm:block">Africa Startup Ecosystem Builders Society</p>
+            <h1 id="home-title" className="font-display text-hero text-ivory sm:mt-5">Stronger ecosystems.<br /><em className="font-normal text-ivory/90">Stronger African economies.</em></h1>
+            <p className="mt-4 max-w-[34rem] text-[1rem] leading-relaxed text-ivory/90 sm:mt-5 sm:text-[1.0625rem] lg:text-[1.1875rem]">{positioning.statement}</p>
+            <div className="mt-6 flex flex-col gap-2.5 sm:mt-7 sm:flex-row sm:gap-3">
+              <Btn to={investPath} variant="signal">Invest in Our Mission</Btn>
+              <Btn to="/what-we-build" variant="line">Explore Our Work</Btn>
+            </div>
+            <p className="mt-5 text-[0.9375rem] text-ivory/85 sm:mt-6">Ecosystem builder? <Link to="/join" className="font-semibold text-ivory underline decoration-signal underline-offset-4 hover:text-signal">Belong to the field you are building</Link></p>
+          </div>
+          <div className="mt-7 flex items-end justify-between gap-6 border-t border-ivory/15 pt-3 text-[0.75rem] text-ivory/70 sm:mt-10 sm:pt-4">
+            <p className="font-display text-[1.0625rem] italic text-ivory/90">{positioning.philosophy}</p>
+            <p className="text-right"><span className="hidden sm:inline">Practitioners at an ASEB gathering · </span>Photo: ASEB Society</p>
+          </div>
+        </div>
+      </section>
 
-    <section className="section"><div className="wrap grid gap-10 lg:grid-cols-12">
-      <div className="lg:col-span-5"><Heading label="The work behind the work" title="Does this sound familiar?">The people supporting entrepreneurs need support of their own.</Heading><Photo className="mt-8" src="images/events/aseb-networking.jpg" alt="ASEB practitioners sharing a conversation between sessions" caption="Practitioners connecting at an ASEB gathering" ratio="aspect-[3/2]" /></div>
-      <div className="border-t border-ink lg:col-span-6 lg:col-start-7">{challenges.map((item) => <details key={item.who} className="group border-b border-hairline py-6"><summary className="flex cursor-pointer list-none items-start justify-between gap-5 [&::-webkit-details-marker]:hidden"><span><span className="text-xs font-semibold text-teal">{item.who}</span><span className="mt-2 block font-display text-2xl leading-snug">{item.question}</span></span><span aria-hidden="true" className="mt-6 text-xl text-ember group-open:hidden">+</span><span aria-hidden="true" className="mt-6 hidden text-xl text-ember group-open:block">−</span></summary><p className="mt-5 text-base text-stone">{item.answer}</p><div className="mt-4"><TLink to={item.to}>{item.action}</TLink></div></details>)}</div>
-    </div></section>
+      {/* 2. The economic imperative */}
+      <section id="purpose" className="section scroll-mt-20" aria-labelledby="imperative-title">
+        <div className="wrap grid gap-12 lg:grid-cols-12 lg:gap-10">
+          <div className="lg:col-span-5">
+            <SectionLabel>The economic imperative</SectionLabel>
+            <h2 id="imperative-title" className="mt-5 text-title">Africa's economic future will be built by its enterprises.</h2>
+            <p className="lede mt-6">Entrepreneurship is part of the response to Africa's employment and productivity challenges. It only works where entrepreneurs can reach functioning support: people, institutions and systems that help a business start, survive and grow.</p>
+            <ul className="mt-8 flex flex-wrap gap-x-4 gap-y-2 text-[0.875rem] text-stone" aria-label="The support system entrepreneurs depend on">
+              {supportSystem.map((item) => <li key={item} className="flex items-center gap-2"><span className="status-dot bg-teal/50" aria-hidden="true" />{item}</li>)}
+            </ul>
+          </div>
+          <ol className="border-t border-ink lg:col-span-6 lg:col-start-7">
+            {publishedEvidence.map((item) => (
+              <li key={item.figure} className="reveal grid gap-3 border-b border-hairline py-7 sm:grid-cols-[minmax(0,11rem)_1fr] sm:gap-8">
+                <p className="numeral text-[2.5rem] leading-none text-ember lg:text-[3rem]">{item.figure}</p>
+                <div>
+                  <p className="text-[1.0625rem] leading-relaxed">{item.claim}</p>
+                  <a href={item.href} target="_blank" rel="noreferrer" className="mt-2 inline-block text-[0.8125rem] text-stone underline-offset-4 hover:text-ember hover:underline">{item.source} ↗</a>
+                </div>
+              </li>
+            ))}
+            <li className="py-6 text-[0.9375rem] leading-relaxed text-stone">Capital, policy and talent all matter. Each depends on the people and institutions who connect them. That layer is the least funded and the least visible.</li>
+          </ol>
+        </div>
+      </section>
 
-    <section className="section border-t border-hairline bg-paper"><div className="wrap grid gap-12 lg:grid-cols-12">
-      <div className="lg:col-span-5"><Heading label="You may already be doing it" title="What is ecosystem building?">It is the work that helps entrepreneurs find the people, knowledge, finance, markets and conditions they need to start and grow.</Heading><p className="mt-5 text-stone">You do not need “ecosystem builder” in your job title. If you strengthen the support around entrepreneurs, your work belongs in this field.</p><div className="mt-7"><TLink to="/framework">Read the framework</TLink></div><Photo className="mt-8" src={panelPhoto.url} alt="Three practitioners in conversation on stage at ASEB 2026" caption="The field in conversation, ASEB 2026, Johannesburg" ratio="aspect-[4/3]" position="50% 60%" /></div>
-      <div className="lg:col-span-6 lg:col-start-7">{[
-        ["A mentor opens a door.", "You help a founder navigate a difficult decision and connect them with someone who can help."],
-        ["A hub builds lasting support.", "Your team brings workspace, skills, networks and investment readiness together for growing businesses."],
-        ["An educator connects learning to enterprise.", "You help students turn ideas into ventures and build relationships beyond the classroom."],
-        ["A climate practitioner connects the system.", "You link green ventures to relevant skills, finance, policy and markets so innovation can become a viable business."],
-        ["A policymaker removes a barrier.", "You make it easier for entrepreneurs to start, operate and access the support they need."],
-      ].map(([title, text]) => <div key={title} className="border-t border-hairline py-6"><h3 className="text-2xl leading-tight">{title}</h3><p className="mt-3 text-base text-stone">{text}</p></div>)}</div>
-    </div></section>
+      {/* 3. The overlooked problem */}
+      <section className="section border-t border-hairline bg-paper" aria-labelledby="question-title">
+        <div className="wrap">
+          <h2 id="question-title" className="max-w-[22ch] font-display text-title">Africa invests in entrepreneurs. <span className="text-ember">Who invests in the people who make entrepreneurship possible?</span></h2>
+          <div className="mt-14 grid gap-10 lg:grid-cols-12">
+            <div className="lg:col-span-5">
+              <Photo src="images/events/aseb-networking.jpg" alt="Ecosystem builders in conversation between sessions at an ASEB gathering" caption="Practitioners comparing notes between sessions" ratio="aspect-[4/5]" position="35% center" />
+            </div>
+            <div className="lg:col-span-6 lg:col-start-7">
+              <p className="text-[1.125rem] leading-relaxed">The effectiveness of every hub, accelerator and agency depends on the capabilities, knowledge, relationships and sustainability of the people who design and run them. Across the continent, those people work with structural barriers that no single institution can remove.</p>
+              <div role="tablist" aria-label="Structural challenges" className="mt-10 grid grid-cols-2 border-t border-ink sm:grid-cols-4">
+                {problemThemes.map((theme, i) => (
+                  <button key={theme.name} role="tab" type="button" id={`problem-tab-${i}`} aria-selected={problem === i} aria-controls="problem-panel" onClick={() => setProblem(i)}
+                    className={`relative min-h-[56px] border-b border-hairline px-1 py-3 text-left text-[0.9375rem] font-semibold transition-colors ${problem === i ? "text-ink" : "text-stone hover:text-ink"}`}>
+                    {theme.name}
+                    {problem === i && <span aria-hidden="true" className="absolute inset-x-0 -bottom-px h-[2px] bg-signal" />}
+                  </button>
+                ))}
+              </div>
+              <div id="problem-panel" role="tabpanel" aria-labelledby={`problem-tab-${problem}`} className="mandate-enter pt-7" key={problem}>
+                <p className="font-display text-[1.625rem] leading-snug">{problemThemes[problem]?.line}</p>
+                <ul className="mt-5 space-y-3">{problemThemes[problem]?.issues.map((issue) => <li key={issue} className="flex gap-3 text-[1rem] text-stone"><span className="mt-[0.6em] h-px w-4 shrink-0 bg-ember" aria-hidden="true" />{issue}</li>)}</ul>
+              </div>
+              <p className="mt-10 border-l-2 border-signal pl-5 text-[0.9375rem] leading-relaxed text-stone">These are the areas ASEB Society is set up to address. Conditions differ across countries, and the Society's research agenda exists to document where and how.</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-    <section id="find-your-place" className="section scroll-mt-44"><div className="wrap"><Heading label="Your work belongs here" title="Find your place.">What best describes your work? Find the relevant pathway without needing to know our institutional terminology.</Heading><FindYourPlace /></div></section>
+      {/* 4. The institutional solution */}
+      <section className="on-dark section bg-night text-ivory" aria-labelledby="solution-title">
+        <div className="wrap grid gap-12 lg:grid-cols-12 lg:gap-10">
+          <div className="lg:col-span-5">
+            <SectionLabel dark>The institutional solution</SectionLabel>
+            <h2 id="solution-title" className="mt-5 text-title">Building the infrastructure behind Africa's entrepreneurial future.</h2>
+            <p className="mt-6 text-[1.0625rem] leading-relaxed text-ivory/80">ASEB Society is permanent professional infrastructure for the people who build entrepreneurship support. Investment in the Society travels outward: to practitioners, through their institutions, to entrepreneurs and the economies they grow.</p>
+            <p className="mt-6 text-[0.8125rem] leading-relaxed text-ivory/60">These are intended outcomes. The Society reports measured results separately, and only when there is evidence for them.</p>
+          </div>
+          <div className="lg:col-span-6 lg:col-start-7"><TheoryOfChange /></div>
+        </div>
+      </section>
 
-    <section className="section mandate-band border-y border-hairline"><div className="wrap"><Heading label="Our institutional mandate" title="Connection. Practice. Collaboration. Recognition.">Four connected pillars strengthen the people and institutions who make entrepreneurship possible.</Heading><MandateExplorer /></div></section>
+      {/* 5. Four connected mandates */}
+      <section id="work" className="section scroll-mt-20" aria-labelledby="mandates-title">
+        <div className="wrap">
+          <div className="grid gap-6 lg:grid-cols-12">
+            <div className="lg:col-span-6"><SectionLabel>Four connected mandates</SectionLabel><h2 id="mandates-title" className="mt-5 text-title">One institution. Four ways it strengthens the field.</h2></div>
+            <p className="lede lg:col-span-5 lg:col-start-8 lg:pt-12">Each mandate answers a different structural problem. Together they turn a yearly convening into continuing infrastructure.</p>
+          </div>
+          <MandatePanels />
+        </div>
+      </section>
 
-    <section className="section"><div className="wrap"><Heading label="Continental purpose, practical delivery" title="One professional home across Africa.">Our work connects a continental framework with local knowledge and focused collaboration. The goal is stronger support for entrepreneurs, wherever that work happens.</Heading>
-      <div className="mt-12 grid gap-8 lg:grid-cols-3">{[
-        ["Continental infrastructure", "A shared professional home", "Profiles, a searchable archive, public knowledge and a common framework connect the field across borders.", "A mentor can use the Evidence Library without a local ASEB office."],
-        ["Countries and communities", "Relevant to where you work", "Circles and local partnerships are being developed around geography, language, roles and shared challenges.", "Local knowledge shapes the priorities; shared practice connects them across borders."],
-        ["Programmes and collaboration", "Focused work, clear outcomes", "Projects bring specific partners together around a defined entrepreneurship challenge, beneficiaries and delivery plan.", "A university and hub could propose a joint practitioner-development programme."],
-      ].map(([label, title, text, example]) => <div key={label} className="border-t-2 border-teal pt-6"><p className="text-xs font-semibold text-teal">{label}</p><h3 className="mt-3 text-2xl">{title}</h3><p className="mt-4 text-base text-stone">{text}</p><p className="mt-5 border-l border-hairline pl-4 text-sm text-stone">{example}</p></div>)}</div>
-    </div></section>
+      {/* 6. Continental network */}
+      <section id="network" className="section scroll-mt-20 border-t border-hairline bg-paper" aria-labelledby="network-title">
+        <div className="wrap grid gap-12 lg:grid-cols-12 lg:gap-10">
+          <div className="min-w-0 lg:col-span-5">
+            <SectionLabel>Continental network</SectionLabel>
+            <h2 id="network-title" className="mt-5 text-title">Local knowledge. Continental collaboration.</h2>
+            <p className="lede mt-6">The Society is building its presence country by country, through Country Partners, credible organisations with formal local responsibilities, and Ambassadors, individual practitioners with defined advocacy mandates.</p>
+            <p className="mt-5 text-[0.9375rem] text-stone">Representation is appointed carefully and published only once confirmed. Most countries are still open.</p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <Btn to="/countries">Explore the countries</Btn>
+              <Btn to="/country-partners" variant="line">Become a Country Partner</Btn>
+            </div>
+            <div className="mt-5"><TLink to="/ambassadors">Apply as an Ambassador</TLink></div>
+          </div>
+          <div className="min-w-0 lg:col-span-6 lg:col-start-7"><ContinentalField /></div>
+        </div>
+      </section>
 
-    <section className="section border-y border-hairline bg-paper"><div className="wrap grid gap-10 lg:grid-cols-12"><div className="lg:col-span-5"><Heading label="The Field Registry" title="Discover people and organisations.">Find practitioners and institutions by country, region or role. Start with the people recognised in the ASEB Awards archive.</Heading><div className="mt-7"><Btn to="/registry">Explore the Registry</Btn></div><p className="mt-6 text-sm text-stone">{registry.length} archive records · {countries.length} countries represented. in the Awards archive.</p><div className="mt-5 flex flex-wrap gap-4">{regions.map((region) => <TLink key={region} to={`/registry?region=${encodeURIComponent(region)}`}>{region} Africa</TLink>)}</div></div><div className="lg:col-span-6 lg:col-start-7"><Photo src="images/events/aseb-2026-recognised-builders.jpg" alt="Recognised practitioners and institutions holding awards at ASEB 2026" caption="Recognised ecosystem builders, ASEB 2026, Johannesburg" ratio="aspect-[4/3]" />
-      <p className="mt-6 text-sm text-stone">Recognition is one part of a professional journey. The Registry documents the Awards archive; membership and profile verification have their own review pathways.</p>
-    </div></div></section>
+      {/* 7. Institutional credibility */}
+      <section className="section" aria-labelledby="credibility-title">
+        <div className="wrap grid gap-12 lg:grid-cols-12 lg:gap-10">
+          <div className="lg:col-span-6">
+            <SectionLabel>Grounded in practice</SectionLabel>
+            <h2 id="credibility-title" className="mt-5 text-title">Credible because it is accountable.</h2>
+            <p className="lede mt-6">The Society grew out of five years of convening practitioners in four host countries. It is governed by a Board with fiduciary oversight, separates convening from authority, and publishes what is operational and what is not.</p>
+            {chair && (
+              <figure className="mt-10 grid grid-cols-[88px_1fr] items-center gap-5 border-t border-hairline pt-8">
+                <div className="photo aspect-square"><img src={asset(chair.photo)} alt={`${chair.name}, ${chair.role}`} loading="lazy" /></div>
+                <figcaption><p className="font-display text-[1.25rem] leading-tight">{chair.name}</p><p className="mt-1 text-[0.875rem] text-stone">{chair.role}. {chair.base}.</p></figcaption>
+              </figure>
+            )}
+          </div>
+          <nav aria-label="Accountability" className="border-t border-ink lg:col-span-5 lg:col-start-8">
+            {[
+              ["Our Story", "/about/story", "Five Summit editions and the move to a permanent institution"],
+              ["Leadership", "/people", "Founder, executive team and Board"],
+              ["Governance", "/governance", "Oversight, integrity and stewardship goals"],
+              ["Institutional Progress", "/progress", "What is operational, in development or planned"],
+              ["Evidence Library", "/evidence", "The research the Society's practice draws on"],
+            ].map(([label, to, note]) => (
+              <Link key={to} to={to ?? "/"} className="group flex items-baseline justify-between gap-6 border-b border-hairline py-5">
+                <span><span className="block font-display text-[1.375rem] leading-tight group-hover:text-ember">{label}</span><span className="mt-1 block text-[0.875rem] text-stone">{note}</span></span>
+                <span aria-hidden="true" className="text-ember transition-transform group-hover:translate-x-1">→</span>
+              </Link>
+            ))}
+          </nav>
+        </div>
+      </section>
 
-    <section className="section"><div className="wrap"><Heading label="Available now" title="What can you do today?" />
-      <div className="mt-10 grid gap-x-8 sm:grid-cols-2 lg:grid-cols-3">{[
-        ["Apply to join", "Tell us who you are, what you do and where you operate. Applications are reviewed.", "/join"],
-        ["Create your account", "Save your professional profile and Circle preferences. Membership applications follow a separate review.", "/auth"],
-        ["Explore the field", "Find public archive records by country, role and organisation type.", "/registry"],
-        ["Make your work visible", "Describe your practice and request review of a profile in the Awards archive.", "/join"],
-        ["Read and contribute", "Use open evidence and submit an editorial pitch from your practice.", "/insights"],
-        ["Propose a partnership", "Discuss your priorities for practitioner development or a focused collaboration.", "/collaborate"],
-      ].map(([title, text, to]) => <Link key={title} to={to ?? "/join"} className="group border-t border-hairline py-7"><h3 className="flex items-baseline justify-between gap-3 text-2xl group-hover:text-ember">{title}<Arr /></h3><p className="mt-3 text-base text-stone">{text}</p></Link>)}</div>
-    </div></section>
+      {/* 8. Institutional investment */}
+      <section id="invest" className="on-dark relative isolate overflow-hidden bg-night text-ivory" aria-labelledby="invest-title">
+        <div className="absolute inset-0 -z-10 opacity-25"><img src={asset("images/events/aseb-2026-recognised-builders.jpg")} alt="" className="h-full w-full object-cover" loading="lazy" /></div>
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,var(--color-night)_0%,color-mix(in_oklab,var(--color-night)_88%,transparent)_45%,var(--color-night)_100%)]" />
+        <div className="wrap section grid gap-12 lg:grid-cols-12 lg:gap-10">
+          <div className="lg:col-span-5">
+            <SectionLabel dark>Invest in Our Mission</SectionLabel>
+            <h2 id="invest-title" className="mt-5 text-title">Fund the foundations of African entrepreneurship.</h2>
+            <p className="mt-6 text-[1.0625rem] leading-relaxed text-ivory/80">A stronger hub supports successive cohorts of founders, not one venture. Investment in ecosystem builders and their institutions compounds across every programme they run.</p>
+            <dl className="mt-8 space-y-4 border-t border-night-line pt-6">
+              {accountability.slice(0, 2).map((item) => <div key={item.k}><dt className="text-[0.8125rem] font-semibold text-sand">{item.k}</dt><dd className="mt-1 text-[0.9375rem] text-ivory/75">{item.v}</dd></div>)}
+            </dl>
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <Btn to={investPath} variant="signal">Invest in Our Mission</Btn>
+              <Btn to={`${investPath}#enquire`} variant="line">Start a conversation</Btn>
+            </div>
+          </div>
+          <ul className="grid self-start sm:grid-cols-2 lg:col-span-6 lg:col-start-7">
+            {investmentAreas.slice(0, 7).map((area) => (
+              <li key={area.slug} className="border-t border-night-line">
+                <Link to={`${investPath}#${area.slug}`} className="group block py-5 pr-4">
+                  <span className="flex items-baseline justify-between gap-3 font-semibold text-ivory group-hover:text-signal">{area.name}<span aria-hidden="true">→</span></span>
+                  <span className="mt-1.5 block text-[0.875rem] leading-snug text-ivory/65">{area.outcome}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
 
-    <section className="section institution-statement on-dark bg-teal text-ivory"><div className="wrap grid gap-10 lg:grid-cols-12"><div className="lg:col-span-8"><p className="eyebrow">A field with a name. A community with a purpose.</p><h2 className="society-section-title mt-6">Entrepreneurship grows stronger when its builders grow together.</h2></div><div className="flex flex-col justify-end lg:col-span-3 lg:col-start-10"><p className="text-base text-ivory/85">From mentoring and hub leadership to research, investment and climate innovation, your work is part of the same connected field.</p><div className="mt-7"><TLink to="/progress">Our institutional journey</TLink></div></div></div></section>
-
-    <section className="section"><div className="wrap grid gap-10 lg:grid-cols-12"><Photo className="lg:col-span-6" src="images/events/aseb-summit-panel.jpg" alt="Practitioners exchanging ideas during an ASEB Summit panel" caption="Shared practice at the ASEB Summit" ratio="aspect-[4/3]" /><div className="lg:col-span-5 lg:col-start-8"><Heading label="From recognition to continuity" title="Why this matters." /><p className="mt-6 text-stone">Since 2022, five Summit and Awards editions have brought attention to the people who support entrepreneurship. ASEB Society was publicly launched on 21 October 2026 to build a continuing professional home beyond the annual event.</p><p className="mt-5 text-stone">The next chapter connects that recognition to continuity: shared methods, meaningful relationships and sustained support for the people and institutions building the field.</p><div className="mt-7 flex flex-wrap gap-5"><TLink to="/about/story">Read our story</TLink><TLink to="/summit">Explore past editions</TLink></div></div></div></section>
-
-    <section className="on-dark section bg-teal text-ivory"><div className="wrap"><p className="eyebrow">Your next chapter</p><h2 className="society-section-title mt-5 max-w-3xl">You build opportunities for others.<br />Make room for your own growth.</h2><p className="mt-6 max-w-2xl text-lg text-ivory/90">Whether you work independently, lead an institution or support the field through funding, research or policy, there is a place to begin.</p><div className="mt-8 flex flex-wrap gap-3"><Btn to="/join" variant="signal">Apply to Join the Society</Btn><Btn to="/get-involved" variant="line">Find a Way to Contribute</Btn></div></div></section>
-  </>;
+      {/* 9. Professional participation */}
+      <section className="section" aria-labelledby="belong-title">
+        <div className="wrap grid gap-12 lg:grid-cols-12 lg:gap-10">
+          <div className="lg:col-span-6">
+            <SectionLabel>For ecosystem builders</SectionLabel>
+            <h2 id="belong-title" className="mt-5 text-title">Belong to the field you are building.</h2>
+            <p className="lede mt-6">If you mentor founders, run a hub, fund programmes, shape policy or research entrepreneurship, your work is part of one profession. Membership connects you to it.</p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <Btn to="/join">Apply for membership</Btn>
+              <Btn to="/auth?mode=signup" variant="line">Create an account</Btn>
+            </div>
+            <p className="mt-5 text-[0.875rem] text-stone">Applications are reviewed by the Secretariat. Creating an account does not by itself grant membership.</p>
+          </div>
+          <dl className="grid gap-px self-start border border-hairline bg-hairline sm:grid-cols-2 lg:col-span-5 lg:col-start-8">
+            {membershipValue.map((item) => <div key={item.k} className="bg-ivory p-6"><dt className="font-display text-[1.375rem]">{item.k}</dt><dd className="mt-2 text-[0.9375rem] leading-relaxed text-stone">{item.v}</dd></div>)}
+          </dl>
+        </div>
+      </section>
+    </>
+  );
 }

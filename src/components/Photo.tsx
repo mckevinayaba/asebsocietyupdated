@@ -12,7 +12,7 @@ export function Photo({ src, alt, caption, className = "", ratio = "aspect-[3/2]
       {caption && (
         <figcaption className="caption">
           {caption}
-          {credit && <span className="text-stone/80"> · Photo: ASEB Society</span>}
+          {credit && <span className="text-stone"> · Photo: ASEB Society</span>}
         </figcaption>
       )}
     </figure>

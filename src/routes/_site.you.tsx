@@ -1,0 +1,8 @@
+import { createFileRoute } from "@tanstack/react-router";
+import You from "@/pages/You";
+import { seo } from "@/lib/seo";
+
+export const Route = createFileRoute("/_site/you")({
+  head: () => seo({ title: "You", description: "Your account, saved items and membership pathway.", path: "/you", noindex: true }),
+  component: You,
+});

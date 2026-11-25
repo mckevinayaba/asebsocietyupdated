@@ -76,7 +76,7 @@ export default function CountryPartners() {
               source="/country-partners"
               submitLabel="Submit expression of interest"
               consent="I have read the Country Partner obligations and commit to the ASEB Code of Practice."
-              done={{ title: "Thank you. Your expression of interest is with the Secretariat.", body: "We will review it against the selection criteria, contact your referees and write to you within four weeks." }}
+              done={{ title: "Thank you. Your expression of interest is with the Secretariat.", body: "The Secretariat reviews it against the selection criteria and may contact your referees. Submitting does not confer an appointment." }}
               fields={[
                 { name: "applicantType", label: "Applying as", type: "choice", options: ["An institution", "An individual practitioner"], required: true },
                 { name: "name", label: "Full name", required: true },

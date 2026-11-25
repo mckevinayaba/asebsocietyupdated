@@ -8,7 +8,7 @@ import { asset } from "@/lib/asset";
 function Profile({ p, large = false }: { p: Person; large?: boolean }) {
   const [open, setOpen] = useState(false);
   return (
-    <article className={`reveal grid gap-6 border-b border-hairline py-10 ${large ? "lg:grid-cols-12 lg:gap-10" : "sm:grid-cols-[160px_1fr] sm:gap-8"}`}>
+    <article id={p.slug} className={`reveal scroll-mt-32 grid gap-6 border-b border-hairline py-10 ${large ? "lg:grid-cols-12 lg:gap-10" : "sm:grid-cols-[160px_1fr] sm:gap-8"}`}>
       <div className={large ? "lg:col-span-4" : ""}>
         <div className={`photo aspect-square ${large ? "max-w-[360px]" : "max-w-[160px]"}`}>
           <img src={asset(p.photo)} alt={`${p.name}, ${p.role.split(" · ")[0]}`} loading="lazy" />

@@ -1,5 +1,7 @@
 import "@testing-library/jest-dom/vitest";
 
+// Browser stubs apply only to jsdom tests. Database tests run in the node environment.
+if (typeof window !== "undefined") {
 Object.defineProperty(window, "scrollTo", {
   writable: true,
   value: () => {},
@@ -18,3 +20,4 @@ Object.defineProperty(window, "matchMedia", {
     dispatchEvent: () => {},
   }),
 });
+}

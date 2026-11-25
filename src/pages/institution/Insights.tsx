@@ -59,7 +59,7 @@ export default function Insights() {
               source="/insights"
               submitLabel="Send pitch"
               consent="The work is mine or my organisation's to share, and it credits the people and institutions it draws on."
-              done={{ title: "Thank you. Your pitch is with the editorial team.", body: "We reply to every pitch within three weeks." }}
+              done={{ title: "Thank you. Your pitch is with the editorial team.", body: "The editorial team reviews every pitch and replies by email." }}
               fields={[
                 { name: "category", label: "Category", type: "choice", options: insightCategories.map((c) => c.name), required: true },
                 { name: "name", label: "Your name", required: true },
