@@ -234,3 +234,110 @@
   .society-hero .hero-question { margin-top: 20px; }
   .society-hero .mt-7 { margin-top: 20px; }
 }
+
+/* ==========================================================================
+   ASEB institutional design system, application layer.
+   Light editorial surfaces for reading and work, a deep "night" surface for
+   cinematic moments. Documented in docs/DESIGN_SYSTEM.md.
+   ========================================================================== */
+@theme {
+  --color-night: oklch(0.2 0.022 195);
+  --color-night-2: oklch(0.25 0.026 192);
+  --color-night-line: oklch(0.36 0.025 190);
+  --color-ivory-dim: oklch(0.86 0.01 120);
+  --color-signal-soft: oklch(0.95 0.035 60);
+
+  --shadow-sheet: 0 -24px 60px -30px oklch(0.15 0.02 190 / 0.55);
+  --shadow-bar: 0 1px 0 oklch(0.86 0.018 80), 0 10px 30px -24px oklch(0.2 0.02 190 / 0.35);
+
+  --ease-emphasis: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 160ms;
+  --duration-base: 260ms;
+  --duration-slow: 520ms;
+
+  --text-hero: clamp(2.125rem, 1.35rem + 3.6vw, 4.75rem);
+  --text-hero--line-height: 1.02;
+  --text-title: clamp(1.75rem, 1.25rem + 2vw, 3rem);
+  --text-title--line-height: 1.08;
+  --text-label: 0.6875rem;
+  --text-label--line-height: 1rem;
+}
+
+:root {
+  --app-bar-h: 56px;
+  --context-tabs-h: 44px;
+  --bottom-nav-h: 64px;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (min-width: 1024px) {
+  :root { --app-bar-h: 76px; --bottom-nav-h: 0px; }
+}
+
+/* The application frame. Content never sits under the bottom navigation. */
+.app-main { padding-bottom: calc(var(--bottom-nav-h) + var(--safe-bottom)); }
+@media (min-width: 1024px) { .app-main { padding-bottom: 0; } }
+
+.app-bar { padding-top: var(--safe-top); transition: background-color var(--duration-base) var(--ease-quiet), color var(--duration-base) var(--ease-quiet), box-shadow var(--duration-base) var(--ease-quiet); }
+.app-bar[data-surface="solid"] { background: color-mix(in oklab, var(--color-ivory) 94%, transparent); box-shadow: var(--shadow-bar); backdrop-filter: saturate(1.2) blur(10px); }
+.app-bar[data-surface="clear"] { background: linear-gradient(180deg, oklch(0.16 0.02 195 / 0.55), transparent); color: var(--color-ivory); }
+
+.bottom-nav { padding-bottom: var(--safe-bottom); box-shadow: 0 -1px 0 var(--color-hairline); }
+.bottom-nav a[aria-current="page"] .nav-mark { opacity: 1; transform: scaleX(1); }
+.nav-mark { opacity: 0; transform: scaleX(0.3); transition: transform var(--duration-base) var(--ease-emphasis), opacity var(--duration-fast); }
+
+.context-tabs a { scroll-snap-align: start; }
+.context-tabs a[aria-current="page"] { color: var(--color-ink); }
+.context-tabs a[aria-current="page"]::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--color-signal); }
+
+.sheet-panel { box-shadow: var(--shadow-sheet); }
+.sheet-panel[data-state="open"] { animation: sheet-up var(--duration-base) var(--ease-emphasis); }
+.sheet-overlay[data-state="open"] { animation: fade-in var(--duration-base) var(--ease-quiet); }
+@keyframes sheet-up { from { transform: translateY(24px); opacity: 0.6; } to { transform: none; opacity: 1; } }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+
+/* Cinematic opening. Depth comes from the photograph, a graded scrim and a slow drift. */
+.cinema { position: relative; isolation: isolate; overflow: hidden; background: var(--color-night); color: var(--color-ivory); }
+.cinema-media { position: absolute; inset: 0; z-index: -2; }
+.cinema-media img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.9) contrast(1.05); animation: cinema-drift 26s var(--ease-quiet) both; }
+.cinema-grade { position: absolute; inset: 0; z-index: -1; background:
+  linear-gradient(180deg, oklch(0.16 0.02 195 / 0.55) 0%, oklch(0.16 0.02 195 / 0.05) 30%, oklch(0.16 0.02 195 / 0.35) 58%, oklch(0.14 0.02 195 / 0.94) 100%),
+  radial-gradient(120% 70% at 85% 30%, oklch(0.62 0.15 52 / 0.18), transparent 60%); }
+@keyframes cinema-drift { from { transform: scale(1.08) translate3d(-1%, 0, 0); } to { transform: scale(1.02) translate3d(0, 0, 0); } }
+.cinema-mobile { min-height: calc(100svh - var(--bottom-nav-h) - var(--safe-bottom)); }
+@media (max-width: 1023px) {
+  .cinema-grade { background:
+    linear-gradient(180deg, oklch(0.16 0.02 195 / 0.6) 0%, oklch(0.16 0.02 195 / 0.15) 22%, oklch(0.16 0.02 195 / 0.55) 42%, oklch(0.14 0.02 195 / 0.93) 64%, oklch(0.14 0.02 195 / 0.97) 100%); }
+}
+@media (min-width: 1024px) {
+  .cinema-mobile { min-height: min(820px, calc(100svh - 0px)); }
+  .cinema-grade { background:
+    linear-gradient(90deg, oklch(0.15 0.02 195 / 0.92) 0%, oklch(0.15 0.02 195 / 0.7) 38%, oklch(0.15 0.02 195 / 0.05) 72%),
+    linear-gradient(180deg, oklch(0.15 0.02 195 / 0.5) 0%, transparent 25%); }
+}
+
+/* Dense grade for interior cinematic openings, where text sits over busy photographs. */
+.cinema-dense .cinema-grade { background: linear-gradient(180deg, oklch(0.15 0.02 195 / 0.78) 0%, oklch(0.15 0.02 195 / 0.82) 45%, oklch(0.14 0.02 195 / 0.95) 100%); }
+@media (min-width: 1024px) {
+  .cinema-dense .cinema-grade { background: linear-gradient(90deg, oklch(0.15 0.02 195 / 0.94) 0%, oklch(0.15 0.02 195 / 0.78) 45%, oklch(0.15 0.02 195 / 0.25) 80%); }
+}
+
+/* Theory of change: a connected path, not a flowchart template. */
+.change-step { position: relative; }
+.change-step::before { content: ""; position: absolute; left: 11px; top: 28px; bottom: -8px; width: 1px; background: var(--color-night-line); }
+.change-step:last-child::before { display: none; }
+.change-dot { width: 23px; height: 23px; border-radius: 999px; border: 1px solid var(--color-night-line); display: grid; place-items: center; background: var(--color-night); }
+.change-dot::after { content: ""; width: 7px; height: 7px; border-radius: 999px; background: var(--color-signal); transform: scale(var(--dot-scale, 0.6)); transition: transform var(--duration-slow) var(--ease-emphasis); }
+.change-step[data-active="true"] .change-dot::after { --dot-scale: 1.25; }
+
+/* Immersive story viewer. Scroll snapping is used only inside the viewer. */
+.story-viewer { height: 100svh; overflow-y: auto; scroll-snap-type: y mandatory; overscroll-behavior: contain; }
+.story-slide { height: 100svh; scroll-snap-align: start; scroll-snap-stop: always; }
+.action-rail button, .action-rail a { -webkit-tap-highlight-color: transparent; }
+
+.status-dot { display: inline-block; width: 7px; height: 7px; border-radius: 999px; flex: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cinema-media img { animation: none; transform: none; }
+  .story-viewer { scroll-behavior: auto; }
+}

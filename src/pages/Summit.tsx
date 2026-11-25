@@ -5,6 +5,7 @@ import { statements, proof } from "@/content/site";
 import { SectionHead } from "@/components/PageHero";
 import { Btn, TLink } from "@/components/Arrow";
 import { asset } from "@/lib/asset";
+import { nextSummit } from "@/content/case";
 
 export default function Summit() {
   return (
@@ -46,6 +47,23 @@ export default function Summit() {
           <p className="mt-4 pl-6 text-[0.9375rem] text-stone-light">Visible practitioners attract partners, capital and talent. Invisible ones carry the load alone.</p>
         </div>
       </header>
+
+      {/* The Summit within the Society's permanent mandate, and the next edition */}
+      <section className="border-b border-hairline bg-paper" aria-labelledby="summit-mandate-title">
+        <div className="wrap grid gap-10 py-12 lg:grid-cols-12 lg:gap-10 lg:py-16">
+          <div className="lg:col-span-7">
+            <p className="eyebrow">One of four mandates</p>
+            <h2 id="summit-mandate-title" className="mt-4 text-display-sm">The continental convening of a permanent institution.</h2>
+            <p className="mt-5 max-w-prose text-[1.0625rem] leading-relaxed text-stone">The Summit convenes the field once a year, recognises its practitioners and mobilises new ones. Between editions, ASEB Circles, the Academy and the Field Lab carry that work forward. The full Summit and Awards programme lives at asebs.com.</p>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap"><Btn to="https://www.asebs.com" variant="line">Visit asebs.com</Btn><TLink to="/what-we-build">How the four mandates connect</TLink></div>
+          </div>
+          <div className="on-dark self-start bg-night p-7 text-ivory lg:col-span-4 lg:col-start-9">
+            <p className="text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-sand">Next edition · Announced</p>
+            <p className="mt-3 font-display text-[2.25rem] leading-none">{nextSummit.place} {nextSummit.year}</p>
+            <p className="mt-4 text-[0.9375rem] leading-relaxed text-ivory/80">{nextSummit.line}</p>
+          </div>
+        </div>
+      </section>
 
       {/* 2026 programme */}
       <section className="section">

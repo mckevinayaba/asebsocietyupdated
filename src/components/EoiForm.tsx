@@ -61,6 +61,7 @@ export function EoiForm({ source, fields, consent, submitLabel, done }: Props) {
         <p className="eyebrow">Received</p>
         <h3 className="mt-5 font-display text-[2rem] leading-tight">{done.title}</h3>
         <p className="mt-4 max-w-prose text-[1rem] leading-relaxed text-stone">{done.body}</p>
+        <p className="mt-6 max-w-prose border-l-2 border-signal pl-4 text-[0.875rem] leading-relaxed text-stone">Your submission was saved securely for Secretariat review on {new Date().toLocaleString("en-GB", { dateStyle: "long", timeStyle: "short" })}. Automatic email confirmations are not active yet, so you will not receive a receipt by email. For anything urgent, write to <a className="underline underline-offset-4" href="mailto:aseb@asebsociety.org">aseb@asebsociety.org</a>.</p>
       </div>
     );
 

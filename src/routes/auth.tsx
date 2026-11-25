@@ -4,9 +4,13 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/lib/router";
 import { useMember } from "@/hooks/use-member";
+import { safeRedirect } from "@/content/navigation";
 
 export const Route = createFileRoute("/auth")({
-  validateSearch: (search: Record<string, unknown>): { mode?: "signup" } => search["mode"] === "signup" ? { mode: "signup" } : {},
+  validateSearch: (search: Record<string, unknown>): { mode?: "signup"; redirect?: string } => ({
+    ...(search["mode"] === "signup" ? { mode: "signup" as const } : {}),
+    ...(typeof search["redirect"] === "string" ? { redirect: safeRedirect(search["redirect"]) } : {}),
+  }),
   head: () => ({ meta: [
     { title: "Member sign in | ASEB Society" },
     { name: "description", content: "Sign in or create your ASEB account to keep a personal profile and connect with Circles." },
@@ -28,7 +32,8 @@ function AuthPage() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
-  useEffect(() => { if (ready && user) void navigate({ to: "/app", replace: true }); }, [ready, user, navigate]);
+  const destination = safeRedirect(search.redirect);
+  useEffect(() => { if (ready && user) void navigate({ href: destination, replace: true }); }, [ready, user, navigate, destination]);
   useEffect(() => {
     const draft = sessionStorage.getItem("aseb-application-account");
     if (!draft) return;
@@ -47,7 +52,7 @@ function AuthPage() {
           if (authError) setError(authError.message); else setNotice("If an account exists for that email, a password-reset link has been sent.");
         } else {
           const { error: authError } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
-          if (authError) setError(authError.message); else await navigate({ to: "/app", replace: true });
+          if (authError) setError(authError.message); else await navigate({ href: destination, replace: true });
         }
       } catch { setError("Please check your connection and try again."); }
       finally { setBusy(false); }

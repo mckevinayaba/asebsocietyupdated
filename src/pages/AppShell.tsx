@@ -1,6 +1,9 @@
 import { circleGroups } from "@/lib/programme-intake";
 import { useState, type ReactNode } from "react";
-import { Link } from "@/lib/router";
+import { Link, useSearchParams } from "@/lib/router";
+import { BottomNav } from "@/components/shell/BottomNav";
+import { useQuery } from "@tanstack/react-query";
+import { getMyAccess } from "@/lib/secretariat.functions";
 import { useNavigate } from "@tanstack/react-router";
 import { useSuspenseQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
@@ -16,8 +19,8 @@ import { pillars } from "@/content/pillars";
 import { summit2026, speakers } from "@/content/summit";
 import { registry, regions } from "@/content/registry";
 
-// Member app preview. Mobile first: a bottom tab bar with text labels and a logo-orange
-// indicator, no icon set. On desktop the same tabs become a left rail.
+// Member app. Mobile first: the global bottom navigation stays in place after sign in, and the
+// member sections become contextual tabs at the top. On desktop the same sections form a left rail.
 // All content here is structural preview content. No members, posts or quotes are invented.
 
 type Tab = "home" | "circles" | "academy" | "fieldlab" | "summit";
@@ -234,7 +237,11 @@ export default function AppShell() {
   const { data } = useSuspenseQuery({ queryKey: ["member-data", user?.id], queryFn: () => fetchMember() });
   const [editing, setEditing] = useState(false);
   const [signingOut, setSigningOut] = useState(false);
-  const [tab, setTab] = useState<Tab>("home");
+  const [searchParams] = useSearchParams();
+  const requested = searchParams.get("tab");
+  const [tab, setTab] = useState<Tab>(tabs.some((t) => t.id === requested) ? (requested as Tab) : "home");
+  const fetchAccess = useServerFn(getMyAccess);
+  const access = useQuery({ queryKey: ["my-access", user?.id], queryFn: () => fetchAccess(), staleTime: 60_000 });
   const profile = data.profile;
   const body = editing ? <MemberProfile profile={profile} close={() => setEditing(false)} /> : { home: <HomeTab applications={data.applications} name={profile?.name || ""} role={profile?.primary_role || ""} country={profile?.country || ""} edit={() => setEditing(true)} />, circles: <CirclesTab joined={data.circles} toggle={async (key, join) => { await changeCircle({ data: { key, join } }); await queryClient.invalidateQueries({ queryKey: ["member-data"] }); }} />, academy: <AcademyTab />, fieldlab: <FieldLabTab />, summit: <SummitTab /> }[tab];
 
@@ -247,7 +254,8 @@ export default function AppShell() {
             <img src={asset("images/brand/aseb-society-mark-on-light.png")} alt="" className="h-8 w-auto" />
             <span className="font-display text-[1.125rem]">ASEB Society</span>
           </Link>
-          <div className="flex items-center gap-5 text-[0.875rem] font-semibold">
+          <div className="flex items-center gap-3 text-[0.875rem] font-semibold sm:gap-5">
+            {access.data?.secretariat && <Link to="/secretariat" className="hidden min-h-[44px] items-center text-ember hover:text-ink sm:inline-flex">Secretariat</Link>}
             <Button variant="ghost" className="min-h-[44px]" disabled={signingOut} onClick={async () => { setSigningOut(true); await queryClient.cancelQueries(); queryClient.clear(); await supabase.auth.signOut(); await navigate({ to: "/auth", replace: true }); }}>Sign out</Button>
             <Button onClick={() => setEditing(true)} className="h-9 w-9 bg-ink font-display text-[0.9375rem] text-ivory" aria-label="Your profile">{profile?.name?.slice(0, 1) || "M"}</Button>
           </div>
@@ -255,6 +263,15 @@ export default function AppShell() {
         <div className="border-t border-hairline bg-sand/40 px-5 py-2 text-center text-[0.75rem] text-ink/80">
           {profile?.country && profile?.primary_role ? "Your ASEB account · Society membership is reviewed separately." : "Complete your profile to add your country and primary role."}
         </div>
+        <nav aria-label="Member sections" className="no-scrollbar flex h-11 gap-6 overflow-x-auto border-t border-hairline px-5 lg:hidden">
+          {tabs.map((t) => (
+            <button key={t.id} type="button" onClick={() => { setEditing(false); setTab(t.id); window.scrollTo({ top: 0 }); }} aria-current={tab === t.id ? "page" : undefined}
+              className={`relative shrink-0 whitespace-nowrap text-[0.875rem] ${tab === t.id ? "font-semibold text-ink after:absolute after:inset-x-0 after:bottom-0 after:h-[2px] after:bg-signal" : "text-ink/60"}`}>
+              {t.label}
+            </button>
+          ))}
+          {access.data?.secretariat && <Link to="/secretariat" className="flex shrink-0 items-center whitespace-nowrap text-[0.875rem] font-semibold text-ember">Secretariat</Link>}
+        </nav>
       </header>
 
       <div className="mx-auto grid max-w-[1240px] lg:grid-cols-[220px_1fr_300px] lg:gap-10 lg:px-8">
@@ -298,20 +315,7 @@ export default function AppShell() {
         </aside>
       </div>
 
-      {/* Mobile tab bar: text labels, logo-orange indicator */}
-      <nav aria-label="App tabs" className="fixed inset-x-0 bottom-0 z-40 border-t border-hairline bg-ivory/95 backdrop-blur-sm lg:hidden" style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
-        <ul className="grid grid-cols-5">
-          {tabs.map((t) => (
-            <li key={t.id}>
-              <Button variant="ghost" onClick={() => { setEditing(false); setTab(t.id); window.scrollTo({ top: 0 }); }} aria-current={tab === t.id ? "page" : undefined}
-                className={`relative flex h-[60px] w-full items-center justify-center text-[0.8125rem] ${tab === t.id ? "font-semibold text-ink" : "text-stone"}`}>
-                {tab === t.id && <span className="absolute left-1/2 top-0 h-[3px] w-8 -translate-x-1/2 bg-signal" aria-hidden="true" />}
-                {t.label}
-              </Button>
-            </li>
-          ))}
-        </ul>
-      </nav>
+      <BottomNav />
     </div>
   );
 }

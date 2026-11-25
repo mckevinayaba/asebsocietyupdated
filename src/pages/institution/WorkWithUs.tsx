@@ -100,7 +100,7 @@ export default function WorkWithUs() {
               source="/work-with-us"
               submitLabel="Send request"
               consent="I agree that ASEB Society may contact me about this request."
-              done={{ title: "Thank you. Your request is with the Secretariat.", body: "We will send the capability statement and reply on the opportunity within three working days." }}
+              done={{ title: "Thank you. Your request is with the Secretariat.", body: "The Secretariat reviews each request and replies by email from aseb@asebsociety.org." }}
               fields={[
                 { name: "requestType", label: "Request", type: "choice", options: ["Capability statement", "Invitation to tender", "Consortium partnership", "Direct commission"], required: true },
                 { name: "organisation", label: "Organisation", required: true },
