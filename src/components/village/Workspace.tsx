@@ -57,7 +57,7 @@ export function Workspace({ children, aside, label }: { children: ReactNode; asi
           <div className="sticky top-[calc(var(--app-bar-h)+20px)] space-y-6">
             <NavList items={workspaceLinks} />
             {user && <div className="border-t border-hairline pt-4"><p className="px-3 text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-stone">You</p><div className="mt-2"><NavList items={personalLinks} /></div></div>}
-            <div className="border-t border-hairline px-3 pt-4 text-[0.8125rem] leading-relaxed text-stone"><Link to="/" className="hover:text-ink">About ASEB Society</Link><br /><Link to={investPath} className="hover:text-ink">Invest in Our Mission</Link><br /><Link to="/partners" className="hover:text-ink">Partnerships</Link></div>
+            <ul className="border-t border-hairline pt-3 text-[0.8125rem] text-stone">{[["About ASEB Society", "/"], ["Invest in Our Mission", investPath], ["Partnerships", "/partners"]].map(([label, to]) => <li key={label}><Link to={to ?? "/"} className="flex min-h-[32px] items-center px-3 hover:text-ink">{label}</Link></li>)}</ul>
           </div>
         </nav>
         <div className="min-w-0">{children}</div>

@@ -32,3 +32,6 @@
 - Migrations are hand-written SQL in `drizzle/migrations/` and must pass `src/test/database-security.test.ts`. They are applied to Lovable Cloud by the owner after a verified backup.
 - `src/dev/` and `/preview/*` are development-only and must never ship demonstration data in production.
 - See `CLAUDE.md` and `docs/` for the full institutional, design and data governance rules.
+- The five knowledge products (The Field at /the-field, the Playbook, ASEB Voices, Ask the Village, State of the Field) share one content model and are not pillars. ASEB Voices is the only storytelling brand, and Founders' Voices is one of its categories. See docs/LIVING_VILLAGE.md.
+- Community content lifecycle, consent, attribution and moderation are enforced in the database (migration 0007). Never publish without consent, never expose author_id, and never invent counts, followers or engagement.
+- Community publishing stays pre-moderated until the Society approves its community guidelines, contributor terms and privacy notice.

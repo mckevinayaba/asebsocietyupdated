@@ -1,5 +1,7 @@
 # Product experience
 
+The five knowledge products and the community are described in `docs/LIVING_VILLAGE.md`.
+
 ## Principle
 
 The mobile experience is an application from the first visit, before sign in or installation. Desktop is designed separately for its own interaction patterns but shares the same data, semantics and navigation logic.

@@ -341,3 +341,10 @@
   .cinema-media img { animation: none; transform: none; }
   .story-viewer { scroll-behavior: auto; }
 }
+
+/* Very narrow phones (under 360px): long single words such as "Entrepreneurship" must fit
+   without hyphenation, so the largest display sizes step down slightly. */
+@media (max-width: 359px) {
+  .text-display-lg, .text-hero { font-size: 2rem; }
+  .text-display-md, .text-title { font-size: 1.75rem; }
+}

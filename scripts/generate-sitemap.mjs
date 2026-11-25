@@ -11,10 +11,14 @@ const staticPaths = [
   "/summit", "/communities", "/learning", "/field-lab", "/registry", "/countries", "/country-partners",
   "/ambassadors", "/field", "/discover", "/stories", "/evidence", "/insights", "/framework", "/climate", "/sdgs",
   "/join", "/get-involved", "/partners", "/collaborate", "/work-with-us", "/funders", "/registry/submit",
+  "/the-field", "/voices", "/playbook", "/ask", "/state-of-the-field", "/community-guidelines",
 ];
+// Published community items are dynamic and are listed once a database-backed sitemap route exists.
 const countriesSource = readFileSync(path.join(root, "src/content/countries.ts"), "utf8");
 const countryNames = [...countriesSource.matchAll(/"([^"]+)"/g)].map((m) => m[1]);
 const slugify = (name) => name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+const products = readFileSync(path.join(root, "src/content/products.ts"), "utf8");
+const playbookSlugs = [...products.matchAll(/\{ slug: "([a-z0-9-]+)", title:/g)].map((m) => m[1]);
 const registry = JSON.parse(readFileSync(path.join(root, "src/content/registry.json"), "utf8"));
 const field = readFileSync(path.join(root, "src/content/field.ts"), "utf8");
 const constituencies = [...field.matchAll(/slug: "([a-z-]+)",\n\s+n?/g)].map((m) => m[1]).filter((s) => ["practitioners", "support-institutions", "capital-market-builders", "systems-builders"].includes(s));
@@ -24,6 +28,7 @@ const paths = [
   ...[...new Set(constituencies)].map((slug) => `/field/${slug}`),
   ...countryNames.map((name) => `/countries/${slugify(name)}`),
   "/countries/mayotte",
+  ...playbookSlugs.map((slug) => `/playbook/${slug}`),
   ...registry.map((record) => `/registry/${record.slug}`),
 ];
 const escape = (value) => value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
