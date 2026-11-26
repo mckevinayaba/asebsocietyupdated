@@ -170,7 +170,7 @@ export default function Editorial() {
 
   if (queue.isLoading) return <Frame><p className="mx-auto max-w-[1400px] px-5 py-16 text-stone lg:px-8">Checking editorial access…</p></Frame>;
   if (queue.data?.state === "not_provisioned") return <Frame><div className="mx-auto max-w-2xl px-5 py-16"><p className="eyebrow">Setup required</p><h1 className="mt-5 text-display-sm">The editorial workspace is not switched on yet.</h1><p className="mt-4 text-stone">It needs migrations 0007 and 0008 to be applied to Lovable Cloud, and an editor or moderator role provisioned. See docs/DATA_GOVERNANCE.md.</p></div></Frame>;
-  if (!data) return <Frame><div className="mx-auto max-w-2xl px-5 py-16"><h1 className="text-display-sm">This workspace is for ASEB editors and moderators.</h1><p className="mt-4 text-stone">Roles are granted by the Society's database owner, never through the website.</p></div></Frame>;
+  if (!data) return <Frame><div className="mx-auto max-w-2xl px-5 py-16"><h1 className="text-display-sm">This workspace is for ASEB Society editors and moderators.</h1><p className="mt-4 text-stone">Roles are granted by the Society's database owner, never through the website.</p></div></Frame>;
   const item = data.items.find((i) => i.id === selected) ?? null;
   const openReports = data.reports.filter((r) => r.status === "open");
   const views: [View, string][] = [["queue", `Review queue (${data.items.filter((i) => ["submitted", "under_review", "revision_requested", "accepted"].includes(i.status)).length})`], ["published", "Published"], ["reports", `Reports (${openReports.length})`], ["chapters", "Playbook chapters"], ["categories", "Voices categories"], ["settings", "Community settings"]];

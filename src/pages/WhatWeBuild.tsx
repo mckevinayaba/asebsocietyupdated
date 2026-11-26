@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { useLocation } from "@/lib/router";
 import { pillars } from "@/content/pillars";
-import { ladder } from "@/content/framework";
+import { standing, summitSocietyRelationship } from "@/content/proposition";
+import { AnnualCycle } from "@/components/proposition/AnnualCycle";
 import { PageHero, SectionHead } from "@/components/PageHero";
 import { Btn } from "@/components/Arrow";
 import { Photo } from "@/components/Photo";
@@ -30,18 +31,13 @@ export default function WhatWeBuild() {
       <PageHero
         eyebrow="What we build"
         title="Four pillars. One year-round practice."
-        lede="The Summit brings the field together. The Society is building year-round support through Circles, learning and collaborative projects. Explore the institutional mandates and choose a pathway into the work."
+        lede="The Summit brings the field together. The Society sustains the work throughout the year, through Circles, the Academy and the Field Lab, with five knowledge products carrying it between gatherings. Explore each pillar and choose a pathway into the work."
       />
 
-      <section className="border-b border-hairline bg-paper">
-        <div className="wrap grid lg:grid-cols-3">
-          {chapters.map((c, i) => (
-            <div key={c.k} className={`py-10 ${i > 0 ? "border-t border-hairline lg:border-l lg:border-t-0 lg:pl-10" : "lg:pr-10"}`}>
-              <span aria-hidden="true" className="block h-[2px] w-8 bg-signal" />
-              <p className="mt-5 font-display text-[1.625rem] leading-tight">{c.k}</p>
-              <p className="mt-2 text-[0.9375rem] text-stone">{c.v}</p>
-            </div>
-          ))}
+      <section className="section border-b border-hairline bg-paper" aria-labelledby="cycle-title">
+        <div className="wrap">
+          <SectionHead eyebrow="Beyond the annual gathering" title={<span id="cycle-title">One institutional cycle, all year.</span>} lede={summitSocietyRelationship} />
+          <div className="mt-14"><AnnualCycle /></div>
         </div>
       </section>
 
@@ -65,6 +61,7 @@ export default function WhatWeBuild() {
               </div>
               <div className="lg:col-span-6 lg:col-start-7">
                 <p className="text-eyebrow font-semibold uppercase text-stone">Programme directions</p>
+                <p className="mt-2 text-[0.875rem] text-stone">Directions the pillar is developing. Only what its status describes is operating today.</p>
                 <ul className="mt-5 border-t border-ink">
                   {p.programmes.map((g) => (
                     <li key={g.name} className="flex flex-wrap items-start justify-between gap-4 border-b border-hairline py-6">
@@ -82,24 +79,23 @@ export default function WhatWeBuild() {
         );
       })}
 
-      <section id="pathway" className="on-dark section scroll-mt-28 bg-ink text-ivory">
+      <section id="pathway" className="on-dark section scroll-mt-28 bg-ink text-ivory" aria-labelledby="standing-title">
         <div className="wrap">
           <SectionHead
-            eyebrow="The recognition pathway"
-            title="A direction for professional growth."
-            lede="Professional development connects experience with evidence, shared standards and accountable practice."
+            eyebrow="Professional standing"
+            title={<span id="standing-title">Different forms of standing, kept distinct.</span>}
+            lede="Registering, applying, contributing and being recognised are different things. None confers another, and nothing on this platform is accreditation, certification or a professional designation."
           />
-          <ol className="mt-16 border-t border-hairline-dark">
-            {ladder.map((l, i) => (
-              <li key={l.step} className="grid gap-3 border-b border-hairline-dark py-8 lg:grid-cols-12 lg:items-baseline lg:gap-10">
-                <span aria-hidden="true" className="hidden lg:col-span-1 lg:block"><span className="block h-[2px] w-6 bg-sand" /></span>
-                <span className="font-display text-[1.75rem] leading-tight lg:col-span-4">{l.name}</span>
-                <p className="text-[1rem] leading-relaxed text-stone-light lg:col-span-6">{l.how}</p>
-                <span className="hidden h-[3px] bg-signal lg:col-span-1 lg:block" style={{ opacity: 0.3 + i * 0.175 }} aria-hidden="true" />
+          <ul className="mt-14 border-t border-hairline-dark">
+            {standing.map((l) => (
+              <li key={l.name} className="grid gap-2 border-b border-hairline-dark py-6 lg:grid-cols-12 lg:items-baseline lg:gap-10">
+                <span className="font-display text-[1.5rem] leading-tight lg:col-span-4">{l.name}</span>
+                <p className="text-[1rem] leading-relaxed text-stone-light lg:col-span-6">{l.line}</p>
+                <span className="text-[0.8125rem] font-semibold text-sand lg:col-span-2 lg:text-right">{l.status}</span>
               </li>
             ))}
-          </ol>
-          <div className="mt-12"><Btn to="/join" variant="signal">Begin as a Member</Btn></div>
+          </ul>
+          <div className="mt-12 flex flex-col gap-3 sm:flex-row sm:flex-wrap"><Btn to="/join" variant="signal">Apply for membership</Btn><Btn to="/progress" variant="line">See what is operational</Btn></div>
         </div>
       </section>
     </>

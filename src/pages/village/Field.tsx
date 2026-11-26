@@ -11,6 +11,7 @@ import { ContentCard } from "@/components/village/ContentCard";
 import { ContributionEditor } from "@/components/village/ContributionEditor";
 import { Media, NotYetLive, Prose, timeAgo } from "@/components/village/Primitives";
 import { ActionBar } from "@/components/village/ActionBar";
+import { productProblems } from "@/content/proposition";
 
 const tabKinds: Record<FeedTab, ContentKind[]> = {
   "for-you": ["post", "article", "voice", "question", "research", "opportunity", "playbook_contribution"],
@@ -57,6 +58,7 @@ export function FieldPage() {
       <header className="mb-6">
         <p className="eyebrow">{products.field.name}</p>
         <h1 className="mt-4 font-display text-[2rem] leading-tight lg:text-[2.5rem]">{products.field.line}</h1>
+        <p className="mt-3 max-w-prose text-[0.9375rem] leading-relaxed text-stone">{productProblems.field}</p>
       </header>
       <Composer />
       <FeedTabs tab={tab} />

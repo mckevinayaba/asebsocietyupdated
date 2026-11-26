@@ -3,11 +3,11 @@
 // Do not add a person, partner or past contract here until it is confirmed.
 
 export const story = [
-  { year: "2022", city: "Johannesburg", title: "The first room", line: "The first ASEB Summit and Awards opened a room for the people who build the rooms founders walk into: hub managers, programme leads, investors, policymakers and researchers." },
-  { year: "2023", city: "Nairobi", title: "Recognition created return", line: "Builders who had been recognised came back and brought their peers. The Awards showed that the field could see itself." },
-  { year: "2024", city: "Accra", title: "The question between summits", line: "The field asked what happens in the eleven months between convenings: where the learning goes, who keeps the record, who sets the standard." },
-  { year: "2025", city: "Addis Ababa", title: "The year-round ambition", line: "The field continued developing the idea of a permanent professional home: somewhere to share practice and keep the field’s memory between summits." },
-  { year: "2026", city: "Johannesburg", title: "The homecoming", line: "The fifth edition, 20 to 22 October, asked 'Who Built the Builder?'. Nominations arrived from 52 countries. The Ecosystem Tour took the field to Soweto. ASEB Society was publicly launched on 21 October 2026 as a continuing professional home for ecosystem builders." },
+  { year: "2022", city: "Johannesburg, South Africa", title: "A room for the builders", line: "The Africa Startup Ecosystem Builders Summit & Awards (ASEB) was established to recognise and connect the people and institutions building the conditions for African entrepreneurship, and to bring visibility and meaning to the practice of ecosystem building. Part of its founding concern was the growing use of the term without clear professional meaning." },
+  { year: "2023", city: "Nairobi, Kenya", title: "The first conversations", line: "During the second edition, conversations began about a permanent organisation beyond the annual gathering. Practitioners saw the value of sustained professional engagement, relationships and collective learning throughout the year." },
+  { year: "2024", city: "Accra, Ghana", title: "The case deepens", line: "During the third edition, the discussion of a permanent institution deepened. The need for professional belonging, institutional continuity and engagement between summits became increasingly apparent." },
+  { year: "2025", city: "Addis Ababa, Ethiopia", title: "The intention announced", line: "During the fourth edition, the intention to establish the Africa Startup Ecosystem Builders Society was announced. Stakeholders in Ethiopia began assembling a team towards local representation, an early mobilisation rather than a formal appointment." },
+  { year: "2026", city: "Johannesburg, South Africa", title: "The institution launched", line: "On 21 October 2026, during the fifth edition, 'Who Built the Builder?', ASEB Society was officially launched as a permanent continental institution advancing ecosystem building as a professional practice and a recognised profession across Africa. Nominations arrived from 52 countries, and the Ecosystem Tour took the field to Soweto." },
 ];
 
 export type Person = { slug: string; name: string; role: string; base: string; group: "founder" | "executive" | "board" | "representation"; photo: string; summary: string; bio: string[]; linkedin?: string };
@@ -24,16 +24,16 @@ export const people: Person[] = [
   {
     slug: "nomalanga-sitole", name: "Nomalanga Sitole", role: "Communications and Narrative Lead", base: "South Africa", group: "executive", photo: "images/people/nomalanga-sitole.jpg",
     summary: "More than 20 years across broadcasting, event production and marketing leadership. Founder of TVW International and a Standard Bank Top Women Entrepreneur finalist.",
-    bio: ["A multi-award-winning MC, facilitator, author and voice-over artist who has hosted major events for Nedbank, Liberty, FNB, ABSA, Investec and the Gauteng Legislature. At ASEB she shapes how the field's story is told."],
+    bio: ["A multi-award-winning MC, facilitator, author and voice-over artist who has hosted major events for Nedbank, Liberty, FNB, ABSA, Investec and the Gauteng Legislature. At ASEB Society she shapes how the field's story is told."],
   },
   {
     slug: "sally-njoh-tabe", name: "Sally Njoh Tabe", role: "Stakeholder Engagement and Community Lead", base: "Cameroon", group: "executive", photo: "images/people/sally-njoh-tabe.jpg",
     summary: "CEO and Co-Founder of HappyMe Health and a researcher whose antimicrobial resistance work was named among Wiley's top cited articles.",
-    bio: ["A Founder Institute and AWE alumna and intergovernmental liaison with YALDA. At ASEB she holds the community together across the continent: the relationships that make a continental institution feel personal."],
+    bio: ["A Founder Institute and AWE alumna and intergovernmental liaison with YALDA. At ASEB Society she holds the community together across the continent: the relationships that make a continental institution feel personal."],
   },
   {
     slug: "ian-lorenzen", name: "Ian Lorenzen", role: "Chairman of the Board", base: "Partner and Executive Director, GrowthAfrica", group: "board", photo: "images/people/ian-lorenzen.jpg",
-    summary: "More than a decade supporting African entrepreneurs, growth-focused SMEs, ecosystem actors and funders. One of the earliest voices to engage with the question behind ASEB in 2022.",
+    summary: "More than a decade supporting African entrepreneurs, growth-focused SMEs, ecosystem actors and funders. One of the earliest voices to engage with the question behind the ASEB Summit & Awards in 2022.",
     bio: [
       "His work sits at the intersection of entrepreneurship development, business acceleration, ecosystem convening, partnership building and programme strategy. He is known for asking the difficult questions that ecosystem conversations often avoid, and for protecting the meaning of ecosystem building from becoming another diluted development term.",
       "He formally joined the ASEB work at the Nairobi edition in 2023 and has continued through Accra, Addis Ababa and Johannesburg. As Chairman of the Board of ASEB Society, he contributes to the year-round mission of building a professional home for ecosystem builders.",
@@ -92,15 +92,15 @@ export const governancePrinciples = [
 ];
 
 export const stewardshipGoals = [
-  { name: "Legitimate Field Formation", line: "Ecosystem building must reflect the full realities of Africa, across geography, language, economy and context. A field defined only by capital cities, elite actors or donor-facing narratives is not legitimate." },
-  { name: "Power-Sharing Discipline", line: "We promote practices that share credit, information, data and authority, so collaboration is structural, not performative." },
-  { name: "Collective Stewardship Mandate", line: "Ecosystem builders are not owners of ecosystems. They are stewards of long-term outcomes." },
-  { name: "Continuity and Memory Infrastructure", line: "We prioritise documentation, shared learning and institutional memory so each generation of builders does not start from zero." },
-  { name: "Evidence and Accountability Regime", line: "Stories without evidence distort the field. Learning replaces hype and accountability replaces optics." },
-  { name: "Builder Protection and Sustainability", line: "Ecosystem building cannot rely on burnout, unpaid labour or permanent precarity. Builders must be sustained, not extracted." },
-  { name: "Embedded Public Infrastructure", line: "We support efforts to embed ecosystem building into durable public systems and mandates, so progress does not reset with political or funding changes." },
-  { name: "Narrative Sovereignty and Knowledge Ownership", line: "African ecosystems must be documented and interpreted by those embedded in their realities." },
-  { name: "Signal Integrity and Field Legibility", line: "When everything looks like success, nothing is credible. We protect clear signals of contribution." },
+  { name: "Legitimate Field Formation", line: "Ecosystem building must reflect the full realities of Africa, across geography, language, economy and context. A field defined only by capital cities, elite actors or donor-facing narratives is not legitimate.", practice: "Enable meaningful participation across countries, languages, professional roles and economic contexts.", through: "Country Partners, ASEB Circles, inclusive access" },
+  { name: "Power-Sharing Discipline", line: "We promote practices that share credit, information, data and authority, so collaboration is structural, not performative.", practice: "Share knowledge, credit and meaningful participation in decisions.", through: "Playbook credits, ASEB Voices attribution" },
+  { name: "Collective Stewardship Mandate", line: "Ecosystem builders are not owners of ecosystems. They are stewards of long-term outcomes.", practice: "Treat ecosystems as shared responsibilities rather than institutional possessions.", through: "Field Lab collaborations, additionality before expansion" },
+  { name: "Continuity and Memory Infrastructure", line: "We prioritise documentation, shared learning and institutional memory so each generation of builders does not start from zero.", practice: "Preserve useful knowledge, relationships and experience beyond individual projects and funding cycles.", through: "The Playbook, ASEB Voices, the Field Registry" },
+  { name: "Evidence and Accountability Regime", line: "Stories without evidence distort the field. Learning replaces hype and accountability replaces optics.", practice: "Distinguish activities, outputs, outcomes and unsupported claims.", through: "State of the Field, the Progress page" },
+  { name: "Builder Protection and Sustainability", line: "Ecosystem building cannot rely on burnout, unpaid labour or permanent precarity. Builders must be sustained, not extracted.", practice: "Recognise the importance of viable roles, adequate resources and practitioner wellbeing, and avoid dependence on indefinite personal sacrifice and burnout.", through: "ASEB Circles, institutional funding" },
+  { name: "Embedded Public Infrastructure", line: "We support efforts to embed ecosystem building into durable public systems and mandates, so progress does not reset with political or funding changes.", practice: "Encourage durable professional and institutional arrangements that can support collective economic development.", through: "ASEB Field Lab policy work" },
+  { name: "Narrative Sovereignty and Knowledge Ownership", line: "African ecosystems must be documented and interpreted by those embedded in their realities.", practice: "Enable African practitioners to document, interpret and share the realities of their own ecosystems.", through: "ASEB Voices, State of the Field" },
+  { name: "Signal Integrity and Field Legibility", line: "When everything looks like success, nothing is credible. We protect clear signals of contribution.", practice: "Recognise demonstrated contribution rather than visibility, popularity or titles alone.", through: "The Independent Awards Jury, the Field Registry" },
 ];
 
 export const partnerTypes = [
@@ -115,12 +115,12 @@ export const partnerTypes = [
 export const partnerCommitments = ["Mission alignment", "Long-term stewardship", "Resource contribution", "Knowledge sharing"];
 
 export const countryPartnerDuties = [
-  { k: "Host", v: "Run the Country Circle and at least two country convenings a year, locally led." },
-  { k: "Verify", v: "Check Field Registry records and programme registrations in the country under the Code of Practice." },
-  { k: "Map", v: "Lead the country's Ecosystem Stage Diagnostic and keep the country page current." },
-  { k: "Nominate", v: "Mobilise nominations for the Awards and propose country judges, under conflict-of-interest rules." },
-  { k: "Connect", v: "Introduce government, funder and corporate partners. First contact for in-country tenders." },
-  { k: "Report", v: "Submit an annual country report to the Secretariat." },
+  { k: "Engage practitioners", v: "Bring local ecosystem builders into the Society's work and help a country community of practice take shape." },
+  { k: "Build relationships", v: "Develop institutional relationships with government, funders, universities and support organisations." },
+  { k: "Mobilise knowledge", v: "Run contribution campaigns for the Playbook, ASEB Voices and State of the Field, in local languages where possible." },
+  { k: "Collaborate across borders", v: "Connect the country to continental work, and mobilise nominations for the Summit & Awards without any role in selecting recipients." },
+  { k: "Share local intelligence", v: "Keep the country page current and contribute evidence on local ecosystem conditions." },
+  { k: "Report and account", v: "Report to the Secretariat under an approved mandate, with renewal based on agreed criteria." },
 ];
 
 export const countryPartnerCriteria = [
@@ -167,7 +167,7 @@ export const collaborationModels = [
   { name: "Co-convening", line: "A joint session or track at the Summit, an ASEB Voices session or a regional convening." },
   { name: "Co-delivery", line: "Joint delivery of an Academy course or a Field Lab project." },
   { name: "Data and evidence", line: "Shared indicators, datasets or co-authored research." },
-  { name: "Recognition pathway", line: "Your programme's alumni earn credit towards ASEB designations." },
+  { name: "Recognition pathway", line: "A possible future route for programme alumni into Society pathways, once those pathways are established and approved." },
   { name: "Consortium", line: "Joint bids for funder tenders, through the Work With Us desk." },
 ];
 
@@ -189,7 +189,7 @@ export const sdgs: Sdg[] = [
   { n: 2, name: "Zero Hunger", how: "Agri-food and agritech support systems.", condition: "Market Access and Procurement" },
   { n: 3, name: "Good Health and Well-being", how: "Health-innovation hubs, and fair work and well-being for builders.", condition: "Talent and Capability Development" },
   { n: 4, name: "Quality Education", how: "Entrepreneurship education and a professional Academy for builders.", condition: "Talent and Capability Development", primary: true },
-  { n: 5, name: "Gender Equality", how: "Gender-intentional programme design and capital; ASEB Women.", condition: "Capital Formation and Access", primary: true },
+  { n: 5, name: "Gender Equality", how: "Gender-intentional programme design and capital.", condition: "Capital Formation and Access", primary: true },
   { n: 6, name: "Clean Water and Sanitation", how: "Water-innovation programmes and pipelines.", condition: "Environmental and Contextual Constraints" },
   { n: 7, name: "Affordable and Clean Energy", how: "Clean-energy incubators and the pipelines that make capital deployable.", condition: "Environmental and Contextual Constraints" },
   { n: 8, name: "Decent Work and Economic Growth", how: "Jobs through firm creation and growth, and the transition from informal to formal (target 8.3).", condition: "Market Access and Procurement", primary: true },
@@ -216,7 +216,7 @@ export const funderNeeds = [
 
 export const waysToFund = [
   { name: "Core field infrastructure", line: "The platform, Field Registry, Programme Register and Insights." },
-  { name: "A pillar or programme", line: "An Academy cohort, a Field Lab project, ASEB Women or ASEB Youth." },
+  { name: "A pillar or programme", line: "An Academy pilot or a Field Lab project, including work focused on women or youth." },
   { name: "A country or region", line: "Country Partner deployment, country convenings and the country page." },
   { name: "Research", line: "The State of the Field and the annual condition briefs." },
   { name: "Summit and Awards", line: "The annual convening and the recognition of the field." },

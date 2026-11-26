@@ -6,9 +6,9 @@ export const Route = createFileRoute("/_authenticated/app")({
   head: () => ({
     meta: [
       { title: 'Member app | ASEB Society' },
-      { name: "description", content: 'Your ASEB account, personal profile, Circle selections and resources.' },
+      { name: "description", content: 'Your ASEB Society account, personal profile, Circle selections and resources.' },
       { property: "og:title", content: 'Member app | ASEB Society' },
-      { property: "og:description", content: 'Your ASEB account, personal profile, Circle selections and resources.' },
+      { property: "og:description", content: 'Your ASEB Society account, personal profile, Circle selections and resources.' },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

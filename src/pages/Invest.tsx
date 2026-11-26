@@ -28,8 +28,8 @@ export default function Invest() {
         <div className="cinema-grade" />
         <div className="wrap relative pb-14 pt-28 lg:pb-24 lg:pt-36">
           <p className="text-[0.75rem] font-semibold uppercase tracking-[0.16em] text-sand">Invest in Our Mission</p>
-          <h1 id="invest-title" className="mt-5 max-w-[16ch] font-display text-hero">Fund the foundations of African entrepreneurship.</h1>
-          <p className="mt-6 max-w-[36rem] text-[1.0625rem] leading-relaxed text-ivory/85 lg:text-[1.1875rem]">{positioning.statement} Investment in the Society reaches the practitioners and institutions that every founder depends on.</p>
+          <h1 id="invest-title" className="mt-5 max-w-[16ch] font-display text-hero">Fund the infrastructure, not merely the activity.</h1>
+          <p className="mt-6 max-w-[36rem] text-[1.0625rem] leading-relaxed text-ivory/85 lg:text-[1.1875rem]">Investment in entrepreneurship depends on the capabilities, coordination and sustainability of the people and institutions who deliver support. ASEB Society strengthens that professional infrastructure across Africa.</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <a href="#enquire" className="btn btn-signal">Start an institutional conversation <span className="arr" aria-hidden="true">↓</span></a>
             <a href="#areas" className="btn btn-line">See where investment goes</a>
@@ -63,7 +63,7 @@ export default function Invest() {
         <div className="wrap">
           <p className="eyebrow">Investment areas</p>
           <h2 id="areas-title" className="mt-5 max-w-3xl text-title">Where support makes the greatest difference.</h2>
-          <p className="lede mt-5 max-w-prose">No funding amounts are published. Each conversation starts from your priorities and the Society's operational readiness.</p>
+          <p className="lede mt-5 max-w-prose">These are proposed funding areas, not approved and costed programmes. No funding amounts are published, and no donor relationship is implied. Each conversation starts from your priorities and the Society's operational readiness.</p>
           <ol className="mt-12 border-t border-ink">
             {investmentAreas.map((area) => (
               <li key={area.slug} id={area.slug} className="reveal grid scroll-mt-28 gap-3 border-b border-hairline py-7 lg:grid-cols-12 lg:gap-10">
@@ -95,6 +95,19 @@ export default function Invest() {
         </div>
       </section>
 
+      <section className="section border-t border-hairline bg-paper" aria-labelledby="sponsor-title">
+        <div className="wrap grid gap-12 lg:grid-cols-12 lg:gap-10">
+          <div className="lg:col-span-5">
+            <p className="eyebrow">Two different opportunities</p>
+            <h2 id="sponsor-title" className="mt-5 text-title">Funding the Society is not sponsoring the Summit.</h2>
+          </div>
+          <dl className="grid gap-px self-start border border-hairline bg-hairline sm:grid-cols-2 lg:col-span-7">
+            <div className="bg-ivory p-6 lg:p-7"><dt className="font-display text-[1.375rem]">Institutional funding</dt><dd className="mt-3 text-[0.9375rem] leading-relaxed text-stone">Supports ASEB Society's year-round professional and institutional mandate: the Secretariat, the platform, the knowledge products, the country network and the work of Circles, the Academy and the Field Lab.</dd><dd className="mt-4"><a href="#enquire" className="tlink text-[0.9375rem]">Start an institutional conversation <span className="arr" aria-hidden="true">↓</span></a></dd></div>
+            <div className="bg-ivory p-6 lg:p-7"><dt className="font-display text-[1.375rem]">Summit sponsorship</dt><dd className="mt-3 text-[0.9375rem] leading-relaxed text-stone">Supports an individual edition of the Africa Startup Ecosystem Builders Summit &amp; Awards, the Society's flagship convening and recognition programme. How the Summit may contribute to the Society's sustainability is decided under approved financial and governance arrangements.</dd><dd className="mt-4"><a href="https://www.asebs.com" target="_blank" rel="noreferrer" className="tlink text-[0.9375rem]">Summit partnership on asebs.com <span className="arr" aria-hidden="true">↗</span></a></dd></div>
+          </dl>
+        </div>
+      </section>
+
       <section className="section border-t border-hairline" aria-labelledby="ways-title">
         <div className="wrap grid gap-12 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-5">
@@ -104,7 +117,7 @@ export default function Invest() {
           </div>
           <ul className="grid self-start sm:grid-cols-2 lg:col-span-6 lg:col-start-7">
             {waysToContribute.map((way) => {
-              const to = way === "Funding" || way === "Institutional resources" ? "#enquire" : way === "Research" ? "/field-lab" : way === "Country representation" ? "/country-partners" : way === "Professional knowledge" ? "/playbook" : way === "Partnerships" ? "/partners" : "/collaborate";
+              const to = way === "Funding" || way === "Institutional resources" ? "#enquire" : way === "Research" ? "/field-lab" : way === "Country engagement" ? "/country-partners" : way === "Knowledge" ? "/playbook" : way === "Professional learning" ? "/learning" : way === "Partnerships" ? "/partners" : "/collaborate";
               return <li key={way} className="border-t border-hairline">{to.startsWith("#") ? <a href={to} className="group flex min-h-[56px] items-center justify-between gap-3 pr-4 font-semibold hover:text-ember">{way}<span aria-hidden="true">→</span></a> : <Link to={to} className="group flex min-h-[56px] items-center justify-between gap-3 pr-4 font-semibold hover:text-ember">{way}<span aria-hidden="true">→</span></Link>}</li>;
             })}
           </ul>

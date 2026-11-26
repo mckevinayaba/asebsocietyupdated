@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "@/lib/router";
 
 export const Route = createFileRoute("/reset-password")({
-  head: () => ({ meta: [{ title: "Reset password | ASEB Society" }, { name: "description", content: "Set a new password for your ASEB account." }, { property: "og:title", content: "Reset password | ASEB Society" }, { property: "og:description", content: "Securely reset your ASEB account password." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
+  head: () => ({ meta: [{ title: "Reset password | ASEB Society" }, { name: "description", content: "Set a new password for your ASEB Society account." }, { property: "og:title", content: "Reset password | ASEB Society" }, { property: "og:description", content: "Securely reset your ASEB Society account password." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   component: ResetPassword,
 });
 function ResetPassword() {

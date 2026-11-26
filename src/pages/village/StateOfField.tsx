@@ -9,6 +9,7 @@ import { ContentCard } from "@/components/village/ContentCard";
 import { ActionBar } from "@/components/village/ActionBar";
 import { NotYetLive, Prose, timeAgo } from "@/components/village/Primitives";
 import { Btn, TLink } from "@/components/Arrow";
+import { productProblems } from "@/content/proposition";
 
 const classes = [
   ["Research evidence", "Peer-reviewed or methodologically documented research."],
@@ -26,7 +27,7 @@ export function StateOfFieldPage() {
     <>
       <header className="border-b border-ink">
         <div className="wrap grid gap-10 pb-12 pt-12 lg:grid-cols-12 lg:pb-16 lg:pt-16">
-          <div className="lg:col-span-7"><p className="eyebrow">{products.state.name}</p><h1 className="mt-5 text-display-lg">{products.state.line}</h1></div>
+          <div className="lg:col-span-7"><p className="eyebrow">{products.state.name}</p><h1 className="mt-5 text-display-lg">{products.state.line}</h1><p className="mt-5 max-w-prose text-[1rem] leading-relaxed text-stone">{productProblems.state}</p></div>
           <div className="flex flex-col justify-end lg:col-span-5"><p className="lede">ASEB Society's evidence and ecosystem intelligence destination. Research, surveys, country observations and cases, each with its source, method and coverage stated.</p><div className="mt-6 flex flex-col gap-3 sm:flex-row"><Btn to="/contribute?kind=research">Submit evidence</Btn><Btn to="/evidence" variant="line">Evidence Library</Btn></div></div>
         </div>
       </header>

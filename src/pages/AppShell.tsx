@@ -14,7 +14,8 @@ import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { asset } from "@/lib/asset";
 import { constituencies, rolesFor, roleBySlug } from "@/content/field";
-import { conditions, domains, ladder } from "@/content/framework";
+import { conditions, domains } from "@/content/framework";
+import { standing } from "@/content/proposition";
 import { pillars } from "@/content/pillars";
 import { summit2026, speakers } from "@/content/summit";
 import { registry, regions } from "@/content/registry";
@@ -135,7 +136,7 @@ function AcademyTab() {
     <div className="space-y-8">
       <div>
         <Label>ASEB Academy</Label>
-        <h1 className="mt-2 font-display text-[2rem] leading-tight">ASEB Foundations</h1>
+        <h1 className="mt-2 font-display text-[2rem] leading-tight">Foundations</h1>
         <p className="mt-3 text-[0.9375rem] leading-relaxed text-stone">Explore the learning themes behind professional ecosystem-building practice. Register your priorities for upcoming opportunities; confirmed course and qualification details will be shared separately.</p>
       </div>
       <Card>
@@ -261,7 +262,7 @@ export default function AppShell() {
           </div>
         </div>
         <div className="border-t border-hairline bg-sand/40 px-5 py-2 text-center text-[0.75rem] text-ink/80">
-          {profile?.country && profile?.primary_role ? "Your ASEB account · Society membership is reviewed separately." : "Complete your profile to add your country and primary role."}
+          {profile?.country && profile?.primary_role ? "Your ASEB Society account · membership is reviewed separately." : "Complete your profile to add your country and primary role."}
         </div>
         <nav aria-label="Member sections" className="no-scrollbar flex h-11 gap-6 overflow-x-auto border-t border-hairline px-5 lg:hidden">
           {tabs.map((t) => (
@@ -296,10 +297,10 @@ export default function AppShell() {
         <aside className="hidden pt-10 lg:block">
           <div className="sticky top-[110px] space-y-6">
             <Card>
-              <Label>Recognition pathway</Label>
+              <Label>Forms of standing</Label>
               <ol className="mt-3">
-                {ladder.map((l) => (
-                  <li key={l.step} className="flex items-center gap-3 py-2 text-[0.875rem] text-stone">
+                {standing.map((l) => (
+                  <li key={l.name} className="flex items-center gap-3 py-2 text-[0.875rem] text-stone">
                     <span className="inline-block h-2 w-2 border border-stone/50" aria-hidden="true" />
                     {l.name}
                   </li>

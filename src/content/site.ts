@@ -16,7 +16,7 @@ export const statements = {
   whoBuilds:
     "Ecosystem builders are the mentors, coaches and angel investors; the hubs, incubators, accelerators and coworking spaces; the funders, corporates and investment networks; the policymakers, researchers, universities and infrastructure builders whose work makes founders possible. Some hold the title. Most do not. ASEB Society exists for all of them.",
   whatWeDo:
-    "We work at the level of the field. We connect practitioners across borders, set and certify standards of practice, solve shared structural problems through collaborative projects, and recognise excellence in front of the continent.",
+    "We work at the level of the field. We connect practitioners across borders, develop shared standards of practice with them, work on shared structural problems through collaborative projects, and recognise excellence in front of the continent.",
   indexLine: "The index measures the conditions. ASEB Society equips the people who change them.",
   recognitionLine: "Recognition is not a trophy. It is infrastructure.",
 };
@@ -65,31 +65,4 @@ export const proof = [
   { value: "5", label: "Editions since 2022", note: "2022 to 2026", href: "https://www.asebs.com/story" },
 ];
 
-export const timeline = [
-  { year: "2022", city: "Johannesburg", line: "Where it began. A room for the people who build the rooms founders walk into." },
-  { year: "2023", city: "Nairobi", line: "Recognition created retention. Builders came back, and brought others." },
-  { year: "2024", city: "Accra", line: "The field asked what happens between summits." },
-  { year: "2025", city: "Addis Ababa", line: "Scale met substance. The field continued shaping its ambition for a year-round professional home." },
-  { year: "2026", city: "Johannesburg", line: "The homecoming. Fifth edition, 20 to 22 October: Who Built the Builder? ASEB Society was publicly launched on 21 October 2026." },
-];
 
-export const whyNow = [
-  {
-    figure: "$213bn to $140bn",
-    label: "Projected fall in official development assistance. USAID closed on 1 July 2025.",
-    source: "UNDP, 2026",
-    href: "https://www.undp.org/sites/g/files/zskgke326/files/2026-04/how_a_1bn_undp_initiative_can_offset_a_60bn_aid_decline.pdf",
-  },
-  {
-    figure: "$100m+",
-    label: "USAID innovation funding Kenyan startups alone lost access to.",
-    source: "TechCabal, 2025",
-    href: "https://techcabal.com/2025/02/12/usaid-shutdown-affects-kenya/",
-  },
-  {
-    figure: "Under 1%",
-    label: "Africa's share of global venture funding.",
-    source: "BusinessDay, 2026",
-    href: "https://businessday.ng/technology/article/africas-startups-raise-2-2bn-in-2025-as-growth-outruns-europe-china-and-india/",
-  },
-];

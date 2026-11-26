@@ -13,9 +13,9 @@ export const Route = createFileRoute("/auth")({
   }),
   head: () => ({ meta: [
     { title: "Member sign in | ASEB Society" },
-    { name: "description", content: "Sign in or create your ASEB account to keep a personal profile and connect with Circles." },
+    { name: "description", content: "Sign in or create your ASEB Society account to keep a personal profile and connect with Circles." },
     { property: "og:title", content: "Member sign in | ASEB Society" },
-    { property: "og:description", content: "Your account for ASEB member profiles and Circles." },
+    { property: "og:description", content: "Your ASEB Society account for member profiles and Circles." },
     { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" },
   ] }),
   component: AuthPage,

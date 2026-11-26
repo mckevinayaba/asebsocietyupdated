@@ -15,6 +15,8 @@
 
 | One governing Board over the whole institution. Summit & Awards is the flagship programme, not a separately governed institution. Summit and Awards Advisory Board and the three layer model removed from public presentation. Independent Awards Jury selects recipients. Advisory Council placeholder removed (governance directive, November 2026) | Yes, on the platform. Formal adoption by Board resolution pending. See docs/GOVERNANCE.md |
 
+| Founding Organisational Profile 2026/2027 reconciled with the platform: field development proposition, three levels of intervention, corrected chronology, Summit and Society cycle, funding distinct from sponsorship, narrative independence from other organisations (November 2026) | Yes, on branch alignment/founding-profile. See docs/reports/ASEB_SOCIETY_PROFILE_PLATFORM_ALIGNMENT.md |
+
 ## Decisions taken in implementation, open for review
 
 | Decision | Reason |
@@ -67,3 +69,4 @@
 - Approved village, ecosystem or editorial artwork, if the Society wants conceptual illustration alongside photography.
 - Production publication of this release.
 - Board resolution adopting the unified governance structure, and decisions on the existing Advisory Board appointments listed in docs/GOVERNANCE.md.
+- Whether the Soweto figures on the Climate page remain once their remaining source is checked, and approval of a public edition of the Organisational Profile.

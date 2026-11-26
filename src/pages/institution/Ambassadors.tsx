@@ -10,7 +10,7 @@ export default function Ambassadors() {
   return (
     <>
       <PageHero
-        eyebrow="ASEB Ambassadors"
+        eyebrow="ASEB Society Ambassadors"
         title="Not a title. An obligation."
         lede="Ambassadors champion ecosystem building as a profession and steward the Society's mission in their communities, networks and spheres of influence. They commit three to five hours a month of active contribution."
       >
@@ -68,7 +68,7 @@ export default function Ambassadors() {
             <EoiForm
               source="/ambassadors"
               submitLabel="Submit expression of interest"
-              consent="I can commit three to five hours a month and I commit to the ASEB Code of Practice."
+              consent="I can commit three to five hours a month and I commit to the ASEB Society Code of Practice."
               done={{ title: "Thank you. Your expression of interest is with the Secretariat.", body: "Your application is pending review. The Ambassador team can contact you about your proposed contribution; submission does not confer an appointment." }}
               fields={[
                 { name: "type", label: "Ambassador type", type: "select", options: ambassadorTypes.map((t) => t.name), required: true },

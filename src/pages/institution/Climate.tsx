@@ -85,9 +85,9 @@ export default function Climate() {
           </div>
           <div className="space-y-6 text-[1.0625rem] leading-relaxed lg:col-span-5 lg:col-start-8 lg:pt-12">
             <p>A field built only around venture-backed startups describes fewer than two in ten African workers. Township, rural and informal-economy builders are part of the practice: enterprise development agencies, township hubs, cooperatives, savings-group organisers and local economic development officers.</p>
-            <p className="text-stone">This is why the ASEB 2026 Ecosystem Tour went to Soweto. Soweto is home to about a quarter of Johannesburg's residents but produces about 5% of the city's economy, and it is where support organisations most often deliver services in South African townships.</p>
+            <p className="text-stone">This is why the ASEB 2026 Ecosystem Tour went to Soweto. Soweto is home to about a quarter of Johannesburg's residents but produces about 5% of the city's economy.</p>
             <Source>
-              <Ext href="https://www.pic.gov.za/assets/TownshipandRuralEconomy.pdf">Public Investment Corporation, Township and Rural Economy</Ext>; <Ext href="https://andeglobal.org/wp-content/uploads/2025/06/2021-Township-Ecosystem-Snapshot.pdf">ANDE, Township Economies in South Africa</Ext>.
+              <Ext href="https://www.pic.gov.za/assets/TownshipandRuralEconomy.pdf">Public Investment Corporation, Township and Rural Economy</Ext>.
             </Source>
           </div>
         </div>

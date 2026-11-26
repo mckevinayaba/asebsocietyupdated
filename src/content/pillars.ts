@@ -49,9 +49,9 @@ export const pillars: Pillar[] = [
     body:
       "Professional learning connects experience with stronger methods. The Academy agenda centres on practitioner development, shared frameworks and standards grounded in the realities of African entrepreneurship ecosystems.",
     programmes: [
-      { name: "ASEB Foundations", detail: "Foundation learning direction: understanding ecosystem conditions and connecting them to everyday practice." },
+      { name: "Foundations", detail: "Foundation learning direction: understanding ecosystem conditions and connecting them to everyday practice." },
       { name: "Practitioner Programme", detail: "Applied practitioner development centred on programme design, methods and reflective practice." },
-      { name: "ASEB Fellowship", detail: "An advanced development direction for experienced practitioners contributing to the field." },
+      { name: "Fellowship", detail: "An advanced development direction for experienced practitioners contributing to the field." },
       { name: "Mentor Corps", detail: "A mentoring direction connecting experienced practitioners with emerging ecosystem builders." },
       { name: "Builder Apprenticeship", detail: "A practice-based learning direction developed around host institutions and real ecosystem work." },
     ],
@@ -65,7 +65,7 @@ export const pillars: Pillar[] = [
       "Field Lab is where the field works on itself. Projects are documented from the first day, tagged to a condition and closed with an output that stays in the public record: a diagnostic, a standard, a brief or a playbook.",
     programmes: [
       { name: "Ecosystem Stage Diagnostic", detail: "A research direction examining the seven ecosystem conditions in a city or country." },
-      { name: "ASEB Hub Standard", detail: "A standards-development direction for self-assessment and peer learning in support institutions." },
+      { name: "Hub Standard", detail: "A standards-development direction for self-assessment and peer learning in support institutions." },
       { name: "Policy Bridge", detail: "A policy collaboration direction bringing practitioner experience into startup legislation and reform." },
       { name: "Fair Work Benchmark", detail: "A research direction on working conditions and sustainable livelihoods across the field." },
       { name: "State of African Ecosystem Building", detail: "A research agenda documenting African ecosystem-building practice and conditions." },

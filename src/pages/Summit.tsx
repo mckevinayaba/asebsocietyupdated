@@ -9,6 +9,8 @@ import { nextSummit } from "@/content/case";
 import { ScrollRail } from "@/components/ScrollRail";
 import { photo, assignments } from "@/content/photography";
 import { summitPositioning, summitGovernance } from "@/content/institution";
+import { summitSocietyRelationship } from "@/content/proposition";
+import { AnnualCycle } from "@/components/proposition/AnnualCycle";
 
 export default function Summit() {
   return (
@@ -66,6 +68,14 @@ export default function Summit() {
             <p className="mt-3 font-display text-[2.25rem] leading-none">{nextSummit.place} {nextSummit.year}</p>
             <p className="mt-4 text-[0.9375rem] leading-relaxed text-ivory/80">{nextSummit.line}</p>
           </div>
+        </div>
+      </section>
+
+      {/* Beyond the annual gathering */}
+      <section className="section border-b border-hairline" aria-labelledby="cycle-title">
+        <div className="wrap">
+          <SectionHead eyebrow="Beyond the annual gathering" title={<span id="cycle-title">The Summit brings the field together. The Society sustains the work throughout the year.</span>} lede={summitSocietyRelationship} />
+          <div className="mt-14"><AnnualCycle /></div>
         </div>
       </section>
 
