@@ -33,6 +33,10 @@ Each step is an intended outcome. Measured impact is reported separately, and on
 
 Five digital knowledge products support the mandates and are not pillars: The Field, the African Ecosystem Building Playbook, ASEB Voices, Ask the Village and State of the Field. See `docs/LIVING_VILLAGE.md`. Discover is a browsing page across them.
 
+## Governance
+
+One institution. One governing Board. Four institutional pillars. Clear executive accountability. Specialist support where necessary. Independent awards assessment. The ASEB Society Board governs every pillar, the Summit & Awards included. The Summit & Awards is the flagship continental convening and recognition programme of ASEB Society, not a separately governed institution. Award recipients are selected by an Independent Awards Jury, which is not a governing body. There is no Summit Advisory Board, no three layer model and no Advisory Council. See `docs/GOVERNANCE.md`.
+
 ## Verified figures and their provenance
 
 | Figure | Status | Where it appears |

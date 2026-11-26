@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { PageHero, SectionHead } from "@/components/PageHero";
-import { Btn } from "@/components/Arrow";
+import { Btn, TLink } from "@/components/Arrow";
 import { people, type Person } from "@/content/institution";
 import { asset } from "@/lib/asset";
 import { Button } from "@/components/ui/button";
@@ -39,6 +39,7 @@ export default function People() {
   const founder = people.filter((p) => p.group === "founder");
   const exec = people.filter((p) => p.group === "executive");
   const board = people.filter((p) => p.group === "board");
+  const representation = people.filter((p) => p.group === "representation");
   return (
     <>
       <PageHero eyebrow="Our people" title="Leadership grounded in practice." lede="The people who steward ASEB Society have built hubs, programmes, funds and institutions themselves. They are accountable to the field, not to a single funder or personality." />
@@ -63,9 +64,10 @@ export default function People() {
       <section className="section-tight border-t border-hairline">
         <div className="wrap grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <p className="eyebrow">Board and Advisory Board</p>
-            <h2 className="mt-5 text-display-sm">Strategic oversight and regional reach.</h2>
-            <p className="mt-5 text-[1rem] leading-relaxed text-stone">The Board provides strategic oversight, ensures fiduciary responsibility and safeguards the mission. Regional roles carry the Society's work into Lusophone and East Africa.</p>
+            <p className="eyebrow">ASEB Society Board</p>
+            <h2 className="mt-5 text-display-sm">One Board, accountable for the whole institution.</h2>
+            <p className="mt-5 text-[1rem] leading-relaxed text-stone">The Board provides strategic direction and fiduciary oversight across every pillar and programme of ASEB Society, the Summit & Awards included.</p>
+            <div className="mt-6"><TLink to="/governance">How the Society is governed</TLink></div>
           </div>
           <div className="border-t border-ink lg:col-span-8">{board.map((p) => <Profile key={p.slug} p={p} />)}</div>
         </div>
@@ -74,19 +76,17 @@ export default function People() {
       <section className="section-tight border-t border-hairline bg-paper">
         <div className="wrap grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <p className="eyebrow">Advisory Council</p>
-            <h2 className="mt-5 text-display-sm">Counsel from across the continent.</h2>
+            <p className="eyebrow">Country Partners and Ambassadors</p>
+            <h2 className="mt-5 text-display-sm">Carrying the work into countries and regions.</h2>
+            <p className="mt-5 text-[1rem] leading-relaxed text-stone">National and regional representation under an agreed mandate. Country Partners and Ambassadors are obligations, not titles.</p>
           </div>
-          <div className="lg:col-span-7 lg:col-start-6">
-            <p className="text-[1.0625rem] leading-relaxed">The Advisory Council will bring senior ecosystem builders, investors and policymakers from across Africa to advise the Board on strategy, partnerships and programme development.</p>
-            <p className="mt-4 flex items-start gap-2.5 text-[0.9375rem] text-stone"><span className="status-dot mt-[0.55em] border border-ember" aria-hidden="true" />No members have been appointed yet. Appointments are published here once the Board confirms them.</p>
-          </div>
+          <div className="border-t border-ink lg:col-span-8">{representation.map((p) => <Profile key={p.slug} p={p} />)}</div>
         </div>
       </section>
 
       <section className="section">
         <div className="wrap">
-          <SectionHead eyebrow="Serve the field" title="Carry the work in your country." lede="Country Partners and Ambassadors extend the Society across all 54 countries. Both are obligations, not titles." />
+          <SectionHead eyebrow="Serve the field" title="Carry the work in your country." lede="Country Partners and Ambassadors extend the Society across all 54 countries." />
           <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <Btn to="/country-partners">Become a Country Partner</Btn>
             <Btn to="/ambassadors" variant="line">Become an Ambassador</Btn>

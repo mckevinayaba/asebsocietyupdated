@@ -10,7 +10,7 @@ export const story = [
   { year: "2026", city: "Johannesburg", title: "The homecoming", line: "The fifth edition, 20 to 22 October, asked 'Who Built the Builder?'. Nominations arrived from 52 countries. The Ecosystem Tour took the field to Soweto. ASEB Society was publicly launched on 21 October 2026 as a continuing professional home for ecosystem builders." },
 ];
 
-export type Person = { slug: string; name: string; role: string; base: string; group: "founder" | "executive" | "board"; photo: string; summary: string; bio: string[]; linkedin?: string };
+export type Person = { slug: string; name: string; role: string; base: string; group: "founder" | "executive" | "board" | "representation"; photo: string; summary: string; bio: string[]; linkedin?: string };
 
 export const people: Person[] = [
   {
@@ -36,11 +36,11 @@ export const people: Person[] = [
     summary: "More than a decade supporting African entrepreneurs, growth-focused SMEs, ecosystem actors and funders. One of the earliest voices to engage with the question behind ASEB in 2022.",
     bio: [
       "His work sits at the intersection of entrepreneurship development, business acceleration, ecosystem convening, partnership building and programme strategy. He is known for asking the difficult questions that ecosystem conversations often avoid, and for protecting the meaning of ecosystem building from becoming another diluted development term.",
-      "He formally joined the ASEB work at the Nairobi edition in 2023 and has continued through Accra, Addis Ababa and Johannesburg. As Strategic Advisor to ASEB Society, he contributes to the year-round mission of building a professional home for ecosystem builders.",
+      "He formally joined the ASEB work at the Nairobi edition in 2023 and has continued through Accra, Addis Ababa and Johannesburg. As Chairman of the Board of ASEB Society, he contributes to the year-round mission of building a professional home for ecosystem builders.",
     ],
   },
   {
-    slug: "haymee-perez-cogle", name: "Haymée I. Pérez Cogle", role: "Country Partner for Angola · Regional Ambassador for Lusophone Africa · Advisory Board Member", base: "Luanda, Angola", group: "board", photo: "images/people/haymee-perez-cogle.jpg",
+    slug: "haymee-perez-cogle", name: "Haymée I. Pérez Cogle", role: "Country Partner for Angola · Regional Ambassador for Lusophone Africa", base: "Luanda, Angola", group: "representation", photo: "images/people/haymee-perez-cogle.jpg",
     summary: "More than 30 years across technology, telecommunications, entrepreneurship and innovation. Managing Director of Founder Institute Luanda and of Renascença Digital Consultoria.",
     bio: [
       "Through her venture-building work she has supported the launch and growth of more than 50 startups. She took part in the early development of internet and telecommunications infrastructure in Angola and brings an operational view of how ecosystems are built: through structure, trust, governance, capital readiness and long-term institutional commitment.",
@@ -65,11 +65,24 @@ export const people: Person[] = [
   },
 ];
 
-export const governanceLayers = [
-  { name: "Board of ASEB Society", kind: "Institutional oversight", points: ["Fiduciary and strategic oversight of all ASEB Society work.", "Approves strategy, annual budgets, major partnerships and multi-year funding decisions.", "Operates under the Charter and a conflict-of-interest framework, on a predictable annual rhythm."] },
-  { name: "Summit and Awards Advisory Board", kind: "Product integrity", points: ["Counsel on themes, categories, criteria, integrity safeguards and reputational risk.", "Advisory, not operational. It does not judge nominees or select winners.", "Appointed by, and accountable to, the Board of ASEB Society."] },
-  { name: "Field Councils and Working Groups", kind: "Practitioner voice", points: ["Bring practitioner voice from every region and role into standards, learning and systems work.", "Inform the institution. They carry no legal or fiduciary authority."] },
+// The unified governance structure. One institution, one governing Board, four pillars, clear executive
+// accountability, specialist support where necessary, independent awards assessment. Read
+// docs/GOVERNANCE.md before changing it, including its "Never reintroduce" list, which
+// src/test/governance.test.ts enforces.
+export type AuthorityKind = "Governing authority" | "Executive responsibility" | "Operational delivery" | "Advisory participation" | "Representation" | "Independent assessment";
+
+export const governanceStructure: { key: string; name: string; kind: AuthorityKind; summary: string; holds: string; doesNot: string }[] = [
+  { key: "board", name: "ASEB Society Board", kind: "Governing authority", summary: "Strategic direction, fiduciary oversight, institutional accountability, financial oversight and risk management.", holds: "Approves strategy, budgets, major partnerships, governing documents and the mandates of committees. Oversees every pillar and programme, the Summit & Awards included.", doesNot: "Run day to day operations, or select award recipients." },
+  { key: "ceo", name: "Founder & Chief Executive Officer", kind: "Executive responsibility", summary: "Executive leadership, strategy implementation, institutional development, resource mobilisation, stakeholder relationships and programme accountability.", holds: "Leads the institution within the strategy and budget the Board approves, and answers to the Board for delivery across all four pillars.", doesNot: "Override the Board, or determine award recipients outside the approved assessment process." },
+  { key: "secretariat", name: "ASEB Secretariat", kind: "Operational delivery", summary: "Institutional operations, membership administration, stakeholder engagement, communications, programme coordination and digital platform management.", holds: "Runs the institution's operations and records, under the direction of the Founder & Chief Executive Officer.", doesNot: "Set strategy, or approve its own mandate." },
+  { key: "committees", name: "Programme Committees and Working Groups", kind: "Advisory participation", summary: "Specialist expertise, professional participation, technical advice and programme support, established according to institutional needs and approved mandates.", holds: "Advises within a written mandate, for a defined period. Summit editions may be supported by temporary programme committees and country host organising committees.", doesNot: "Carry governing, fiduciary or award selection authority, or exist as standing bodies without an approved mandate." },
+  { key: "representation", name: "Country Partners and Ambassadors", kind: "Representation", summary: "National and regional representation, stakeholder mobilisation, local ecosystem engagement and continental institutional expansion.", holds: "Represents the Society in a country or region under an agreed mandate, and mobilises nominations and participation.", doesNot: "Commit the Society to agreements, or speak for it beyond that mandate." },
+  { key: "jury", name: "Independent Awards Jury", kind: "Independent assessment", summary: "Independent assessment and selection of award recipients under approved awards criteria and integrity safeguards.", holds: "Assesses nominees and selects award recipients according to approved criteria and procedures, with declared conflicts of interest and recusal.", doesNot: "Govern the Society. Equally, no sponsor, leader or committee may determine winners outside the approved assessment process." },
 ];
+
+// The one sentence used wherever the Summit is described in relation to the institution.
+export const summitPositioning = "The Africa Startup Ecosystem Builders Summit & Awards is the flagship continental convening and recognition programme of ASEB Society, bringing together the people and institutions shaping African entrepreneurial ecosystems to exchange knowledge, advance professional practice, address shared challenges and recognise outstanding contributions to the field.";
+export const summitGovernance = "The Summit operates within the institutional governance and strategic mandate of ASEB Society. Where necessary, individual Summit editions may be supported by temporary programme committees, country host organising committees and an independent awards assessment process.";
 
 export const governancePrinciples = [
   { name: "Separation of convening from authority", line: "Convenings and visibility do not equal decision-making power." },
@@ -196,7 +209,7 @@ export const funderNeeds = [
   { need: "Indicators and MEL", answer: "The Common Reporting Framework, the Ecosystem Stage Diagnostic and an annual State of the Field." },
   { need: "Value for money", answer: "Less duplication through the Programme Register, and a shared curriculum through the Academy." },
   { need: "Country coverage", answer: "Country Partners and Regional Representatives; Awards nominations from 52 countries in 2026." },
-  { need: "Safeguarding and governance", answer: "Charter, Code of Practice, conflict-of-interest rules and an Awards Advisory Board that does not judge." },
+  { need: "Safeguarding and governance", answer: "One governing Board, a Charter, a Code of Practice, conflict of interest rules and an Independent Awards Jury that assesses nominees under approved criteria." },
   { need: "Localisation", answer: "African-led institution and African-authored knowledge, under Stewardship Goal 8." },
   { need: "Sustainability and exit", answer: "Builder Protection and Embedded Public Infrastructure goals; renewal and succession work in the Field Lab." },
 ];

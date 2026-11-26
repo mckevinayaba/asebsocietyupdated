@@ -29,6 +29,7 @@ Database changes are hand written SQL in `drizzle/migrations/`, registered in `d
 ## Non negotiables
 
 - Four pillars, never more without approval: ASEB Summit & Awards, ASEB Circles, ASEB Academy, ASEB Field Lab. The five knowledge products are not pillars.
+- Governance: one institution, one governing Board, four pillars, clear executive accountability, specialist support where necessary, independent awards assessment. The Summit & Awards is the flagship programme of ASEB Society, never a separately governed institution. Never reintroduce a Summit (and Awards) Advisory Board, a three layer model, an Advisory Council placeholder or "Advisory Board Member" titles. Read `docs/GOVERNANCE.md`.
 - Tagline: It Takes a Village. The Founder is Founder & Chief Executive Officer.
 - ASEB Voices is the only storytelling brand. Founders' Voices is a category. Never create a separate Founder Voices or Stories from the Field product.
 - Never read or expose `content_items.author_id` outside the database. Use `content_authors()`.

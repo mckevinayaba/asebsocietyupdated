@@ -19,7 +19,7 @@ export const pillars: Pillar[] = [
     body:
       "Since 2022 the Summit and Awards have documented the field across five editions and more than 50 countries. Every finalist enters the Field Registry, and every Champion is invited into the Society's recognition pathway.",
     programmes: [
-      { name: "The Awards", detail: "28 roles across four parts of the field, peer-reviewed against eight domains." },
+      { name: "The Awards", detail: "28 roles across four parts of the field, independently assessed against eight domains." },
       { name: "The Summit", detail: "Three days of evidence, practice and field visits. Fifth edition held in Johannesburg, October 2026." },
       { name: "Honour Roll", detail: "Every recognised practitioner and institution, from 2023 onward, in the Field Registry." },
       { name: "Regional rounds", detail: "A regional engagement direction connecting local practice with continental recognition." },

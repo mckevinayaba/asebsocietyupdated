@@ -4,17 +4,18 @@
 
 ## Decision: CONDITIONAL GO
 
-The platform's code is ready. Its content is honest, its navigation holds together, it works at every screen width tested, it passes automated accessibility checks, and its database access rules are proven by 176 automated tests. On that evidence alone it would be a GO.
+The platform's code is ready. Its content is honest, its navigation holds together, it works at every screen width tested, it passes automated accessibility checks, and its database access rules are proven by 182 automated tests. On that evidence alone it would be a GO.
 
-It is not a GO, for three reasons. Nobody has yet verified the live site, because the audit could not reach it. The Society collects personal information without a published privacy notice, which POPIA does not allow. And no one has confirmed a recent database backup. These are not defects in the code. They are things only the Society can do, and they are quick.
+It is not a GO, for four reasons. The live site still shows a contradictory governance structure until the governance correction is merged and published. Nobody has yet verified the live site, because the audit could not reach it. The Society collects personal information without a published privacy notice, which POPIA does not allow. And no one has confirmed a recent database backup. These are not defects in the code. They are things only the Society can do, and they are quick.
 
-**Condition for a public launch announcement:** close blockers B1, B2, B3 and B5 in the Launch Blockers Register. Until then, the site can stay live as it is, but it should not be announced, and no invitations or campaigns should go out.
+**Condition for a public launch announcement:** close blockers B1, B2, B3, B5 and B12 in the Launch Blockers Register. Until then, the site can stay live as it is, but it should not be announced, and no invitations or campaigns should go out.
 
 ## Executive dashboard
 
 | Area | Status | Basis |
 | --- | --- | --- |
 | Identity and branding | Ready | Tagline, four pillars, Founder title and ASEB Voices consistent across the platform |
+| Governance consistency | Corrected in code, not yet live | One governing Board, Summit & Awards as flagship programme, Independent Awards Jury. Enforced by test. Formal Board adoption pending, asebs.com unchecked |
 | Architecture | Ready | Four pillars, five knowledge products, one storytelling brand |
 | Visitor understanding | Ready | Every main journey walked, each page ends with a next step |
 | Desktop and mobile | Ready | 580 page loads across ten widths, no overflow, no errors |

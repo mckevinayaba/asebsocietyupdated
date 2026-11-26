@@ -6,7 +6,7 @@ Everything listed as corrected exists on the branch `quality/launch-readiness`. 
 
 1. Six links to the old site's own domain removed or replaced, including the Leadership Advisory Council source link.
 2. Permanent redirects for `/about/team`, `/about/goals` and `/about/governance`.
-3. Advisory Council section rewritten to state plainly that no members are appointed yet.
+3. Advisory Council placeholder removed, because no approved mandate or appointed members exist.
 4. Dead ends closed on Governance, Framework and Community Guidelines.
 5. Professional profiles directory added at `/members` and linked from Explore, so profiles are no longer orphaned.
 6. "Opening soon" loading fallback replaced with an honest error state that offers a retry and an email route.
@@ -18,12 +18,15 @@ Everything listed as corrected exists on the branch `quality/launch-readiness`. 
 12. Unused `MandateExplorer` component deleted.
 13. Database test harness updated to mirror how Lovable created the community media bucket, so the security suite reflects production.
 
+14. Governance corrected across the platform. The three layer structure and the Summit and Awards Advisory Board are removed. The page now presents one governing Board, executive leadership, the Secretariat, programme committees, Country Partners and Ambassadors, and an Independent Awards Jury that is not a governing body. The approved Summit positioning is used on the Summit and Governance pages. The Leadership page shows the Board alone under "ASEB Society Board", and Country Partners and Ambassadors in their own section. Two Field Registry titles now match the Leadership page. "Peer-reviewed" awards wording now names the Independent Awards Jury. Existing appointments are unchanged.
+
 ## Permanent safeguards added
 
 1. `src/test/link-integrity.test.ts`: every internal destination must resolve to a real route, and no self-domain, empty, Lovable or localhost link may appear.
 2. `src/test/photography.test.ts`: no within-page repetition, unique page openings, no low resolution openings, no hardcoded photograph paths.
 3. `scripts/check-links.mjs` (`npm run check:links`): crawls any deployed copy of the site, including production, with read-only requests, and reports broken internal links, broken images and failing external links.
 4. `.github/workflows/quality.yml`: free GitHub Actions run of the type check, all tests and the production build on every pull request and every push to `main`. No secrets needed. Nothing is deployed by it.
+5. `src/test/governance.test.ts`: one governing authority, the approved six structures, an independent jury, and none of the outdated governance terms in public sources.
 
 ## Partially corrected
 
@@ -43,7 +46,7 @@ Everything listed as corrected exists on the branch `quality/launch-readiness`. 
 1. The four legal and policy drafts.
 2. Opening community publishing beyond pre-moderation.
 3. Any public figures for funding targets, member counts or impact.
-4. Advisory Council appointments.
+4. A Board resolution formally adopting the unified governance structure, and decisions on the three existing advisory appointments listed in `docs/GOVERNANCE.md`.
 
 ## Needs resources
 
@@ -51,6 +54,12 @@ Everything listed as corrected exists on the branch `quality/launch-readiness`. 
 2. Approved institutional documents for funders (concept note, programme proposals, governance framework).
 3. At least one moderator besides the Founder.
 4. An appointed Information Officer under POPIA.
+
+## Governance items outside the repository
+
+1. asebs.com could not be reviewed. The corrections it may need are listed in `docs/GOVERNANCE.md`.
+2. Published community content in the production database could not be searched. Search /editorial for "Advisory Board" after release.
+3. The Charter, Code of Conduct and Transparency policy are not in the repository and were not reviewed.
 
 ## Blockers outside the repository
 

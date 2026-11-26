@@ -7,7 +7,7 @@ This report covers the code on branch `quality/launch-readiness`. It says whethe
 | Gate | Result | Evidence |
 | --- | --- | --- |
 | Type check | Pass | `npx tsc --noEmit -p .`, no errors |
-| Tests | Pass, 176 of 176 | `npm test`, 14 files, including database security, link integrity and photography |
+| Tests | Pass, 182 of 182 | `npm test`, 15 files, including database security, link integrity, photography and governance |
 | Production build | Pass | `npx vite build` |
 | Demonstration content excluded | Pass | Preview chunks are 170 and 94 bytes and answer not found |
 | Internal links | Pass | 0 broken of 310 |

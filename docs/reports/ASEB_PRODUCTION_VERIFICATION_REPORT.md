@@ -9,7 +9,7 @@ The audit environment's network policy blocks www.asebsociety.org and lovable.ap
 | Check | Result |
 | --- | --- |
 | Type check | Passes, no errors |
-| Tests | 176 pass across 14 files, including the database security suite against all eleven migrations |
+| Tests | 182 pass across 15 files, including the database security suite against all eleven migrations |
 | Production build | Succeeds |
 | Demonstration content in the production bundle | Absent. `/preview/*` answers not found |
 | Largest client script, compressed | about 104 KB |
@@ -37,6 +37,7 @@ Record the date, the result and who checked it for each line.
 | Editorial | Open /editorial | Review queue loads |
 | Environment | In Lovable, confirm no service role key is exposed to the client | Only the publishable key is present in the browser |
 | Social previews | Paste the home page and an ASEB Voices story into LinkedIn's Post Inspector | Correct title, description and ASEB photograph |
+| Governance | Open /governance and /people | "One institution. Shared purpose. Clear accountability.", six structures, no Advisory Board or Advisory Council anywhere |
 | Performance | Run PageSpeed Insights on the home page, phone setting | Record the scores. Aim for Largest Contentful Paint under 2.5 s |
 
 Once these are recorded, update the Launch Blockers Register.
