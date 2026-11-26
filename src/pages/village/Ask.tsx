@@ -10,6 +10,7 @@ import { NotYetLive, Prose, timeAgo } from "@/components/village/Primitives";
 import { Workspace, VillagePanel } from "@/components/village/Workspace";
 import { Btn } from "@/components/Arrow";
 import { UsefulIcon } from "@/components/shell/Icons";
+import { productProblems } from "@/content/proposition";
 
 export function AskPage() {
   const [params] = useSearchParams();
@@ -22,7 +23,8 @@ export function AskPage() {
       <header>
         <p className="eyebrow">{products.ask.name}</p>
         <h1 className="mt-4 font-display text-[2.25rem] leading-tight lg:text-[3rem]">{products.ask.line}</h1>
-        <p className="lede mt-4 max-w-prose">Ask a practical question about ecosystem building and learn from people who have faced it. Answers are community experience, not official ASEB guidance.</p>
+        <p className="mt-3 max-w-prose text-[0.9375rem] leading-relaxed text-stone">{productProblems.ask}</p>
+        <p className="lede mt-4 max-w-prose">Ask a practical question about ecosystem building and learn from people who have faced it. Answers are community experience, not official ASEB Society guidance.</p>
         <div className="mt-6"><Btn to="/contribute?kind=question">Ask a question</Btn></div>
       </header>
       <nav aria-label="Questions" className="mt-8 flex gap-6 border-b border-hairline">
@@ -61,7 +63,7 @@ export function QuestionPage() {
         </div>
         <section id="responses" className="mt-10 scroll-mt-28" aria-labelledby="answers-title">
           <h2 id="answers-title" className="font-display text-[1.75rem]">{sorted.length ? `${sorted.length} answer${sorted.length === 1 ? "" : "s"}` : "No answers yet"}</h2>
-          <p className="mt-2 text-[0.875rem] text-stone">Answers marked useful by readers rise to the top. Community answers are not official ASEB guidance.</p>
+          <p className="mt-2 text-[0.875rem] text-stone">Answers marked useful by readers rise to the top. Community answers are not official ASEB Society guidance.</p>
           <EngagementProvider ids={sorted.map((a) => a.id)}>
             {sorted.map((a) => (
               <div key={a.id} id={a.slug} className="relative">

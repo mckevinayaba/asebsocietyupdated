@@ -1,6 +1,6 @@
-// The seven conditions of the ASEB Framework, aligned with the dimensions of the
+// The seven conditions of the ASEB Society Framework, aligned with the dimensions of the
 // Africa Entrepreneurial Ecosystem Index (AEEI). Measure with the AEEI names,
-// practise with ASEB's conditions.
+// practise with the ASEB Society Framework's conditions.
 
 export type Condition = {
   n: string;
@@ -73,24 +73,16 @@ export const conditions: Condition[] = [
 export const practiceProfession = [
   {
     term: "Practice",
-    means: "The work of ecosystem building: its methods, standards, evidence and the seven conditions it strengthens.",
-    builds: "The ASEB Framework, practice standards, Field Lab projects, the State of the Field.",
-    shows: "Academy, Field Lab, Evidence Library",
+    means: "The work itself: the methods, knowledge, competencies, judgement, evidence and tools used to improve entrepreneurial ecosystem conditions.",
+    builds: "The ASEB Society Framework, shared methods developed and tested with practitioners, Field Lab investigations, the Playbook and State of the Field, each respecting African contextual differences.",
+    shows: "Academy, Field Lab, the Playbook, Evidence Library",
   },
   {
     term: "Profession",
-    means: "The people and institutions who do that work, and the recognition, pathway and home they hold.",
-    builds: "The designations from Member to ASEB Fellow, certification, ASEB Circles, the Field Registry, the Awards.",
+    means: "The people doing that work: their professional identity, recognition, development, ethical responsibilities, credibility, peer support and continuity. No ecosystem builder should have to start from zero every time a programme ends or an employer changes.",
+    builds: "Professional profiles, peer communities in ASEB Circles, the Field Registry and recognition through the Summit & Awards. Formal professional pathways are a future proposal that would need consultation and institutional approval.",
     shows: "Join, profiles, Circles, Summit and Awards",
   },
-];
-
-export const ladder = [
-  { step: "01", name: "Member", how: "Join the Society, choose your role in the field and sign the Code of Practice." },
-  { step: "02", name: "Verified", how: "Your record of practice is checked against public evidence or a peer reference." },
-  { step: "03", name: "Associate Ecosystem Builder", how: "Complete ASEB Foundations and begin a logged record of continuing practice." },
-  { step: "04", name: "Professional Ecosystem Builder", how: "Complete the Practitioner Programme and a capstone reviewed by faculty." },
-  { step: "05", name: "ASEB Fellow", how: "Nominated, reviewed by the Leadership Council, and leading work in the Field Lab." },
 ];
 
 export const domains = [

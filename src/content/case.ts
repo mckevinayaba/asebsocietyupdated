@@ -92,17 +92,12 @@ export type InvestmentArea = { slug: string; name: string; purpose: string; outc
 
 // No amounts, targets or commitments are published until approved.
 export const investmentAreas: InvestmentArea[] = [
-  { slug: "founding-support", name: "Founding institutional support", purpose: "Core support for the Society's first years as a permanent institution.", outcome: "A stable foundation that lets every other mandate operate." },
-  { slug: "secretariat", name: "Secretariat development", purpose: "The small team that runs membership, partnerships, governance and reporting.", outcome: "Reliable operations, faster responses and accountable records." },
-  { slug: "practitioner-development", name: "Practitioner and capacity development", purpose: "Learning pathways, peer Circles and practice standards for ecosystem builders.", outcome: "More capable practitioners and support institutions." },
-  { slug: "country-network", name: "Country network activation", purpose: "Recruiting, onboarding and supporting Country Partners and Ambassadors.", outcome: "Locally rooted representation, beginning where demand and capacity exist." },
-  { slug: "ecosystem-intelligence", name: "Ecosystem intelligence and applied research", purpose: "Field Lab research, policy intelligence and the translation of evidence into practice.", outcome: "Decisions informed by evidence rather than assumption." },
-  { slug: "inclusive-participation", name: "Inclusive participation", purpose: "Reaching township, rural, informal economy and Francophone, Lusophone and Arabic speaking practitioners.", outcome: "A field that reflects the whole continent, not only its capital cities." },
-  { slug: "playbook", name: "The African Ecosystem Building Playbook", purpose: "Editing, research and publication of a living professional publication written with practitioners.", outcome: "Shared, African-authored knowledge on how ecosystems are built." },
-  { slug: "voices-and-memory", name: "ASEB Voices and institutional memory", purpose: "Editorial capacity to document the people, institutions and lessons behind African ecosystems.", outcome: "A field that keeps its memory instead of starting from zero." },
-  { slug: "knowledge-access", name: "Knowledge accessibility", purpose: "Translation, low-bandwidth access and multilingual participation.", outcome: "Knowledge that reaches practitioners in every language and connection." },
-  { slug: "digital-infrastructure", name: "Digital institutional infrastructure", purpose: "This platform: registry, member services, knowledge and Secretariat tools.", outcome: "A shared professional home that a small team can run." },
-  { slug: "strategic-collaboration", name: "Strategic collaboration", purpose: "Joint programmes with foundations, agencies, universities and networks.", outcome: "Shared outcomes, agreed in advance and reported openly." },
+  { slug: "founding-support", name: "Founding institutional support", purpose: "Core coordination, governance, financial systems, Secretariat capacity and digital platform operations.", outcome: "A stable institution that lets every other area of work operate and report responsibly." },
+  { slug: "practitioner-development", name: "Professional practice development", purpose: "Practitioner learning, competencies, professional methods and facilitated communities of practice.", outcome: "More capable practitioners, and methods that travel between institutions." },
+  { slug: "playbook", name: "Collective knowledge", purpose: "The African Ecosystem Building Playbook, evidence resources and reviewed professional contributions.", outcome: "Shared, African-authored knowledge on how ecosystems are built." },
+  { slug: "voices-and-memory", name: "Institutional memory", purpose: "ASEB Voices, documented practitioner experience and the preservation of professional knowledge.", outcome: "A field that keeps its memory instead of starting from zero." },
+  { slug: "country-network", name: "Continental representation", purpose: "Country network development, local engagement and inclusive access to knowledge, beginning where demand and capacity exist.", outcome: "Locally rooted representation that reflects the whole continent." },
+  { slug: "ecosystem-intelligence", name: "Applied research", purpose: "Scoped Field Lab investigations, relevant evidence and practical learning about ecosystem development.", outcome: "Decisions informed by evidence rather than assumption." },
 ];
 
 export const accountability = [
@@ -122,7 +117,7 @@ export const membershipValue = [
 // Leadership supplied cumulative figures. Kept for Our Story with a clear provenance label.
 // They are not independently verified until reconciled against source records.
 export const cumulativeFigures = {
-  provenance: "Cumulative figures supplied by ASEB leadership. Reconciliation against source records is in progress.",
+  provenance: "Historical figures of the ASEB Summit & Awards, supplied by institutional leadership. Reconciliation against primary records is in progress. They are not ASEB Society membership or measured impact.",
   items: [
     { value: "12,700+", label: "Nominations across five editions" },
     { value: "245+", label: "Ecosystem builders recognised" },

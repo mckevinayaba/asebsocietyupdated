@@ -39,9 +39,9 @@ export default function Collaborate() {
           <SectionHead eyebrow="Collaboration models" title="Five ways to work together." />
           <div className="mt-12"><KeyGrid items={collaborationModels.map((m) => ({ k: m.name, v: m.line }))} /></div>
           <div className="mt-12 grid gap-6 border-t border-hairline pt-8 text-[0.9375rem] leading-relaxed text-stone lg:grid-cols-3">
-            <p><span className="font-semibold text-ink">Co-badging.</span> The ASEB mark appears only on agreed outputs and always alongside yours.</p>
+            <p><span className="font-semibold text-ink">Co-badging.</span> The ASEB Society mark appears only on agreed outputs and always alongside yours.</p>
             <p><span className="font-semibold text-ink">No implied endorsement.</span> Alignment recognises practice. It does not endorse founder outcomes.</p>
-            <p><span className="font-semibold text-ink">Accountability.</span> The designation is reviewed each year and withdrawn if the Standard is breached.</p>
+            <p><span className="font-semibold text-ink">Accountability.</span> Each collaboration is reviewed each year and ends if its agreed terms are breached.</p>
           </div>
         </div>
       </section>
@@ -51,13 +51,13 @@ export default function Collaborate() {
           <div className="lg:col-span-4">
             <p className="eyebrow">Expression of interest</p>
             <h2 className="mt-5 text-display-sm">Tell us about your programme.</h2>
-            <p className="mt-5 text-[1rem] leading-relaxed text-stone">The Secretariat will propose a collaboration model within three weeks.</p>
+            <p className="mt-5 text-[1rem] leading-relaxed text-stone">The Secretariat reviews each proposal and replies by email to discuss a collaboration model.</p>
           </div>
           <div className="min-w-0 lg:col-span-7 lg:col-start-6">
             <EoiForm
               source="/collaborate"
               submitLabel="Propose a collaboration"
-              consent="Our programme is willing to work to the ASEB Programme Standard and the Code of Practice."
+              consent="Our programme is willing to work to the ASEB Society Code of Practice and agreed collaboration terms."
               done={{ title: "Thank you. Your proposal is with the Secretariat.", body: "The Secretariat reviews each proposal and replies by email to discuss a collaboration model." }}
               fields={[
                 { name: "programme", label: "Programme name", required: true },

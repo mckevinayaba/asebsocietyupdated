@@ -8,12 +8,12 @@ const tiers = [
   {
     name: "Continental Partners",
     who: "Hub networks, academies, development finance institutions and governments.",
-    what: "A seat on the partner council, co-design of the ASEB Agenda, and shared data under the Common Reporting Framework.",
+    what: "Co-design of shared priorities and programmes, and shared data under agreed terms.",
   },
   {
     name: "Knowledge Partners",
     who: "Research centres and policy institutions producing evidence on African ecosystems.",
-    what: "Named co-authorship of the State of the Field, a seat on the ASEB Research Council, a Field Lab project and a research session at every Summit.",
+    what: "Named co-authorship of State of the Field work, a Field Lab collaboration and a research session at the Summit, as agreed with each partner.",
   },
   {
     name: "Programme Partners",

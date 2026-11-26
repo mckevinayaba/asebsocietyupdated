@@ -205,7 +205,7 @@ export default function Join() {
               <label className="mt-8 flex cursor-pointer items-start gap-4">
                 <input type="checkbox" className="sr-only" checked={f.code} onChange={(e) => set("code", e.target.checked)} />
                 <span className={`mt-1 inline-flex h-5 w-5 shrink-0 items-center justify-center border text-[0.75rem] font-bold ${f.code ? "border-ink bg-ink text-ivory" : "border-ink/50"}`} aria-hidden="true">{f.code ? "✓" : ""}</span>
-                <span className="text-[1rem]">I commit to the ASEB Code of Practice.</span>
+                <span className="text-[1rem]">I commit to the ASEB Society Code of Practice.</span>
               </label>
             </div>
           )}

@@ -8,7 +8,7 @@ export default function Framework() {
   return (
     <>
       <PageHero
-        eyebrow="The ASEB Framework"
+        eyebrow="The ASEB Society Framework"
         title="Seven conditions. One practice."
         lede={statements.definition}
       />
@@ -26,7 +26,7 @@ export default function Framework() {
                 <h3 className="text-[2.5rem] leading-none">{p.term}</h3>
                 <dl className="mt-8 space-y-6 text-[0.9375rem]">
                   <div><dt className="text-eyebrow font-semibold uppercase text-umber">What it means</dt><dd className="mt-2 leading-relaxed">{p.means}</dd></div>
-                  <div><dt className="text-eyebrow font-semibold uppercase text-umber">What ASEB builds</dt><dd className="mt-2 leading-relaxed">{p.builds}</dd></div>
+                  <div><dt className="text-eyebrow font-semibold uppercase text-umber">What ASEB Society builds</dt><dd className="mt-2 leading-relaxed">{p.builds}</dd></div>
                   <div><dt className="text-eyebrow font-semibold uppercase text-umber">Where it shows</dt><dd className="mt-2 leading-relaxed text-stone">{p.shows}</dd></div>
                 </dl>
               </div>
@@ -40,14 +40,14 @@ export default function Framework() {
           <SectionHead
             eyebrow="The seven conditions"
             title="What ecosystem builders strengthen."
-            lede="Measure with the dimensions of the Africa Entrepreneurial Ecosystem Index. Practise with ASEB's conditions. Each Academy module and Field Lab project is tagged to one of them."
+            lede="Measure with the dimensions of the Africa Entrepreneurial Ecosystem Index. Practise with the ASEB Society Framework's conditions. Future Academy learning and Field Lab projects will be tagged to them."
           />
-          <div className="mt-14 overflow-x-auto">
+          <div className="mt-14 overflow-x-auto" tabIndex={0} role="region" aria-label="The seven conditions table">
             <table className="w-full min-w-[720px] border-collapse text-left">
               <thead>
                 <tr className="border-b border-ink text-eyebrow font-semibold uppercase text-stone">
                   <th className="w-14 py-4 font-semibold">No.</th>
-                  <th className="py-4 font-semibold">ASEB condition</th>
+                  <th className="py-4 font-semibold">Condition</th>
                   <th className="py-4 font-semibold">In practice</th>
                   <th className="py-4 font-semibold">AEEI dimension</th>
                   <th className="py-4 text-right font-semibold">Fit</th>
@@ -70,7 +70,7 @@ export default function Framework() {
             </table>
           </div>
           <p className="mt-6 max-w-3xl text-[0.8125rem] leading-relaxed text-stone">
-            {aeeiCredit} The alignment is ASEB's own reading and is offered for review by the index authors before it is published as an ASEB standard.
+            {aeeiCredit} The alignment is ASEB Society's own reading and is offered for review by the index authors before it is published as an ASEB Society standard.
           </p>
         </div>
       </section>
@@ -80,7 +80,7 @@ export default function Framework() {
           <div className="lg:col-span-5">
             <p className="eyebrow">The competency framework</p>
             <h2 className="mt-5 text-display-sm">Eight domains of professional practice.</h2>
-            <p className="lede mt-6">Every lesson, Field Lab project and award category is tagged with one or more of these domains. The Awards are judged against them.</p>
+            <p className="lede mt-6">Award categories draw on these domains, and future Academy learning and Field Lab work will be organised around them. They describe competence. They are not an accreditation standard.</p>
             <div className="mt-8"><TLink to="/what-we-build#pathway">See the recognition pathway</TLink></div>
           </div>
           <ol className="grid border-t border-ink sm:grid-cols-2 lg:col-span-6 lg:col-start-7">
