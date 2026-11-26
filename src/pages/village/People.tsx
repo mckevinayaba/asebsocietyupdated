@@ -134,6 +134,51 @@ export function GuidelinesPage() {
         <h2 className="pt-4 font-display text-[1.5rem] text-ink">Moderation</h2>
         <p>Moderators can hide content that breaks these guidelines and record why. Reports are confidential. Serious allegations about people or institutions are reviewed by an editor and are not published without care for fairness, privacy and evidence.</p>
       </section>
+      <div className="mt-12 flex flex-col gap-3 border-t border-ink pt-8 sm:flex-row sm:flex-wrap">
+        <Link to="/the-field" className="btn btn-primary">Go to The Field</Link>
+        <Link to="/contribute" className="btn btn-line">Contribute</Link>
+        <Link to="/you?tab=profile" className="btn btn-line">Set up your profile</Link>
+      </div>
     </div>
+  );
+}
+
+// Directory of public professional profiles. Only people who chose "Everyone" appear, and only
+// signed-in visitors also see community profiles. No contact details are ever shown.
+export function MembersDirectoryPage() {
+  const community = useCommunity();
+  const [query, setQuery] = useState("");
+  const [term, setTerm] = useState("");
+  const list = useQuery({ queryKey: ["village", "directory", term], queryFn: () => publicProfiles({ search: term, limit: 60 }), enabled: community.available });
+  return (
+    <Workspace label="People">
+      <header>
+        <p className="eyebrow">Explore · Professional profiles</p>
+        <h1 className="mt-4 font-display text-[2.25rem] leading-tight lg:text-[3rem]">The people building the village.</h1>
+        <p className="lede mt-4 max-w-prose">Practitioners and institutions who chose to make their profile visible. A profile shows participation in the community, not Society membership or accreditation.</p>
+        <form className="mt-6 flex max-w-xl gap-3" onSubmit={(e) => { e.preventDefault(); setTerm(query.trim()); }}>
+          <label className="block flex-1"><span className="sr-only">Search by name, organisation or country</span><input type="search" className="field-input" placeholder="Name, organisation or country" value={query} onChange={(e) => setQuery(e.target.value)} /></label>
+          <button type="submit" className="btn btn-primary">Search</button>
+        </form>
+      </header>
+      <div className="mt-8">
+        {!community.ready || list.isLoading ? <p className="py-8 text-stone" role="status">Loading…</p>
+          : !community.available || list.isError ? <NotYetLive what="The directory" />
+          : list.data?.length ? (
+            <ul className="border-t border-ink">{list.data.map((p) => (
+              <li key={p.id}><Link to={`/members/${p.id}`} className="group grid grid-cols-[48px_1fr] items-center gap-4 border-b border-hairline py-4">
+                <span aria-hidden="true" className="grid h-12 w-12 place-items-center rounded-full bg-night font-display text-[1.25rem] text-ivory">{p.name.slice(0, 1)}</span>
+                <span className="min-w-0"><span className="block font-semibold group-hover:text-ember">{p.name}</span><span className="block truncate text-[0.875rem] text-stone">{[p.headline, p.organisation, p.country].filter(Boolean).join(" · ")}</span></span>
+              </Link></li>
+            ))}</ul>
+          ) : (
+            <div className="border border-dashed border-hairline p-8 text-center">
+              <p className="font-display text-[1.375rem]">{term ? "No public profile matches that search." : "No profiles have been made public yet."}</p>
+              <p className="mt-2 text-stone">Members choose whether their profile is visible. You can make yours public from your profile settings.</p>
+              <div className="mt-5 flex flex-wrap justify-center gap-3"><Link to="/you?tab=profile" className="btn btn-primary">Set up your profile</Link><Link to="/registry" className="btn btn-line">Browse the Field Registry</Link></div>
+            </div>
+          )}
+      </div>
+    </Workspace>
   );
 }

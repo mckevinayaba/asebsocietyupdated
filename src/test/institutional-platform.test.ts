@@ -22,7 +22,7 @@ describe("application navigation", () => {
   it("marks query-specific contextual tabs as current", () => {
     const set = contextTabsFor("/registry");
     expect(set?.id).toBe("explore");
-    const people = set!.tabs.find((t) => t.label === "People")!;
+    const people = set!.tabs.find((t) => t.label === "Recognised people")!;
     const all = set!.tabs.find((t) => t.label === "Field Registry")!;
     expect(isTabCurrent(people, "/registry", "?type=individual", set!.tabs)).toBe(true);
     expect(isTabCurrent(all, "/registry", "?type=individual", set!.tabs)).toBe(false);

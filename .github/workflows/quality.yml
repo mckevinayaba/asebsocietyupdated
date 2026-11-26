@@ -1,0 +1,30 @@
+# Free quality gate for every pull request and push to main. It runs on GitHub's hosted runners
+# and needs no secrets. It does not deploy anything: Lovable publishes from main separately.
+name: Quality
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: oven-sh/setup-bun@v2
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+      - name: Type check
+        run: npx tsc --noEmit -p .
+      - name: Tests, including database security and link integrity
+        run: npm test
+      - name: Production build
+        run: npx vite build

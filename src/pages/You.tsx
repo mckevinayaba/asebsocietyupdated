@@ -67,7 +67,7 @@ function Saved() {
     <div className="space-y-10">
       <section>
         <h2 className="font-display text-[1.5rem]">Saved to your account</h2>
-        {marks.isLoading ? <p className="mt-3 text-stone">Loading…</p> : !marks.data?.available ? <p className="mt-3 text-stone">Saving to your account opens with The Field.</p>
+        {marks.isLoading ? <p className="mt-3 text-stone">Loading…</p> : !marks.data?.available ? <p className="mt-3 text-stone">Your saved items could not be loaded just now. Please try again.</p>
           : marks.data.items.length ? <ul className="mt-4 border-t border-ink">{marks.data.items.map((i) => <li key={i.id} className="border-b border-hairline py-4"><p className="text-[0.75rem] font-semibold uppercase tracking-[0.1em] text-teal">{kindLabel[i.kind]}</p><Link to={permalink(i.kind, i.slug)} className="mt-1 block font-semibold hover:text-ember">{i.title || excerpt(i.body, 90)}</Link></li>)}</ul>
           : <p className="mt-3 text-stone">Nothing saved yet. Use Save on any contribution.</p>}
       </section>

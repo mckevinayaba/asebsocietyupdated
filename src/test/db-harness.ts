@@ -28,6 +28,9 @@ export async function createDatabase(): Promise<PGlite> {
     ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO anon, authenticated, service_role;
     ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON FUNCTIONS TO anon, authenticated, service_role;
   `);
+  // In Lovable Cloud the community-media bucket is created with the storage tool rather than by
+  // migration 0008, with these settings. The harness creates it the same way before 0008 runs.
+  await db.exec(`INSERT INTO storage.buckets (id, name, public, file_size_limit, allowed_mime_types) VALUES ('community-media', 'community-media', false, 5242880, ARRAY['image/jpeg', 'image/png', 'image/webp'])`);
   const dir = path.resolve(__dirname, "../../drizzle/migrations");
   for (const file of readdirSync(dir).filter((name) => name.endsWith(".sql")).sort()) {
     await db.exec(readFileSync(path.join(dir, file), "utf8"));

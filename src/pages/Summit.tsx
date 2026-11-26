@@ -7,6 +7,7 @@ import { Btn, TLink } from "@/components/Arrow";
 import { asset } from "@/lib/asset";
 import { nextSummit } from "@/content/case";
 import { ScrollRail } from "@/components/ScrollRail";
+import { photo, assignments } from "@/content/photography";
 
 export default function Summit() {
   return (
@@ -29,7 +30,7 @@ export default function Summit() {
         <div className="wrap">
           <figure>
             <div className="photo aspect-[4/3] sm:aspect-[16/9] lg:aspect-[21/9]">
-              <img src={asset("images/events/aseb-2026-recognised-builders.jpg")} alt="Recognised practitioners and institutions at ASEB 2026" style={{ objectPosition: "50% 40%" }} />
+              <img src={asset(photo(assignments.summit.hero).src)} alt={photo(assignments.summit.hero).alt} style={{ objectPosition: "50% 40%" }} />
             </div>
             <figcaption className="caption">ASEB Summit and Awards 2026, Johannesburg · Photo: ASEB Society</figcaption>
           </figure>
@@ -126,10 +127,10 @@ export default function Summit() {
               </figure>
             ))}
             <div className="on-dark col-span-1 flex flex-col justify-between bg-ink p-5 text-ivory lg:p-7">
-              <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-sand">ASEB 2026</p>
+              <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-sand">More from the Summit</p>
               <div>
-                <p className="font-display text-[1.375rem] leading-snug lg:text-[1.625rem]">The full gallery follows.</p>
-                <p className="mt-3 text-[0.8125rem] leading-relaxed text-stone-light">More photographs from the Summit floor to follow.</p>
+                <p className="font-display text-[1.375rem] leading-snug lg:text-[1.625rem]">Every edition, on asebs.com.</p>
+                <a href="https://www.asebs.com" target="_blank" rel="noreferrer" className="tlink mt-3 text-[0.8125rem]">The Summit and Awards site <span className="arr" aria-hidden="true">↗</span></a>
               </div>
             </div>
           </div>

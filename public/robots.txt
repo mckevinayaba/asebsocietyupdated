@@ -12,6 +12,7 @@ Disallow: /preview/
 Disallow: /editorial
 Disallow: /contribute
 Disallow: /members/
+Allow: /members$
 Disallow: /onboarding
 
 Sitemap: https://www.asebsociety.org/sitemap.xml

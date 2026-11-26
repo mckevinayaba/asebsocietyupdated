@@ -23,6 +23,7 @@ export const desktopNav: NavGroup[] = [
     { label: "The Framework", to: "/framework", note: "Seven conditions entrepreneurs need" },
   ] },
   { label: "Explore", to: "/registry", items: [
+    { label: "Professional profiles", to: "/members", note: "People in the community who made their profile public" },
     { label: "Practitioners", to: "/registry?type=individual", note: "People recognised in the Field Registry" },
     { label: "Institutions", to: "/registry?type=organisation", note: "Support organisations in the archive" },
     { label: "Countries", to: "/countries", note: "All 54 African states and representation" },
@@ -53,8 +54,8 @@ export type PrimaryTab = { key: TabKey; label: string; to: string; memberTo?: st
 
 // Bottom navigation. Prefix order matters: the first tab whose prefix matches wins.
 export const primaryTabs: PrimaryTab[] = [
-  { key: "home", label: "Home", to: "/", memberTo: "/the-field", prefixes: ["/the-field", "/contribute", "/members", "/onboarding", "/community-guidelines", "/why-aseb", "/about", "/people", "/governance", "/progress", "/invest", "/funders", "/what-we-build", "/summit", "/learning", "/field-lab", "/partners", "/collaborate", "/work-with-us", "/get-involved", "/join", "/sdgs"] },
-  { key: "explore", label: "Explore", to: "/registry", prefixes: ["/registry", "/countries", "/country-partners", "/ambassadors", "/field"] },
+  { key: "home", label: "Home", to: "/", memberTo: "/the-field", prefixes: ["/the-field", "/contribute", "/onboarding", "/community-guidelines", "/why-aseb", "/about", "/people", "/governance", "/progress", "/invest", "/funders", "/what-we-build", "/summit", "/learning", "/field-lab", "/partners", "/collaborate", "/work-with-us", "/get-involved", "/join", "/sdgs"] },
+  { key: "explore", label: "Explore", to: "/registry", prefixes: ["/members", "/registry", "/countries", "/country-partners", "/ambassadors", "/field"] },
   { key: "circles", label: "Circles", to: "/communities", prefixes: ["/communities"] },
   { key: "discover", label: "Discover", to: "/discover", prefixes: ["/discover", "/playbook", "/voices", "/ask", "/state-of-the-field", "/stories", "/evidence", "/insights", "/framework", "/climate"] },
   { key: "you", label: "You", to: "/you", prefixes: ["/you", "/app", "/auth", "/secretariat", "/reset-password"] },
@@ -74,8 +75,8 @@ export const contextTabSets: ContextTabSet[] = [
   { id: "work", label: "Our Work", prefixes: ["/summit", "/communities", "/learning", "/field-lab", "/what-we-build"], tabs: [
     { label: "Summit & Awards", to: "/summit" }, { label: "Circles", to: "/communities" }, { label: "Academy", to: "/learning" }, { label: "Field Lab", to: "/field-lab" }, { label: "How they connect", to: "/what-we-build" },
   ] },
-  { id: "explore", label: "Explore", prefixes: ["/registry", "/countries", "/country-partners", "/ambassadors", "/field"], tabs: [
-    { label: "Field Registry", to: "/registry" }, { label: "People", to: "/registry?type=individual" }, { label: "Institutions", to: "/registry?type=organisation" }, { label: "Countries", to: "/countries" }, { label: "Country Partners", to: "/country-partners" }, { label: "Ambassadors", to: "/ambassadors" }, { label: "Roles", to: "/field" },
+  { id: "explore", label: "Explore", prefixes: ["/members", "/registry", "/countries", "/country-partners", "/ambassadors", "/field"], tabs: [
+    { label: "Profiles", to: "/members" }, { label: "Field Registry", to: "/registry" }, { label: "Recognised people", to: "/registry?type=individual" }, { label: "Institutions", to: "/registry?type=organisation" }, { label: "Countries", to: "/countries" }, { label: "Country Partners", to: "/country-partners" }, { label: "Ambassadors", to: "/ambassadors" }, { label: "Roles", to: "/field" },
   ] },
   { id: "discover", label: "Discover", prefixes: ["/discover", "/playbook", "/voices", "/ask", "/state-of-the-field", "/evidence", "/insights", "/framework", "/climate"], tabs: [
     { label: "Discover", to: "/discover" }, { label: "The Playbook", to: "/playbook" }, { label: "ASEB Voices", to: "/voices" }, { label: "Ask the Village", to: "/ask" }, { label: "State of the Field", to: "/state-of-the-field" }, { label: "Academy", to: "/learning" }, { label: "Opportunities", to: "/the-field?tab=opportunities" }, { label: "Events", to: "/discover?type=event" },

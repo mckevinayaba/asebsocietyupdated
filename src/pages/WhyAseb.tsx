@@ -7,6 +7,7 @@ import { Source, Ext } from "@/components/Rows";
 import { TheoryOfChange } from "@/components/TheoryOfChange";
 import { investPath } from "@/content/navigation";
 import { mandates, positioning, problemThemes, publishedEvidence, supportSystem } from "@/content/case";
+import { photo, assignments } from "@/content/photography";
 
 // Why We Exist: the institutional case in full. Structural challenges are described as the
 // Society's intervention focus, never as claims about every African country.
@@ -88,7 +89,7 @@ export default function WhyAseb() {
 
       <section id="informal" className="section scroll-mt-24" aria-labelledby="informal-title">
         <div className="wrap grid gap-12 lg:grid-cols-12 lg:gap-10">
-          <div className="lg:col-span-5"><Photo src="images/events/aseb-community-gathering.jpg" alt="Practitioners gathered at an ASEB session" caption="Practitioners at an ASEB gathering" ratio="aspect-[4/3]" /></div>
+          <div className="lg:col-span-5"><Photo src={photo(assignments.whyAseb.informal).src} alt={photo(assignments.whyAseb.informal).alt} caption="Delegates at ASEB 2025, Addis Ababa" ratio="aspect-[4/3]" /></div>
           <div className="space-y-6 text-[1.0625rem] leading-relaxed lg:col-span-6 lg:col-start-7">
             <p className="eyebrow">The whole economy</p>
             <h2 id="informal-title" className="text-display-sm">An ecosystem is not only its startups.</h2>

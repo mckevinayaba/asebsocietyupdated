@@ -7,6 +7,7 @@ import { TheoryOfChange } from "@/components/TheoryOfChange";
 import { accountability, investmentAreas, positioning, problemThemes, publishedEvidence } from "@/content/case";
 import { partnerTypes } from "@/content/institution";
 import { programmeReadiness } from "@/content/platform";
+import { photo, pillarPhoto, assignments } from "@/content/photography";
 
 const readinessRows = [
   { k: "ASEB Summit & Awards", v: "Operational since 2022, five editions in four host countries." },
@@ -23,7 +24,7 @@ export default function Invest() {
   return (
     <>
       <section className="cinema cinema-dense on-dark" aria-labelledby="invest-title">
-        <div className="cinema-media"><img src={asset("images/events/aseb-2026-recognised-builders.jpg")} alt="" className="object-[55%_center]" fetchPriority="high" /></div>
+        <div className="cinema-media"><img src={asset(photo(assignments.invest.hero).src)} alt="" className="object-[50%_center]" fetchPriority="high" /></div>
         <div className="cinema-grade" />
         <div className="wrap relative pb-14 pt-28 lg:pb-24 lg:pt-36">
           <p className="text-[0.75rem] font-semibold uppercase tracking-[0.16em] text-sand">Invest in Our Mission</p>
@@ -33,7 +34,7 @@ export default function Invest() {
             <a href="#enquire" className="btn btn-signal">Start an institutional conversation <span className="arr" aria-hidden="true">↓</span></a>
             <a href="#areas" className="btn btn-line">See where investment goes</a>
           </div>
-          <p className="mt-10 text-[0.75rem] text-ivory/60">Recognised practitioners and institutions, ASEB 2026, Johannesburg · Photo: ASEB Society</p>
+          <p className="mt-10 text-[0.75rem] text-ivory/60">Ecosystem builders at ASEB 2023, Nairobi · Photo: ASEB Society</p>
         </div>
       </section>
 

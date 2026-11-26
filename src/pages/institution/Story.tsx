@@ -6,17 +6,11 @@ import { Source, Ext } from "@/components/Rows";
 import { story } from "@/content/institution";
 import { proof } from "@/content/site";
 import { cumulativeFigures, nextSummit, positioning } from "@/content/case";
-import audience2022 from "@/assets/aseb-2022-audience.jpg.asset.json";
-import discussion2024 from "@/assets/aseb-2024-discussion.jpg.asset.json";
-import delegates2025 from "@/assets/aseb-2025-delegates.jpg.asset.json";
+import { photo, pillarPhoto, assignments } from "@/content/photography";
 
-const editionPhoto: Record<string, { src: string; alt: string; caption: string; position?: string }> = {
-  "2022": { src: audience2022.url, alt: "Participants listening at the first ASEB Summit and Awards in Johannesburg, 2022", caption: "Johannesburg, 2022" },
-  "2023": { src: "images/events/aseb-2023-nairobi.jpg", alt: "Builders celebrate together at ASEB 2023 in Nairobi", caption: "Nairobi, 2023", position: "40% center" },
-  "2024": { src: discussion2024.url, alt: "Speakers in discussion at the ASEB Summit 2024 in Accra", caption: "Accra, 2024" },
-  "2025": { src: delegates2025.url, alt: "Delegates gathered on stage at ASEB 2025 in Addis Ababa", caption: "Addis Ababa, 2025" },
-  "2026": { src: "images/events/aseb-2026-summit-delegates.jpg", alt: "ASEB Summit delegates in Johannesburg, 2026", caption: "Johannesburg, 2026" },
-};
+const editionPhoto: Record<string, { src: string; alt: string; caption: string; position?: string }> = Object.fromEntries(
+  Object.entries(assignments.story.editions).map(([year, key]) => [year, { src: photo(key).src, alt: photo(key).alt, caption: `${photo(key).city ?? ""}, ${year}` }]),
+);
 
 // Our Story: the historical archive. The movement-to-institution narrative, edition record and
 // historical figures live here, not on the home page.
@@ -24,7 +18,7 @@ export default function Story() {
   return (
     <>
       <section className="cinema cinema-dense on-dark" aria-labelledby="story-title">
-        <div className="cinema-media"><img src={asset("images/events/aseb-2026-summit-delegates.jpg")} alt="" className="object-[45%_center]" fetchPriority="high" /></div>
+        <div className="cinema-media"><img src={asset(photo(assignments.story.hero).src)} alt="" className="object-[45%_center]" fetchPriority="high" /></div>
         <div className="cinema-grade" />
         <div className="wrap relative pb-14 pt-32 lg:pb-24 lg:pt-44">
           <p className="text-[0.75rem] font-semibold uppercase tracking-[0.16em] text-sand">Our Story · From movement to institution</p>
@@ -53,7 +47,7 @@ export default function Story() {
               <div className="lg:col-span-7"><h3 className="font-display text-[1.75rem] leading-tight">The next convening</h3><p className="mt-4 text-[1.0625rem] leading-relaxed text-stone">{nextSummit.line}</p><div className="mt-5"><TLink to={nextSummit.href}>ASEB Summit and Awards on asebs.com</TLink></div></div>
             </li>
           </ol>
-          <Source>Sources: <Ext href="https://www.asebsociety.org/about/story">ASEB Society, Our Story</Ext> and <Ext href="https://www.asebs.com/story">The ASEB Story, asebs.com</Ext>.</Source>
+          <Source>Source: <Ext href="https://www.asebs.com/story">The ASEB Story, asebs.com</Ext>.</Source>
         </div>
       </section>
 
@@ -73,7 +67,7 @@ export default function Story() {
       <section className="section" aria-labelledby="transition-title">
         <div className="wrap grid gap-12 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-5">
-            <Photo src="images/events/aseb-2026-recognised-builders.jpg" alt="Recognised practitioners and institutions holding awards at ASEB 2026" caption="Recognised ecosystem builders, ASEB 2026, Johannesburg" ratio="aspect-[4/3]" />
+            <Photo src={photo(assignments.story.transition).src} alt={photo(assignments.story.transition).alt} caption="On stage at the ASEB Awards" ratio="aspect-[4/3]" />
           </div>
           <div className="lg:col-span-6 lg:col-start-7">
             <p className="eyebrow">The institutional transition</p>

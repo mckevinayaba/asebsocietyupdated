@@ -1,3 +1,4 @@
+import { photo, assignments } from "./photography";
 // ASEB Summit and Awards. Source for programme and speakers: https://www.asebs.com/programme
 // and https://www.asebs.com/speakers. Photos credited to ASEB Society.
 
@@ -56,13 +57,8 @@ export const editions = [
   { year: "2022", city: "Johannesburg", note: "Where it began." },
 ];
 
-export const gallery = [
-  { src: "images/events/aseb-2026-recognised-builders.jpg", alt: "Recognised practitioners and institutions at ASEB 2026 in Johannesburg", caption: "Recognised practitioners and institutions, ASEB 2026, Johannesburg", span: "wide" },
-  { src: "images/events/aseb-awards-stage-1.jpg", alt: "A recognised builder on stage at the ASEB Awards", caption: "On stage at the ASEB Awards", span: "tall" },
-  { src: "images/events/aseb-awards-stage-2.jpg", alt: "Two builders embrace on the ASEB Awards stage", caption: "The ASEB Awards", span: "tall" },
-  { src: "images/events/aseb-summit-panel.jpg", alt: "A panel discussion at the ASEB Summit", caption: "A practitioner panel at the ASEB Summit", span: "wide" },
-  { src: "images/events/aseb-awards-stage-3.jpg", alt: "A recognition plaque presented at the ASEB Awards", caption: "Recognition presented at the ASEB Awards", span: "tall" },
-];
+// Gallery photographs come from the photography registry so they never duplicate the page opening.
+export const gallery = assignments.summit.gallery.map((key, i) => ({ src: photo(key).src, alt: photo(key).alt, caption: photo(key).subject, span: i === 0 || i === 3 ? "wide" : "tall" }));
 
 // Institutions listed on asebs.com under "They showed up for the ecosystem."
 export const supporters = [

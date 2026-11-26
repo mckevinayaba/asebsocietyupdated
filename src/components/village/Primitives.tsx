@@ -42,14 +42,15 @@ export function Media({ items, compact = false }: { items: MediaItem[]; compact?
   );
 }
 
-// Shown wherever a feature needs migration 0007 and it is not applied yet.
+// Shown only if the community database cannot be reached (migrations 0007 and 0008 are applied in
+// Lovable Cloud, so in normal operation this never appears). It is a temporary error with a retry,
+// not an "opening soon" promise.
 export function NotYetLive({ what, children }: { what: string; children?: ReactNode }) {
   return (
-    <div className="border border-dashed border-hairline bg-paper p-6 lg:p-8" role="status">
-      <p className="text-[0.75rem] font-semibold uppercase tracking-[0.12em] text-umber">Opening soon</p>
-      <p className="mt-3 font-display text-[1.5rem] leading-snug">{what} is built and waiting to be switched on.</p>
-      <p className="mt-3 max-w-prose text-[0.9375rem] leading-relaxed text-stone">The Secretariat is completing the final setup step. Nothing has been published yet, so nothing is shown here rather than placeholder content.</p>
-      {children && <div className="mt-5">{children}</div>}
+    <div className="border border-hairline bg-paper p-6 lg:p-8" role="alert">
+      <p className="font-display text-[1.5rem] leading-snug">{what} could not be loaded just now.</p>
+      <p className="mt-3 max-w-prose text-[0.9375rem] leading-relaxed text-stone">This is usually a brief connection problem. Please try again. If it continues, write to <a className="underline underline-offset-4" href="mailto:aseb@asebsociety.org">aseb@asebsociety.org</a>.</p>
+      <div className="mt-5 flex flex-wrap gap-3"><button type="button" className="btn btn-primary" onClick={() => window.location.reload()}>Try again</button>{children}</div>
     </div>
   );
 }

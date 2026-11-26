@@ -1,5 +1,6 @@
+import { Link } from "@/lib/router";
 import { PageHero, SectionHead } from "@/components/PageHero";
-import { KeyGrid, Source, Ext } from "@/components/Rows";
+import { KeyGrid } from "@/components/Rows";
 import { EoiForm } from "@/components/EoiForm";
 import { Arr } from "@/components/Arrow";
 import { countryPartnerDuties, countryPartnerCriteria, countryLadder } from "@/content/institution";
@@ -32,7 +33,7 @@ export default function CountryPartners() {
             <p className="eyebrow">The first Country Partner</p>
             <h2 className="mt-5 text-display-sm">Angola, and the Lusophone corridor.</h2>
             <p className="mt-5 text-[1.0625rem] leading-relaxed text-stone">Haymée I. Pérez Cogle, Managing Director of Founder Institute Luanda, serves as Country Partner for Angola and Regional Ambassador for Lusophone Africa. Her role makes sure Portuguese-speaking ecosystems in Angola, Mozambique, Cabo Verde, Guinea-Bissau and São Tomé and Príncipe are not left at the margins of Africa's startup story.</p>
-            <Source>Source: <Ext href="https://www.asebsociety.org/about/team">ASEB Society, Our People</Ext>.</Source>
+            <p className="mt-4 text-[0.9375rem]"><Link to="/people#haymee-perez-cogle" className="tlink">Read her profile <span className="arr" aria-hidden="true">→</span></Link></p>
           </div>
         </div>
       </section>
