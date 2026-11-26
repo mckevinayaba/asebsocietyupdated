@@ -59,6 +59,7 @@ import { Route as SiteCountriesIndexRouteImport } from './routes/_site.countries
 import { Route as SiteCountriesSlugRouteImport } from './routes/_site.countries.$slug'
 import { Route as SiteFieldIndexRouteImport } from './routes/_site.field.index'
 import { Route as SiteFieldSlugRouteImport } from './routes/_site.field.$slug'
+import { Route as SiteMembersIndexRouteImport } from './routes/_site.members.index'
 import { Route as SiteMembersIdRouteImport } from './routes/_site.members.$id'
 import { Route as SitePlaybookIndexRouteImport } from './routes/_site.playbook.index'
 import { Route as SitePlaybookSlugRouteImport } from './routes/_site.playbook.$slug'
@@ -325,6 +326,11 @@ const SiteFieldSlugRoute = SiteFieldSlugRouteImport.update({
   path: '/field/$slug',
   getParentRoute: () => SiteRoute,
 } as any)
+const SiteMembersIndexRoute = SiteMembersIndexRouteImport.update({
+  id: '/members/',
+  path: '/members/',
+  getParentRoute: () => SiteRoute,
+} as any)
 const SiteMembersIdRoute = SiteMembersIdRouteImport.update({
   id: '/members/$id',
   path: '/members/$id',
@@ -464,6 +470,7 @@ export interface FileRoutesByFullPath {
   '/ask/': typeof SiteAskIndexRoute
   '/countries/': typeof SiteCountriesIndexRoute
   '/field/': typeof SiteFieldIndexRoute
+  '/members/': typeof SiteMembersIndexRoute
   '/playbook/': typeof SitePlaybookIndexRoute
   '/registry/': typeof SiteRegistryIndexRoute
   '/state-of-the-field/': typeof SiteStateOfTheFieldIndexRoute
@@ -530,6 +537,7 @@ export interface FileRoutesByTo {
   '/ask': typeof SiteAskIndexRoute
   '/countries': typeof SiteCountriesIndexRoute
   '/field': typeof SiteFieldIndexRoute
+  '/members': typeof SiteMembersIndexRoute
   '/playbook': typeof SitePlaybookIndexRoute
   '/registry': typeof SiteRegistryIndexRoute
   '/state-of-the-field': typeof SiteStateOfTheFieldIndexRoute
@@ -599,6 +607,7 @@ export interface FileRoutesById {
   '/_site/ask/': typeof SiteAskIndexRoute
   '/_site/countries/': typeof SiteCountriesIndexRoute
   '/_site/field/': typeof SiteFieldIndexRoute
+  '/_site/members/': typeof SiteMembersIndexRoute
   '/_site/playbook/': typeof SitePlaybookIndexRoute
   '/_site/registry/': typeof SiteRegistryIndexRoute
   '/_site/state-of-the-field/': typeof SiteStateOfTheFieldIndexRoute
@@ -667,6 +676,7 @@ export interface FileRouteTypes {
     | '/ask/'
     | '/countries/'
     | '/field/'
+    | '/members/'
     | '/playbook/'
     | '/registry/'
     | '/state-of-the-field/'
@@ -733,6 +743,7 @@ export interface FileRouteTypes {
     | '/ask'
     | '/countries'
     | '/field'
+    | '/members'
     | '/playbook'
     | '/registry'
     | '/state-of-the-field'
@@ -801,6 +812,7 @@ export interface FileRouteTypes {
     | '/_site/ask/'
     | '/_site/countries/'
     | '/_site/field/'
+    | '/_site/members/'
     | '/_site/playbook/'
     | '/_site/registry/'
     | '/_site/state-of-the-field/'
@@ -1174,6 +1186,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SiteFieldSlugRouteImport
       parentRoute: typeof SiteRoute
     }
+    '/_site/members/': {
+      id: '/_site/members/'
+      path: '/members'
+      fullPath: '/members/'
+      preLoaderRoute: typeof SiteMembersIndexRouteImport
+      parentRoute: typeof SiteRoute
+    }
     '/_site/members/$id': {
       id: '/_site/members/$id'
       path: '/members/$id'
@@ -1354,6 +1373,7 @@ interface SiteRouteChildren {
   SiteAskIndexRoute: typeof SiteAskIndexRoute
   SiteCountriesIndexRoute: typeof SiteCountriesIndexRoute
   SiteFieldIndexRoute: typeof SiteFieldIndexRoute
+  SiteMembersIndexRoute: typeof SiteMembersIndexRoute
   SitePlaybookIndexRoute: typeof SitePlaybookIndexRoute
   SiteRegistryIndexRoute: typeof SiteRegistryIndexRoute
   SiteStateOfTheFieldIndexRoute: typeof SiteStateOfTheFieldIndexRoute
@@ -1412,6 +1432,7 @@ const SiteRouteChildren: SiteRouteChildren = {
   SiteAskIndexRoute: SiteAskIndexRoute,
   SiteCountriesIndexRoute: SiteCountriesIndexRoute,
   SiteFieldIndexRoute: SiteFieldIndexRoute,
+  SiteMembersIndexRoute: SiteMembersIndexRoute,
   SitePlaybookIndexRoute: SitePlaybookIndexRoute,
   SiteRegistryIndexRoute: SiteRegistryIndexRoute,
   SiteStateOfTheFieldIndexRoute: SiteStateOfTheFieldIndexRoute,

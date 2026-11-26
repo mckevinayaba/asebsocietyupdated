@@ -69,7 +69,9 @@ export default function Governance() {
           <div className="lg:col-span-5 lg:col-start-8">
             <p className="text-[1.0625rem] leading-relaxed text-stone">Documented decision-making, visible advisory mandates, periodic financial and activity reporting, and clear rules on who can fundraise, decide and sign for the Society.</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <Btn to="/funders">For funders and DFIs</Btn>
+              <Btn to="/invest">Invest in Our Mission</Btn>
+              <Btn to="/progress" variant="line">Institutional Progress</Btn>
+              <Btn to="/people" variant="line">Leadership</Btn>
             </div>
           </div>
         </div>

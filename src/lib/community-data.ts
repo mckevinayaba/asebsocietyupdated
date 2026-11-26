@@ -11,7 +11,7 @@ import { isMissingBackend, publicColumns, type Author, type ContentKind, type Co
 export const db = () => supabase as unknown as SupabaseClient<any>;
 
 export class BackendUnavailable extends Error {
-  constructor() { super("The community features are not switched on yet."); }
+  constructor() { super("The community service could not be reached. Please try again."); }
 }
 
 function check<T>(result: { data: T | null; error: { code?: string; message?: string } | null }): T {

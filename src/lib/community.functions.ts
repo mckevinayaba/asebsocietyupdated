@@ -11,7 +11,7 @@ const untyped = (client: unknown) => client as SupabaseClient<any>;
 const unavailable = { available: false as const };
 type DbError = { code?: string; message?: string } | null;
 function fail(error: DbError, message: string): never {
-  if (isMissingBackend(error)) throw new Error("The community features are not switched on yet.");
+  if (isMissingBackend(error)) throw new Error("The community service could not be reached. Please try again.");
   // Database rule messages are written for people (for example a missing consent), so pass them on.
   if (error?.code === "42501" && error.message && !/row-level security|permission denied/i.test(error.message)) throw new Error(error.message);
   throw new Error(message);

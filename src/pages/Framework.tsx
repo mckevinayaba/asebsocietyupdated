@@ -97,7 +97,7 @@ export default function Framework() {
       <section className="on-dark section-tight bg-ink text-ivory">
         <div className="wrap flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
           <p className="max-w-2xl font-display text-[1.75rem] leading-snug lg:text-[2.25rem]">{statements.indexLine}</p>
-          <Btn to="/evidence" variant="signal">The Evidence Library</Btn>
+          <div className="flex flex-col gap-3 sm:flex-row"><Btn to="/evidence" variant="signal">The Evidence Library</Btn><Btn to="/playbook/local-conditions" variant="line">Contribute to the Playbook</Btn></div>
         </div>
       </section>
     </>

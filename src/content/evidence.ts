@@ -89,7 +89,7 @@ export const evidence: EvidenceItem[] = [
     authors: "Prof Erik Stam, Dr Phumlani Nkontwana and i4Policy. ASEB Summit 2026, Day Two",
     year: "2026",
     summary: "How the index can move from a research output into the decisions of governments, funders and support institutions.",
-    forPractice: "Read alongside the dashboard demonstration by Lincoln Njogu of i4Policy. Recording to be added.",
+    forPractice: "Read alongside the AEEI dashboard, presented by Lincoln Njogu of i4Policy in the same Summit session.",
     href: "https://www.asebs.com/speakers",
     conditions: ["Policy and Regulatory Environments", "Trust, Coordination and Data"],
   },
