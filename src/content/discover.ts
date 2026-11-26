@@ -47,7 +47,7 @@ export const stories: Story[] = [
     body: s.line,
     ...editionPhotos[s.year],
     related: { label: "Read Our Story", to: "/about/story" },
-    source: { label: "ASEB Society, Our Story", href: "https://www.asebsociety.org/about/story" },
+    source: { label: "Our Story", href: "/about/story" },
   })),
   { id: "summit-2027", kicker: `${nextSummit.year} · ${nextSummit.place}`, title: "The next convening", body: nextSummit.line, related: { label: "The Summit & Awards", to: "/summit" }, source: { label: "asebs.com", href: nextSummit.href } },
   ...mandates.map((m) => ({ id: `mandate-${m.key}`, kicker: m.role, title: m.name, body: `${m.purpose} ${m.status.text}`, photo: m.photo, alt: m.alt, caption: m.name, related: { label: m.pathway.label, to: m.pathway.to }, source: { label: "ASEB Society programme record", href: "/progress" } })),

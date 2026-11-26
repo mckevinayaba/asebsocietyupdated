@@ -49,7 +49,10 @@ import { Route as SiteWhyAsebRouteImport } from './routes/_site.why-aseb'
 import { Route as SiteWorkWithUsRouteImport } from './routes/_site.work-with-us'
 import { Route as SiteYouRouteImport } from './routes/_site.you'
 import { Route as PreviewSecretariatRouteImport } from './routes/preview.secretariat'
+import { Route as SiteAboutGoalsRouteImport } from './routes/_site.about.goals'
+import { Route as SiteAboutGovernanceRouteImport } from './routes/_site.about.governance'
 import { Route as SiteAboutStoryRouteImport } from './routes/_site.about.story'
+import { Route as SiteAboutTeamRouteImport } from './routes/_site.about.team'
 import { Route as SiteAskIndexRouteImport } from './routes/_site.ask.index'
 import { Route as SiteAskSlugRouteImport } from './routes/_site.ask.$slug'
 import { Route as SiteCountriesIndexRouteImport } from './routes/_site.countries.index'
@@ -272,9 +275,24 @@ const PreviewSecretariatRoute = PreviewSecretariatRouteImport.update({
   path: '/preview/secretariat',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SiteAboutGoalsRoute = SiteAboutGoalsRouteImport.update({
+  id: '/about/goals',
+  path: '/about/goals',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteAboutGovernanceRoute = SiteAboutGovernanceRouteImport.update({
+  id: '/about/governance',
+  path: '/about/governance',
+  getParentRoute: () => SiteRoute,
+} as any)
 const SiteAboutStoryRoute = SiteAboutStoryRouteImport.update({
   id: '/about/story',
   path: '/about/story',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteAboutTeamRoute = SiteAboutTeamRouteImport.update({
+  id: '/about/team',
+  path: '/about/team',
   getParentRoute: () => SiteRoute,
 } as any)
 const SiteAskIndexRoute = SiteAskIndexRouteImport.update({
@@ -428,7 +446,10 @@ export interface FileRoutesByFullPath {
   '/work-with-us': typeof SiteWorkWithUsRoute
   '/you': typeof SiteYouRoute
   '/preview/secretariat': typeof PreviewSecretariatRoute
+  '/about/goals': typeof SiteAboutGoalsRoute
+  '/about/governance': typeof SiteAboutGovernanceRoute
   '/about/story': typeof SiteAboutStoryRoute
+  '/about/team': typeof SiteAboutTeamRoute
   '/ask/$slug': typeof SiteAskSlugRoute
   '/countries/$slug': typeof SiteCountriesSlugRoute
   '/field/$slug': typeof SiteFieldSlugRoute
@@ -491,7 +512,10 @@ export interface FileRoutesByTo {
   '/work-with-us': typeof SiteWorkWithUsRoute
   '/you': typeof SiteYouRoute
   '/preview/secretariat': typeof PreviewSecretariatRoute
+  '/about/goals': typeof SiteAboutGoalsRoute
+  '/about/governance': typeof SiteAboutGovernanceRoute
   '/about/story': typeof SiteAboutStoryRoute
+  '/about/team': typeof SiteAboutTeamRoute
   '/ask/$slug': typeof SiteAskSlugRoute
   '/countries/$slug': typeof SiteCountriesSlugRoute
   '/field/$slug': typeof SiteFieldSlugRoute
@@ -557,7 +581,10 @@ export interface FileRoutesById {
   '/_site/you': typeof SiteYouRoute
   '/preview/secretariat': typeof PreviewSecretariatRoute
   '/_site/': typeof SiteIndexRoute
+  '/_site/about/goals': typeof SiteAboutGoalsRoute
+  '/_site/about/governance': typeof SiteAboutGovernanceRoute
   '/_site/about/story': typeof SiteAboutStoryRoute
+  '/_site/about/team': typeof SiteAboutTeamRoute
   '/_site/ask/$slug': typeof SiteAskSlugRoute
   '/_site/countries/$slug': typeof SiteCountriesSlugRoute
   '/_site/field/$slug': typeof SiteFieldSlugRoute
@@ -622,7 +649,10 @@ export interface FileRouteTypes {
     | '/work-with-us'
     | '/you'
     | '/preview/secretariat'
+    | '/about/goals'
+    | '/about/governance'
     | '/about/story'
+    | '/about/team'
     | '/ask/$slug'
     | '/countries/$slug'
     | '/field/$slug'
@@ -685,7 +715,10 @@ export interface FileRouteTypes {
     | '/work-with-us'
     | '/you'
     | '/preview/secretariat'
+    | '/about/goals'
+    | '/about/governance'
     | '/about/story'
+    | '/about/team'
     | '/ask/$slug'
     | '/countries/$slug'
     | '/field/$slug'
@@ -750,7 +783,10 @@ export interface FileRouteTypes {
     | '/_site/you'
     | '/preview/secretariat'
     | '/_site/'
+    | '/_site/about/goals'
+    | '/_site/about/governance'
     | '/_site/about/story'
+    | '/_site/about/team'
     | '/_site/ask/$slug'
     | '/_site/countries/$slug'
     | '/_site/field/$slug'
@@ -1068,11 +1104,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PreviewSecretariatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_site/about/goals': {
+      id: '/_site/about/goals'
+      path: '/about/goals'
+      fullPath: '/about/goals'
+      preLoaderRoute: typeof SiteAboutGoalsRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/about/governance': {
+      id: '/_site/about/governance'
+      path: '/about/governance'
+      fullPath: '/about/governance'
+      preLoaderRoute: typeof SiteAboutGovernanceRouteImport
+      parentRoute: typeof SiteRoute
+    }
     '/_site/about/story': {
       id: '/_site/about/story'
       path: '/about/story'
       fullPath: '/about/story'
       preLoaderRoute: typeof SiteAboutStoryRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/about/team': {
+      id: '/_site/about/team'
+      path: '/about/team'
+      fullPath: '/about/team'
+      preLoaderRoute: typeof SiteAboutTeamRouteImport
       parentRoute: typeof SiteRoute
     }
     '/_site/ask/': {
@@ -1279,7 +1336,10 @@ interface SiteRouteChildren {
   SiteWorkWithUsRoute: typeof SiteWorkWithUsRoute
   SiteYouRoute: typeof SiteYouRoute
   SiteIndexRoute: typeof SiteIndexRoute
+  SiteAboutGoalsRoute: typeof SiteAboutGoalsRoute
+  SiteAboutGovernanceRoute: typeof SiteAboutGovernanceRoute
   SiteAboutStoryRoute: typeof SiteAboutStoryRoute
+  SiteAboutTeamRoute: typeof SiteAboutTeamRoute
   SiteAskSlugRoute: typeof SiteAskSlugRoute
   SiteCountriesSlugRoute: typeof SiteCountriesSlugRoute
   SiteFieldSlugRoute: typeof SiteFieldSlugRoute
@@ -1334,7 +1394,10 @@ const SiteRouteChildren: SiteRouteChildren = {
   SiteWorkWithUsRoute: SiteWorkWithUsRoute,
   SiteYouRoute: SiteYouRoute,
   SiteIndexRoute: SiteIndexRoute,
+  SiteAboutGoalsRoute: SiteAboutGoalsRoute,
+  SiteAboutGovernanceRoute: SiteAboutGovernanceRoute,
   SiteAboutStoryRoute: SiteAboutStoryRoute,
+  SiteAboutTeamRoute: SiteAboutTeamRoute,
   SiteAskSlugRoute: SiteAskSlugRoute,
   SiteCountriesSlugRoute: SiteCountriesSlugRoute,
   SiteFieldSlugRoute: SiteFieldSlugRoute,

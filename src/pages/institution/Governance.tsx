@@ -1,6 +1,6 @@
 import { PageHero, SectionHead } from "@/components/PageHero";
 import { Btn } from "@/components/Arrow";
-import { KeyGrid, Source, Ext } from "@/components/Rows";
+import { KeyGrid } from "@/components/Rows";
 import { governanceLayers, governancePrinciples, stewardshipGoals } from "@/content/institution";
 
 export default function Governance() {
@@ -57,7 +57,6 @@ export default function Governance() {
               </li>
             ))}
           </ol>
-          <p className="mt-6 text-[0.8125rem] text-stone-light">Sources: <a className="underline underline-offset-4 hover:text-ivory" href="https://www.asebsociety.org/about/goals" target="_blank" rel="noreferrer">Stewardship Goals</a> and <a className="underline underline-offset-4 hover:text-ivory" href="https://www.asebsociety.org/about/governance" target="_blank" rel="noreferrer">Governance</a>, asebsociety.org.</p>
         </div>
       </section>
 
@@ -72,7 +71,6 @@ export default function Governance() {
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Btn to="/funders">For funders and DFIs</Btn>
             </div>
-            <Source>See also <Ext href="https://www.asebsociety.org/about/governance">Governance and Accountability</Ext>.</Source>
           </div>
         </div>
       </section>

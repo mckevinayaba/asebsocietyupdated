@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { PageHero, SectionHead } from "@/components/PageHero";
 import { Btn } from "@/components/Arrow";
-import { Source, Ext } from "@/components/Rows";
 import { people, type Person } from "@/content/institution";
 import { asset } from "@/lib/asset";
 import { Button } from "@/components/ui/button";
@@ -76,11 +75,11 @@ export default function People() {
         <div className="wrap grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <p className="eyebrow">Advisory Council</p>
-            <h2 className="mt-5 text-display-sm">Being assembled.</h2>
+            <h2 className="mt-5 text-display-sm">Counsel from across the continent.</h2>
           </div>
           <div className="lg:col-span-7 lg:col-start-6">
-            <p className="text-[1.0625rem] leading-relaxed">Senior ecosystem builders, investors and policymakers from across the continent who advise on strategy, partnerships and programme development. Members will be announced once appointed.</p>
-            <Source>Source: <Ext href="https://www.asebsociety.org/about/team">ASEB Society, Our People</Ext>.</Source>
+            <p className="text-[1.0625rem] leading-relaxed">The Advisory Council will bring senior ecosystem builders, investors and policymakers from across Africa to advise the Board on strategy, partnerships and programme development.</p>
+            <p className="mt-4 flex items-start gap-2.5 text-[0.9375rem] text-stone"><span className="status-dot mt-[0.55em] border border-ember" aria-hidden="true" />No members have been appointed yet. Appointments are published here once the Board confirms them.</p>
           </div>
         </div>
       </section>

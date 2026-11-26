@@ -53,7 +53,7 @@ export default function Story() {
               <div className="lg:col-span-7"><h3 className="font-display text-[1.75rem] leading-tight">The next convening</h3><p className="mt-4 text-[1.0625rem] leading-relaxed text-stone">{nextSummit.line}</p><div className="mt-5"><TLink to={nextSummit.href}>ASEB Summit and Awards on asebs.com</TLink></div></div>
             </li>
           </ol>
-          <Source>Sources: <Ext href="https://www.asebsociety.org/about/story">ASEB Society, Our Story</Ext> and <Ext href="https://www.asebs.com/story">The ASEB Story, asebs.com</Ext>.</Source>
+          <Source>Source: <Ext href="https://www.asebs.com/story">The ASEB Story, asebs.com</Ext>.</Source>
         </div>
       </section>
 

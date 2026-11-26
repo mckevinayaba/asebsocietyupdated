@@ -92,7 +92,6 @@ export default function Partners() {
             <p className="eyebrow">What partners commit to</p>
             <h2 className="mt-5 text-display-md">Partnership is not logo placement.</h2>
             <p className="mt-5 text-[1rem] leading-relaxed text-stone-light">It is a shared commitment to strengthening the systems African founders depend on.</p>
-            <p className="mt-6 text-[0.8125rem] text-stone-light"><a className="underline underline-offset-4 hover:text-ivory" href="https://www.asebsociety.org/partners" target="_blank" rel="noreferrer">Partners, asebsociety.org</a></p>
           </div>
           <ol className="border-t border-ivory/40 lg:col-span-6 lg:col-start-7">
             {partnerCommitments.map((c, i) => (

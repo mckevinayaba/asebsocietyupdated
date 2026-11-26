@@ -1,5 +1,6 @@
+import { Link } from "@/lib/router";
 import { PageHero, SectionHead } from "@/components/PageHero";
-import { KeyGrid, Source, Ext } from "@/components/Rows";
+import { KeyGrid } from "@/components/Rows";
 import { EoiForm } from "@/components/EoiForm";
 import { Arr } from "@/components/Arrow";
 import { ambassadorDuties, ambassadorTypes } from "@/content/institution";
@@ -53,7 +54,6 @@ export default function Ambassadors() {
             </ul>
           </div>
         </div>
-        <div className="wrap"><p className="mt-8 text-[0.8125rem] text-stone-light">Adapted from <a className="underline underline-offset-4 hover:text-ivory" href="https://www.asebsociety.org/ambassadors" target="_blank" rel="noreferrer">ASEB Ambassadors, asebsociety.org</a>.</p></div>
       </section>
 
       <section id="apply" className="section scroll-mt-24">
@@ -62,7 +62,7 @@ export default function Ambassadors() {
             <p className="eyebrow">Expression of interest</p>
             <h2 className="mt-5 text-display-sm">Ready to steward?</h2>
             <p className="mt-5 text-[1rem] leading-relaxed text-stone">If you cannot commit the time, Ambassadorship is not for you. If you can, you will be part of an institution professionalising essential work.</p>
-            <Source>Ambassadors can progress to Country Partner. <Ext href="https://www.asebsociety.org/ambassadors">Current programme</Ext>.</Source>
+            <p className="mt-5 text-[0.9375rem] text-stone">Ambassadors can progress to <Link to="/country-partners" className="underline underline-offset-4 hover:text-ink">Country Partner</Link>.</p>
           </div>
           <div className="min-w-0 lg:col-span-7 lg:col-start-6">
             <EoiForm
