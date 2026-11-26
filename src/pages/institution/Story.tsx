@@ -6,11 +6,15 @@ import { Source, Ext } from "@/components/Rows";
 import { story } from "@/content/institution";
 import { proof } from "@/content/site";
 import { cumulativeFigures, nextSummit, positioning } from "@/content/case";
+import audience2022 from "@/assets/aseb-2022-audience.jpg.asset.json";
+import discussion2024 from "@/assets/aseb-2024-discussion.jpg.asset.json";
+import delegates2025 from "@/assets/aseb-2025-delegates.jpg.asset.json";
 
 const editionPhoto: Record<string, { src: string; alt: string; caption: string; position?: string }> = {
+  "2022": { src: audience2022.url, alt: "Participants listening at the first ASEB Summit and Awards in Johannesburg, 2022", caption: "Johannesburg, 2022" },
   "2023": { src: "images/events/aseb-2023-nairobi.jpg", alt: "Builders celebrate together at ASEB 2023 in Nairobi", caption: "Nairobi, 2023", position: "40% center" },
-  "2024": { src: "images/events/aseb-2024-accra-group.jpg", alt: "Recognised builders at the ASEB Summit 2024 in Accra", caption: "Accra, 2024" },
-  "2025": { src: "images/events/aseb-2025-addis-panel.jpg", alt: "A panel discussion at ASEB 2025 in Addis Ababa", caption: "Addis Ababa, 2025", position: "70% center" },
+  "2024": { src: discussion2024.url, alt: "Speakers in discussion at the ASEB Summit 2024 in Accra", caption: "Accra, 2024" },
+  "2025": { src: delegates2025.url, alt: "Delegates gathered on stage at ASEB 2025 in Addis Ababa", caption: "Addis Ababa, 2025" },
   "2026": { src: "images/events/aseb-2026-summit-delegates.jpg", alt: "ASEB Summit delegates in Johannesburg, 2026", caption: "Johannesburg, 2026" },
 };
 
