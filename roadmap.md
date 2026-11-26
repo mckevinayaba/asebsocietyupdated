@@ -1,5 +1,7 @@
 # ASEB platform rollout
 
+- [x] Refine the homepage hero headline and spacing, align public positioning and sharing metadata, and verify desktop and mobile without changing photography, navigation or backend functionality.
+
 - [x] 1. Refine registry discovery, record provenance, Evidence Library discovery and the ecosystem-tax narrative.
 - [x] 2. Enable Lovable Cloud and persist membership applications, profile-claim requests and registry submissions for review.
 - [x] 3. Enable member accounts, private editable profiles and saved Circle join/leave selections; verify sign-in, persistence, privacy and sign-out.

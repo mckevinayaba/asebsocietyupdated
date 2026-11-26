@@ -5,7 +5,7 @@
 | Decision | Implemented |
 | --- | --- |
 | Four pillars: Summit & Awards, Circles (not "Commons"), Academy, Field Lab | Yes |
-| Positioning "Stronger ecosystems. Stronger African economies." with "Invest in Our Mission" as primary action | Yes |
+| Positioning "Stronger ecosystems. Stronger economies." with "Invest in Our Mission" as primary action | Yes |
 | Movement to institution narrative and historical statistics moved off the home page into Our Story | Yes |
 | Remove Ecosystem Tax framing from public content | Yes |
 | Continental expansion through Country Partners and Ambassadors | Content and intake yes, appointment records prepared next |

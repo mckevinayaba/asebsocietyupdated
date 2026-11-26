@@ -36,10 +36,9 @@ export default function Home() {
         <nav aria-label="On this page" className="relative z-10 mt-[calc(var(--app-bar-h)+var(--safe-top))] flex justify-center gap-6 pt-2 text-[0.875rem] font-semibold text-ivory/75 lg:hidden">
           {heroTabs.map((tab, i) => tab.href.startsWith("#") ? <a key={tab.href} href={tab.href} className={`py-2 transition-colors hover:text-ivory ${i === 0 ? "text-ivory underline decoration-signal decoration-2 underline-offset-[10px]" : ""}`}>{tab.label}</a> : <Link key={tab.href} to={tab.href} className="py-2 transition-colors hover:text-ivory">{tab.label}</Link>)}
         </nav>
-        <div className="wrap relative mt-auto pb-6 pt-10 lg:my-auto lg:pb-24 lg:pt-[calc(var(--app-bar-h)+64px)]">
+        <div className="wrap relative mt-auto pb-6 pt-12 lg:my-auto lg:pb-20 lg:pt-[calc(var(--app-bar-h)+56px)]">
           <div className="max-w-[44rem]">
-            <p className="hidden text-[0.75rem] font-semibold uppercase tracking-[0.16em] text-sand sm:block">Africa Startup Ecosystem Builders Society</p>
-            <h1 id="home-title" className="font-display text-hero text-ivory sm:mt-5">Stronger ecosystems.<br /><em className="font-normal text-ivory/90">Stronger African economies.</em></h1>
+            <h1 id="home-title" className="home-headline font-display text-ivory">Stronger ecosystems.<br /><em className="font-normal text-ivory/90">Stronger economies.</em></h1>
             <p className="mt-4 max-w-[34rem] text-[1rem] leading-relaxed text-ivory/90 sm:mt-5 sm:text-[1.0625rem] lg:text-[1.1875rem]">{positioning.statement}</p>
             <div className="mt-6 flex flex-col gap-2.5 sm:mt-7 sm:flex-row sm:gap-3">
               <Btn to={investPath} variant="signal">Invest in Our Mission</Btn>

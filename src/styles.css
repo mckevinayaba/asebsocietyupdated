@@ -297,6 +297,10 @@
 @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
 
 /* Cinematic opening. Depth comes from the photograph, a graded scrim and a slow drift. */
+.home-headline { font-size: 2.125rem; line-height: 1.06; letter-spacing: 0; }
+@media (min-width: 640px) { .home-headline { font-size: 2.75rem; } }
+@media (min-width: 1024px) { .home-headline { font-size: 4.5rem; } }
+@media (max-width: 359px) { .home-headline { font-size: 1.875rem; } }
 .cinema { position: relative; isolation: isolate; overflow: hidden; background: var(--color-night); color: var(--color-ivory); }
 .cinema-media { position: absolute; inset: 0; z-index: -2; }
 .cinema-media img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.9) contrast(1.05); animation: cinema-drift 26s var(--ease-quiet) both; }

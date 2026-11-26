@@ -8,7 +8,7 @@ It is not primarily a conference, an awards organisation, an accelerator, a netw
 
 - Tagline: It Takes a Village.
 - Promise: Strengthening those who strengthen entrepreneurship.
-- Primary positioning: Stronger ecosystems. Stronger African economies.
+- Primary positioning: Stronger ecosystems. Stronger economies.
 
 ## The problem
 

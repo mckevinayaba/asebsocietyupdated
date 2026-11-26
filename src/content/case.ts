@@ -3,7 +3,7 @@
 // Rule: every figure carries a source, and a figure is only published when `verified` is true.
 
 export const positioning = {
-  headline: "Stronger ecosystems. Stronger African economies.",
+  headline: "Stronger ecosystems. Stronger economies.",
   statement: "We advance ecosystem building as a professional practice and a recognised profession, strengthening the people, institutions and systems that make entrepreneurship possible across Africa.",
   philosophy: "It Takes a Village.",
   promise: "Strengthening those who strengthen entrepreneurship.",
