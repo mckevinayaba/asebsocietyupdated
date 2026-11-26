@@ -13,6 +13,8 @@
 | Mobile first application shell with five bottom destinations | Yes |
 | No membership fees without approval | Yes, none exist |
 
+| One governing Board over the whole institution. Summit & Awards is the flagship programme, not a separately governed institution. Summit and Awards Advisory Board and the three layer model removed from public presentation. Independent Awards Jury selects recipients. Advisory Council placeholder removed (governance directive, November 2026) | Yes, on the platform. Formal adoption by Board resolution pending. See docs/GOVERNANCE.md |
+
 ## Decisions taken in implementation, open for review
 
 | Decision | Reason |
@@ -64,3 +66,4 @@
 - Community guidelines, contributor terms, withdrawal procedure and privacy notice, before community publishing is opened.
 - Approved village, ecosystem or editorial artwork, if the Society wants conceptual illustration alongside photography.
 - Production publication of this release.
+- Board resolution adopting the unified governance structure, and decisions on the existing Advisory Board appointments listed in docs/GOVERNANCE.md.

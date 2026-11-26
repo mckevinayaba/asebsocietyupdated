@@ -107,7 +107,7 @@ export const investmentAreas: InvestmentArea[] = [
 
 export const accountability = [
   { k: "Intended outcomes", v: "Every investment area states what it is meant to change. Measured impact is reported only when evidence exists." },
-  { k: "Governance", v: "A Board with fiduciary oversight, an advisory board for Summit integrity and a conflict of interest framework." },
+  { k: "Governance", v: "One governing Board with fiduciary oversight of every pillar, an Independent Awards Jury that assesses nominees under approved criteria, and a conflict of interest framework." },
   { k: "Transparent progress", v: "The Progress page separates what is operational from what is in development, planned or subject to funding." },
   { k: "Agreed reporting", v: "Programme partnerships agree scope, delivery partners and reporting before work begins." },
 ];

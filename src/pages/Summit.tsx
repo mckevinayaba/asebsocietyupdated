@@ -8,6 +8,7 @@ import { asset } from "@/lib/asset";
 import { nextSummit } from "@/content/case";
 import { ScrollRail } from "@/components/ScrollRail";
 import { photo, assignments } from "@/content/photography";
+import { summitPositioning, summitGovernance } from "@/content/institution";
 
 export default function Summit() {
   return (
@@ -22,7 +23,7 @@ export default function Summit() {
             </div>
             <div className="flex flex-col justify-end lg:col-span-4">
               <p className="text-[1.0625rem] leading-relaxed text-stone-light">
-                The ASEB Awards recognise excellence in 28 roles across four parts of the field. Recognition is evidence-based, peer-reviewed and continental. Every finalist becomes part of the Field Registry.
+                The ASEB Awards recognise excellence in 28 roles across four parts of the field. Recognition is evidence based and continental, and recipients are selected by an Independent Awards Jury under approved criteria. Every finalist becomes part of the Field Registry.
               </p>
             </div>
           </div>
@@ -56,8 +57,9 @@ export default function Summit() {
           <div className="lg:col-span-7">
             <p className="eyebrow">One of four mandates</p>
             <h2 id="summit-mandate-title" className="mt-4 text-display-sm">The continental convening of a permanent institution.</h2>
-            <p className="mt-5 max-w-prose text-[1.0625rem] leading-relaxed text-stone">The Summit convenes the field once a year, recognises its practitioners and mobilises new ones. Between editions, ASEB Circles, the Academy and the Field Lab carry that work forward. The full Summit and Awards programme lives at asebs.com.</p>
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap"><Btn to="https://www.asebs.com" variant="line">Visit asebs.com</Btn><TLink to="/what-we-build">How the four mandates connect</TLink></div>
+            <p className="mt-5 max-w-prose text-[1.0625rem] leading-relaxed">{summitPositioning}</p>
+            <p className="mt-4 max-w-prose text-[1rem] leading-relaxed text-stone">{summitGovernance} Between editions, ASEB Circles, the Academy and the Field Lab carry the work forward. The full Summit and Awards programme lives at asebs.com.</p>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap"><Btn to="https://www.asebs.com" variant="line">Visit asebs.com</Btn><TLink to="/governance">How the Summit is governed</TLink></div>
           </div>
           <div className="on-dark self-start bg-night p-7 text-ivory lg:col-span-4 lg:col-start-9">
             <p className="text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-sand">Next edition · Announced</p>
