@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { PageHero } from "@/components/PageHero";
 import { Btn, TLink } from "@/components/Arrow";
 import NotFound from "./NotFound";
+import { Sheet } from "@/components/shell/Sheet";
 
 const PAGE = 24;
 
@@ -28,6 +29,7 @@ export function RegistryIndex() {
   const [year, setYear] = useState("all");
   const [sort, setSort] = useState("name");
   const [shown, setShown] = useState(PAGE);
+  const [filtersOpen, setFiltersOpen] = useState(false);
   useEffect(() => {
     setRegion(requestedRegion && regions.includes(requestedRegion) ? requestedRegion : "all");
     setShown(PAGE);
@@ -43,6 +45,36 @@ export function RegistryIndex() {
   }, [q, type, region, condition, country, year, sort]);
 
   const reset = (fn: () => void) => { fn(); setShown(PAGE); };
+  const clearFilters = () => reset(() => { setQ(""); setType("all"); setRegion("all"); setCondition("all"); setCountry("all"); setYear("all"); });
+  const filterFields = () => <>
+            <label className="min-w-0">
+              <span className="field-label">Type</span>
+              <select aria-label="Type" className="field-input" value={type} onChange={(e) => reset(() => setType(e.target.value as typeof type))}>
+                <option value="all">All</option>
+                <option value="individual">Practitioners</option>
+                <option value="organisation">Institutions</option>
+              </select>
+            </label>
+            <label className="min-w-0">
+              <span className="field-label">Region</span>
+              <select aria-label="Region" className="field-input" value={region} onChange={(e) => reset(() => setRegion(e.target.value))}>
+                <option value="all">All regions</option>
+                {regions.map((r) => <option key={r} value={r}>{r}</option>)}
+              </select>
+            </label>
+            <label className="min-w-0">
+              <span className="field-label">Condition</span>
+              <select aria-label="Condition" className="field-input" value={condition} onChange={(e) => reset(() => setCondition(e.target.value))}>
+                <option value="all">All conditions</option>
+                {registryConditions.map((c) => <option key={c} value={c}>{c.replace(/&/g, "and")}</option>)}
+              </select>
+            </label>
+
+            <label className="min-w-0"><span className="field-label">Country</span><select aria-label="Country" className="field-input" value={country} onChange={(e) => reset(() => setCountry(e.target.value))}><option value="all">All countries</option>{countries.map((c) => <option key={c}>{c}</option>)}<option value="continental">Continental / not specified</option></select></label>
+            <label className="min-w-0"><span className="field-label">Recognition year</span><select aria-label="Recognition year" className="field-input" value={year} onChange={(e) => reset(() => setYear(e.target.value))}><option value="all">All years</option>{years.map((y) => <option key={y}>{y}</option>)}</select></label>
+            <label className="min-w-0"><span className="field-label">Sort by</span><select aria-label="Sort by" className="field-input" value={sort} onChange={(e) => reset(() => setSort(e.target.value))}><option value="name">Name, A–Z</option><option value="recent">Latest recognition</option></select></label>
+
+  </>;
 
   return (
     <>
@@ -55,51 +87,38 @@ export function RegistryIndex() {
         <div className="wrap">
           <div className="mb-8 flex flex-wrap items-center justify-between gap-5 border-b border-hairline pb-6"><p className="text-sm text-stone">Awards recognition and Society membership are distinct.</p><TLink to="/registry/submit">Propose a registry record</TLink></div>
           <div className="grid gap-4 border-b border-ink pb-8 lg:grid-cols-12">
-            <label className="lg:col-span-5">
+            <label className="lg:col-span-12">
               <span className="field-label">Search</span>
               <input className="field-input" type="search" placeholder="Name, country, role or award" value={q} onChange={(e) => reset(() => setQ(e.target.value))} />
             </label>
-            <label className="lg:col-span-2">
-              <span className="field-label">Type</span>
-              <select className="field-input" value={type} onChange={(e) => reset(() => setType(e.target.value as typeof type))}>
-                <option value="all">All</option>
-                <option value="individual">Practitioners</option>
-                <option value="organisation">Institutions</option>
-              </select>
-            </label>
-            <label className="lg:col-span-2">
-              <span className="field-label">Region</span>
-              <select className="field-input" value={region} onChange={(e) => reset(() => setRegion(e.target.value))}>
-                <option value="all">All regions</option>
-                {regions.map((r) => <option key={r} value={r}>{r}</option>)}
-              </select>
-            </label>
-            <label className="lg:col-span-3">
-              <span className="field-label">Condition</span>
-              <select className="field-input" value={condition} onChange={(e) => reset(() => setCondition(e.target.value))}>
-                <option value="all">All conditions</option>
-                {registryConditions.map((c) => <option key={c} value={c}>{c.replace(/&/g, "and")}</option>)}
-              </select>
-            </label>
           </div>
-          <div className="mt-5 grid gap-4 sm:grid-cols-3">
-            <label><span className="field-label">Country</span><select className="field-input" value={country} onChange={(e) => reset(() => setCountry(e.target.value))}><option value="all">All countries</option>{countries.map((c) => <option key={c}>{c}</option>)}<option value="continental">Continental / not specified</option></select></label>
-            <label><span className="field-label">Recognition year</span><select className="field-input" value={year} onChange={(e) => reset(() => setYear(e.target.value))}><option value="all">All years</option>{years.map((y) => <option key={y}>{y}</option>)}</select></label>
-            <label><span className="field-label">Sort by</span><select className="field-input" value={sort} onChange={(e) => reset(() => setSort(e.target.value))}><option value="name">Name, A–Z</option><option value="recent">Latest recognition</option></select></label>
+          <div className="mt-4 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 lg:hidden">
+            <div className="no-scrollbar flex min-w-0 gap-1 overflow-x-auto" role="group" aria-label="Record type">
+              {(["all", "individual", "organisation"] as const).map((value) => <Button key={value} variant="ghost" aria-pressed={type === value} onClick={() => reset(() => setType(value))} className={`h-11 shrink-0 rounded-none border-b-2 px-2 text-[0.8125rem] ${type === value ? "border-teal text-teal" : "border-transparent text-stone"}`}>{value === "all" ? "All" : value === "individual" ? "Practitioners" : "Institutions"}</Button>)}
+            </div>
+            <Button variant="outline" className="h-11 shrink-0 px-3" onClick={() => setFiltersOpen(true)} aria-haspopup="dialog">Filters{[region, condition, country, year].some((v) => v !== "all") ? " •" : ""}</Button>
           </div>
+          <div className="mt-5 hidden grid-cols-3 gap-4 lg:grid">{filterFields()}</div>
+          <Sheet open={filtersOpen} onOpenChange={setFiltersOpen} title="Refine the Field Registry" description={`${results.length} matching archive records`}>
+            <div className="grid gap-4 pt-3">{filterFields()}</div>
+            <div className="mt-6 flex gap-3 border-t border-hairline bg-ivory py-4">
+              <Button className="min-h-12 flex-1" onClick={() => setFiltersOpen(false)}>View records</Button>
+              <Button variant="outline" className="min-h-12" onClick={clearFilters}>Reset</Button>
+            </div>
+          </Sheet>
           <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
             <p className="text-[0.875rem] text-stone" aria-live="polite"><span className="numeral font-semibold text-ink">{results.length}</span> of {registry.length} archive records</p>
-            {hasFilters && <Button variant="ghost" onClick={() => reset(() => { setQ(""); setType("all"); setRegion("all"); setCondition("all"); setCountry("all"); setYear("all"); })}>Clear filters <span aria-hidden="true">×</span></Button>}
+            {hasFilters && <Button variant="ghost" onClick={clearFilters}>Clear filters <span aria-hidden="true">×</span></Button>}
           </div>
 
           <ul className="mt-6 grid gap-px bg-hairline sm:grid-cols-2 lg:grid-cols-3">
             {results.slice(0, shown).map((r) => {
               const top = topRecognition(r);
               return (
-                <li key={r.slug} className="bg-ivory">
+                <li key={r.slug} className="editorial-card bg-ivory">
                   <Link to={`/registry/${r.slug}`} className="group flex h-full flex-col justify-between gap-6 p-6 transition-colors hover:bg-paper">
                     <div>
-                      <div className="flex items-center justify-between gap-4 text-[0.75rem] font-semibold uppercase tracking-[0.12em] text-stone">
+                      <div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-4 text-[0.75rem] font-semibold uppercase text-stone">
                         <span>{r.type === "organisation" ? "Institution" : "Practitioner"}</span>
                         <span>{r.country || "Continental"}</span>
                       </div>

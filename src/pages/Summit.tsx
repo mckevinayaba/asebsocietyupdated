@@ -6,6 +6,7 @@ import { SectionHead } from "@/components/PageHero";
 import { Btn, TLink } from "@/components/Arrow";
 import { asset } from "@/lib/asset";
 import { nextSummit } from "@/content/case";
+import { ScrollRail } from "@/components/ScrollRail";
 
 export default function Summit() {
   return (
@@ -91,11 +92,12 @@ export default function Summit() {
       <section className="section border-t border-hairline bg-paper">
         <div className="wrap">
           <SectionHead eyebrow="Voices of ASEB 2026" title="The practitioners and researchers who carried the programme." />
-          <ul className="mt-14 grid grid-cols-2 gap-x-5 gap-y-10 sm:grid-cols-3 lg:grid-cols-5">
+          <ScrollRail label="speakers">
+          <ul data-rail-track tabIndex={0} aria-label="ASEB 2026 speakers" className="mobile-rail speaker-rail mt-4 grid grid-cols-2 gap-x-5 gap-y-10 sm:grid-cols-3 lg:mt-14 lg:grid-cols-5">
             {speakers.map((s) => (
               <li key={s.slug} className="reveal">
-                <div className="photo aspect-[4/5]">
-                  <img src={asset(`images/people/${s.slug}.jpg`)} alt={s.name} loading="lazy" className="grayscale-[15%]" />
+                <div className="photo portrait-frame aspect-[4/5]">
+                  <img src={asset(`images/people/${s.slug}.jpg`)} alt={s.name} loading="lazy" />
                 </div>
                 <p className="mt-4 font-display text-[1.1875rem] leading-tight">{s.name}</p>
                 <p className="mt-1 text-[0.8125rem] leading-snug text-stone">{s.role}</p>
@@ -103,6 +105,7 @@ export default function Summit() {
               </li>
             ))}
           </ul>
+          </ScrollRail>
           <p className="mt-10 text-[0.8125rem] text-stone">
             Source: <a className="underline underline-offset-4 hover:text-ember" href="https://www.asebs.com/speakers" target="_blank" rel="noreferrer">ASEB 2026 speakers, asebs.com</a>
           </p>
@@ -113,7 +116,8 @@ export default function Summit() {
       <section className="section">
         <div className="wrap">
           <SectionHead eyebrow="From the Summit floor" title="The record, in pictures." lede="Photography from the ASEB Summit and Awards. Photos: ASEB Society." />
-          <div className="mt-14 grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-4">
+          <ScrollRail label="Summit photographs">
+          <div data-rail-track tabIndex={0} aria-label="Summit photographs" className="mobile-rail gallery-rail mt-4 grid grid-cols-2 gap-3 lg:mt-14 lg:grid-cols-4 lg:gap-4">
             {gallery.map((g) => (
               <figure key={g.src} className={g.span === "wide" ? "col-span-2" : "col-span-1"}>
                 <div className={`photo ${g.span === "wide" ? "aspect-[16/10]" : "aspect-[4/5] lg:aspect-[8/10]"}`}>
@@ -129,6 +133,7 @@ export default function Summit() {
               </div>
             </div>
           </div>
+          </ScrollRail>
         </div>
       </section>
 

@@ -4,13 +4,14 @@ import { Btn } from "@/components/Arrow";
 import { Source, Ext } from "@/components/Rows";
 import { people, type Person } from "@/content/institution";
 import { asset } from "@/lib/asset";
+import { Button } from "@/components/ui/button";
 
 function Profile({ p, large = false }: { p: Person; large?: boolean }) {
   const [open, setOpen] = useState(false);
   return (
     <article id={p.slug} className={`reveal scroll-mt-32 grid gap-6 border-b border-hairline py-10 ${large ? "lg:grid-cols-12 lg:gap-10" : "sm:grid-cols-[160px_1fr] sm:gap-8"}`}>
       <div className={large ? "lg:col-span-4" : ""}>
-        <div className={`photo aspect-square ${large ? "max-w-[360px]" : "max-w-[160px]"}`}>
+        <div className={`photo portrait-frame aspect-square ${large ? "max-w-[360px]" : "max-w-[160px]"}`}>
           <img src={asset(p.photo)} alt={`${p.name}, ${p.role.split(" · ")[0]}`} loading="lazy" />
         </div>
       </div>
@@ -21,9 +22,9 @@ function Profile({ p, large = false }: { p: Person; large?: boolean }) {
         <p className="mt-5 max-w-prose text-[1rem] leading-relaxed">{p.summary}</p>
         {open && <div className="mt-4 max-w-prose space-y-4 text-[1rem] leading-relaxed text-stone">{p.bio.map((b, i) => <p key={i}>{b}</p>)}</div>}
         <div className="mt-5 flex flex-wrap items-center gap-5">
-          <button type="button" className="tlink" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
+          <Button variant="ghost" type="button" className="tlink h-auto justify-start rounded-none px-0 hover:bg-transparent" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
             {open ? "Show less" : "Read full profile"} <span className="arr" aria-hidden="true">{open ? "↑" : "↓"}</span>
-          </button>
+          </Button>
           {p.linkedin && (
             <a href={p.linkedin} target="_blank" rel="noreferrer" className="tlink">
               LinkedIn <span className="arr" aria-hidden="true">↗</span>

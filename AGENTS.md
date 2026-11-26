@@ -35,3 +35,6 @@
 - The five knowledge products (The Field at /the-field, the Playbook, ASEB Voices, Ask the Village, State of the Field) share one content model and are not pillars. ASEB Voices is the only storytelling brand, and Founders' Voices is one of its categories. See docs/LIVING_VILLAGE.md.
 - Community content lifecycle, consent, attribution and moderation are enforced in the database (migration 0007). Never publish without consent, never expose author_id, and never invent counts, followers or engagement.
 - Community publishing stays pre-moderated until the Society approves its community guidelines, contributor terms and privacy notice.
+- Mobile chrome scroll direction is shared by the public layout, and touch rails use ScrollRail with semantic tracks and button alternatives so navigation and discovery remain accessible.
+- Continental discovery derives all displayed counts and representation from the shared country profiles, never from inferred membership or activity.
+- Speaker and leadership portrait frames use contain rather than cover so authentic source photographs are never cropped by the presentation layer.

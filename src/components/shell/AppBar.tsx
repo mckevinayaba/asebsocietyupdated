@@ -10,7 +10,7 @@ import { MenuSheet } from "./MenuSheet";
 
 // The global application bar. Solid on reading and working screens; on the immersive home
 // opening it starts clear over the photograph and turns solid as soon as the visitor scrolls.
-export function AppBar({ immersive = false }: { immersive?: boolean }) {
+export function AppBar({ immersive = false, tucked = false }: { immersive?: boolean; tucked?: boolean }) {
   const { user } = useMember();
   const { pathname } = useLocation();
   const [scrolled, setScrolled] = useState(false);
@@ -46,7 +46,7 @@ export function AppBar({ immersive = false }: { immersive?: boolean }) {
 
   return (
     <>
-      <header data-surface={surface} className={`app-bar fixed inset-x-0 top-0 z-40 ${clear ? "text-ivory" : "text-ink"}`}>
+      <header data-surface={surface} data-tucked={tucked && !menuOpen && !searchOpen} className={`app-bar fixed inset-x-0 top-0 z-40 ${clear ? "text-ivory" : "text-ink"}`}>
         <div className="wrap flex h-[var(--app-bar-h)] items-center gap-4 lg:gap-8">
           <Link to="/" className="flex shrink-0 items-center gap-2.5" aria-label="ASEB Society, home">
             <img src={asset(clear ? "images/brand/aseb-society-mark-on-dark.png" : "images/brand/aseb-society-mark-on-light.png")} alt="" width={40} height={36} className="h-8 w-auto lg:h-10" />

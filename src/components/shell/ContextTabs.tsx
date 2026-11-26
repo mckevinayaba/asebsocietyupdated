@@ -4,7 +4,7 @@ import { contextTabsFor, isTabCurrent } from "@/content/navigation";
 
 // Horizontal contextual tabs under the application bar. They scroll sideways when they exceed
 // the width, and the current tab is brought into view on arrival.
-export function ContextTabs() {
+export function ContextTabs({ tucked = false }: { tucked?: boolean }) {
   const { pathname, search } = useLocation();
   const set = contextTabsFor(pathname);
   const scroller = useRef<HTMLDivElement>(null);
@@ -16,7 +16,7 @@ export function ContextTabs() {
   }, [pathname, search]);
   if (!set) return null;
   return (
-    <nav aria-label={`${set.label} sections`} className="context-tabs sticky top-[calc(var(--app-bar-h)+var(--safe-top))] z-30 border-b border-hairline bg-ivory/95 backdrop-blur-sm">
+    <nav data-tucked={tucked} aria-label={`${set.label} sections`} className="context-tabs sticky top-[calc(var(--app-bar-h)+var(--safe-top))] z-30 border-b border-hairline bg-ivory/95 backdrop-blur-sm">
       <div ref={scroller} className="no-scrollbar wrap flex h-[var(--context-tabs-h)] snap-x scroll-px-5 sm:scroll-px-8 items-stretch gap-6 overflow-x-auto">
         <span className="hidden shrink-0 items-center text-[0.75rem] font-semibold uppercase tracking-[0.12em] text-umber sm:flex">{set.label}</span>
         {set.tabs.map((tab) => {

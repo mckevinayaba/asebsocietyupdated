@@ -21,3 +21,8 @@
 - Circle conversations, Academy lessons and automatic registry publication remain unavailable; public programme mandates link to accurate next steps and participation announcements.
 - Member access uses email/password only; confirmation and password-reset email delivery have not been exercised. Existing verified account access and sign-out were checked.
 - Signed-out hard refresh of `/app` recovers to `/auth` but emits a router hydration warning in the preview; signed-in profile/Circle workflows pass.
+## Combined design and mobile refinement
+- [x] Refine shared mobile navigation pacing and touch rails for Summit photography, speakers and Village highlights.
+- [x] Streamline Registry filtering with a mobile filter sheet and quick type selection.
+- [x] Add grounded continental discovery, refine editorial surfaces and preserve full portrait framing.
+- [x] Verify desktop/mobile interactions, reduced motion, relevant tests and preview before saving.

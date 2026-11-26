@@ -4,10 +4,11 @@ import { excerpt, permalink, type ContentKind } from "@/lib/community";
 import { listLive } from "@/lib/community-data";
 import { products, playbookChapters, type ProductKey } from "@/content/products";
 import { useCommunity } from "@/hooks/use-community";
+import { ScrollRail } from "@/components/ScrollRail";
 
 const slots: { product: ProductKey; kinds: ContentKind[]; invitation: string; cta: string; to: string }[] = [
   { product: "voices", kinds: ["voice"], invitation: "Every ecosystem has a story. We want yours.", cta: "Share your story", to: "/contribute?kind=voice" },
-  { product: "playbook", kinds: ["playbook_contribution"], invitation: playbookChapters[2]!.call, cta: "Contribute to the Playbook", to: "/playbook" },
+  { product: "playbook", kinds: ["playbook_contribution"], invitation: playbookChapters[2]?.call ?? "Contribute documented ecosystem-building practice.", cta: "Contribute to the Playbook", to: "/playbook" },
   { product: "field", kinds: ["post", "article"], invitation: "What is happening in your ecosystem?", cta: "Open The Field", to: "/the-field" },
   { product: "ask", kinds: ["question"], invitation: "No one has all the answers. Ask the question you are stuck on.", cta: "Ask the Village", to: "/ask" },
   { product: "state", kinds: ["research"], invitation: "Share research, surveys and documented cases from your ecosystem.", cta: "State of the Field", to: "/state-of-the-field" },
@@ -30,11 +31,12 @@ export function VillageHighlights() {
           <div className="lg:col-span-6"><p className="eyebrow">From the village</p><h2 id="village-highlights" className="mt-5 text-title">One village. Many voices.</h2></div>
           <p className="lede lg:col-span-5 lg:col-start-8 lg:pt-12">Five ways the field documents, questions and strengthens its own practice, all reviewed before publication.</p>
         </div>
-        <ul className="mt-12 grid gap-px border border-hairline bg-hairline md:grid-cols-2 lg:grid-cols-5">
+        <ScrollRail label="Village highlights">
+        <ul data-rail-track tabIndex={0} aria-label="Village highlights" className="mobile-rail village-rail mt-4 grid gap-px border border-hairline bg-hairline md:grid-cols-2 lg:mt-12 lg:grid-cols-5">
           {slots.map((slot, i) => {
             const item = latest.data?.[slot.product];
             return (
-              <li key={slot.product} className={`flex flex-col bg-ivory p-6 ${i === 0 ? "md:col-span-2 lg:col-span-1 lg:row-span-1" : ""}`}>
+              <li key={slot.product} className={`editorial-card flex flex-col bg-ivory p-6 ${i === 0 ? "md:col-span-2 lg:col-span-1 lg:row-span-1" : ""}`}>
                 <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-umber">{products[slot.product].name}</p>
                 {item ? (
                   <>
@@ -47,6 +49,7 @@ export function VillageHighlights() {
             );
           })}
         </ul>
+        </ScrollRail>
       </div>
     </section>
   );
