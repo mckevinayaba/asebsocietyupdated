@@ -95,8 +95,7 @@ export default function Climate() {
 
       <section className="pb-[72px] lg:pb-32">
         <div className="wrap">
-          <Photo src="images/events/aseb-community-gathering.jpg" alt="Builders gathered in conversation at an ASEB community session" caption="An ASEB community session" ratio="aspect-[16/9] lg:aspect-[21/9]" />
-          <div className="mt-12 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <Btn to="/join">Join the Society</Btn>
             <Btn to="/ambassadors" variant="line">Become a Climate Ambassador</Btn>
           </div>

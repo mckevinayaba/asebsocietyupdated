@@ -1,6 +1,7 @@
 import { PageHero } from "@/components/PageHero";
 import { Btn } from "@/components/Arrow";
 import { Photo } from "@/components/Photo";
+import { photo, assignments } from "@/content/photography";
 
 const paths = [
   { id: "practitioners", k: "Practitioners", h: "Join the Society and build your record of practice.", d: "Mentors, coaches, angel investors, ecosystem builders, media and wellbeing practitioners. Membership is the first step on the recognition pathway.", cta: "Join as a practitioner", to: "/join" },
@@ -50,7 +51,7 @@ export default function GetInvolved() {
       </section>
       <section className="pb-[72px] pt-[72px] lg:pb-32">
         <div className="wrap">
-          <Photo src="images/events/aseb-summit-panel.jpg" alt="Practitioners in conversation at the ASEB Summit" caption="Practitioners in conversation at the ASEB Summit" ratio="aspect-[16/9] lg:aspect-[21/9]" />
+          <Photo src={photo(assignments.getInvolved.closing).src} alt={photo(assignments.getInvolved.closing).alt} caption="In discussion at the ASEB Summit 2024, Accra" ratio="aspect-[16/9] lg:aspect-[21/9]" />
         </div>
       </section>
     </>

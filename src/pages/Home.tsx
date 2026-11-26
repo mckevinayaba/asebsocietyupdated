@@ -11,6 +11,7 @@ import { accountability, investmentAreas, membershipValue, positioning, problemT
 import { people } from "@/content/institution";
 import { interdependence } from "@/content/products";
 import { VillageHighlights } from "@/components/village/VillageHighlights";
+import { photo, pillarPhoto, assignments } from "@/content/photography";
 
 const heroTabs = [
   { label: "Our Purpose", href: "#purpose" },
@@ -30,7 +31,7 @@ export default function Home() {
       {/* 1. Immersive institutional introduction */}
       <section className="cinema cinema-mobile on-dark flex flex-col" aria-labelledby="home-title">
         <div className="cinema-media">
-          <img src={asset("images/events/aseb-community-gathering.jpg")} alt="" className="object-[68%_center] lg:object-[60%_center]" fetchPriority="high" decoding="async" />
+          <img src={asset(photo(assignments.home.hero).src)} alt="" className="object-[68%_center] lg:object-[60%_center]" fetchPriority="high" decoding="async" />
         </div>
         <div className="cinema-grade" />
         <nav aria-label="On this page" className="relative z-10 mt-[calc(var(--app-bar-h)+var(--safe-top))] flex justify-center gap-6 pt-2 text-[0.875rem] font-semibold text-ivory/75 lg:hidden">
@@ -105,7 +106,7 @@ export default function Home() {
           <h2 id="question-title" className="max-w-[22ch] font-display text-title">Africa invests in entrepreneurs. <span className="text-ember">Who invests in the people who make entrepreneurship possible?</span></h2>
           <div className="mt-14 grid gap-10 lg:grid-cols-12">
             <div className="lg:col-span-5">
-              <Photo src="images/events/aseb-networking.jpg" alt="Ecosystem builders in conversation between sessions at an ASEB gathering" caption="Practitioners comparing notes between sessions" ratio="aspect-[4/5]" position="35% center" />
+              <Photo src={photo(assignments.home.question).src} alt={photo(assignments.home.question).alt} caption="Ecosystem builders at the ASEB Summit 2024, Accra" ratio="aspect-[4/5]" position="50% center" />
             </div>
             <div className="lg:col-span-6 lg:col-start-7">
               <p className="text-[1.125rem] leading-relaxed">The effectiveness of every hub, accelerator and agency depends on the capabilities, knowledge, relationships and sustainability of the people who design and run them. Across the continent, those people work with structural barriers that no single institution can remove.</p>
@@ -206,8 +207,6 @@ export default function Home() {
 
       {/* 8. Institutional investment */}
       <section id="invest" className="on-dark relative isolate overflow-hidden bg-night text-ivory" aria-labelledby="invest-title">
-        <div className="absolute inset-0 -z-10 opacity-25"><img src={asset("images/events/aseb-2026-recognised-builders.jpg")} alt="" className="h-full w-full object-cover" loading="lazy" /></div>
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,var(--color-night)_0%,color-mix(in_oklab,var(--color-night)_88%,transparent)_45%,var(--color-night)_100%)]" />
         <div className="wrap section grid gap-12 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-5">
             <SectionLabel dark>Invest in Our Mission</SectionLabel>

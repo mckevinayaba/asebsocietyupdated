@@ -35,7 +35,7 @@ export default function Funders() {
         <div className="wrap">
           <div className="mb-14 grid gap-6 border-l-2 border-signal pl-6 lg:grid-cols-2 lg:gap-12">
             <h2 className="font-display text-[2rem] leading-tight">Back the infrastructure founders rely on.</h2>
-            <p className="text-[1.0625rem] leading-relaxed text-stone">A stronger startup hub can support successive cohorts, not just one venture. Better mentors, investment readiness, market connections and local coordination can benefit many entrepreneurs over time. Assess that leverage through the quality of support, the founders reached and the outcomes achieved—not a promised multiplier.</p>
+            <p className="text-[1.0625rem] leading-relaxed text-stone">A stronger startup hub can support successive cohorts, not just one venture. Better mentors, investment readiness, market connections and local coordination can benefit many entrepreneurs over time. Assess that leverage through the quality of support, the founders reached and the outcomes achieved, not a promised multiplier.</p>
           </div>
           <SectionHead eyebrow="In your language" title="What a results framework needs, the field already has." />
           <dl className="mt-12 border-t border-ink">

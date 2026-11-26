@@ -79,7 +79,7 @@ export const evidence: EvidenceItem[] = [
     authors: "Professor Erik Stam, Utrecht University. ASEB Summit 2026, Day Two",
     year: "2026",
     summary: "What it really takes to build an entrepreneurial ecosystem, and how to tell the difference between activity and progress.",
-    forPractice: "Every claim about an ecosystem should be backed by evidence. Recording and slides to be added to the library.",
+    forPractice: "Every claim about an ecosystem should be backed by evidence, not activity counts.",
     href: "https://www.asebs.com/speakers",
     conditions: ["All seven"],
   },

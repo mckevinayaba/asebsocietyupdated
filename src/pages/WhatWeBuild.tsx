@@ -7,11 +7,11 @@ import { Btn } from "@/components/Arrow";
 import { Photo } from "@/components/Photo";
 import { programmeReadiness } from "@/content/platform";
 import { TLink } from "@/components/Arrow";
+import { pillarPhoto as registryPillarPhoto } from "@/content/photography";
 
-const pillarPhoto: Record<string, { src: string; alt: string; caption: string } | undefined> = {
-  summit: { src: "images/events/aseb-2026-recognised-builders.jpg", alt: "Recognised practitioners at ASEB 2026", caption: "ASEB 2026, Johannesburg" },
-  circles: { src: "images/events/aseb-networking.jpg", alt: "Practitioners connecting between sessions at an ASEB gathering", caption: "Finding your people at an ASEB gathering" },
-};
+const pillarPhoto: Record<string, { src: string; alt: string; caption: string } | undefined> = Object.fromEntries(
+  (["summit", "circles", "academy", "field-lab"] as const).map((key) => [key, { src: registryPillarPhoto(key).src, alt: registryPillarPhoto(key).alt, caption: registryPillarPhoto(key).subject }]),
+);
 
 const chapters = [
   { k: "See the Field", v: "The Field Registry, the evidence and Insights." },
