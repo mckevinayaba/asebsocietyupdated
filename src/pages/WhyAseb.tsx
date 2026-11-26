@@ -1,5 +1,7 @@
 import { Link } from "@/lib/router";
-import { statements, whyNow } from "@/content/site";
+import { statements } from "@/content/site";
+import { ActivityExplorer } from "@/components/proposition/ActivityExplorer";
+import { additionality, continuityRisks } from "@/content/proposition";
 import { PageHero, SectionHead } from "@/components/PageHero";
 import { Btn, TLink } from "@/components/Arrow";
 import { Photo } from "@/components/Photo";
@@ -47,7 +49,24 @@ export default function WhyAseb() {
         </div>
       </section>
 
-      <section className="section" aria-labelledby="challenges-title">
+      <section className="section" aria-labelledby="activity-title">
+        <div className="wrap">
+          <div className="grid gap-6 lg:grid-cols-12 lg:gap-10">
+            <div className="lg:col-span-6">
+              <p className="eyebrow">One of the founding concerns behind ASEB</p>
+              <h2 id="activity-title" className="mt-5 text-display-sm">Not every activity builds an ecosystem.</h2>
+              <p className="mt-4 font-display text-[1.5rem] italic text-ember">The activity is not the outcome.</p>
+            </div>
+            <div className="space-y-4 text-[1.0625rem] leading-relaxed text-stone lg:col-span-5 lg:col-start-8 lg:pt-12">
+              <p>Events, hubs, accelerators, research, partnerships and policy can all contribute meaningfully to an ecosystem. Their value also lies in the lasting improvements they help create in its conditions and relationships.</p>
+              <p className="text-[0.9375rem]">None of this dismisses the activity, and no single intervention has to transform a system on its own. The purpose is a shared professional understanding of the work, not a test of who may call themselves an ecosystem builder.</p>
+            </div>
+          </div>
+          <ActivityExplorer />
+        </div>
+      </section>
+
+      <section className="section border-t border-hairline" aria-labelledby="challenges-title">
         <div className="wrap">
           <SectionHead eyebrow="Structural challenges" title="What ecosystem builders work against." lede="These are the problem areas the Society is set up to address. Their shape differs from country to country, which is why the Field Lab's research agenda exists." />
           <div className="mt-14 grid gap-px border border-hairline bg-hairline md:grid-cols-2">
@@ -100,15 +119,36 @@ export default function WhyAseb() {
         </div>
       </section>
 
-      <section className="section border-t border-hairline bg-paper" aria-labelledby="sustain-title">
-        <div className="wrap">
-          <SectionHead eyebrow="Why sustained investment matters" title="Short programmes cannot build a permanent field." lede="As official development assistance retreats, more of the burden falls on Africa's own institutions. They need to be stronger, better connected and able to last beyond any single funding cycle." />
-          <div className="mt-12 grid gap-px border border-hairline bg-hairline lg:grid-cols-3">
-            {whyNow.map((w) => <div key={w.figure} className="bg-ivory p-7"><p className="numeral text-[2rem] leading-none text-ember">{w.figure}</p><p className="mt-4 text-[0.9375rem] leading-relaxed">{w.label}</p><a href={w.href} target="_blank" rel="noreferrer" className="mt-3 inline-block text-[0.8125rem] text-stone underline-offset-4 hover:underline">{w.source} ↗</a></div>)}
+      <section className="section border-t border-hairline bg-paper" aria-labelledby="endure-title">
+        <div className="wrap grid gap-12 lg:grid-cols-12 lg:gap-10">
+          <div className="lg:col-span-5">
+            <p className="eyebrow">Why a permanent professional institution</p>
+            <h2 id="endure-title" className="mt-5 text-display-sm">The field is evolving. Its knowledge must endure.</h2>
+            <p className="mt-6 text-[1.0625rem] leading-relaxed">Across Africa, practitioners and institutions have invested years in strengthening entrepreneurship support, developing relationships and generating valuable knowledge. When funding changes, programmes conclude or experienced people leave, some of that knowledge and professional experience can fragment or disappear.</p>
+            <p className="mt-5 text-[1.0625rem] leading-relaxed text-stone">ASEB Society seeks to help preserve and advance collective knowledge across organisational boundaries, countries and generations, and to strengthen the field's capacity to learn, collaborate, improve its practice and sustain the people doing the work. An annual gathering can recognise that work. It cannot hold it together for the rest of the year.</p>
           </div>
-          <div className="mt-12 flex flex-col gap-3 sm:flex-row sm:flex-wrap"><Btn to={investPath}>Invest in Our Mission</Btn><Btn to="/progress" variant="line">See our progress</Btn></div>
-          <div className="mt-6"><TLink to="/framework">Explore the seven conditions</TLink></div>
+          <div className="lg:col-span-6 lg:col-start-7">
+            <p className="text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-umber">The structural risks the field carries</p>
+            <ul className="mt-4 grid border-t border-ink sm:grid-cols-2 sm:gap-x-8">
+              {continuityRisks.map((r) => <li key={r} className="flex gap-3 border-b border-hairline py-3.5 text-[0.9875rem]"><span className="mt-[0.6em] h-px w-4 shrink-0 bg-ember" aria-hidden="true" />{r}</li>)}
+            </ul>
+          </div>
         </div>
+      </section>
+
+      <section className="section" aria-labelledby="additionality-title">
+        <div className="wrap grid gap-12 lg:grid-cols-12 lg:gap-10">
+          <div className="lg:col-span-5">
+            <p className="eyebrow">Additionality before expansion</p>
+            <h2 id="additionality-title" className="mt-5 text-display-sm">Strengthen the ecosystem, not the organisation chart.</h2>
+            <p className="mt-6 text-[1.0625rem] leading-relaxed text-stone">ASEB Society is not the only institution doing valuable work for Africa's entrepreneurs, and it does not need to reproduce what others already do well. Before it establishes a new programme or service, it asks four questions. Where collaboration, curation or referral would serve the field better, that is what it chooses.</p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap"><Btn to="/partners" variant="line">Institutional partnerships</Btn><Btn to="/governance" variant="line">Governance</Btn></div>
+          </div>
+          <ol className="border-t border-ink lg:col-span-6 lg:col-start-7">
+            {additionality.map((q, i) => <li key={q} className="grid grid-cols-[2.5rem_1fr] border-b border-hairline py-5"><span aria-hidden="true" className={`mt-3 block h-[2px] bg-signal`} style={{ width: `${12 + i * 6}px` }} /><span className="font-display text-[1.375rem] leading-snug lg:text-[1.5rem]">{q}</span></li>)}
+          </ol>
+        </div>
+        <div className="wrap mt-14 flex flex-col gap-3 sm:flex-row sm:flex-wrap"><Btn to={investPath}>Invest in Our Mission</Btn><Btn to="/progress" variant="line">See our progress</Btn><TLink to="/framework">Explore the seven conditions</TLink></div>
       </section>
     </>
   );

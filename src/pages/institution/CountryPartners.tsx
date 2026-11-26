@@ -19,7 +19,7 @@ export default function CountryPartners() {
 
       <section className="section">
         <div className="wrap">
-          <SectionHead eyebrow="The obligation" title="What a Country Partner does." />
+          <SectionHead eyebrow="Proposed responsibilities" title="What a Country Partner would do." lede="Each appointment is agreed in writing, with a defined mandate, reporting and renewal. These are the responsibilities the Society proposes. The exact terms of each mandate are approved case by case." />
           <div className="mt-12"><KeyGrid items={countryPartnerDuties.map((d) => ({ k: d.k, v: d.v }))} /></div>
         </div>
       </section>
@@ -35,6 +35,25 @@ export default function CountryPartners() {
             <p className="mt-5 text-[1.0625rem] leading-relaxed text-stone">Haymée I. Pérez Cogle, Managing Director of Founder Institute Luanda, serves as Country Partner for Angola and Regional Ambassador for Lusophone Africa. Her role makes sure Portuguese-speaking ecosystems in Angola, Mozambique, Cabo Verde, Guinea-Bissau and São Tomé and Príncipe are not left at the margins of Africa's startup story.</p>
             <p className="mt-4 text-[0.9375rem]"><Link to="/people#haymee-perez-cogle" className="tlink">Read her profile <span className="arr" aria-hidden="true">→</span></Link></p>
           </div>
+        </div>
+      </section>
+
+      <section className="section" aria-labelledby="presence-title">
+        <div className="wrap grid gap-12 lg:grid-cols-12 lg:gap-10">
+          <div className="lg:col-span-5">
+            <p className="eyebrow">Where the Society stands today</p>
+            <h2 id="presence-title" className="mt-5 text-display-sm">Reach is not representation.</h2>
+            <p className="mt-5 text-[1rem] leading-relaxed text-stone">The ambition is credible representation across Africa. Today the Society distinguishes five different things, and only the first is representation. Nobody becomes a Country Partner or Ambassador by registering or applying.</p>
+          </div>
+          <dl className="border-t border-ink lg:col-span-6 lg:col-start-7">
+            {[
+              ["Appointed representatives", "One. Haymée I. Pérez Cogle, Country Partner for Angola and Regional Ambassador for Lusophone Africa."],
+              ["Applicants", "Applications are stored privately for Secretariat review. They are not published and confer no role."],
+              ["Emerging local mobilisation", "In Ethiopia, stakeholders began assembling a team after the 2025 Summit in Addis Ababa. It is an expression of interest, not an appointment."],
+              ["Proposed country relationships", "Discussed only once agreed. None is announced before it is confirmed."],
+              ["Historical event reach", "The ASEB Summit & Awards received nominations from 52 countries in 2026. That is reach, not national representation."],
+            ].map(([k, v]) => <div key={k} className="grid gap-1 border-b border-hairline py-5 sm:grid-cols-[13rem_1fr] sm:gap-6"><dt className="font-semibold">{k}</dt><dd className="text-[0.9375rem] leading-relaxed text-stone">{v}</dd></div>)}
+          </dl>
         </div>
       </section>
 
@@ -60,7 +79,7 @@ export default function CountryPartners() {
                 </li>
               ))}
             </ol>
-            <p className="mt-6 text-[0.9375rem] leading-relaxed text-stone">Country Partners receive the designation, a seat in the Country Partner Council, steward tools on the platform and first right to co-deliver ASEB-led work in their country, on terms set in the Country Partner Agreement.</p>
+            <p className="mt-6 text-[0.9375rem] leading-relaxed text-stone">An appointed Country Partner holds the role under a written agreement that sets its mandate, reporting, renewal and any right to co-deliver ASEB Society work in the country.</p>
           </div>
         </div>
       </section>
@@ -76,7 +95,7 @@ export default function CountryPartners() {
             <EoiForm
               source="/country-partners"
               submitLabel="Submit expression of interest"
-              consent="I have read the Country Partner obligations and commit to the ASEB Code of Practice."
+              consent="I have read the Country Partner obligations and commit to the ASEB Society Code of Practice."
               done={{ title: "Thank you. Your expression of interest is with the Secretariat.", body: "The Secretariat reviews it against the selection criteria and may contact your referees. Submitting does not confer an appointment." }}
               fields={[
                 { name: "applicantType", label: "Applying as", type: "choice", options: ["An institution", "An individual practitioner"], required: true },

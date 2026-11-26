@@ -138,14 +138,14 @@ export default function Governance() {
           <SectionHead
             eyebrow="The Nine Stewardship Goals"
             title="Constraints, not aspirations."
-            lede="These goals emerged from years of practice across African ecosystems: repeated conversations about what keeps breaking. They govern our programmes, partnerships, membership decisions and recognition. Anything that contradicts them does not belong within ASEB Society."
+            lede="These goals emerged from years of practice across African ecosystems: repeated conversations about what keeps breaking. They are the Society's published commitments. How each is applied in formal policy is still being set out for Board approval."
           />
           <ol className="mt-14 border-t border-ivory/40">
             {stewardshipGoals.map((g) => (
               <li key={g.name} className="grid gap-3 border-b border-hairline-dark py-7 lg:grid-cols-12 lg:gap-10">
                 <span aria-hidden="true" className="mt-3 block h-[2px] w-6 bg-signal" />
                 <h3 className="font-display text-[1.5rem] leading-tight lg:col-span-4">{g.name}</h3>
-                <p className="text-[1rem] leading-relaxed text-stone-light lg:col-span-7">{g.line}</p>
+                <div className="lg:col-span-7"><p className="text-[1rem] leading-relaxed text-stone-light">{g.line}</p><p className="mt-3 text-[0.9375rem] leading-relaxed text-ivory"><span className="font-semibold text-sand">In practice. </span>{g.practice}</p><p className="mt-1.5 text-[0.8125rem] text-stone-light">Carried through {g.through}</p></div>
               </li>
             ))}
           </ol>

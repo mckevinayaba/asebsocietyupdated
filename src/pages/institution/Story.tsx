@@ -23,7 +23,7 @@ export default function Story() {
         <div className="wrap relative pb-14 pt-32 lg:pb-24 lg:pt-44">
           <p className="text-[0.75rem] font-semibold uppercase tracking-[0.16em] text-sand">Our Story · From movement to institution</p>
           <h1 id="story-title" className="mt-5 max-w-[18ch] font-display text-hero">We did not start with a theory. We started with a room.</h1>
-          <p className="mt-6 max-w-[36rem] text-[1.0625rem] leading-relaxed text-ivory/85">In 2022 the Africa Startup Ecosystem Builders Summit and Awards opened a room for the people who build the rooms founders walk into. Five editions in four host countries later, that room has become a permanent institution.</p>
+          <p className="mt-6 max-w-[36rem] text-[1.0625rem] leading-relaxed text-ivory/85">In 2022 the Africa Startup Ecosystem Builders Summit &amp; Awards opened a room for the people who build the rooms founders walk into. Five editions in four host countries later, the conversations that began there have become a permanent institution. The Society is new. The work, relationships and experiences that gave birth to it are not.</p>
           <p className="mt-10 text-[0.75rem] text-ivory/60">ASEB Summit delegates, Johannesburg, October 2026 · Photo: ASEB Society</p>
         </div>
       </section>
@@ -72,8 +72,8 @@ export default function Story() {
           <div className="lg:col-span-6 lg:col-start-7">
             <p className="eyebrow">The institutional transition</p>
             <h2 id="transition-title" className="mt-5 text-display-sm">Visibility is not infrastructure.</h2>
-            <p className="mt-6 text-[1.0625rem] leading-relaxed text-stone">A convening can recognise the field once a year. Only an institution can keep its memory, set its standards and support its builders in the eleven months between. ASEB Society was publicly launched on 21 October 2026, on Day Two of the Johannesburg Summit, to be that institution.</p>
-            <p className="mt-5 text-[1.0625rem] leading-relaxed text-stone">The Summit and Awards continue as one of the Society's four mandates, with its own home at asebs.com. The Society carries the work forward all year.</p>
+            <p className="mt-6 text-[1.0625rem] leading-relaxed text-stone">A convening can recognise the field once a year. Only an institution can keep its memory, set its standards and support its builders in the eleven months between. ASEB Society was officially launched on 21 October 2026, on Day Two of the fifth edition in Johannesburg, to be that institution.</p>
+            <p className="mt-5 text-[1.0625rem] leading-relaxed text-stone">The Africa Startup Ecosystem Builders Summit &amp; Awards remains the flagship continental convening and recognition programme of ASEB Society, with its own home at asebs.com. The Summit brings the field together. The Society sustains the work throughout the year.</p>
             <p className="mt-8 font-display text-[1.5rem] leading-snug">{positioning.promise}</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap"><Btn to="/why-aseb">Why We Exist</Btn><Btn to="/people" variant="line">Leadership</Btn><Btn to="https://www.asebs.com" variant="line">asebs.com</Btn></div>
             <p className="mt-6 text-[0.875rem] text-stone">Recognised practitioners appear in the <Link to="/registry" className="underline underline-offset-4">Field Registry</Link>. Recognition there does not make someone a Society member.</p>

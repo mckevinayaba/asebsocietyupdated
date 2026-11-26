@@ -6,6 +6,8 @@ import { useCommunity, useEngagement, EngagementProvider } from "@/hooks/use-com
 import { ContentCard } from "@/components/village/ContentCard";
 import { NotYetLive, Prose, timeAgo } from "@/components/village/Primitives";
 import { Btn } from "@/components/Arrow";
+import { productProblems } from "@/content/proposition";
+import { ContributionPrompts } from "@/components/proposition/ContributionPrompts";
 
 const statusText: Record<string, string> = {
   proposed: "Proposed topic", open: "Open for contributions", drafting: "Being drafted", in_review: "In editorial review", published: "Published edition", archived: "Archived",
@@ -28,6 +30,7 @@ export function PlaybookPage() {
           </div>
           <div className="flex flex-col justify-end lg:col-span-5">
             <p className="text-[1.0625rem] leading-relaxed text-ivory/85">{products.playbook.line} Practitioners, founders, researchers and institutions contribute what they know. Editors weave it into chapters, with every contributor credited and every source kept.</p>
+            <p className="mt-3 text-[0.9375rem] leading-relaxed text-ivory/70">{productProblems.playbook}</p>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row"><Btn to="/contribute?kind=playbook_contribution" variant="signal">Contribute to a chapter</Btn><a href="#chapters" className="btn btn-line">Read the chapters <span className="arr" aria-hidden="true">↓</span></a></div>
           </div>
         </div>
@@ -55,6 +58,14 @@ export function PlaybookPage() {
           </ol>
         </div>
         {!community.available && community.ready && <div className="wrap mt-10"><NotYetLive what="Playbook contributions" /></div>}
+      </section>
+      <section className="section border-t border-hairline bg-paper" aria-labelledby="calls-title">
+        <div className="wrap">
+          <p className="eyebrow">Open calls for knowledge</p>
+          <h2 id="calls-title" className="mt-5 max-w-[24ch] text-display-sm">Questions the field is asking itself.</h2>
+          <p className="mt-4 max-w-prose text-[1rem] leading-relaxed text-stone">Prompts for contributors, not quotations from anyone. Answer one in the product that suits it, or pass it to someone who should.</p>
+          <div className="mt-10"><ContributionPrompts sharePath="/playbook" /></div>
+        </div>
       </section>
     </>
   );

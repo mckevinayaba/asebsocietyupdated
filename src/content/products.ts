@@ -70,7 +70,7 @@ export const participationPaths = [
   { key: "connect", label: "I want to connect with African entrepreneurial ecosystems" },
 ] as const;
 
-export const waysToContribute = ["Funding", "Research", "Technical expertise", "Professional knowledge", "Mentorship", "Technology", "Translation", "Institutional resources", "Introductions", "Media support", "Partnerships", "Country representation"];
+export const waysToContribute = ["Funding", "Professional expertise", "Research", "Knowledge", "Technology", "Translation", "Institutional resources", "Professional learning", "Strategic introductions", "Media support", "Partnerships", "Country engagement"];
 
 // The economics of interdependence. One argument among others, never the only explanation.
 export const interdependence = [

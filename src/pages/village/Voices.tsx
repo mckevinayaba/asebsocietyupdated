@@ -11,6 +11,8 @@ import { ContributionEditor } from "@/components/village/ContributionEditor";
 import { ActionBar } from "@/components/village/ActionBar";
 import { Media, NotYetLive, Prose, timeAgo } from "@/components/village/Primitives";
 import { Btn } from "@/components/Arrow";
+import { productProblems } from "@/content/proposition";
+import { ContributionPrompts } from "@/components/proposition/ContributionPrompts";
 
 // ASEB Voices: a premium editorial publication. Warm paper, generous serif typography and a
 // masthead identity distinct from The Field, while clearly part of ASEB Society.
@@ -38,6 +40,7 @@ export function VoicesPage() {
             <h1 className="font-display text-[1.875rem] leading-tight lg:col-span-7 lg:text-[2.5rem]">{products.voices.line}</h1>
             <div className="lg:col-span-5">
               <p className="text-[1.0625rem] leading-relaxed text-stone">Behind every ecosystem are stories the world has never heard. The people who built institutions, the founders whose lives were changed, the communities that created opportunities, the failures nobody talks about and the lessons Africa cannot afford to lose.</p>
+              <p className="mt-3 text-[0.9375rem] leading-relaxed text-stone">{productProblems.voices} Stories are personal accounts, reviewed and published with consent. They are not independently verified evidence.</p>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row"><Btn to="/contribute?kind=voice">We want your story</Btn><Btn to="/voices?category=founders" variant="line">Founders' Voices</Btn></div>
             </div>
           </div>
@@ -94,6 +97,19 @@ export function VoicesPage() {
               )}
             </>
           )}
+        </div>
+      </section>
+
+      <section className="section border-t border-hairline" aria-labelledby="invite-title">
+        <div className="wrap grid gap-12 lg:grid-cols-12 lg:gap-10">
+          <div className="lg:col-span-5">
+            <p className="eyebrow">We want your story</p>
+            <h2 id="invite-title" className="mt-5 text-display-sm">The work worth remembering is often the work nobody wrote down.</h2>
+            <p className="mt-5 text-[1rem] leading-relaxed text-stone">Write about the journey that made you an ecosystem builder, the institution you built, the funding that ran out, the programme that failed and what it taught you, the relationship that changed an outcome, or the person whose contribution everyone forgot. Founders are welcome too, in Founders' Voices, to tell the field what support actually made a difference.</p>
+            <p className="mt-4 text-[0.875rem] leading-relaxed text-stone">Every story is reviewed by an editor and published only with your consent. You can ask for light edits or none, and you can withdraw it later.</p>
+            <div className="mt-7"><Btn to="/contribute?kind=voice">Share your story</Btn></div>
+          </div>
+          <div className="lg:col-span-6 lg:col-start-7"><ContributionPrompts only={["kind=voice"]} sharePath="/voices" /></div>
         </div>
       </section>
 
