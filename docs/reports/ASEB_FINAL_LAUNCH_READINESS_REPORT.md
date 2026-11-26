@@ -8,13 +8,14 @@ The platform's code is ready. Its content is honest, its navigation holds togeth
 
 It is not a GO, for four reasons. The live site still shows a contradictory governance structure until the governance correction is merged and published. Nobody has yet verified the live site, because the audit could not reach it. The Society collects personal information without a published privacy notice, which POPIA does not allow. And no one has confirmed a recent database backup. These are not defects in the code. They are things only the Society can do, and they are quick.
 
-**Condition for a public launch announcement:** close blockers B1, B2, B3, B5 and B12 in the Launch Blockers Register. Until then, the site can stay live as it is, but it should not be announced, and no invitations or campaigns should go out.
+**Condition for a public launch announcement:** close blockers B1, B2, B3, B5, B12 and B15 in the Launch Blockers Register. Until then, the site can stay live as it is, but it should not be announced, and no invitations or campaigns should go out.
 
 ## Executive dashboard
 
 | Area | Status | Basis |
 | --- | --- | --- |
 | Identity and branding | Ready | Tagline, four pillars, Founder title and ASEB Voices consistent across the platform |
+| Institutional narrative | Corrected in code, not yet live | Founding Organisational Profile reconciled. Unapproved credentials and councils removed, no outside-organisation framing. See ASEB_SOCIETY_PROFILE_PLATFORM_ALIGNMENT.md |
 | Governance consistency | Corrected in code, not yet live | One governing Board, Summit & Awards as flagship programme, Independent Awards Jury. Enforced by test. Formal Board adoption pending, asebs.com unchecked |
 | Architecture | Ready | Four pillars, five knowledge products, one storytelling brand |
 | Visitor understanding | Ready | Every main journey walked, each page ends with a next step |
