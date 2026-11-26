@@ -34,16 +34,18 @@ export const summit2026 = {
 export type Speaker = { slug: string; name: string; role: string; session: string };
 
 export const speakers: Speaker[] = [
-  { slug: "mckevin-ayaba", name: "McKevin Ayaba", role: "Founder & Chief Executive Officer, ASEB Society", session: "Understanding Startup Ecosystem Building: From Movement to Institution" },
+  { slug: "robyn-whittaker", name: "Dr Robyn Whittaker", role: "System Weaver, Kaleidoscope Lights Africa · Africa Voices Dialogue · South Africa", session: "" },
   { slug: "colin-leshou", name: "Colin Leshou", role: "Head of Ecosystem Enablement, Allan & Gill Gray Philanthropies", session: "From Programmes to Ecosystems: Building Institutions Entrepreneurs Can Depend On" },
   { slug: "erik-stam", name: "Professor Erik Stam", role: "Professor of Strategy, Organisation and Entrepreneurship, Utrecht University", session: "From Ecosystem Language to Ecosystem Evidence" },
   { slug: "phumlani-nkontwana", name: "Dr Phumlani Nkontwana", role: "Founding Academic Director, Allan Gray Centre for Africa Entrepreneurship, Stellenbosch University", session: "Provincial ecosystem research in South Africa" },
-  { slug: "tim-gelissen", name: "Tim Gelissen", role: "Co Director, i4Policy", session: "Africa Entrepreneurial Ecosystem Index: From Evidence to Institutional Action" },
+  { slug: "cristianne-wendler", name: "Cristianne Wendler", role: "Co Founder and CEO, Vanhu Tech · South Africa", session: "" },
   { slug: "lincoln-njogu", name: "Lincoln Njogu", role: "Head of Technology, i4Policy", session: "The AEEI Data Dashboard" },
   { slug: "catherine-wijnberg", name: "Catherine Wijnberg", role: "Founder and CEO, Fetola", session: "20 Years of Building Businesses That Last" },
   { slug: "david-wilson", name: "David Wilson", role: "CEO and Co Founder, National Mentorship Movement", session: "Mentorship in Practice" },
-  { slug: "thekla-mutero", name: "Thekla Mutero", role: "Founding President, Emerging Mining Association of Namibia", session: "When Recognition Becomes Responsibility" },
+  { slug: "linda-nanan-vallee", name: "Dr Linda Nanan Vallée", role: "Lecturer, Researcher and Startup Ecosystem Enabler · Côte d'Ivoire", session: "" },
   { slug: "katrin-putz", name: "Katrin Pütz", role: "Founder and Managing Director, (B)energy", session: "Access to capital and markets" },
+  { slug: "valerie-garises", name: "Valerie Garises", role: "Director: Technology, Innovation and Entrepreneurship, Namibia University of Science and Technology", session: "From Research to Enterprise: Building Universities That Turn Knowledge into Impact" },
+  { slug: "chisala-bwalya", name: "Dr Chisala C. Bwalya, DPS", role: "Director of Research Development, Zambia Research and Development Center", session: "From Policy to Practice: Connecting Research, Innovation and Entrepreneurship Across Africa" },
 ];
 
 export const editions = [

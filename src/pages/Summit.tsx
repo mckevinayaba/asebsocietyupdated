@@ -99,7 +99,7 @@ export default function Summit() {
                 </div>
                 <p className="mt-4 font-display text-[1.1875rem] leading-tight">{s.name}</p>
                 <p className="mt-1 text-[0.8125rem] leading-snug text-stone">{s.role}</p>
-                <p className="mt-3 border-t border-hairline pt-3 text-[0.8125rem] leading-snug">{s.session}</p>
+                {s.session && <p className="mt-3 border-t border-hairline pt-3 text-[0.8125rem] leading-snug">{s.session}</p>}
               </li>
             ))}
           </ul>
