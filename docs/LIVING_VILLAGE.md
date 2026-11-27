@@ -51,7 +51,7 @@ Rules enforced in the database (`enforce_content_lifecycle`):
 - Editors cannot change a contributor's text without edit consent.
 - Authors cannot feature, hide, re-slug or self-publish.
 - Stories, Playbook contributions, research and opportunities always need an editor.
-- Community publishing starts **pre-moderated**: posts, questions and answers wait for a moderator. Only a Secretariat administrator can open it, and only after community guidelines, contributor terms and a privacy notice are approved.
+- Community publishing has two modes (migration 0011). **Pre-moderated**, the default: posts, articles, questions, answers and opportunities wait for a moderator. **Automated**: they are checked by the moderation engine and published immediately when safe, with clear violations not published and uncertain cases escalated to people. Only a Secretariat administrator can switch modes, and the server refuses automated mode until the moderation key is configured. The retired 'open' mode, which let a browser publish without any check, no longer exists. See `docs/reports/ASEB_INTELLIGENT_COMMUNITY_MODERATION.md`.
 - Scheduled items appear when their time arrives, without a background job.
 
 ### Attribution and privacy

@@ -21,6 +21,33 @@ Moderators handle community posts, questions, answers and reports. Editors handl
 
 The platform has no "request changes" state today, so a fixable submission is declined with a reason and the contributor may resubmit. Every decision should carry a short reason in the notes field. Reports should be reviewed within [confirm, for example 3 working days].
 
+## Automated publishing (proposed)
+
+When the Secretariat switches on automated publishing, ordinary community contributions (updates, articles, questions, answers and opportunities) no longer wait for a person. They are checked automatically and:
+
+- **published** when no rule or category is triggered
+- **not published** when they clearly break an approved rule: threats, hateful threats, explicit sexual content, content involving minors, unsafe links, unacceptable attachments
+- **sent to a moderator** when context matters: possible harassment or discrimination, violence, self-harm, illegal activity, suspicious funding offers, sensitive personal numbers, impersonation of ASEB Society, spam, and anything in the model's review band
+
+Criticism of institutions, policies, programmes, funders and ASEB Society is never a reason to restrict a contribution. A failed check never publishes anything. Stories, Playbook contributions, research, the Evidence Library and official publications keep full editorial review.
+
+Moderators handle the exceptions:
+
+- escalated cases
+- review requests (appeals)
+- reports
+- checks that did not finish
+
+Every human decision is recorded with a reason, and the author is told in respectful language that never assumes intent.
+
+## Account standing
+
+Responses are proportionate. A warning comes first, then a temporary pause in publishing for a set number of days, then suspension, which only a Secretariat administrator can apply. Serious violations may justify immediate action. Every response is recorded in the audit log and explained to the person, who can still read, save and follow.
+
+## Reports
+
+Anyone signed in can report a contribution. Reporters are never identified to the author. A report never removes content by itself, and a large number of reports does not establish a violation: a person decides. Each person can send up to 20 reports a day.
+
 ## Corrections and complaints
 
 Factual errors are corrected openly with a dated note. Complaints go to aseb@asebsociety.org and are acknowledged within [confirm].

@@ -19,6 +19,19 @@ Africa Startup Ecosystem Builders Society ("ASEB Society", "the Society") operat
 
 We do not use advertising trackers or third party analytics on the platform at the time of writing. The browser stores your sign in session and some preferences locally so the site works.
 
+## Automated checks on community contributions
+
+When automated publishing is switched on, updates, articles, questions, answers and opportunities are checked automatically before they appear. The check uses:
+
+- ASEB Society's own rules, which look for unsafe links, requests for payment, impersonation, sensitive numbers and spam
+- the OpenAI Moderation API (OpenAI, L.L.C., United States), which classifies text and images for categories such as harassment, hate, threats and sexual content
+
+Only the contribution itself is sent to the external service: its title, text, opportunity details and any photographs, shown through a link that expires after two minutes. Your name, email, profile, membership records and account details are never sent. [confirm: OpenAI's data usage and retention terms for the Moderation API, and the cross-border transfer basis under section 72 of POPIA]
+
+The check produces one of three outcomes: published, not published (with a reason), or sent to a moderator. An automated outcome is not a finding about you. You can edit and publish again, or ask a person to review it. Moderators can see the categories and rules that were triggered. You see the outcome and the reason written for you.
+
+Records of each automated check (outcome, categories, rules triggered, scores, the model used and the time) are kept for [confirm, suggested 24 months] for accountability and appeals, then deleted.
+
 ## Who can see it
 
 Intake records (applications, enquiries, nominations, pitches) are visible only to authorised Secretariat reviewers and administrators. This is enforced in the database, not only in the interface. Published contributions show the name you chose to display. The identity of a contributor's account is never exposed through public interfaces.
