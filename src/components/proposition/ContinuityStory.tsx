@@ -14,7 +14,7 @@ export function ContinuityStory() {
         <h2 id="continuity-title" className="mt-5 max-w-[20ch] font-display text-title">{continuity.title}</h2>
         <div className="mt-12 grid gap-10 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-5">
-            <Photo src={p.src} alt={p.alt} caption="Ecosystem builders at the ASEB Summit & Awards 2024, Accra" ratio="aspect-[4/5]" position="50% center" />
+            <Photo src={p.src} alt={p.alt} caption="Ecosystem builders at the ASEB Summit & Awards 2026, Johannesburg" ratio="aspect-[1600/1384]" position="center" />
           </div>
           <div className="lg:col-span-6 lg:col-start-7">
             <p className="text-[1.125rem] leading-relaxed">{continuity.opening}</p>
