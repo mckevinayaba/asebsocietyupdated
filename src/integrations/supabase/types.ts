@@ -14,6 +14,50 @@ export type Database = {
   }
   public: {
     Tables: {
+      account_restrictions: {
+        Row: {
+          created_at: string
+          created_by: string
+          ends_at: string | null
+          id: string
+          level: string
+          message_to_user: string
+          reason: string
+          revoked_at: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string
+          ends_at?: string | null
+          id?: string
+          level: string
+          message_to_user?: string
+          reason: string
+          revoked_at?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string
+          ends_at?: string | null
+          id?: string
+          level?: string
+          message_to_user?: string
+          reason?: string
+          revoked_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "account_restrictions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       blocks: {
         Row: {
           blocked_id: string
@@ -489,6 +533,110 @@ export type Database = {
           work_description?: string
         }
         Relationships: []
+      }
+      moderation_appeals: {
+        Row: {
+          author_id: string
+          content_id: string
+          created_at: string
+          id: string
+          message: string
+          resolution_note: string
+          resolved_at: string | null
+          resolved_by: string | null
+          status: string
+        }
+        Insert: {
+          author_id: string
+          content_id: string
+          created_at?: string
+          id?: string
+          message?: string
+          resolution_note?: string
+          resolved_at?: string | null
+          resolved_by?: string | null
+          status?: string
+        }
+        Update: {
+          author_id?: string
+          content_id?: string
+          created_at?: string
+          id?: string
+          message?: string
+          resolution_note?: string
+          resolved_at?: string | null
+          resolved_by?: string | null
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "moderation_appeals_author_id_fkey"
+            columns: ["author_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "moderation_appeals_content_id_fkey"
+            columns: ["content_id"]
+            isOneToOne: false
+            referencedRelation: "content_items"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      moderation_assessments: {
+        Row: {
+          applied: boolean
+          categories: string[]
+          content_id: string
+          created_at: string
+          decision: string
+          fingerprint: string
+          id: number
+          model: string
+          provider: string
+          public_reason: string
+          rule_hits: Json
+          scores: Json
+        }
+        Insert: {
+          applied?: boolean
+          categories?: string[]
+          content_id: string
+          created_at?: string
+          decision: string
+          fingerprint: string
+          id?: never
+          model?: string
+          provider: string
+          public_reason?: string
+          rule_hits?: Json
+          scores?: Json
+        }
+        Update: {
+          applied?: boolean
+          categories?: string[]
+          content_id?: string
+          created_at?: string
+          decision?: string
+          fingerprint?: string
+          id?: never
+          model?: string
+          provider?: string
+          public_reason?: string
+          rule_hits?: Json
+          scores?: Json
+        }
+        Relationships: [
+          {
+            foreignKeyName: "moderation_assessments_content_id_fkey"
+            columns: ["content_id"]
+            isOneToOne: false
+            referencedRelation: "content_items"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       notifications: {
         Row: {
@@ -984,6 +1132,10 @@ export type Database = {
           useful: number
         }[]
       }
+      content_fingerprint: {
+        Args: { item: Database["public"]["Tables"]["content_items"]["Row"] }
+        Returns: string
+      }
       content_is_live: {
         Args: { item: Database["public"]["Tables"]["content_items"]["Row"] }
         Returns: boolean
@@ -999,6 +1151,7 @@ export type Database = {
       }
       follower_count: { Args: { profile_id: string }; Returns: number }
       has_staff_role: { Args: { roles: string[] }; Returns: boolean }
+      is_community_kind: { Args: { kind: string }; Returns: boolean }
       is_content_author: { Args: { item: string }; Returns: boolean }
       is_live_content: { Args: { item: string }; Returns: boolean }
       is_secretariat: { Args: never; Returns: boolean }
@@ -1009,6 +1162,58 @@ export type Database = {
       }
       is_verified_user: { Args: never; Returns: boolean }
       media_is_public: { Args: { object_name: string }; Returns: boolean }
+      moderation_indicators: {
+        Args: { days?: number }
+        Returns: {
+          checking_now: number
+          errors: number
+          escalated: number
+          open_appeals: number
+          open_reports: number
+          published: number
+          restricted: number
+          waiting_for_people: number
+        }[]
+      }
+      moderation_record_decision: {
+        Args: {
+          p_categories: string[]
+          p_content: string
+          p_decision: string
+          p_fingerprint: string
+          p_model: string
+          p_provider: string
+          p_public_reason: string
+          p_rule_hits: Json
+          p_scores: Json
+        }
+        Returns: string
+      }
+      moderation_snapshot: {
+        Args: { p_content: string }
+        Returns: {
+          author_id: string
+          body: string
+          details: Json
+          fingerprint: string
+          id: string
+          kind: string
+          media: Json
+          status: string
+          summary: string
+          title: string
+        }[]
+      }
+      my_account_standing: {
+        Args: never
+        Returns: {
+          created_at: string
+          ends_at: string
+          level: string
+          message_to_user: string
+        }[]
+      }
+      my_active_restriction: { Args: never; Returns: string }
       my_content: {
         Args: never
         Returns: {
@@ -1056,6 +1261,15 @@ export type Database = {
           message_to_author: string
         }[]
       }
+      my_moderation_outcomes: {
+        Args: never
+        Returns: {
+          content_id: string
+          created_at: string
+          decision: string
+          public_reason: string
+        }[]
+      }
       profile_content: {
         Args: { max_rows?: number; profile: string }
         Returns: string[]
@@ -1074,6 +1288,14 @@ export type Database = {
           organisation: string
           primary_role: string
         }[]
+      }
+      publishing_limit_problem: {
+        Args: { p_body: string; p_id: string; p_kind: string; p_parent: string }
+        Returns: string
+      }
+      request_moderation_review: {
+        Args: { p_content: string; p_message: string }
+        Returns: string
       }
       secretariat_list_accounts: {
         Args: never
