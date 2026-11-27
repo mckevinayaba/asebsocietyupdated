@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { useNavigate } from "@tanstack/react-router";
@@ -7,8 +8,8 @@ import { useMember } from "@/hooks/use-member";
 import { useSaved } from "@/hooks/use-saved";
 import { useEngagement } from "@/hooks/use-community";
 import { supabase } from "@/integrations/supabase/client";
-import { deleteDraft, getMyBookmarks, getMyWork, withdrawContribution } from "@/lib/community.functions";
-import { kindLabel, permalink, statusLabel, excerpt } from "@/lib/community";
+import { deleteDraft, getMyBookmarks, getMyModeration, getMyWork, recheckContribution, requestModerationReview, withdrawContribution } from "@/lib/community.functions";
+import { communityKinds, kindLabel, permalink, statusLabel, excerpt } from "@/lib/community";
 import { OnboardingPage } from "@/pages/village/People";
 import { NotYetLive, timeAgo } from "@/components/village/Primitives";
 import { villageLine } from "@/content/products";
@@ -28,17 +29,35 @@ function Contributions({ publishedOnly = false }: { publishedOnly?: boolean }) {
   const remove = useServerFn(deleteDraft);
   const queryClient = useQueryClient();
   const work = useQuery({ queryKey: ["village", "my-work"], queryFn: () => fetchWork() });
+  const fetchModeration = useServerFn(getMyModeration);
+  const moderation = useQuery({ queryKey: ["village", "my-moderation"], queryFn: () => fetchModeration(), retry: false });
+  const recheck = useServerFn(recheckContribution);
+  const askReview = useServerFn(requestModerationReview);
+  const [busyId, setBusyId] = useState("");
+  const [notice, setNotice] = useState<Record<string, string>>({});
+  const mod = moderation.data && moderation.data.available ? moderation.data : null;
   if (work.isLoading) return <p className="py-8 text-stone">Loading…</p>;
   if (!work.data?.available) return <NotYetLive what="My contributions" />;
   const items = work.data.items.filter((i) => i.kind !== "answer" || !publishedOnly).filter((i) => !publishedOnly || i.status === "published");
   const latestMessage = (id: string) => work.data?.available ? work.data.messages.find((m) => m.content_id === id) : undefined;
   const refresh = () => queryClient.invalidateQueries({ queryKey: ["village"] });
   if (!items.length) return <div className="border border-dashed border-hairline p-8 text-center"><p className="font-display text-[1.375rem]">{publishedOnly ? "Nothing published yet." : "You have not contributed yet."}</p><div className="mt-5"><Btn to="/contribute">Contribute</Btn></div></div>;
+  const standing = mod?.standing ?? [];
   return (
+    <>
+    {standing.length > 0 && (
+      <section className="mb-6 border-l-2 border-signal bg-paper p-4" aria-label="Your account standing">
+        {standing.map((st, i) => <p key={i} className="text-[0.9375rem]"><span className="font-semibold">{st.level === "warning" ? "A message from the moderators" : st.level === "temporary" ? `Publishing is paused until ${st.ends_at ? new Date(st.ends_at).toLocaleDateString("en-GB") : "further notice"}` : "Publishing is suspended"}.</span> {st.message_to_user}</p>)}
+        <p className="mt-2 text-[0.8125rem] text-stone">You can still read, save and follow. Questions about this? Write to aseb@asebsociety.org.</p>
+      </section>
+    )}
     <ul className="border-t border-ink">
       {items.map((item) => {
         const message = latestMessage(item.id);
-        const editable = ["draft", "submitted", "revision_requested"].includes(item.status);
+        const editable = ["draft", "submitted", "revision_requested", "checking", "restricted"].includes(item.status) || (item.status === "published" && communityKinds.includes(item.kind));
+        const outcome = mod?.outcomes.find((o) => o.content_id === item.id);
+        const appeal = mod?.appeals.find((a) => a.content_id === item.id);
+        const act = async (fn: () => Promise<unknown>, done: string) => { setBusyId(item.id); try { await fn(); setNotice((n) => ({ ...n, [item.id]: done })); await refresh(); } catch (e) { setNotice((n) => ({ ...n, [item.id]: e instanceof Error ? e.message : "Please try again." })); } finally { setBusyId(""); } };
         return (
           <li key={item.id} className="border-b border-hairline py-5">
             <div className="flex flex-wrap items-baseline justify-between gap-3">
@@ -47,8 +66,14 @@ function Contributions({ publishedOnly = false }: { publishedOnly?: boolean }) {
             </div>
             <p className="mt-2 font-semibold">{item.status === "published" ? <Link to={permalink(item.kind, item.slug)} className="hover:text-ember">{item.title || excerpt(item.body, 90)}</Link> : item.title || excerpt(item.body, 90)}</p>
             {message?.message_to_author && <p className="mt-2 border-l-2 border-signal pl-3 text-[0.9375rem]"><span className="font-semibold">Editors: </span>{message.message_to_author}</p>}
+            {(item.status === "restricted" || item.status === "under_review") && outcome?.public_reason && <p className="mt-2 border-l-2 border-signal pl-3 text-[0.9375rem]">{outcome.public_reason}{item.status === "restricted" ? " This was an automated assessment, not a judgement about you." : ""}</p>}
+            {item.status === "checking" && <p className="mt-2 border-l-2 border-signal pl-3 text-[0.9375rem]">The safety check has not finished. Your contribution is private and has not been published.</p>}
+            {appeal && <p className="mt-2 text-[0.875rem] text-stone">{appeal.status === "open" ? "A person has been asked to review this." : appeal.status === "overturned" ? "Reviewed by a moderator and published." : `Reviewed by a moderator and kept unpublished.${appeal.resolution_note ? ` ${appeal.resolution_note}` : ""}`}</p>}
+            {notice[item.id] && <p className="mt-2 text-[0.875rem] text-teal" role="status">{notice[item.id]}</p>}
             <div className="mt-3 flex flex-wrap gap-4 text-[0.875rem]">
-              {editable && <Link to={`/contribute?edit=${item.id}`} className="font-semibold underline underline-offset-4">Continue editing</Link>}
+              {editable && <Link to={`/contribute?edit=${item.id}`} className="font-semibold underline underline-offset-4">{item.status === "published" ? "Edit" : "Continue editing"}</Link>}
+              {item.status === "checking" && <button type="button" disabled={busyId === item.id} className="font-semibold underline underline-offset-4" onClick={() => void act(() => recheck({ data: { id: item.id } }), "Checked again. The status above is up to date.")}>{busyId === item.id ? "Checking…" : "Try the check again"}</button>}
+              {item.status === "restricted" && !appeal && <button type="button" disabled={busyId === item.id} className="font-semibold underline underline-offset-4" onClick={() => void act(() => askReview({ data: { id: item.id, message: "" } }), "A moderator will review it.")}>Ask for a human review</button>}
               {item.status === "draft" && <button type="button" className="text-ember underline underline-offset-4" onClick={async () => { if (window.confirm("Delete this draft? This cannot be undone.")) { await remove({ data: { id: item.id } }); await refresh(); } }}>Delete draft</button>}
               {item.status !== "draft" && item.status !== "archived" && <button type="button" className="text-stone underline underline-offset-4" onClick={async () => { if (window.confirm("Withdraw this contribution? It will be taken down from the platform.")) { await withdraw({ data: { id: item.id } }); await refresh(); } }}>Withdraw</button>}
             </div>
@@ -56,6 +81,7 @@ function Contributions({ publishedOnly = false }: { publishedOnly?: boolean }) {
         );
       })}
     </ul>
+    </>
   );
 }
 

@@ -73,9 +73,9 @@ export async function listCategories(): Promise<Category[]> {
   return check<Category[]>(await db().from("voices_categories").select("*").eq("active", true).order("position")) ?? [];
 }
 
-export async function communityMode(): Promise<"pre_moderated" | "open"> {
+export async function communityMode(): Promise<"pre_moderated" | "automated"> {
   const result = await db().rpc("community_mode");
-  return check<string>(result) === "open" ? "open" : "pre_moderated";
+  return check<string>(result) === "automated" ? "automated" : "pre_moderated";
 }
 
 export type PublicProfile = { id: string; name: string; headline: string; primary_role: string; organisation: string; country: string; countries_of_operation: string[]; expertise: string[]; bio: string; links: string[] };

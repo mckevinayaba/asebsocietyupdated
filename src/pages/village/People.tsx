@@ -124,12 +124,19 @@ export function OnboardingPage({ embedded = false }: { embedded?: boolean }) {
 }
 
 export function GuidelinesPage() {
+  const community = useCommunity();
   return (
     <div className="wrap max-w-[48rem] pb-20 pt-12 lg:pt-16">
       <p className="eyebrow">The Field</p>
       <h1 className="mt-5 text-display-md">Community guidelines</h1>
-      <p className="lede mt-5">A working summary while the Society finalises its formal community policy, contributor terms and privacy notice. Until then, every contribution is reviewed before it appears.</p>
+      <p className="lede mt-5">A working summary while the Society finalises its formal community policy, contributor terms and privacy notice.</p>
       <ul className="mt-10 border-t border-ink">{communityGuidelinesSummary.map((g) => <li key={g} className="border-b border-hairline py-5 text-[1.0625rem]">{g}</li>)}</ul>
+      <section className="mt-12 space-y-4 text-[1rem] leading-relaxed text-stone" aria-labelledby="checks-title">
+        <h2 id="checks-title" className="font-display text-[1.5rem] text-ink">How contributions are published</h2>
+        <p>{community.mode === "automated" ? "Updates, articles, questions, answers and opportunities are checked automatically when you publish. Safe contributions appear straight away. A contribution that clearly breaks these guidelines is not published, and you are told why. When the check is unsure, a moderator looks at it first." : "At present a moderator reviews each update, article, question, answer and opportunity before it appears."} Stories in ASEB Voices, Playbook contributions and research are always reviewed by an editor.</p>
+        <p>Criticism of institutions, programmes, policies, funders and ASEB Society itself is welcome. Disagreement and uncomfortable truths are part of a professional field. What is not allowed is harassment, threats, discrimination, fraud, impersonation and the sharing of other people's private information.</p>
+        <p>An automated decision is never a judgement about you. If a contribution is not published, you can edit it and publish again, or ask a person to review it. Repeated or serious harm can lead to a warning, a pause in publishing or, in serious cases, suspension, always decided by a person.</p>
+      </section>
       <section className="mt-12 space-y-4 text-[1rem] leading-relaxed text-stone">
         <h2 className="font-display text-[1.5rem] text-ink">Your work stays yours</h2>
         <p>Contributors keep ownership of their original work. By submitting, you give ASEB Society permission to publish it as you chose, credited as you chose. You can withdraw your contribution at any time from My contributions, and it will be taken down from the platform.</p>

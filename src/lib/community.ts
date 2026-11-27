@@ -6,7 +6,7 @@ import type { ProductKey } from "@/content/products";
 export const contentKinds = ["post", "article", "voice", "playbook_contribution", "question", "answer", "research", "opportunity"] as const;
 export type ContentKind = (typeof contentKinds)[number];
 
-export const statuses = ["draft", "submitted", "under_review", "revision_requested", "accepted", "scheduled", "published", "declined", "archived"] as const;
+export const statuses = ["draft", "submitted", "checking", "under_review", "revision_requested", "accepted", "scheduled", "published", "restricted", "declined", "archived"] as const;
 export type ContentStatus = (typeof statuses)[number];
 
 export const evidenceClasses = ["practitioner_experience", "founder_perspective", "documented_case", "research_evidence", "observation", "editorial"] as const;
@@ -24,6 +24,7 @@ export const kindProduct: Record<ContentKind, ProductKey> = {
 export const statusLabel: Record<ContentStatus, string> = {
   draft: "Draft", submitted: "Submitted", under_review: "Under review", revision_requested: "Revision requested", accepted: "Accepted",
   scheduled: "Scheduled", published: "Published", declined: "Declined", archived: "Withdrawn or archived",
+  checking: "Being checked", restricted: "Not published",
 };
 
 export const evidenceLabel: Record<EvidenceClass, string> = {
@@ -31,9 +32,10 @@ export const evidenceLabel: Record<EvidenceClass, string> = {
   research_evidence: "Research evidence", observation: "Observation", editorial: "Editorial",
 };
 
-// Community kinds can publish directly when the Secretariat opens community publishing.
-// Everything else always goes through editorial review.
-export const communityKinds: ContentKind[] = ["post", "question", "answer"];
+// Community kinds publish through automated checks once the Secretariat switches automated
+// publishing on (migration 0011). Stories, Playbook contributions and research always go through
+// editorial review. Keep in step with public.is_community_kind().
+export const communityKinds: ContentKind[] = ["post", "article", "question", "answer", "opportunity"];
 export const needsEditor = (kind: ContentKind) => !communityKinds.includes(kind);
 
 export function permalink(kind: ContentKind, slug: string, parentSlug?: string): string {

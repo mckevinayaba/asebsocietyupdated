@@ -8,12 +8,14 @@ import { Sheet } from "@/components/shell/Sheet";
 import { AppreciateIcon, DiscussIcon, FlagIcon, SaveIcon, ShareIcon } from "@/components/shell/Icons";
 
 const reasons = [
+  { key: "spam", label: "Spam or a suspicious opportunity" },
   { key: "harassment", label: "Harassment or a personal attack" },
-  { key: "false_or_misleading", label: "False or misleading" },
+  { key: "discrimination", label: "Discrimination or hateful language" },
+  { key: "threat", label: "A threat or incitement to violence" },
   { key: "privacy", label: "Shares someone's private information" },
-  { key: "confidential", label: "Confidential information" },
-  { key: "spam", label: "Spam or advertising" },
-  { key: "other", label: "Something else" },
+  { key: "impersonation", label: "Pretends to be someone else, or ASEB Society" },
+  { key: "false_or_misleading", label: "False or misleading" },
+  { key: "other", label: "Another Community Guidelines concern" },
 ] as const;
 
 // Appreciate, Discuss, Save, Share and Report. Counts come only from real rows, and nothing is
@@ -73,18 +75,19 @@ export function ActionBar({ item, href, inline = false }: { item: FeedItem; href
 
 function ReportSheet({ open, onOpenChange, contentId }: { open: boolean; onOpenChange: (open: boolean) => void; contentId: string }) {
   const send = useServerFn(reportContent);
-  const [reason, setReason] = useState<(typeof reasons)[number]["key"]>("harassment");
+  const [reason, setReason] = useState<(typeof reasons)[number]["key"]>("spam");
+  const [message, setMessage] = useState("");
   const [detail, setDetail] = useState("");
   const [state, setState] = useState<"idle" | "busy" | "done" | "error">("idle");
   return (
-    <Sheet open={open} onOpenChange={(v) => { onOpenChange(v); if (!v) setState("idle"); }} title="Report this contribution" description="Moderators review every report. The author is not told who reported it." side="bottom">
+    <Sheet open={open} onOpenChange={(v) => { onOpenChange(v); if (!v) setState("idle"); }} title="Report this contribution" description="Moderators review every report. The author is never told who reported it. A report alone does not remove a contribution: a person decides." side="bottom">
       {state === "done" ? <p className="py-6 text-[1rem]" role="status">Thank you. Your report is with the moderators.</p> : (
-        <form className="space-y-4 pb-2" onSubmit={async (e) => { e.preventDefault(); setState("busy"); try { await send({ data: { contentId, reason, detail } }); setState("done"); } catch { setState("error"); } }}>
+        <form className="space-y-4 pb-2" onSubmit={async (e) => { e.preventDefault(); setState("busy"); try { await send({ data: { contentId, reason, detail } }); setState("done"); } catch (err) { setMessage(err instanceof Error ? err.message : ""); setState("error"); } }}>
           <fieldset className="space-y-2"><legend className="field-label">What is wrong?</legend>
             {reasons.map((r) => <label key={r.key} className="flex min-h-[44px] items-center gap-3 border-b border-hairline"><input type="radio" name="reason" checked={reason === r.key} onChange={() => setReason(r.key)} />{r.label}</label>)}
           </fieldset>
           <label className="block"><span className="field-label">Anything moderators should know (optional)</span><textarea className="field-input min-h-[88px] py-3" maxLength={1000} value={detail} onChange={(e) => setDetail(e.target.value)} /></label>
-          {state === "error" && <p className="text-sm text-ember" role="alert">The report could not be sent. Please try again.</p>}
+          {state === "error" && <p className="text-sm text-ember" role="alert">{message || "The report could not be sent. Please try again."}</p>}
           <button type="submit" disabled={state === "busy"} className="btn btn-primary w-full">{state === "busy" ? "Sending…" : "Send report"}</button>
         </form>
       )}

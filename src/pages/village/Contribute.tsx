@@ -3,7 +3,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { Link, useSearchParams } from "@/lib/router";
 import { getMyWork } from "@/lib/community.functions";
 import { useMember } from "@/hooks/use-member";
-import { contentKinds, kindLabel, type ContentKind } from "@/lib/community";
+import { communityKinds, contentKinds, kindLabel, type ContentKind } from "@/lib/community";
 import { products } from "@/content/products";
 import { ContributionEditor } from "@/components/village/ContributionEditor";
 
@@ -29,12 +29,13 @@ export default function Contribute() {
   const { user } = useMember();
   const fetchWork = useServerFn(getMyWork);
   const work = useQuery({ queryKey: ["village", "my-work"], queryFn: () => fetchWork(), enabled: !!user && !!editId });
-  const editing = work.data?.available ? work.data.items.find((i) => i.id === editId && ["draft", "submitted", "revision_requested"].includes(i.status)) : undefined;
+  const editing = work.data?.available ? work.data.items.find((i) => i.id === editId && (["draft", "submitted", "revision_requested", "checking", "restricted"].includes(i.status) || (i.status === "published" && communityKinds.includes(i.kind)))) : undefined;
   if (editId && editing) {
     return (
       <div className="wrap max-w-[52rem] pb-20 pt-8 lg:pt-12">
         <Link to="/you?tab=contributions" className="text-[0.875rem] text-stone hover:text-ink">← My contributions</Link>
-        <h1 className="mt-6 text-display-sm">Continue editing</h1>
+        <h1 className="mt-6 text-display-sm">{editing.status === "published" ? "Edit your contribution" : "Continue editing"}</h1>
+        {editing.status === "published" && <p className="mt-3 max-w-prose text-[0.9375rem] text-stone">Your changes are checked again before they appear. Until then, the contribution is not visible to others.</p>}
         {work.data?.available && work.data.messages.filter((m) => m.content_id === editing.id && m.message_to_author).slice(0, 1).map((m) => <p key={m.created_at} className="mt-4 border-l-2 border-signal pl-4 text-[0.9375rem]"><span className="font-semibold">Message from the editors: </span>{m.message_to_author}</p>)}
         <div className="mt-8"><ContributionEditor kind={editing.kind} initial={editing} {...(editing.parent_id ? { parentId: editing.parent_id } : {})} /></div>
       </div>
