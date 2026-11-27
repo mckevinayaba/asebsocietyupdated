@@ -54,14 +54,14 @@ export function AppBar({ immersive = false, tucked = false }: { immersive?: bool
           </Link>
 
           <nav ref={navRef} aria-label="Main" className="hidden flex-1 items-center justify-center gap-1 lg:flex">
-            <Link to="/" className={`relative flex h-11 items-center px-3 text-[0.875rem] font-medium transition-colors ${clear ? "text-ivory/90 hover:text-ivory" : pathname === "/" ? "text-ink" : "text-ink/70 hover:text-ink"}`}>Home</Link>
+            <Link to="/" className={`relative flex h-11 items-center whitespace-nowrap px-2.5 xl:px-3 text-[0.875rem] font-medium transition-colors ${clear ? "text-ivory/90 hover:text-ivory" : pathname === "/" ? "text-ink" : "text-ink/70 hover:text-ink"}`}>Home</Link>
             {desktopNav.map((group) => {
               const open = menu === group.label;
               const active = groupActive(group.to, group.items);
               return (
                 <div key={group.label} className="relative" onMouseEnter={() => setMenu(group.label)} onMouseLeave={() => setMenu(null)}>
                   <button type="button" aria-expanded={open} aria-haspopup="true" onClick={() => setMenu(open ? null : group.label)}
-                    className={`relative flex h-11 items-center gap-1.5 px-3 text-[0.875rem] font-medium transition-colors ${clear ? "text-ivory/90 hover:text-ivory" : active ? "text-ink" : "text-ink/70 hover:text-ink"}`}>
+                    className={`relative flex h-11 items-center gap-1.5 whitespace-nowrap px-2.5 xl:px-3 text-[0.875rem] font-medium transition-colors ${clear ? "text-ivory/90 hover:text-ivory" : active ? "text-ink" : "text-ink/70 hover:text-ink"}`}>
                     {group.label}
                     <span aria-hidden="true" className={`text-[0.7rem] opacity-60 transition-transform ${open ? "rotate-180" : ""}`}>⌄</span>
                     {active && !clear && <span aria-hidden="true" className="absolute inset-x-3 bottom-1 h-[2px] bg-signal" />}
@@ -102,7 +102,7 @@ export function AppBar({ immersive = false, tucked = false }: { immersive?: bool
             )}
             {user && <Link to="/contribute" className="grid h-11 w-11 place-items-center rounded-full hover:bg-current/10 md:hidden" aria-label="Create a contribution"><CreateIcon /></Link>}
             {user && <NotificationsButton clear={clear} />}
-            <Link to={user ? "/you" : "/auth"} className={`hidden h-11 items-center px-2 text-[0.875rem] font-medium lg:inline-flex ${clear ? "text-ivory/90 hover:text-ivory" : "text-ink/75 hover:text-ink"}`}>
+            <Link to={user ? "/you" : "/auth"} className={`hidden h-11 items-center whitespace-nowrap px-2 text-[0.875rem] font-medium lg:inline-flex ${clear ? "text-ivory/90 hover:text-ivory" : "text-ink/75 hover:text-ink"}`}>
               {user ? (firstName || "You") : "Sign in"}
             </Link>
             <Link to={investPath} className="btn btn-signal hidden min-h-[44px] px-4 text-[0.875rem] lg:inline-flex">Invest in Our Mission</Link>
