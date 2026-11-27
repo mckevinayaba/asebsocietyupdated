@@ -110,6 +110,12 @@ from auth.users
 where lower(email) = lower('editor-email@example.org') and email_confirmed_at is not null;
 ```
 
+### Community moderation (migration 0011, prepared, not applied)
+
+Apply after a verified backup, then run `npm test`. It converts an 'open' community mode to 'pre_moderated', adds the 'checking' and 'restricted' states, and adds `moderation_assessments` (append only), `moderation_appeals` and `account_restrictions`. It does not publish, delete or rewrite any contribution. Items already waiting as 'submitted' stay with moderators.
+
+Automated assessments send only a contribution's own text and photographs to the OpenAI Moderation API, from the server. The `OPENAI_API_KEY` server secret must be added in Lovable Cloud and must never appear in client code. Suggested retention for assessment records: 24 months, subject to approval.
+
 ### Community publishing
 
 It starts pre-moderated. Open it from `/editorial` (Community settings) only after the Society approves community guidelines, contributor terms, a withdrawal procedure and a privacy notice. Those documents are not drafted as approved policy in this repository. `/community-guidelines` is a working summary and says so.

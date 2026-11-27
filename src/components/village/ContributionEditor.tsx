@@ -1,15 +1,30 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Link } from "@/lib/router";
 import { supabase } from "@/integrations/supabase/client";
-import { contributionSchema, evidenceLabel, kindLabel, type ContentKind, type ContentRow, type EvidenceClass, type MediaItem } from "@/lib/community";
-import { saveContribution } from "@/lib/community.functions";
+import { contributionSchema, evidenceLabel, kindLabel, needsEditor, type ContentKind, type ContentRow, type EvidenceClass, type MediaItem } from "@/lib/community";
+import { getMyProfile, recheckContribution, requestModerationReview, saveContribution } from "@/lib/community.functions";
 import { founderTopics, playbookChapters, voicesCategories } from "@/content/products";
 import { africanCountries } from "@/content/countries";
 import { useMember } from "@/hooks/use-member";
 import { useCommunity } from "@/hooks/use-community";
 import { Media, NotYetLive, Prose, SignInPrompt } from "./Primitives";
+
+type Outcome = { id: string; slug: string; status: string; decision?: string | null; reason?: string };
+
+// Photographs are re-drawn before upload, which removes embedded metadata such as the location a
+// phone records. If the browser cannot re-draw the file, the original is uploaded unchanged.
+async function withoutMetadata(file: File): Promise<File> {
+  try {
+    const bitmap = await createImageBitmap(file, { imageOrientation: "from-image" });
+    const canvas = document.createElement("canvas");
+    canvas.width = bitmap.width; canvas.height = bitmap.height;
+    canvas.getContext("2d")?.drawImage(bitmap, 0, 0);
+    const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, file.type, 0.9));
+    return blob && blob.size > 0 && blob.size <= 5 * 1024 * 1024 ? new File([blob], file.name, { type: file.type }) : file;
+  } catch { return file; }
+}
 
 type Props = { kind: ContentKind; parentId?: string; chapterSlug?: string; category?: string; compact?: boolean; initial?: ContentRow; onDone?: (result: { slug: string; status: string }) => void };
 
@@ -36,6 +51,14 @@ export function ContributionEditor({ kind, parentId, chapterSlug, category, comp
   const { user, ready } = useMember();
   const community = useCommunity();
   const save = useServerFn(saveContribution);
+  const recheck = useServerFn(recheckContribution);
+  const askReview = useServerFn(requestModerationReview);
+  const fetchProfile = useServerFn(getMyProfile);
+  const me = useQuery({ queryKey: ["village", "my-profile"], queryFn: () => fetchProfile(), enabled: !!user, staleTime: 5 * 60_000, retry: false });
+  const [videoOpen, setVideoOpen] = useState(false);
+  const [videoUrl, setVideoUrl] = useState("");
+  const [appeal, setAppeal] = useState("");
+  const [appealSent, setAppealSent] = useState(false);
   const queryClient = useQueryClient();
   const scope = parentId ?? chapterSlug ?? category ?? "new";
   const [title, setTitle] = useState("");
@@ -55,7 +78,7 @@ export function ContributionEditor({ kind, parentId, chapterSlug, category, comp
   const [preview, setPreview] = useState(false);
   const [busy, setBusy] = useState<"" | "draft" | "submit" | "upload">("");
   const [error, setError] = useState("");
-  const [result, setResult] = useState<{ slug: string; status: string } | null>(null);
+  const [result, setResult] = useState<Outcome | null>(null);
   const [savedId, setSavedId] = useState<string | undefined>();
   const restored = useRef(false);
   // Continue editing an existing draft or a submission returned for revision.
@@ -67,7 +90,10 @@ export function ContributionEditor({ kind, parentId, chapterSlug, category, comp
     setTopics(initial.topics.join(", ")); setEvidence(initial.evidence_class); setDetails(initial.details); setMedia(initial.media);
     setVisibility(initial.visibility); setAttribution(initial.attribution); setConsentPublish(initial.consent_publish); setConsentEdit(initial.consent_edit);
   }, [initial]);
-  const editorial = !["post", "question", "answer"].includes(kind);
+  // Editorial kinds always go to editors. Articles and opportunities ask for explicit permission.
+  const editorial = needsEditor(kind);
+  const asksConsent = !["post", "question", "answer"].includes(kind);
+  const automated = community.mode === "automated" && !editorial;
 
   // Restore an unfinished draft from this device, then keep saving it as the person types.
   useEffect(() => {
@@ -108,7 +134,7 @@ export function ContributionEditor({ kind, parentId, chapterSlug, category, comp
     if (!parsed.success) { setError(parsed.error.issues[0]?.message ?? "Please check the form."); return; }
     setBusy(asDraft ? "draft" : "submit");
     try {
-      const saved = await save({ data: { ...payload, submit: !asDraft } });
+      const saved: Outcome = await save({ data: { ...payload, submit: !asDraft } });
       setSavedId(saved.id);
       await queryClient.invalidateQueries({ queryKey: ["village"] });
       if (!asDraft) {
@@ -128,20 +154,58 @@ export function ContributionEditor({ kind, parentId, chapterSlug, category, comp
     setBusy("upload");
     const ext = file.type === "image/png" ? "png" : file.type === "image/webp" ? "webp" : "jpg";
     const path = `${user.id}/${crypto.randomUUID()}.${ext}`;
-    const { error: uploadError } = await supabase.storage.from("community-media").upload(path, file, { contentType: file.type, upsert: false });
+    const clean = await withoutMetadata(file);
+    const { error: uploadError } = await supabase.storage.from("community-media").upload(path, clean, { contentType: file.type, upsert: false });
     setBusy("");
     if (uploadError) { setError("The photograph could not be uploaded. Confirm your email address, then try again."); return; }
     setMedia((m) => [...m, { kind: "image", path, alt: "", credit: "" }]);
   };
 
+  const startAgain = () => { setResult(null); setSavedId(undefined); setTitle(""); setBody(""); setSummary(""); setMedia([]); setDetails({}); setAppeal(""); setAppealSent(false); };
+  const retry = async () => {
+    if (!result) return;
+    setBusy("submit"); setError("");
+    try { const r = await recheck({ data: { id: result.id } }); setResult({ ...result, ...r }); await queryClient.invalidateQueries({ queryKey: ["village"] }); }
+    catch (e) { setError(e instanceof Error ? e.message : "Please try again in a moment."); }
+    finally { setBusy(""); }
+  };
+  const sendAppeal = async () => {
+    if (!result) return;
+    setBusy("submit"); setError("");
+    try { await askReview({ data: { id: result.id, message: appeal } }); setAppealSent(true); }
+    catch (e) { setError(e instanceof Error ? e.message : "Your request could not be sent."); }
+    finally { setBusy(""); }
+  };
+
   if (result) {
-    const live = result.status === "published";
+    const s = result.status;
+    const heading = s === "published" ? "Published." : s === "restricted" ? "Not published." : s === "checking" ? "Saved privately. Not published yet." : s === "under_review" && !editorial ? "A moderator is taking a quick look." : editorial ? "Your contribution is with the editors." : "Your contribution is with the moderators.";
+    const line = s === "published" ? "Your contribution is live. Thank you for adding your voice to the village."
+      : s === "restricted" ? result.reason || "It may not meet the Community Guidelines."
+      : s === "checking" ? result.reason || "We could not complete the safety check just now."
+      : s === "under_review" && !editorial ? `${result.reason ? `${result.reason} ` : ""}It stays private until then, and you will be notified in the platform.`
+      : "You can follow its progress in My contributions. You will be notified in the platform when an editor responds.";
     return (
-      <div className="border-t border-ink pt-6" role="status">
-        <p className="eyebrow">{live ? "Published" : "Received"}</p>
-        <p className="mt-4 font-display text-[1.75rem] leading-tight">{live ? "Your contribution is live." : editorial ? "Your contribution is with the editors." : "Your contribution is with the moderators."}</p>
-        <p className="mt-3 max-w-prose text-[0.9375rem] leading-relaxed text-stone">{live ? "Thank you for adding your voice to the village." : "You can follow its progress in My contributions. You will be notified in the platform when an editor responds. Email notifications are not active yet."}</p>
-        <div className="mt-5 flex flex-wrap gap-3"><Link to="/you?tab=contributions" className="btn btn-primary">My contributions</Link><button type="button" className="btn btn-line" onClick={() => { setResult(null); setSavedId(undefined); setTitle(""); setBody(""); setSummary(""); setMedia([]); setDetails({}); }}>Write another</button></div>
+      <div className="border-t border-ink pt-6" role="status" aria-live="polite">
+        <p className="eyebrow">{s === "published" ? "Published" : s === "restricted" ? "Not published" : s === "checking" ? "Not published" : "Received"}</p>
+        <p className="mt-4 font-display text-[1.75rem] leading-tight">{heading}</p>
+        <p className="mt-3 max-w-prose text-[0.9375rem] leading-relaxed text-stone">{line}</p>
+        {s === "restricted" && <p className="mt-2 max-w-prose text-[0.875rem] text-stone">This was an automated assessment, not a judgement about you. You can change your contribution and publish it again, or ask a person to look at it.</p>}
+        {error && <p className="mt-3 text-[0.9375rem] text-ember" role="alert">{error}</p>}
+        {s === "restricted" && !appealSent && (
+          <div className="mt-5 max-w-prose space-y-3">
+            <label className="block"><span className="field-label">Ask for a human review (optional note)</span><textarea className="field-input min-h-[80px] py-3" maxLength={1500} value={appeal} onChange={(e) => setAppeal(e.target.value)} placeholder="Add any context that would help a moderator understand your contribution." /></label>
+          </div>
+        )}
+        {appealSent && <p className="mt-4 text-[0.9375rem] text-teal">A moderator will review it. You will be notified in the platform.</p>}
+        <div className="mt-5 flex flex-wrap gap-3">
+          {s === "published" && <Link to={kind === "answer" ? "/ask" : "/the-field"} className="btn btn-primary">See it in the village</Link>}
+          {s === "checking" && <button type="button" disabled={!!busy} className="btn btn-primary" onClick={() => void retry()}>{busy ? "Checking…" : "Try again"}</button>}
+          {s === "restricted" && <button type="button" className="btn btn-primary" onClick={() => { setResult(null); setError(""); }}>Edit and publish again</button>}
+          {s === "restricted" && !appealSent && <button type="button" disabled={!!busy} className="btn btn-line" onClick={() => void sendAppeal()}>Ask for a human review</button>}
+          {s !== "published" && <Link to="/you?tab=contributions" className={s === "checking" || s === "restricted" ? "btn btn-line" : "btn btn-primary"}>My contributions</Link>}
+          <button type="button" className="btn btn-line" onClick={startAgain}>Write another</button>
+        </div>
       </div>
     );
   }
@@ -151,7 +215,8 @@ export function ContributionEditor({ kind, parentId, chapterSlug, category, comp
 
   return (
     <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); void submit(false); }} noValidate>
-      {community.mode === "pre_moderated" && <p className="border-l-2 border-signal pl-4 text-[0.875rem] text-stone">{editorial ? "Every contribution of this kind is reviewed by an editor before publication." : "While community guidelines are being finalised, every contribution is reviewed by a moderator before it appears."} <Link to="/community-guidelines" className="underline underline-offset-4">Community guidelines</Link></p>}
+      {automated && <p className="text-[0.8125rem] text-stone">Publishing follows the <Link to="/community-guidelines" className="underline underline-offset-4">Community Guidelines</Link>. Contributions are checked automatically, and a moderator looks at anything uncertain. Criticism and debate are welcome.</p>}
+      {(community.mode === "pre_moderated" || editorial) && <p className="border-l-2 border-signal pl-4 text-[0.875rem] text-stone">{editorial ? "Every contribution of this kind is reviewed by an editor before publication." : "While community guidelines are being finalised, every contribution is reviewed by a moderator before it appears."} <Link to="/community-guidelines" className="underline underline-offset-4">Community guidelines</Link></p>}
 
       {kind === "voice" && field("Voices category", <select required className="field-input" value={voicesCategory} onChange={(e) => setVoicesCategory(e.target.value)}><option value="">Choose a category</option>{voicesCategories.map((c) => <option key={c.key} value={c.key}>{c.name}</option>)}</select>, voicesCategories.find((c) => c.key === voicesCategory)?.description)}
       {kind === "voice" && voicesCategory === "founders" && <div className="bg-paper p-4 text-[0.875rem]"><p className="font-semibold">Founders' Voices: you might write about</p><ul className="mt-2 grid gap-1 text-stone sm:grid-cols-2">{founderTopics.map((t) => <li key={t}>{t}</li>)}</ul><p className="mt-3 text-stone">Your account is published as your perspective. It is not presented as independently verified evidence, and institutions are never rated or ranked.</p></div>}
@@ -171,16 +236,22 @@ export function ContributionEditor({ kind, parentId, chapterSlug, category, comp
       {kind === "playbook_contribution" && <div className="grid gap-5 sm:grid-cols-2">{playbookFields.map(([key, label]) => <label key={key} className="block"><span className="field-label">{label}</span><textarea className="field-input min-h-[96px] py-3" maxLength={4000} value={details[key] ?? ""} onChange={(e) => setDetails((d) => ({ ...d, [key]: e.target.value }))} /></label>)}</div>}
       {kind === "opportunity" && <div className="grid gap-5 sm:grid-cols-2">{field("Official source link", <input type="url" className="field-input" placeholder="https://" value={details["source"] ?? ""} onChange={(e) => setDetails((d) => ({ ...d, source: e.target.value }))} />)}{field("Closing date", <input type="date" className="field-input" value={details["deadline"] ?? ""} onChange={(e) => setDetails((d) => ({ ...d, deadline: e.target.value }))} />)}{field("Who is eligible", <input className="field-input" maxLength={400} value={details["eligibility"] ?? ""} onChange={(e) => setDetails((d) => ({ ...d, eligibility: e.target.value }))} />)}{field("Offered by", <input className="field-input" maxLength={200} value={details["organisation"] ?? ""} onChange={(e) => setDetails((d) => ({ ...d, organisation: e.target.value }))} />)}</div>}
       {kind === "research" && <div className="grid gap-5 sm:grid-cols-2">{field("Evidence type", <select className="field-input" value={evidence} onChange={(e) => setEvidence(e.target.value as EvidenceClass)}>{(["research_evidence", "documented_case", "observation", "practitioner_experience"] as const).map((k) => <option key={k} value={k}>{evidenceLabel[k]}</option>)}</select>)}{field("Geographic coverage", <input className="field-input" maxLength={300} value={details["coverage"] ?? ""} onChange={(e) => setDetails((d) => ({ ...d, coverage: e.target.value }))} />)}{field("Method", <input className="field-input" maxLength={400} value={details["method"] ?? ""} onChange={(e) => setDetails((d) => ({ ...d, method: e.target.value }))} />, "For example: survey of 40 hubs, interviews, administrative data.")}{field("Source or publication link", <input type="url" className="field-input" placeholder="https://" value={details["source"] ?? ""} onChange={(e) => setDetails((d) => ({ ...d, source: e.target.value }))} />)}</div>}
-      {editorial && !compact && kind !== "opportunity" && field("Short summary (optional)", <textarea className="field-input min-h-[80px] py-3" maxLength={600} value={summary} onChange={(e) => setSummary(e.target.value)} />, "Shown in previews and when shared.")}
+      {asksConsent && !compact && kind !== "opportunity" && field("Short summary (optional)", <textarea className="field-input min-h-[80px] py-3" maxLength={600} value={summary} onChange={(e) => setSummary(e.target.value)} />, "Shown in previews and when shared.")}
 
       {(kind === "post" || kind === "article" || kind === "voice") && (
         <div className="space-y-3">
           {media.length > 0 && <ul className="space-y-3">{media.map((m, i) => <li key={i} className="grid gap-3 border border-hairline p-3 sm:grid-cols-[140px_1fr]"><Media items={[m]} compact /><div className="space-y-2"><label className="block"><span className="field-label">{m.kind === "image" ? "Describe the photograph" : "Title of the video"}</span><input className="field-input" maxLength={300} value={m.alt} onChange={(e) => setMedia((all) => all.map((x, j) => j === i ? { ...x, alt: e.target.value } : x))} /></label>{m.kind === "image" && <label className="block"><span className="field-label">Photo credit</span><input className="field-input" maxLength={200} value={m.credit} onChange={(e) => setMedia((all) => all.map((x, j) => j === i ? { ...x, credit: e.target.value } : x))} /></label>}<button type="button" className="text-[0.875rem] text-ember underline underline-offset-4" onClick={() => setMedia((all) => all.filter((_, j) => j !== i))}>Remove</button></div></li>)}</ul>}
           <div className="flex flex-wrap gap-3">
             <label className="btn btn-line cursor-pointer">{busy === "upload" ? "Uploading…" : "Add a photograph"}<input type="file" accept="image/jpeg,image/png,image/webp" className="sr-only" onChange={(e) => { const f = e.target.files?.[0]; if (f) void upload(f); e.target.value = ""; }} /></label>
-            <button type="button" className="btn btn-line" onClick={() => { const url = window.prompt("Paste a YouTube or Vimeo link"); if (url) setMedia((m) => [...m, { kind: "video_link", url: url.trim(), alt: "", credit: "" }]); }}>Add a video link</button>
+            <button type="button" className="btn btn-line" aria-expanded={videoOpen} onClick={() => setVideoOpen((v) => !v)}>Add a video link</button>
           </div>
-          <p className="text-[0.8125rem] text-stone">Only share photographs you took or have permission to use. Photographs stay private until your contribution is published.</p>
+          {videoOpen && (
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-end">
+              <label className="block flex-1"><span className="field-label">YouTube or Vimeo link</span><input type="url" inputMode="url" className="field-input" placeholder="https://www.youtube.com/watch?v=…" value={videoUrl} onChange={(e) => setVideoUrl(e.target.value)} /></label>
+              <button type="button" className="btn btn-line" onClick={() => { const url = videoUrl.trim(); if (!/^https:\/\/(www\.|m\.)?(youtube\.com|youtu\.be|vimeo\.com)\//.test(url)) { setError("Video links must be YouTube or Vimeo addresses starting with https://"); return; } setMedia((m) => [...m, { kind: "video_link", url, alt: "", credit: "" }]); setVideoUrl(""); setVideoOpen(false); setError(""); }}>Attach</button>
+            </div>
+          )}
+          <p className="text-[0.8125rem] text-stone">Only share photographs you took or have permission to use. Location details stored in photographs are removed before upload. Photographs stay private until your contribution is published.</p>
         </div>
       )}
 
@@ -193,7 +264,7 @@ export function ContributionEditor({ kind, parentId, chapterSlug, category, comp
         </div>
       )}
 
-      {editorial && (
+      {asksConsent && (
         <fieldset className="space-y-3 border-t border-hairline pt-5">
           <legend className="sr-only">Permissions</legend>
           <label className="flex gap-3 text-[0.9375rem]"><input type="checkbox" className="mt-1" checked={consentPublish} onChange={(e) => setConsentPublish(e.target.checked)} />I give ASEB Society permission to publish this contribution on its platforms, credited as I chose above. I keep ownership of my work and can withdraw it at any time.</label>
@@ -203,8 +274,9 @@ export function ContributionEditor({ kind, parentId, chapterSlug, category, comp
       )}
 
       {error && <p className={`text-[0.9375rem] ${error.startsWith("Draft saved") ? "text-teal" : "text-ember"}`} role={error.startsWith("Draft saved") ? "status" : "alert"}>{error}</p>}
+      <p className="text-[0.8125rem] text-stone">Publishing as <span className="font-semibold text-ink">{attribution === "anonymous" ? "Name withheld" : attribution === "initials" ? "your initials" : (me.data?.available && me.data.profile?.name) || "your account name"}</span>{attribution === "name" && me.data?.available && me.data.profile?.headline ? `, ${me.data.profile.headline}` : ""} · Visible to {visibility === "public" ? "everyone" : "signed-in members"}</p>
       <div className="sticky bottom-[calc(var(--bottom-nav-h)+var(--safe-bottom))] z-10 -mx-1 flex flex-wrap items-center gap-3 bg-ivory/95 px-1 py-3 backdrop-blur-sm lg:bottom-0">
-        <button type="submit" disabled={!!busy} className="btn btn-primary">{busy === "submit" ? "Sending…" : editorial || community.mode === "pre_moderated" ? "Submit for review" : "Publish"}</button>
+        <button type="submit" disabled={!!busy} className="btn btn-primary">{busy === "submit" ? (automated ? "Publishing…" : "Sending…") : automated ? "Publish" : "Submit for review"}</button>
         <button type="button" disabled={!!busy} className="btn btn-line" onClick={() => void submit(true)}>{busy === "draft" ? "Saving…" : "Save draft"}</button>
         <button type="button" className="text-[0.875rem] font-semibold text-stone underline underline-offset-4" onClick={() => setPreview(!preview)}>{preview ? "Edit" : "Preview"}</button>
       </div>

@@ -10,3 +10,5 @@ Every document in this folder is a **draft for review**. None has been approved 
 | `EDITORIAL_AND_MODERATION_POLICY_DRAFT.md` | How the Secretariat publishes, declines, hides and corrects content | Draft, needs Secretariat approval |
 
 Statements of fact about the platform in these drafts reflect the code in this repository at the time of writing. Facts marked **[confirm]** were not available in the repository and must be completed by the Society. Once approved, each document should be published as a public page and linked from the footer, the sign up form and the contribution form.
+
+The Privacy Notice and Editorial and Moderation Policy drafts now describe automated community moderation (migration 0011). Automated publishing must not be switched on until both are approved, along with the use of the external moderation service.

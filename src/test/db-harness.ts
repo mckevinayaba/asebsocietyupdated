@@ -49,3 +49,16 @@ export async function asRole(db: PGlite, role: "anon" | "authenticated", uid: st
     await db.exec("RESET ROLE");
   }
 }
+
+// The trusted server: the service role, with no signed-in user.
+export async function asService(db: PGlite, sql: string) {
+  await db.exec(`RESET ROLE; SELECT set_config('request.uid', '', false); SET ROLE service_role;`);
+  try {
+    const result = await db.query<Record<string, unknown>>(sql);
+    return { rows: result.rows, error: null as string | null };
+  } catch (error) {
+    return { rows: [] as Record<string, unknown>[], error: (error as Error).message };
+  } finally {
+    await db.exec("RESET ROLE");
+  }
+}
