@@ -1,3 +1,4 @@
+import { BackLink } from "@/components/BackLink";
 import { useMemo, useState } from "react";
 import { Link, useParams } from "@/lib/router";
 import { Btn, TLink } from "@/components/Arrow";
@@ -59,7 +60,7 @@ export function CountryProfilePage() {
     <>
       <header className="border-b border-hairline">
         <div className="wrap pb-12 pt-10 lg:pb-16 lg:pt-16">
-          <Link to="/countries" className="text-[0.875rem] text-stone hover:text-ink">← All countries</Link>
+          <BackLink fallback="/countries" label="Back" />
           <p className="eyebrow mt-8">{profile.kind} · {profile.region === "Indian Ocean territory" ? profile.region : `${profile.region} Africa`}</p>
           <h1 className="mt-5 text-display-lg">{profile.name}</h1>
           {profile.note && <p className="lede mt-6 max-w-prose">{profile.note}</p>}

@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import AppShell from "@/pages/AppShell";
-import { ScrollToTop } from "@/components/Reveal";
 
 export const Route = createFileRoute("/_authenticated/app")({
   head: () => ({
@@ -17,5 +16,5 @@ export const Route = createFileRoute("/_authenticated/app")({
 });
 
 function Page() {
-  return (<><ScrollToTop /><AppShell /></>);
+  return (<AppShell />);
 }

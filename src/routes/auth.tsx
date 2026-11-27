@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/lib/router";
+import { BackLink } from "@/components/BackLink";
 import { useMember } from "@/hooks/use-member";
 import { safeRedirect } from "@/content/navigation";
 
@@ -40,7 +41,7 @@ function AuthPage() {
     try { const data = JSON.parse(draft); setEmail(typeof data.email === "string" ? data.email : ""); setName(typeof data.name === "string" ? data.name : ""); } catch { /* Ignore an expired draft. */ }
     sessionStorage.removeItem("aseb-application-account");
   }, []);
-  return <main className="min-h-screen bg-ivory"><div className="wrap py-10"><Link to="/" className="font-display text-2xl">ASEB Society</Link></div><div className="mx-auto w-full max-w-lg px-5 pb-20 pt-8"><p className="eyebrow">Your professional home</p><h1 className="mt-6 text-display-md">{mode === "signup" ? "Create your account." : mode === "forgot" ? "Reset your password." : "Welcome back."}</h1>
+  return <main className="min-h-screen bg-ivory"><div className="wrap flex items-center justify-between gap-4 py-10"><Link to="/" className="font-display text-2xl">ASEB Society</Link><BackLink fallback="/" label="Back to the website" /></div><div className="mx-auto w-full max-w-lg px-5 pb-20 pt-8"><p className="eyebrow">Your professional home</p><h1 className="mt-6 text-display-md">{mode === "signup" ? "Create your account." : mode === "forgot" ? "Reset your password." : "Welcome back."}</h1>
     <form className="mt-8 space-y-5" onSubmit={async (event) => {
       event.preventDefault(); if (busy) return; setBusy(true); setError(""); setNotice("");
       try {

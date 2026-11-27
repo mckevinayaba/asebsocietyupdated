@@ -13,6 +13,8 @@ describe("application navigation", () => {
   });
   it("selects the right bottom tab for each section", () => {
     expect(activeTab("/")).toBe("home");
+    expect(activeTab("/summit")).toBeNull();
+    expect(activeTab("/why-aseb")).toBeNull();
     expect(activeTab("/registry/some-record")).toBe("explore");
     expect(activeTab("/countries/kenya")).toBe("explore");
     expect(activeTab("/communities")).toBe("circles");

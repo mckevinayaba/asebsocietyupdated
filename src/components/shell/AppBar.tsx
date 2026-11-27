@@ -55,6 +55,7 @@ export function AppBar({ immersive = false, tucked = false }: { immersive?: bool
           </Link>
 
           <nav ref={navRef} aria-label="Main" className="hidden flex-1 items-center justify-center gap-1 lg:flex">
+            <Link to="/" className={`relative flex h-11 items-center px-3 text-[0.875rem] font-medium transition-colors ${clear ? "text-ivory/90 hover:text-ivory" : pathname === "/" ? "text-ink" : "text-ink/70 hover:text-ink"}`}>Home</Link>
             {desktopNav.map((group) => {
               const open = menu === group.label;
               const active = groupActive(group.to, group.items);

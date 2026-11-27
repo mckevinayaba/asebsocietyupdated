@@ -1,3 +1,4 @@
+import { BackLink } from "@/components/BackLink";
 import { useQuery } from "@tanstack/react-query";
 import { Link, useParams, useSearchParams } from "@/lib/router";
 import { asset } from "@/lib/asset";
@@ -147,7 +148,8 @@ export function VoiceStoryPage() {
     <article className="pb-20">
       <header className="border-b border-hairline bg-paper">
         <div className="wrap max-w-[48rem] pb-12 pt-12 lg:pt-20">
-          <Link to="/voices" className="font-display text-[1.25rem] italic">ASEB Voices</Link>
+          <BackLink fallback="/voices" label="Back" className="mb-4" />
+          <Link to="/voices" className="block font-display text-[1.25rem] italic">ASEB Voices</Link>
           {cat && <p className="mt-8 text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-ember"><Link to={`/voices?category=${cat.key}`}>{cat.name}</Link></p>}
           <h1 className="mt-4 font-display text-[2.5rem] leading-[1.05] lg:text-[3.75rem]">{story.title}</h1>
           {story.summary && <p className="mt-6 text-[1.25rem] leading-relaxed text-stone">{story.summary}</p>}

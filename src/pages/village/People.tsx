@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { useNavigate } from "@tanstack/react-router";
+import { BackLink } from "@/components/BackLink";
 import { Link, useParams } from "@/lib/router";
 import { followerCount, profileContent, publicProfiles } from "@/lib/community-data";
 import { getMyProfile, saveVillageProfile } from "@/lib/community.functions";
@@ -26,6 +27,7 @@ export function MemberProfilePage() {
   const following = engagement.following("profile", p.id);
   return (
     <Workspace label="People">
+      <BackLink fallback="/members" label="Back" className="mb-6" />
       <header className="border-b border-hairline pb-8">
         <span aria-hidden="true" className="grid h-20 w-20 place-items-center rounded-full bg-night font-display text-[2rem] text-ivory">{p.name.slice(0, 1)}</span>
         <h1 className="mt-5 font-display text-[2.25rem] leading-tight">{p.name}</h1>

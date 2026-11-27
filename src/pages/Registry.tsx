@@ -1,3 +1,4 @@
+import { BackLink } from "@/components/BackLink";
 import { useEffect, useMemo, useState } from "react";
 import { Link, useParams, useSearchParams } from "@/lib/router";
 import { registry, recordBySlug, countries, regions, registryConditions, type RegistryRecord } from "@/content/registry";
@@ -162,7 +163,7 @@ export function RecordPage() {
     <>
       <header className="border-b border-hairline">
         <div className="wrap pb-14 pt-10 lg:pb-20 lg:pt-14">
-          <Link to="/registry" className="text-[0.875rem] font-medium text-stone hover:text-ink">← The Field Registry</Link>
+          <BackLink fallback="/registry" label="Back to results" />
           <div className="mt-10 grid gap-10 lg:grid-cols-12">
             <div className="lg:col-span-8">
               <p className="eyebrow">{r.type === "organisation" ? "Institution" : "Practitioner"} · {r.country || "Continental"}</p>

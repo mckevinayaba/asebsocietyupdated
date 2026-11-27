@@ -71,7 +71,7 @@ describe("product architecture", () => {
     expect(Object.keys(products)).toEqual(["field", "playbook", "voices", "ask", "state"]);
     expect(primaryTabs).toHaveLength(5);
     expect(activeTab("/voices/a-story")).toBe("discover");
-    expect(activeTab("/the-field")).toBe("home");
+    expect(activeTab("/the-field")).toBe("discover");
   });
   it("keeps Founders' Voices as a category of ASEB Voices, not a product", () => {
     expect(voicesCategories.map((c) => c.key)).toContain("founders");

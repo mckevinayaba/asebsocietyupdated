@@ -12,7 +12,8 @@ export function MenuSheet({ open, onOpenChange }: { open: boolean; onOpenChange:
   return (
     <Sheet open={open} onOpenChange={onOpenChange} title="ASEB Society" description="Strengthening those who strengthen entrepreneurship.">
       <Link to={investPath} onClick={close} className="btn btn-signal mt-1 w-full">Invest in Our Mission <span className="arr" aria-hidden="true">→</span></Link>
-      <div className="mt-5 border-t border-ink">
+      <Link to="/" onClick={close} className="mt-5 flex min-h-[56px] items-center border-t border-ink font-display text-[1.375rem]">Home</Link>
+      <div className="border-t border-hairline">
         {desktopNav.map((group) => {
           const isOpen = expanded === group.label;
           return (

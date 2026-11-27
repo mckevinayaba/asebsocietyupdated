@@ -54,17 +54,19 @@ export type PrimaryTab = { key: TabKey; label: string; to: string; memberTo?: st
 
 // Bottom navigation. Prefix order matters: the first tab whose prefix matches wins.
 export const primaryTabs: PrimaryTab[] = [
-  { key: "home", label: "Home", to: "/", memberTo: "/the-field", prefixes: ["/the-field", "/contribute", "/onboarding", "/community-guidelines", "/why-aseb", "/about", "/people", "/governance", "/progress", "/invest", "/funders", "/what-we-build", "/summit", "/learning", "/field-lab", "/partners", "/collaborate", "/work-with-us", "/get-involved", "/join", "/sdgs"] },
+  // Home is only ever the homepage, for visitors and members alike.
+  { key: "home", label: "Home", to: "/", prefixes: [] },
   { key: "explore", label: "Explore", to: "/registry", prefixes: ["/members", "/registry", "/countries", "/country-partners", "/ambassadors", "/field"] },
   { key: "circles", label: "Circles", to: "/communities", prefixes: ["/communities"] },
-  { key: "discover", label: "Discover", to: "/discover", prefixes: ["/discover", "/playbook", "/voices", "/ask", "/state-of-the-field", "/stories", "/evidence", "/insights", "/framework", "/climate"] },
+  { key: "discover", label: "Discover", to: "/discover", prefixes: ["/discover", "/the-field", "/contribute", "/onboarding", "/community-guidelines", "/playbook", "/voices", "/ask", "/state-of-the-field", "/stories", "/evidence", "/insights", "/framework", "/climate"] },
   { key: "you", label: "You", to: "/you", prefixes: ["/you", "/app", "/auth", "/secretariat", "/reset-password"] },
 ];
 
-export function activeTab(pathname: string): TabKey {
+// Pages outside the five destinations (About, programmes, Get Involved) highlight no tab.
+export function activeTab(pathname: string): TabKey | null {
   if (pathname === "/") return "home";
   const match = primaryTabs.find((tab) => tab.prefixes.some((prefix) => pathname === prefix || pathname.startsWith(prefix + "/")));
-  return match?.key ?? "home";
+  return match?.key ?? null;
 }
 
 export type ContextTabSet = { id: string; label: string; prefixes: string[]; tabs: NavLinkItem[] };

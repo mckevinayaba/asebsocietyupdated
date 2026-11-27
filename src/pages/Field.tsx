@@ -1,3 +1,4 @@
+import { BackLink } from "@/components/BackLink";
 import { rolePathway } from "@/lib/role-pathways";
 import { Link, useParams } from "@/lib/router";
 import { constituencies, constituencyBySlug, roleBySlug, rolesFor, type ConstituencySlug } from "@/content/field";
@@ -79,6 +80,7 @@ export function ConstituencyPage() {
   const rs = rolesFor(c.slug as ConstituencySlug);
   return (
     <>
+      <div className="wrap pt-6"><BackLink fallback="/field" label="Back" /></div>
       <PageHero eyebrow={`The Field · ${c.name}`} title={c.headline} lede={c.intro}>
         <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <Btn to="/join">Join as one of these roles</Btn>
@@ -127,6 +129,7 @@ export function RolePage() {
 
   return (
     <>
+      <div className="wrap pt-6"><BackLink fallback={`/field/${c.slug}`} label="Back" /></div>
       <PageHero eyebrow={`${c.name} · Role`} title={r.role} lede={r.contribution} />
       <section className="section-tight border-b border-hairline bg-teal-soft"><div className="wrap grid gap-8 md:grid-cols-3">{[{ label: "Find practitioners and institutions", to: `/registry?q=${encodeURIComponent(pathway.registry)}` }, { label: "Choose your peer working group", to: `/communities?group=${encodeURIComponent(pathway.group)}#participate` }, { label: "Read evidence for your practice", to: `/evidence?condition=${encodeURIComponent(pathway.evidence)}` }].map(item => <div key={item.label} className="border-t border-teal/25 pt-5"><TLink to={item.to}>{item.label}</TLink></div>)}</div></section>
       <section className="section">

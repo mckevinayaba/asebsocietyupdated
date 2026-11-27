@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { BackLink } from "@/components/BackLink";
 import { Link, useParams, useSearchParams } from "@/lib/router";
 import { feedTabs, forYouOrder, kindLabel, type ContentKind, type FeedTab } from "@/lib/community";
 import { BackendUnavailable, getBySlug, listLive } from "@/lib/community-data";
@@ -97,6 +98,7 @@ export function FieldItemPage() {
   const chapter = data.details["chapterSlug"];
   return (
     <Workspace label="The Field">
+      <BackLink fallback="/the-field" label="Back" className="mb-6" />
       <article className="max-w-[46rem]">
         <p className="text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-umber">{kindLabel[data.kind]}{chapter && <> · <Link to={`/playbook/${chapter}`} className="underline underline-offset-4">Playbook chapter</Link></>}</p>
         {data.title && <h1 className="mt-4 font-display text-[2.25rem] leading-tight lg:text-[3rem]">{data.title}</h1>}

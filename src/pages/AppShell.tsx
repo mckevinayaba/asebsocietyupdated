@@ -256,6 +256,7 @@ export default function AppShell() {
             <span className="font-display text-[1.125rem]">ASEB Society</span>
           </Link>
           <div className="flex items-center gap-3 text-[0.875rem] font-semibold sm:gap-5">
+            <Link to="/" className="inline-flex min-h-[44px] items-center text-stone hover:text-ink lg:hidden">Website</Link>
             {access.data?.secretariat && <Link to="/secretariat" className="hidden min-h-[44px] items-center text-ember hover:text-ink sm:inline-flex">Secretariat</Link>}
             <Button variant="ghost" className="min-h-[44px]" disabled={signingOut} onClick={async () => { setSigningOut(true); await queryClient.cancelQueries(); queryClient.clear(); await supabase.auth.signOut(); await navigate({ to: "/auth", replace: true }); }}>Sign out</Button>
             <Button onClick={() => setEditing(true)} className="h-9 w-9 bg-ink font-display text-[0.9375rem] text-ivory" aria-label="Your profile">{profile?.name?.slice(0, 1) || "M"}</Button>
