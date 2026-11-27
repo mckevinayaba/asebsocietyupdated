@@ -49,8 +49,7 @@ export function AppBar({ immersive = false, tucked = false }: { immersive?: bool
       <header data-surface={surface} data-tucked={tucked && !menuOpen && !searchOpen} className={`app-bar fixed inset-x-0 top-0 z-40 ${clear ? "text-ivory" : "text-ink"}`}>
         <div className="wrap flex h-[var(--app-bar-h)] items-center gap-4 lg:gap-8">
           <Link to="/" className="flex shrink-0 items-center gap-2.5" aria-label="ASEB Society, home">
-            <img src={asset(clear ? "images/brand/aseb-society-mark-on-dark.png" : "images/brand/aseb-society-mark-on-light.png")} alt="" width={40} height={36} className="h-8 w-auto lg:h-10" />
-            <span className="font-display text-[1.0625rem] leading-none tracking-[-0.01em] lg:hidden">ASEB Society</span>
+            <img src={asset(clear ? "images/brand/aseb-society-mark-on-dark.png" : "images/brand/aseb-society-mark-on-light.png")} alt="" width={40} height={36} className="h-11 w-auto lg:h-12" />
             <span className="hidden flex-col font-display text-[1rem] leading-[1.15] tracking-[-0.01em] lg:flex xl:text-[1.05rem]"><span>Africa Startup Ecosystem</span><span>Builders Society</span></span>
           </Link>
 
