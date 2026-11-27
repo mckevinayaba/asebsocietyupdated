@@ -4,11 +4,12 @@
 // photography, credited "Photo: ASEB Society". None is generated.
 import audience2022 from "@/assets/aseb-2022-audience.jpg.asset.json";
 import discussion2024 from "@/assets/aseb-2024-discussion.jpg.asset.json";
+import johannesburg2026 from "@/assets/aseb-2026-johannesburg-delegates.jpg.asset.json";
 import delegates2025 from "@/assets/aseb-2025-delegates.jpg.asset.json";
 
 export type PhotoKey =
   | "gathering" | "networking" | "summitPanel" | "addisPanel" | "recognised" | "delegates2026"
-  | "nairobi2023" | "accraGroup2024" | "stage1" | "stage2" | "stage3" | "audience2022" | "discussion2024" | "delegates2025";
+  | "nairobi2023" | "accraGroup2024" | "stage1" | "stage2" | "stage3" | "audience2022" | "discussion2024" | "delegates2025" | "johannesburg2026";
 
 export type PhotoRecord = { src: string; alt: string; subject: string; year: string | null; city: string | null; width: number | null; note: string };
 
@@ -26,13 +27,14 @@ export const photos: Record<PhotoKey, PhotoRecord> = {
   stage3: { src: "images/events/aseb-awards-stage-3.jpg", alt: "A recognition plaque presented at the ASEB Awards", subject: "Awards stage", year: null, city: null, width: 378, note: "Low resolution. Small placements only." },
   audience2022: { src: audience2022.url, alt: "Participants listening at the first ASEB Summit and Awards in Johannesburg, 2022", subject: "Audience", year: "2022", city: "Johannesburg", width: null, note: "Stored in Lovable's asset store. The 2022 edition." },
   discussion2024: { src: discussion2024.url, alt: "Speakers in discussion at the ASEB Summit 2024 in Accra", subject: "Discussion", year: "2024", city: "Accra", width: null, note: "Stored in Lovable's asset store. The 2024 edition." },
+  johannesburg2026: { src: johannesburg2026.url, alt: "Ecosystem builders together at ASEB 2026 in Johannesburg", subject: "Builders group at the Summit backdrop", year: "2026", city: "Johannesburg", width: 1600, note: "Stored in Lovable's asset store. Home page question section." },
   delegates2025: { src: delegates2025.url, alt: "Delegates gathered on stage at ASEB 2025 in Addis Ababa", subject: "Delegates on stage", year: "2025", city: "Addis Ababa", width: null, note: "Stored in Lovable's asset store. The 2025 edition." },
 };
 
 // Page and section assignments. Rules, enforced by src/test/photography.test.ts:
 // a photograph never repeats within a page, and no two pages share an opening photograph.
 export const assignments = {
-  home: { hero: "gathering", question: "accraGroup2024" },
+  home: { hero: "gathering", question: "johannesburg2026" },
   pillars: { summit: "recognised", circles: "networking", academy: "addisPanel", "field-lab": "summitPanel" },
   story: { hero: "delegates2026", transition: "stage1", editions: { "2022": "audience2022", "2023": "nairobi2023", "2024": "discussion2024", "2025": "delegates2025", "2026": "recognised" } },
   invest: { hero: "nairobi2023" },
